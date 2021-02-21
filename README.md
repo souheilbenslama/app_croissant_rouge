@@ -1,5 +1,4 @@
 # app-croissant-rouge
-# flutter_ecommerce_project
 
 # how to contribute to this project:
 1. Clown this project
