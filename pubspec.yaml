@@ -32,7 +32,11 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
+  google_maps_flutter: 0.5.33
+  geolocator: ^6.0.0
+  geocoding: 1.0.3+1
+  google_fonts: ^1.1.1
+  fl_chart: ^0.12.2
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
