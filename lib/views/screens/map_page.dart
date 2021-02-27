@@ -46,7 +46,8 @@ class _MapPageState extends State<MapPage> {
           circleId: CircleId(region['id']),
           center:
               LatLng(double.parse(region['lat']), double.parse(region['lng'])),
-          radius: double.parse(region['confirmed']),
+          //radius: double.parse(region['confirmed']),
+          radius: double.parse("500"),
           strokeWidth: 2,
           fillColor: double.parse(region['confirmed']) > 20000
               ? colors[2].withOpacity(0.5)
@@ -60,7 +61,71 @@ class _MapPageState extends State<MapPage> {
 
   @override
   Widget build(BuildContext context) {
+    final _formKey = GlobalKey<FormState>();
     return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButton.extended(
+        icon: Icon(
+          Icons.message,
+        ),
+        label: Text("message"),
+        onPressed: () {
+          showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  content: Stack(
+                    overflow: Overflow.visible,
+                    children: <Widget>[
+                      Positioned(
+                        right: -40.0,
+                        top: -40.0,
+                        child: InkResponse(
+                          onTap: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: CircleAvatar(
+                            child: Icon(Icons.close),
+                            backgroundColor: Colors.red,
+                          ),
+                        ),
+                      ),
+                      Form(
+                        key: _formKey,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            Text("numéro de téléphone "),
+                            Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: TextFormField(),
+                            ),
+                            Text("Description "),
+                            Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: TextFormField(),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: RaisedButton(
+                                child: Text("Submit"),
+                                onPressed: () {
+                                  if (_formKey.currentState.validate()) {
+                                    _formKey.currentState.save();
+                                  }
+                                },
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              });
+        },
+        backgroundColor: Colors.redAccent,
+      ),
       appBar: AppBarComponent(),
       body: Stack(
         children: [
@@ -87,7 +152,7 @@ class _MapPageState extends State<MapPage> {
               ),
             ),
           ),
-          Align(
+          /*  Align(
             alignment: Alignment.topRight,
             child: Container(
               margin: EdgeInsets.all(5.0),
@@ -100,7 +165,7 @@ class _MapPageState extends State<MapPage> {
                 ),
               ),
             ),
-          ),
+          ), */
         ],
       ),
     );
