@@ -1,4 +1,5 @@
 import 'package:app_croissant_rouge/views/screens/MyHomePage.dart';
+import 'package:app_croissant_rouge/views/screens/Protection.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(),
+      home: Protection(),
     );
   }
 }

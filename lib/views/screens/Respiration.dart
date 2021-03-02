@@ -2,7 +2,7 @@
 import 'package:app_croissant_rouge/model/ChoixRespiration.dart';
 import 'package:app_croissant_rouge/views/screens/Conscience.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 
 class Respiration extends StatefulWidget {
   @override
@@ -85,7 +85,11 @@ class _RespirationState extends State<Respiration> {
                     color: Color.fromRGBO(226, 56, 50, 50),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(16.0))),
-                    onPressed: () => UrlLauncher.launch("tel:198"),
+                    onPressed: () async {
+                      const number = '198';
+                      bool res =
+                          await FlutterPhoneDirectCaller.callNumber(number);
+                    },
                     child: Text("Next"),
                   ),
                 ],
