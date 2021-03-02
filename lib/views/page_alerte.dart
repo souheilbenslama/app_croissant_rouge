@@ -13,25 +13,47 @@ class PageAlerte extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Container(
-            width: 410,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                IconButton(
-                  iconSize: 35,
-                  icon: Icon(
-                    Icons.account_circle,
-                    color: Colors.black,
+            child: Container(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Image.asset(
+                    'assets/logo1.png',
+                    width: 130,
+                    height: 65,
                   ),
-                ),
-                IconButton(
-                  iconSize: 35,
-                  icon: Icon(
-                    Icons.settings,
-                    color: Colors.black,
+                  IconButton(
+                    iconSize: 35,
+                    icon: Icon(
+                      Icons.location_on,
+                      color: Colors.black,
+                    ),
+                    onPressed: null,
                   ),
-                ),
-              ],
+                  Container(
+                    width: 230,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: <Widget>[
+                        IconButton(
+                          iconSize: 35,
+                          icon: Icon(
+                            Icons.account_circle,
+                            color: Colors.black,
+                          ),
+                        ),
+                        IconButton(
+                          iconSize: 35,
+                          icon: Icon(
+                            Icons.settings,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
           RaisedButton(
