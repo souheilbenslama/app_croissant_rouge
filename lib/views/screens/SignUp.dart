@@ -260,7 +260,7 @@ class _SignUpState extends State<SignUp> {
             validator: (val) {
               if (val.isEmpty) return 'Champ Obligatoire !';
               if (val != _pass.text)
-                return 'Les mot de passes ne sont pas identiques';
+                return 'Les mots de passe ne sont pas identiques';
               return null;
             },
             obscureText: true,

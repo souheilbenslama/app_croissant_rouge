@@ -1,8 +1,6 @@
-import 'package:app_croissant_rouge/views/screens/SignIn.dart';
+import 'package:app_croissant_rouge/views/screens/Protection.dart';
 import 'package:app_croissant_rouge/views/screens/SignUp.dart';
 import 'package:flutter/material.dart';
-
-import 'Views/screens/MyHomePage.dart';
 
 void main() {
   runApp(MyApp());
@@ -30,7 +28,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: SignUp(),
+      home: Protection(),
     );
   }
 }

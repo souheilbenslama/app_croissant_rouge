@@ -3,6 +3,11 @@ import 'package:app_croissant_rouge/views/screens/SignUp.dart';
 import 'package:flutter/material.dart';
 
 class SignIn extends StatelessWidget {
+  String _email;
+  String _pass;
+
+  final GlobalKey<FormState> _form = GlobalKey<FormState>();
+
   _buildEmail() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -20,7 +25,20 @@ class SignIn extends StatelessWidget {
         Container(
           alignment: Alignment.centerLeft,
           height: 60.0,
-          child: TextField(
+          child: TextFormField(
+            validator: (String value) {
+              if (value.isEmpty) {
+                return 'Champ Obligatoire !';
+              }
+              if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+                  .hasMatch(value)) {
+                return 'Il faut saisir un email valide';
+              }
+              return null;
+            },
+            onSaved: (String value) {
+              _email = value;
+            },
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(color: Colors.white),
             decoration: InputDecoration(
@@ -29,7 +47,7 @@ class SignIn extends StatelessWidget {
                 Icons.email,
                 color: Colors.white,
               ),
-              hintText: 'Enter your E-mail',
+              hintText: 'Saisir votre e-mail',
               hintStyle: TextStyle(color: Colors.white60),
             ),
           ),
@@ -55,7 +73,14 @@ class SignIn extends StatelessWidget {
         Container(
           alignment: Alignment.centerLeft,
           height: 60.0,
-          child: TextField(
+          child: TextFormField(
+            validator: (val) {
+              if (val.isEmpty) return 'Veuillez saisir le mot de passe !';
+              return null;
+            },
+            onSaved: (String value) {
+              _pass = value;
+            },
             obscureText: true,
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(color: Colors.white),
@@ -65,7 +90,7 @@ class SignIn extends StatelessWidget {
                 Icons.lock,
                 color: Colors.white,
               ),
-              hintText: 'Enter your Password',
+              hintText: 'Saisir votre mot de passe',
               hintStyle: TextStyle(color: Colors.white60),
             ),
           ),
@@ -124,83 +149,88 @@ class SignIn extends StatelessWidget {
                 physics: AlwaysScrollableScrollPhysics(),
                 padding:
                     EdgeInsets.symmetric(horizontal: 40.0, vertical: 100.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    CircleAvatar(
-                      radius: 80.0,
-                      backgroundImage: NetworkImage(
-                          'https://media-exp1.licdn.com/dms/image/C4D0BAQEeQQyHaoMmrg/company-logo_200_200/0/1519889981767?e=2159024400&v=beta&t=tkf0F4V2T0xlxp0mWnLsdsaHhnWGIyiIyHkr9aMBD44'),
-                    ),
-                    SizedBox(
-                      height: 40.0,
-                    ),
-                    Text(
-                      'Sign In',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'OpenSans',
-                          fontSize: 30.0,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(
-                      height: 30.0,
-                    ),
-                    _buildEmail(),
-                    SizedBox(
-                      height: 30.0,
-                    ),
-                    _buildPassword(),
-                    _buildForgotPassword(),
-                    SizedBox(
-                      height: 20.0,
-                    ),
-                    //Login Button
-                    Container(
-                        padding: EdgeInsets.symmetric(vertical: 25.0),
-                        width: double.infinity,
-                        child: RaisedButton(
-                          onPressed: () {},
-                          padding: EdgeInsets.all(15.0),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30.0)),
-                          color: Colors.white,
-                          child: Text(
-                            'LOGIN',
-                            style: TextStyle(
-                              color: Colors.black,
-                              letterSpacing: 1.5,
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'OpenSans',
+                child: Form(
+                  key: _form,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      CircleAvatar(
+                        radius: 80.0,
+                        backgroundImage: NetworkImage(
+                            'https://media-exp1.licdn.com/dms/image/C4D0BAQEeQQyHaoMmrg/company-logo_200_200/0/1519889981767?e=2159024400&v=beta&t=tkf0F4V2T0xlxp0mWnLsdsaHhnWGIyiIyHkr9aMBD44'),
+                      ),
+                      SizedBox(
+                        height: 40.0,
+                      ),
+                      Text(
+                        'Sign In',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: 'OpenSans',
+                            fontSize: 30.0,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(
+                        height: 30.0,
+                      ),
+                      _buildEmail(),
+                      SizedBox(
+                        height: 30.0,
+                      ),
+                      _buildPassword(),
+                      _buildForgotPassword(),
+                      SizedBox(
+                        height: 20.0,
+                      ),
+                      //Login Button
+                      Container(
+                          padding: EdgeInsets.symmetric(vertical: 25.0),
+                          width: double.infinity,
+                          child: RaisedButton(
+                            onPressed: () {
+                              _form.currentState.validate();
+                            },
+                            padding: EdgeInsets.all(15.0),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30.0)),
+                            color: Colors.white,
+                            child: Text(
+                              'LOGIN',
+                              style: TextStyle(
+                                color: Colors.black,
+                                letterSpacing: 1.5,
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'OpenSans',
+                              ),
                             ),
-                          ),
-                        )),
-                    //SIGNUP
-                    GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => SignUp()),
-                          );
-                        },
-                        child: RichText(
-                            text: TextSpan(children: [
-                          TextSpan(
-                              text: "Don't have an Account? ",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18.0,
-                                  fontWeight: FontWeight.w400)),
-                          TextSpan(
-                              text: "Sign Up",
-                              style: TextStyle(
-                                  decoration: TextDecoration.underline,
-                                  color: Colors.white,
-                                  fontSize: 18.0,
-                                  fontWeight: FontWeight.bold))
-                        ])))
-                  ],
+                          )),
+                      //SIGNUP
+                      GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => SignUp()),
+                            );
+                          },
+                          child: RichText(
+                              text: TextSpan(children: [
+                            TextSpan(
+                                text: "Don't have an Account? ",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.w400)),
+                            TextSpan(
+                                text: "Sign Up",
+                                style: TextStyle(
+                                    decoration: TextDecoration.underline,
+                                    color: Colors.white,
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.bold))
+                          ])))
+                    ],
+                  ),
                 ),
               ),
             )
