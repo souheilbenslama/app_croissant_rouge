@@ -1,3 +1,5 @@
+import 'package:app_croissant_rouge/views/screens/SignIn.dart';
+import 'package:app_croissant_rouge/views/screens/SignUp.dart';
 import 'package:flutter/material.dart';
 
 import 'Views/screens/MyHomePage.dart';
@@ -28,7 +30,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: SignUp(),
     );
   }
 }
