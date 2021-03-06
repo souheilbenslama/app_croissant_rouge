@@ -25,7 +25,11 @@ dependencies:
     sdk: flutter
   url_launcher: ^5.1.2
   flutter_phone_direct_caller: ^1.0.1
-
+  google_maps_flutter: 0.5.33
+  geolocator: ^6.0.0
+  geocoding: 1.0.3+1
+  google_fonts: ^1.1.1
+  fl_chart: ^0.12.2
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -35,11 +39,6 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  google_maps_flutter: 0.5.33
-  geolocator: ^6.0.0
-  geocoding: 1.0.3+1
-  google_fonts: ^1.1.1
-  fl_chart: ^0.12.2
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -54,7 +53,7 @@ flutter:
     - assets/logo.jpg
     - assets/logo1.png
   # To add assets to your application, add an assets section, like this:
-  assets:
+  
     - assets/images/
   #   - images/a_dot_ham.jpeg
 
@@ -81,5 +80,5 @@ flutter:
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
   #
-  # For details regarding fonts from package dependencies,
+  # For details re garding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
