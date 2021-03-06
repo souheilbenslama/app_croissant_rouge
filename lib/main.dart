@@ -1,5 +1,6 @@
+import 'package:app_croissant_rouge/views/screens/MyHomePage.dart';
+import 'package:app_croissant_rouge/views/screens/Protection.dart';
 import 'package:flutter/material.dart';
-
 import './views/page_alerte.dart';
 
 void main() {
@@ -17,6 +18,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: PageAlerte(),
+
     );
   }
 }
