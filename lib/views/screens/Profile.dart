@@ -63,7 +63,7 @@ class Profile extends StatelessWidget {
                                         iconOff: Icons.notifications_off,
                                         textSize: 18.0,
                                         onChanged: (bool position) {
-                                          print("the button is $position");
+                                          print("The button is $position");
                                         },
                                       ),
                                     ),
