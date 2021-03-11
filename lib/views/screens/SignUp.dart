@@ -29,7 +29,7 @@ class _SignUpState extends State<SignUp> {
           'Nom Complet :',
           style: TextStyle(
             decoration: TextDecoration.underline,
-            color: Colors.white,
+            color: Colors.red[600],
             fontSize: 15.0,
           ),
         ),
@@ -51,14 +51,14 @@ class _SignUpState extends State<SignUp> {
             },
             style: TextStyle(color: Colors.white),
             decoration: InputDecoration(
-              errorStyle: TextStyle(color: Colors.white60),
+              errorStyle: TextStyle(color: Colors.red[600]),
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
                 Icons.person,
-                color: Colors.white70,
+                color: Colors.red[600],
               ),
               hintText: 'Saisir votre nom',
-              hintStyle: TextStyle(color: Colors.white60),
+              hintStyle: TextStyle(color: Colors.grey[600]),
             ),
           ),
         )
@@ -74,7 +74,7 @@ class _SignUpState extends State<SignUp> {
           'Email :',
           style: TextStyle(
             decoration: TextDecoration.underline,
-            color: Colors.white,
+            color: Colors.red[600],
             fontSize: 15.0,
           ),
         ),
@@ -97,16 +97,16 @@ class _SignUpState extends State<SignUp> {
               _email = value;
             },
             keyboardType: TextInputType.emailAddress,
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: Colors.red[600]),
             decoration: InputDecoration(
-              errorStyle: TextStyle(color: Colors.white60),
+              errorStyle: TextStyle(color: Colors.red[600]),
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
                 Icons.email,
-                color: Colors.white70,
+                color: Colors.red[600],
               ),
               hintText: 'Saisir votre email',
-              hintStyle: TextStyle(color: Colors.white60),
+              hintStyle: TextStyle(color: Colors.grey[600]),
             ),
           ),
         )
@@ -122,7 +122,7 @@ class _SignUpState extends State<SignUp> {
           'N° CIN :',
           style: TextStyle(
             decoration: TextDecoration.underline,
-            color: Colors.white,
+            color: Colors.red[600],
             fontSize: 15.0,
           ),
         ),
@@ -146,16 +146,16 @@ class _SignUpState extends State<SignUp> {
               _cin = value;
             },
             keyboardType: TextInputType.number,
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: Colors.red[600]),
             decoration: InputDecoration(
-              errorStyle: TextStyle(color: Colors.white60),
+              errorStyle: TextStyle(color: Colors.red[600]),
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
                 Icons.badge,
-                color: Colors.white70,
+                color: Colors.red[600],
               ),
               hintText: 'Saisir votre numero de CIN',
-              hintStyle: TextStyle(color: Colors.white60),
+              hintStyle: TextStyle(color: Colors.grey[600]),
             ),
           ),
         )
@@ -171,7 +171,7 @@ class _SignUpState extends State<SignUp> {
           'Telephone :',
           style: TextStyle(
             decoration: TextDecoration.underline,
-            color: Colors.white,
+            color: Colors.red[600],
             fontSize: 15.0,
           ),
         ),
@@ -195,16 +195,16 @@ class _SignUpState extends State<SignUp> {
               _tel = value;
             },
             keyboardType: TextInputType.number,
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: Colors.red[600]),
             decoration: InputDecoration(
-              errorStyle: TextStyle(color: Colors.white60),
+              errorStyle: TextStyle(color: Colors.red[600]),
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
                 Icons.phone,
-                color: Colors.white70,
+                color: Colors.red[600],
               ),
               hintText: 'Saisir votre numero de telephone',
-              hintStyle: TextStyle(color: Colors.white60),
+              hintStyle: TextStyle(color: Colors.grey[600]),
             ),
           ),
         )
@@ -217,10 +217,10 @@ class _SignUpState extends State<SignUp> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          'Password :',
+          'Mot de passe :',
           style: TextStyle(
             decoration: TextDecoration.underline,
-            color: Colors.white,
+            color: Colors.red[600],
             fontSize: 15.0,
           ),
         ),
@@ -238,16 +238,16 @@ class _SignUpState extends State<SignUp> {
             },
             obscureText: true,
             keyboardType: TextInputType.emailAddress,
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: Colors.red[600]),
             decoration: InputDecoration(
-              errorStyle: TextStyle(color: Colors.white60),
+              errorStyle: TextStyle(color: Colors.red[600]),
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
                 Icons.lock,
-                color: Colors.white70,
+                color: Colors.red[600],
               ),
               hintText: 'Saisir votre mot de passe',
-              hintStyle: TextStyle(color: Colors.white60),
+              hintStyle: TextStyle(color: Colors.grey[700]),
             ),
           ),
         ),
@@ -265,13 +265,13 @@ class _SignUpState extends State<SignUp> {
             },
             obscureText: true,
             keyboardType: TextInputType.emailAddress,
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: Colors.red[600]),
             decoration: InputDecoration(
-              errorStyle: TextStyle(color: Colors.white60),
+              errorStyle: TextStyle(color: Colors.red[600]),
               prefixIcon: Icon(Icons.lock),
               contentPadding: EdgeInsets.only(top: 14.0),
               hintText: 'Confirmer votre mot de passe',
-              hintStyle: TextStyle(color: Colors.white60),
+              hintStyle: TextStyle(color: Colors.grey[700]),
             ),
           ),
         )
@@ -287,7 +287,7 @@ class _SignUpState extends State<SignUp> {
           'Adresse :',
           style: TextStyle(
             decoration: TextDecoration.underline,
-            color: Colors.white,
+            color: Colors.red[600],
             fontSize: 15.0,
           ),
         ),
@@ -307,16 +307,16 @@ class _SignUpState extends State<SignUp> {
             onSaved: (String value) {
               _adresse = value;
             },
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: Colors.red[600]),
             decoration: InputDecoration(
-              errorStyle: TextStyle(color: Colors.white60),
+              errorStyle: TextStyle(color: Colors.red[600]),
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
                 Icons.add_location_alt_rounded,
-                color: Colors.white70,
+                color: Colors.red[600],
               ),
               hintText: 'Saisir votre adresse',
-              hintStyle: TextStyle(color: Colors.white60),
+              hintStyle: TextStyle(color: Colors.grey[700]),
             ),
           ),
         )
@@ -339,13 +339,13 @@ class _SignUpState extends State<SignUp> {
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
                       colors: [
-                    Color(0xFFff0000),
-                    Color(0xFFcc0000),
-                    Color(0xFF990000),
-                    Color(0xFF660000),
+                    Color(0xFFeeeeee),
+                    Color(0xFFe9e9e9),
+                    Color(0xFFe5e5e5),
+                    Color(0xFFe0e0e0),
                   ],
                       stops: [
-                    0.1,
+                    0.2,
                     0.4,
                     0.7,
                     0.9
@@ -365,7 +365,7 @@ class _SignUpState extends State<SignUp> {
                       Text(
                         'S\'inscrire',
                         style: TextStyle(
-                            color: Colors.white,
+                            color: Colors.red[600],
                             fontFamily: 'OpenSans',
                             fontSize: 35.0,
                             fontWeight: FontWeight.bold),
@@ -412,7 +412,7 @@ class _SignUpState extends State<SignUp> {
                           title: Text(
                             'Je suis un secouriste',
                             style: TextStyle(
-                                color: Colors.white,
+                                color: Colors.red[600],
                                 decoration: TextDecoration.underline),
                           ),
                           value: _checkbox,
@@ -423,7 +423,7 @@ class _SignUpState extends State<SignUp> {
                           },
                         ),
                       ),
-                      //Login Button
+                      //SIGNUP Button
                       Container(
                           padding: EdgeInsets.symmetric(vertical: 25.0),
                           width: double.infinity,
@@ -434,11 +434,11 @@ class _SignUpState extends State<SignUp> {
                             padding: EdgeInsets.all(15.0),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30.0)),
-                            color: Colors.white,
+                            color: Colors.red[600],
                             child: Text(
                               'S\'inscrire',
                               style: TextStyle(
-                                color: Colors.black,
+                                color: Colors.white,
                                 letterSpacing: 1.5,
                                 fontSize: 18.0,
                                 fontWeight: FontWeight.bold,
@@ -459,15 +459,15 @@ class _SignUpState extends State<SignUp> {
                             TextSpan(
                                 text: "Vous avez déjà un compte? ",
                                 style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 18.0,
+                                    color: Colors.red[600],
+                                    fontSize: 17.0,
                                     fontWeight: FontWeight.w400)),
                             TextSpan(
                                 text: "Se connecter",
                                 style: TextStyle(
                                     decoration: TextDecoration.underline,
-                                    color: Colors.white,
-                                    fontSize: 18.0,
+                                    color: Colors.red[600],
+                                    fontSize: 20.0,
                                     fontWeight: FontWeight.bold))
                           ])))
                     ],

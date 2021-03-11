@@ -15,8 +15,9 @@ class SignIn extends StatelessWidget {
         Text(
           'Email :',
           style: TextStyle(
+            fontWeight: FontWeight.bold,
             color: Colors.white,
-            fontSize: 13.0,
+            fontSize: 15.0,
           ),
         ),
         SizedBox(
@@ -42,13 +43,14 @@ class SignIn extends StatelessWidget {
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(color: Colors.white),
             decoration: InputDecoration(
+              errorStyle: TextStyle(color: Colors.grey[300]),
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
                 Icons.email,
                 color: Colors.white,
               ),
               hintText: 'Saisir votre e-mail',
-              hintStyle: TextStyle(color: Colors.white60),
+              hintStyle: TextStyle(color: Colors.grey[300]),
             ),
           ),
         )
@@ -61,10 +63,11 @@ class SignIn extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          'Password :',
+          'Mot de passe :',
           style: TextStyle(
             color: Colors.white,
-            fontSize: 13.0,
+            fontWeight: FontWeight.bold,
+            fontSize: 15.0,
           ),
         ),
         SizedBox(
@@ -85,13 +88,14 @@ class SignIn extends StatelessWidget {
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(color: Colors.white),
             decoration: InputDecoration(
+              errorStyle: TextStyle(color: Colors.grey[300]),
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
                 Icons.lock,
                 color: Colors.white,
               ),
               hintText: 'Saisir votre mot de passe',
-              hintStyle: TextStyle(color: Colors.white60),
+              hintStyle: TextStyle(color: Colors.grey[300]),
             ),
           ),
         )
@@ -106,7 +110,7 @@ class SignIn extends StatelessWidget {
         padding: EdgeInsets.only(right: 0.0),
         onPressed: () {},
         child: Text(
-          'Forgot Password?',
+          'Mot de passe oublié?',
           style: TextStyle(
               decoration: TextDecoration.underline,
               color: Colors.white,
@@ -131,15 +135,15 @@ class SignIn extends StatelessWidget {
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
                       colors: [
-                    Color(0xFFff0000),
-                    Color(0xFFcc0000),
-                    Color(0xFF990000),
-                    Color(0xFF660000),
+                    Color(0xFFe84f4c),
+                    Color(0xFFe53935),
+                    Color(0xFFe2231e),
+                    Color(0xFFe2231e),
                   ],
                       stops: [
-                    0.1,
-                    0.4,
-                    0.7,
+                    0.2,
+                    0.5,
+                    0.9,
                     0.9
                   ])),
             ),
@@ -160,18 +164,18 @@ class SignIn extends StatelessWidget {
                             'https://media-exp1.licdn.com/dms/image/C4D0BAQEeQQyHaoMmrg/company-logo_200_200/0/1519889981767?e=2159024400&v=beta&t=tkf0F4V2T0xlxp0mWnLsdsaHhnWGIyiIyHkr9aMBD44'),
                       ),
                       SizedBox(
-                        height: 40.0,
+                        height: 30.0,
                       ),
                       Text(
-                        'Sign In',
+                        'Login',
                         style: TextStyle(
                             color: Colors.white,
                             fontFamily: 'OpenSans',
-                            fontSize: 30.0,
+                            fontSize: 35.0,
                             fontWeight: FontWeight.bold),
                       ),
                       SizedBox(
-                        height: 30.0,
+                        height: 50.0,
                       ),
                       _buildEmail(),
                       SizedBox(
@@ -195,7 +199,7 @@ class SignIn extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(30.0)),
                             color: Colors.white,
                             child: Text(
-                              'LOGIN',
+                              'Connexion',
                               style: TextStyle(
                                 color: Colors.black,
                                 letterSpacing: 1.5,
@@ -216,13 +220,13 @@ class SignIn extends StatelessWidget {
                           child: RichText(
                               text: TextSpan(children: [
                             TextSpan(
-                                text: "Don't have an Account? ",
+                                text: "Vous n'avez pas de compte? ",
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 18.0,
                                     fontWeight: FontWeight.w400)),
                             TextSpan(
-                                text: "Sign Up",
+                                text: "S'inscrire",
                                 style: TextStyle(
                                     decoration: TextDecoration.underline,
                                     color: Colors.white,
