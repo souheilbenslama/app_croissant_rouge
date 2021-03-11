@@ -86,7 +86,7 @@ class _MapPageState extends State<MapPage> {
                           },
                           child: CircleAvatar(
                             child: Icon(Icons.close),
-                            backgroundColor: Colors.red,
+                            backgroundColor: Colors.redAccent[700],
                           ),
                         ),
                       ),
@@ -124,7 +124,7 @@ class _MapPageState extends State<MapPage> {
                 );
               });
         },
-        backgroundColor: Colors.redAccent,
+        backgroundColor: Colors.redAccent[700],
       ),
       appBar: AppBarComponent(),
       body: Stack(
