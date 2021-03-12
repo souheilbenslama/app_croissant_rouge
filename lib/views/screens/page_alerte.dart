@@ -50,6 +50,9 @@ class PageAlerte extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
                 IconButton(
+                  onPressed: () {
+                    Navigator.of(context).pushNamed('/signIn');
+                  },
                   iconSize: 35,
                   icon: Icon(
                     Icons.account_circle,

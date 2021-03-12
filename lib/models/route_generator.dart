@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../views/screens/page_alerte.dart';
 import '../views/screens/map_page.dart';
 import '../views/screens/Protection.dart';
+import '../views/screens/SignIn.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -12,7 +13,8 @@ class RouteGenerator {
     switch (settings.name) {
       case '/':
         return MaterialPageRoute(builder: (_) => PageAlerte());
-      //case '/profile':
+      case '/signIn':
+        return MaterialPageRoute(builder: (_) => SignIn());
       case '/map':
         return MaterialPageRoute(builder: (_) => MapPage());
       case '/options':
