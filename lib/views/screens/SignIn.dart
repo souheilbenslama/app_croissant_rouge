@@ -1,10 +1,34 @@
 //KHALIL
-import 'package:app_croissant_rouge/views/screens/SignUp.dart';
+import 'package:app_croissant_rouge/views/page_alerte.dart';
+import 'package:app_croissant_rouge/views/screens/Profile.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+
+// The Server to the backend
+const SERVER_IP = 'http://192.168.1.8:3000';
+// The method that will try to attempt to login
+Future<String> attemptLogIn(String username, String password) async {
+  var res = await http.post("$SERVER_IP/users/login",
+      body: {"email": username, "password": password});
+  if (res.statusCode == 200) return res.body;
+  return null;
+}
+
+// Displaying dialogs
+void displayDialog(BuildContext context, String title, String text) =>
+    showDialog(
+      context: context,
+      builder: (context) =>
+          AlertDialog(title: Text(title), content: Text(text)),
+    );
 
 class SignIn extends StatelessWidget {
   String _email;
   String _pass;
+  // Defining the passwordcontroller and the email controller
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   final GlobalKey<FormState> _form = GlobalKey<FormState>();
 
@@ -27,6 +51,7 @@ class SignIn extends StatelessWidget {
           alignment: Alignment.centerLeft,
           height: 60.0,
           child: TextFormField(
+            controller: _usernameController,
             validator: (String value) {
               if (value.isEmpty) {
                 return 'Champ Obligatoire !';
@@ -77,6 +102,7 @@ class SignIn extends StatelessWidget {
           alignment: Alignment.centerLeft,
           height: 60.0,
           child: TextFormField(
+            controller: _passwordController,
             validator: (val) {
               if (val.isEmpty) return 'Veuillez saisir le mot de passe !';
               return null;
@@ -191,8 +217,26 @@ class SignIn extends StatelessWidget {
                           padding: EdgeInsets.symmetric(vertical: 25.0),
                           width: double.infinity,
                           child: RaisedButton(
-                            onPressed: () {
+                            onPressed: () async {
                               _form.currentState.validate();
+                              print("form valdiated ");
+                              var username = _usernameController.text;
+                              var password = _passwordController.text;
+                              var jwt = await attemptLogIn(username, password);
+                              print("attempt to login finished " + jwt);
+                              if (jwt != null) {
+                                final prefs =
+                                    await SharedPreferences.getInstance();
+                                prefs.setString("jwt", jwt);
+                                print("string set to " + jwt);
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => PageAlerte()));
+                              } else {
+                                displayDialog(
+                                    context, "Erreur", "Compte introuvable");
+                              }
                             },
                             padding: EdgeInsets.all(15.0),
                             shape: RoundedRectangleBorder(
@@ -214,7 +258,8 @@ class SignIn extends StatelessWidget {
                           onTap: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => SignUp()),
+                              MaterialPageRoute(
+                                  builder: (context) => Profile()),
                             );
                           },
                           child: RichText(
