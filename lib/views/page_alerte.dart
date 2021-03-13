@@ -7,7 +7,7 @@ const SERVER_IP = 'http://192.168.1.8:3000';
 // The method to register the user
 Future<String> attemptLogInUser(String userId) async {
   var res =
-      await http.post("$SERVER_IP/users/normalUser", body: {"phone": userId});
+      await http.post("$SERVER_IP/users/normalUser", body: {"userid": userId});
   if (res.statusCode == 200) return res.body;
   return null;
 }
