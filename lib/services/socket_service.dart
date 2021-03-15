@@ -5,17 +5,13 @@ class Socket {
   // Dart client
 
   void connect() {
-    IO.Socket socket = IO.io(
-        'http://localhost:3000',
-        OptionBuilder()
-            .setTransports(['websocket']) // for Flutter or Dart VM
-            .disableAutoConnect() // disable auto-connection
-            .setExtraHeaders({'foo': 'bar'}) // optional
-            .build());
+    IO.Socket socket = IO.io('http://192.168.43.68:3000', <String, dynamic>{
+      'transports': ['websocket'],
+      'autoConnect': true,
+    });
 
-    socket.connect();
-
-    socket.on('event', (data) => print(data));
+    socket.connect().onConnect((data) => print("connected"));
+    socket.on('message', (data) => print(data));
     socket.onDisconnect((_) => print('disconnect'));
     socket.on('fromServer', (_) => print(_));
   }
