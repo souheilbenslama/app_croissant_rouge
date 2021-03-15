@@ -29,7 +29,7 @@ class _SignUpState extends State<SignUp> {
           'Nom Complet :',
           style: TextStyle(
             decoration: TextDecoration.underline,
-            color: Colors.red[600],
+            color: Colors.redAccent[700],
             fontSize: 15.0,
           ),
         ),
@@ -49,16 +49,22 @@ class _SignUpState extends State<SignUp> {
             onSaved: (String value) {
               _name = value;
             },
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(
+              color: Colors.grey[700],
+            ),
             decoration: InputDecoration(
-              errorStyle: TextStyle(color: Colors.red[600]),
+              errorStyle: TextStyle(
+                color: Colors.red[300],
+              ),
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
                 Icons.person,
-                color: Colors.red[600],
+                color: Colors.redAccent[700],
               ),
               hintText: 'Saisir votre nom',
-              hintStyle: TextStyle(color: Colors.grey[600]),
+              hintStyle: TextStyle(
+                color: Colors.grey[700],
+              ),
             ),
           ),
         )
@@ -74,7 +80,7 @@ class _SignUpState extends State<SignUp> {
           'Email :',
           style: TextStyle(
             decoration: TextDecoration.underline,
-            color: Colors.red[600],
+            color: Colors.redAccent[700],
             fontSize: 15.0,
           ),
         ),
@@ -97,16 +103,22 @@ class _SignUpState extends State<SignUp> {
               _email = value;
             },
             keyboardType: TextInputType.emailAddress,
-            style: TextStyle(color: Colors.red[600]),
+            style: TextStyle(
+              color: Colors.grey[700],
+            ),
             decoration: InputDecoration(
-              errorStyle: TextStyle(color: Colors.red[600]),
+              errorStyle: TextStyle(
+                color: Colors.red[300],
+              ),
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
                 Icons.email,
-                color: Colors.red[600],
+                color: Colors.redAccent[700],
               ),
               hintText: 'Saisir votre email',
-              hintStyle: TextStyle(color: Colors.grey[600]),
+              hintStyle: TextStyle(
+                color: Colors.grey[700],
+              ),
             ),
           ),
         )
@@ -122,7 +134,7 @@ class _SignUpState extends State<SignUp> {
           'N° CIN :',
           style: TextStyle(
             decoration: TextDecoration.underline,
-            color: Colors.red[600],
+            color: Colors.redAccent[700],
             fontSize: 15.0,
           ),
         ),
@@ -146,16 +158,22 @@ class _SignUpState extends State<SignUp> {
               _cin = value;
             },
             keyboardType: TextInputType.number,
-            style: TextStyle(color: Colors.red[600]),
+            style: TextStyle(
+              color: Colors.grey[700],
+            ),
             decoration: InputDecoration(
-              errorStyle: TextStyle(color: Colors.red[600]),
+              errorStyle: TextStyle(
+                color: Colors.red[300],
+              ),
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
                 Icons.badge,
-                color: Colors.red[600],
+                color: Colors.redAccent[700],
               ),
               hintText: 'Saisir votre numero de CIN',
-              hintStyle: TextStyle(color: Colors.grey[600]),
+              hintStyle: TextStyle(
+                color: Colors.grey[700],
+              ),
             ),
           ),
         )
@@ -171,7 +189,7 @@ class _SignUpState extends State<SignUp> {
           'Telephone :',
           style: TextStyle(
             decoration: TextDecoration.underline,
-            color: Colors.red[600],
+            color: Colors.redAccent[700],
             fontSize: 15.0,
           ),
         ),
@@ -195,16 +213,22 @@ class _SignUpState extends State<SignUp> {
               _tel = value;
             },
             keyboardType: TextInputType.number,
-            style: TextStyle(color: Colors.red[600]),
+            style: TextStyle(
+              color: Colors.grey[700],
+            ),
             decoration: InputDecoration(
-              errorStyle: TextStyle(color: Colors.red[600]),
+              errorStyle: TextStyle(
+                color: Colors.red[300],
+              ),
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
                 Icons.phone,
-                color: Colors.red[600],
+                color: Colors.redAccent[700],
               ),
               hintText: 'Saisir votre numero de telephone',
-              hintStyle: TextStyle(color: Colors.grey[600]),
+              hintStyle: TextStyle(
+                color: Colors.grey[700],
+              ),
             ),
           ),
         )
@@ -220,7 +244,7 @@ class _SignUpState extends State<SignUp> {
           'Mot de passe :',
           style: TextStyle(
             decoration: TextDecoration.underline,
-            color: Colors.red[600],
+            color: Colors.redAccent[700],
             fontSize: 15.0,
           ),
         ),
@@ -238,16 +262,22 @@ class _SignUpState extends State<SignUp> {
             },
             obscureText: true,
             keyboardType: TextInputType.emailAddress,
-            style: TextStyle(color: Colors.red[600]),
+            style: TextStyle(
+              color: Colors.grey[700],
+            ),
             decoration: InputDecoration(
-              errorStyle: TextStyle(color: Colors.red[600]),
+              errorStyle: TextStyle(
+                color: Colors.red[300],
+              ),
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
                 Icons.lock,
-                color: Colors.red[600],
+                color: Colors.redAccent[700],
               ),
               hintText: 'Saisir votre mot de passe',
-              hintStyle: TextStyle(color: Colors.grey[700]),
+              hintStyle: TextStyle(
+                color: Colors.grey[700],
+              ),
             ),
           ),
         ),
@@ -265,13 +295,19 @@ class _SignUpState extends State<SignUp> {
             },
             obscureText: true,
             keyboardType: TextInputType.emailAddress,
-            style: TextStyle(color: Colors.red[600]),
+            style: TextStyle(
+              color: Colors.grey[700],
+            ),
             decoration: InputDecoration(
-              errorStyle: TextStyle(color: Colors.red[600]),
+              errorStyle: TextStyle(
+                color: Colors.red[300],
+              ),
               prefixIcon: Icon(Icons.lock),
               contentPadding: EdgeInsets.only(top: 14.0),
               hintText: 'Confirmer votre mot de passe',
-              hintStyle: TextStyle(color: Colors.grey[700]),
+              hintStyle: TextStyle(
+                color: Colors.grey[700],
+              ),
             ),
           ),
         )
@@ -287,7 +323,7 @@ class _SignUpState extends State<SignUp> {
           'Adresse :',
           style: TextStyle(
             decoration: TextDecoration.underline,
-            color: Colors.red[600],
+            color: Colors.redAccent[700],
             fontSize: 15.0,
           ),
         ),
@@ -307,13 +343,17 @@ class _SignUpState extends State<SignUp> {
             onSaved: (String value) {
               _adresse = value;
             },
-            style: TextStyle(color: Colors.red[600]),
+            style: TextStyle(
+              color: Colors.grey[700],
+            ),
             decoration: InputDecoration(
-              errorStyle: TextStyle(color: Colors.red[600]),
+              errorStyle: TextStyle(
+                color: Colors.red[300],
+              ),
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
                 Icons.add_location_alt_rounded,
-                color: Colors.red[600],
+                color: Colors.redAccent[700],
               ),
               hintText: 'Saisir votre adresse',
               hintStyle: TextStyle(color: Colors.grey[700]),
@@ -365,7 +405,7 @@ class _SignUpState extends State<SignUp> {
                       Text(
                         'S\'inscrire',
                         style: TextStyle(
-                            color: Colors.red[600],
+                            color: Colors.redAccent[700],
                             fontFamily: 'OpenSans',
                             fontSize: 35.0,
                             fontWeight: FontWeight.bold),
@@ -408,11 +448,13 @@ class _SignUpState extends State<SignUp> {
                       SizedBox(height: 50.0),
                       Container(
                         child: CheckboxListTile(
+                          checkColor: Colors.white,
+                          activeColor: Colors.black,
                           controlAffinity: ListTileControlAffinity.leading,
                           title: Text(
                             'Je suis un secouriste',
                             style: TextStyle(
-                                color: Colors.red[600],
+                                color: Colors.redAccent[700],
                                 decoration: TextDecoration.underline),
                           ),
                           value: _checkbox,
@@ -434,7 +476,7 @@ class _SignUpState extends State<SignUp> {
                             padding: EdgeInsets.all(15.0),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30.0)),
-                            color: Colors.red[600],
+                            color: Colors.redAccent[700],
                             child: Text(
                               'S\'inscrire',
                               style: TextStyle(
@@ -448,28 +490,30 @@ class _SignUpState extends State<SignUp> {
                           )),
                       //SIGNIN
                       GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => SignIn()),
-                            );
-                          },
-                          child: RichText(
-                              text: TextSpan(children: [
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => SignIn()),
+                          );
+                        },
+                        child: RichText(
+                          text: TextSpan(children: [
                             TextSpan(
                                 text: "Vous avez déjà un compte? ",
                                 style: TextStyle(
-                                    color: Colors.red[600],
+                                    color: Colors.redAccent[700],
                                     fontSize: 17.0,
                                     fontWeight: FontWeight.w400)),
                             TextSpan(
                                 text: "Se connecter",
                                 style: TextStyle(
                                     decoration: TextDecoration.underline,
-                                    color: Colors.red[600],
+                                    color: Colors.redAccent[700],
                                     fontSize: 20.0,
                                     fontWeight: FontWeight.bold))
-                          ])))
+                          ]),
+                        ),
+                      )
                     ],
                   ),
                 ),
