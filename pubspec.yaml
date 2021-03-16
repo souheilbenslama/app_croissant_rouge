@@ -30,6 +30,7 @@ dependencies:
   geocoding: 1.0.3+1
   google_fonts: ^1.1.1
   fl_chart: ^0.12.2
+  flutter_cached_pdfview: ^0.3.5
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -47,8 +48,10 @@ flutter:
   assets:
     - assets/profil.png
     - assets/logo.jpg
-    - assets/logo1.png
     - assets/images/
+    - assets/file/fichier.pdf
+    - assets/bell.png
+    - assets/emergency.png
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

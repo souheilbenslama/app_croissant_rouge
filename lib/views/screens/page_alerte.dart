@@ -1,5 +1,7 @@
 import 'package:app_croissant_rouge/views/widgets/customized_dialog.dart';
+import 'package:app_croissant_rouge/views/widgets/notification_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
 
 class PageAlerte extends StatelessWidget {
   Widget popupMenuButton() {
@@ -123,7 +125,15 @@ class PageAlerte extends StatelessWidget {
                   ),
                 ),
                 FlatButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return NotificationDialog();
+                      },
+                    );
+                    //return PDF().fromAsset('assets/file/fichier.pdf');
+                  },
                   child: Text(
                     'Documentation',
                     style: TextStyle(
