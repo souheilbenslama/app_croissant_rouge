@@ -1,7 +1,20 @@
 import 'package:app_croissant_rouge/views/widgets/customized_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:device_info/device_info.dart';
+import 'package:http/http.dart' as http;
+
+// The Server to the backend
+const SERVER_IP = 'http://192.168.1.8:3000';
+// The method to register the user
+Future<String> attemptLogInUser(String userId) async {
+  var res =
+      await http.post("$SERVER_IP/users/normalUser", body: {"userid": userId});
+  if (res.statusCode == 200) return res.body;
+  return null;
+}
 
 class PageAlerte extends StatelessWidget {
+<<<<<<< HEAD:lib/views/screens/page_alerte.dart
   Widget popupMenuButton() {
     return PopupMenuButton<String>(
       icon: Icon(
@@ -24,6 +37,20 @@ class PageAlerte extends StatelessWidget {
         )
       ],
     );
+=======
+// To get Device Details
+  static Future<List<String>> getDeviceDetails() async {
+    String deviceName;
+    String deviceVersion;
+    String identifier;
+    final DeviceInfoPlugin deviceInfoPlugin = new DeviceInfoPlugin();
+    var build = await deviceInfoPlugin.androidInfo;
+    deviceName = build.model;
+    deviceVersion = build.version.toString();
+    identifier = build.androidId; //UUID for Android
+//if (!mounted) return;
+    return [deviceName, deviceVersion, identifier];
+>>>>>>> sprint3/signinBackFront:lib/views/page_alerte.dart
   }
 
   @override
@@ -86,8 +113,16 @@ class PageAlerte extends StatelessWidget {
           ),
           RaisedButton(
             color: Colors.redAccent[700],
+<<<<<<< HEAD:lib/views/screens/page_alerte.dart
             onPressed: () {
               Navigator.of(context).pushNamed('/options');
+=======
+            onPressed: () async {
+              var details = await getDeviceDetails();
+              var userId = details[2];
+              var res = await attemptLogInUser(userId);
+              print(res);
+>>>>>>> sprint3/signinBackFront:lib/views/page_alerte.dart
             },
             child: Text(
               'Alerter',
