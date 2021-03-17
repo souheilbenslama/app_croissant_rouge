@@ -49,7 +49,7 @@ flutter:
     - assets/profil.png
     - assets/logo.jpg
     - assets/images/
-    - assets/file/fichier.pdf
+    - assets/file/dummy.pdf
     - assets/bell.png
     - assets/emergency.png
   # The following line ensures that the Material Icons font is
