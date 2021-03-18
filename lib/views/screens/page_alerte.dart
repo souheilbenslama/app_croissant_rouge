@@ -3,6 +3,18 @@ import 'package:app_croissant_rouge/views/widgets/notification_dialog.dart';
 import '../widgets/pdf_viewer_from_asset.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
+import 'package:device_info/device_info.dart';
+import 'package:http/http.dart' as http;
+
+// The Server to the backend
+const SERVER_IP = 'http://192.168.1.8:3000';
+// The method to register the user
+Future<String> attemptLogInUser(String userId) async {
+  var res =
+      await http.post("$SERVER_IP/users/normalUser", body: {"userid": userId});
+  if (res.statusCode == 200) return res.body;
+  return null;
+}
 
 class PageAlerte extends StatelessWidget {
   Widget popupMenuButton() {
@@ -28,6 +40,20 @@ class PageAlerte extends StatelessWidget {
         )
       ],
     );
+  }
+
+// To get Device Details
+  static Future<List<String>> getDeviceDetails() async {
+    String deviceName;
+    String deviceVersion;
+    String identifier;
+    final DeviceInfoPlugin deviceInfoPlugin = new DeviceInfoPlugin();
+    var build = await deviceInfoPlugin.androidInfo;
+    deviceName = build.model;
+    deviceVersion = build.version.toString();
+    identifier = build.androidId; //UUID for Android
+//if (!mounted) return;
+    return [deviceName, deviceVersion, identifier];
   }
 
   @override
@@ -95,8 +121,12 @@ class PageAlerte extends StatelessWidget {
             // Don't like the design : needs changing
             // Alerter when pressed will take us to the questions page
             color: Colors.redAccent[700],
-            onPressed: () {
+            onPressed: () async {
+              var details = await getDeviceDetails();
+              var userId = details[2];
+              var res = await attemptLogInUser(userId);
               Navigator.of(context).pushNamed('/options');
+              print(res);
             },
             child: Text(
               'Alerter',

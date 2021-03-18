@@ -1,6 +1,40 @@
 //KHALIL
 import 'package:app_croissant_rouge/views/screens/SignIn.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
+// The Server to the backend
+const SERVER_IP = 'http://192.168.1.8:3000';
+
+final TextEditingController _nameController = TextEditingController();
+final TextEditingController _passwordController = TextEditingController();
+final TextEditingController _emailController = TextEditingController();
+final TextEditingController _cinController = TextEditingController();
+final TextEditingController _phoneController = TextEditingController();
+final TextEditingController _adressController = TextEditingController();
+
+// Displaying dialogs
+void displayDialog(BuildContext context, String title, String text) =>
+    showDialog(
+      context: context,
+      builder: (context) =>
+          AlertDialog(title: Text(title), content: Text(text)),
+    );
+
+// The method used to sign up
+Future<int> attemptSignUp(String email, String password, String name,
+    String cin, String phone, String address) async {
+  var res = await http.post('$SERVER_IP/users/signup', body: {
+    "email": email,
+    "password": password,
+    "name": name,
+    "cin": cin,
+    "address": address,
+    "phone": phone
+  });
+  print(res.body);
+  return res.statusCode;
+}
 
 class SignUp extends StatefulWidget {
   @override
@@ -40,6 +74,7 @@ class _SignUpState extends State<SignUp> {
           alignment: Alignment.topLeft,
           height: 50.0,
           child: TextFormField(
+            controller: _nameController,
             validator: (String value) {
               if (value.isEmpty) {
                 return 'Champ Obligatoire !';
@@ -89,6 +124,7 @@ class _SignUpState extends State<SignUp> {
           alignment: Alignment.topLeft,
           height: 50.0,
           child: TextFormField(
+            controller: _emailController,
             validator: (String value) {
               if (value.isEmpty) {
                 return 'Champ Obligatoire !';
@@ -145,6 +181,7 @@ class _SignUpState extends State<SignUp> {
           alignment: Alignment.topLeft,
           height: 50.0,
           child: TextFormField(
+            controller: _cinController,
             validator: (String value) {
               if (value.isEmpty) {
                 return 'Champ Obligatoire !';
@@ -200,6 +237,7 @@ class _SignUpState extends State<SignUp> {
           alignment: Alignment.topLeft,
           height: 50.0,
           child: TextFormField(
+            controller: _phoneController,
             validator: (String value) {
               if (value.isEmpty) {
                 return 'Champ Obligatoire !';
@@ -334,6 +372,7 @@ class _SignUpState extends State<SignUp> {
           alignment: Alignment.topLeft,
           height: 50.0,
           child: TextFormField(
+            controller: _adressController,
             validator: (String value) {
               if (value.isEmpty) {
                 return 'Champ Obligatoire !';
@@ -470,8 +509,42 @@ class _SignUpState extends State<SignUp> {
                           padding: EdgeInsets.symmetric(vertical: 25.0),
                           width: double.infinity,
                           child: RaisedButton(
-                            onPressed: () {
+                            onPressed: () async {
                               _form.currentState.validate();
+                              var email = _emailController.text;
+                              var password = _pass.text;
+                              var name = _nameController.text;
+                              var cin = _cinController.text;
+                              var phone = _phoneController.text;
+                              var address = _adressController.text;
+
+                              if (name.length < 4)
+                                displayDialog(
+                                    context, "erreur", "nom invalide");
+                              else if (password.length < 4)
+                                displayDialog(
+                                    context, "erreur", "mot de passe invalide");
+                              else {
+                                var res = await attemptSignUp(
+                                    email, password, name, cin, phone, address);
+                                if (res == 200) {
+                                  displayDialog(context, "Succes",
+                                      "Le secouriste est crée");
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => SignIn()));
+                                } else if (res == 400)
+                                  displayDialog(
+                                      context,
+                                      "Le nom d'utilisateur existe deja",
+                                      "connectez vous si vous avez déja un compte.");
+                                else {
+                                  print(res);
+                                  displayDialog(
+                                      context, "Erreur", "Erreur inconnu.");
+                                }
+                              }
                             },
                             padding: EdgeInsets.all(15.0),
                             shape: RoundedRectangleBorder(
