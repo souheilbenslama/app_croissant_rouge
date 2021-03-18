@@ -6,7 +6,7 @@ description: A new Flutter project.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
-# A version number is three numbers separated by dots, like 1.2.43
+# A version number is three nu mbers separated by dots, like 1.2.43
 # followed by an optional build number separated by a +.
 # Both the version and the builder number may be overridden in flutter
 # build by specifying --build-name and --build-number, respectively.
@@ -32,6 +32,7 @@ dependencies:
   geocoding: 1.0.3+1
   google_fonts: ^1.1.1
   fl_chart: ^0.12.2
+  flutter_cached_pdfview: ^0.3.5
   http: ^0.12.0
   flutter_secure_storage: ^3.3.1+1
   
@@ -54,8 +55,10 @@ flutter:
   assets:
     - assets/profil.png
     - assets/logo.jpg
-    - assets/logo1.png
     - assets/images/
+    - assets/file/dummy.pdf
+    - assets/bell.png
+    - assets/emergency.png
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
