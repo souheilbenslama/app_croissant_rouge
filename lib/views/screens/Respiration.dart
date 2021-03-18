@@ -3,6 +3,7 @@ import 'package:app_croissant_rouge/model/ChoixRespiration.dart';
 import 'package:app_croissant_rouge/views/screens/Conscience.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
+import 'package:location/location.dart';
 
 class Respiration extends StatefulWidget {
   @override
@@ -86,6 +87,29 @@ class _RespirationState extends State<Respiration> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(16.0))),
                     onPressed: () async {
+                      Location location = new Location();
+
+                      bool _serviceEnabled;
+                      PermissionStatus _permissionGranted;
+                      LocationData _locationData;
+
+                      _serviceEnabled = await location.serviceEnabled();
+                      if (!_serviceEnabled) {
+                        _serviceEnabled = await location.requestService();
+                        if (!_serviceEnabled) {
+                          return;
+                        }
+                      }
+
+                      _permissionGranted = await location.hasPermission();
+                      if (_permissionGranted == PermissionStatus.denied) {
+                        _permissionGranted = await location.requestPermission();
+                        if (_permissionGranted != PermissionStatus.granted) {
+                          return;
+                        }
+                      }
+
+                      _locationData = await location.getLocation();
                       const number = '198';
                       bool res =
                           await FlutterPhoneDirectCaller.callNumber(number);
