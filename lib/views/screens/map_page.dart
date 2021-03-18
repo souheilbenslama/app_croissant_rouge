@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:app_croissant_rouge/views/widgets/app_bar.dart';
-import 'package:app_croissant_rouge/models/data.dart';
 
 class MapPage extends StatefulWidget {
   @override
@@ -12,9 +11,17 @@ class MapPage extends StatefulWidget {
 
 class _MapPageState extends State<MapPage> {
   GoogleMapController mapController;
-  Set<Circle> _markers = HashSet<Circle>();
+  //Set<Circle> _markers = HashSet<Circle>();
   List<Color> colors = [Colors.green, Colors.yellow, Colors.red];
-  // Set<Marker> _markers = HashSet<Marker>();
+  Set<Marker> markers = HashSet<Marker>();
+
+  Marker marker = Marker(
+      markerId: MarkerId("testing"),
+      position: LatLng(36.85, 10.15),
+      infoWindow: InfoWindow(title: "test", snippet: '*'),
+      onTap: () {},
+      onDragEnd: (LatLng position) {});
+
   MapType mapType = MapType.normal;
   switchMapType() {
     setState(() {
@@ -26,41 +33,11 @@ class _MapPageState extends State<MapPage> {
     });
   }
 
-  void onMapCreated(controller) {
-    setState(() {
-      mapController = controller;
-      // for(var region in data) {
-      // _markers.add(
-      //     Marker(
-      //       markerId: MarkerId(region['id']),
-      //       position: LatLng(double.parse(region['lat'])	,double.parse(region['lng'])),
-      //       infoWindow: InfoWindow(
-      //           title: region['region'],
-      //           snippet: ''
-      //       ),
-      //
-      //     )
-      // );}
-      for (var region in data) {
-        _markers.add(Circle(
-          circleId: CircleId(region['id']),
-          center:
-              LatLng(double.parse(region['lat']), double.parse(region['lng'])),
-          //radius: double.parse(region['confirmed']),
-          radius: double.parse("500"),
-          strokeWidth: 2,
-          fillColor: double.parse(region['confirmed']) > 20000
-              ? colors[2].withOpacity(0.5)
-              : double.parse(region['confirmed']) > 5000
-                  ? colors[1].withOpacity(0.5)
-                  : colors[0].withOpacity(0.5),
-        ));
-      }
-    });
-  }
+  void onMapCreated(controller) {}
 
   @override
   Widget build(BuildContext context) {
+    this.markers.add(this.marker);
     final _formKey = GlobalKey<FormState>();
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -133,9 +110,9 @@ class _MapPageState extends State<MapPage> {
             mapType: mapType,
             onMapCreated: onMapCreated,
             initialCameraPosition:
-                CameraPosition(target: LatLng(36, 10), zoom: 8.0),
-            // markers: _markers,
-            circles: _markers,
+                CameraPosition(target: LatLng(36.85, 10.15), zoom: 12.50),
+            markers: markers,
+            //circles: _markers,
           ),
           Align(
             alignment: Alignment.topLeft,
