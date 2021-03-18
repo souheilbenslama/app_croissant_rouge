@@ -23,6 +23,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  socket_io_client: ^0.9.12
+
   url_launcher: ^5.1.2
   flutter_phone_direct_caller: ^1.0.1 
   google_maps_flutter: 0.5.33
@@ -31,9 +33,10 @@ dependencies:
   google_fonts: ^1.1.1
   fl_chart: ^0.12.2
   http: ^0.12.0
+  flutter_secure_storage: ^3.3.1+1
   
-
-
+  device_info: ^0.4.0+4
+  shared_preferences: ^0.5.2
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

@@ -1,6 +1,40 @@
 //KHALIL
 import 'package:app_croissant_rouge/views/screens/SignIn.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
+// The Server to the backend
+const SERVER_IP = 'http://192.168.1.8:3000';
+
+final TextEditingController _nameController = TextEditingController();
+final TextEditingController _passwordController = TextEditingController();
+final TextEditingController _emailController = TextEditingController();
+final TextEditingController _cinController = TextEditingController();
+final TextEditingController _phoneController = TextEditingController();
+final TextEditingController _adressController = TextEditingController();
+
+// Displaying dialogs
+void displayDialog(BuildContext context, String title, String text) =>
+    showDialog(
+      context: context,
+      builder: (context) =>
+          AlertDialog(title: Text(title), content: Text(text)),
+    );
+
+// The method used to sign up
+Future<int> attemptSignUp(String email, String password, String name,
+    String cin, String phone, String address) async {
+  var res = await http.post('$SERVER_IP/users/signup', body: {
+    "email": email,
+    "password": password,
+    "name": name,
+    "cin": cin,
+    "address": address,
+    "phone": phone
+  });
+  print(res.body);
+  return res.statusCode;
+}
 
 class SignUp extends StatefulWidget {
   @override
@@ -29,7 +63,7 @@ class _SignUpState extends State<SignUp> {
           'Nom Complet :',
           style: TextStyle(
             decoration: TextDecoration.underline,
-            color: Colors.red[600],
+            color: Colors.redAccent[700],
             fontSize: 15.0,
           ),
         ),
@@ -40,6 +74,7 @@ class _SignUpState extends State<SignUp> {
           alignment: Alignment.topLeft,
           height: 50.0,
           child: TextFormField(
+            controller: _nameController,
             validator: (String value) {
               if (value.isEmpty) {
                 return 'Champ Obligatoire !';
@@ -49,16 +84,22 @@ class _SignUpState extends State<SignUp> {
             onSaved: (String value) {
               _name = value;
             },
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(
+              color: Colors.grey[700],
+            ),
             decoration: InputDecoration(
-              errorStyle: TextStyle(color: Colors.red[600]),
+              errorStyle: TextStyle(
+                color: Colors.red[300],
+              ),
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
                 Icons.person,
-                color: Colors.red[600],
+                color: Colors.redAccent[700],
               ),
               hintText: 'Saisir votre nom',
-              hintStyle: TextStyle(color: Colors.grey[600]),
+              hintStyle: TextStyle(
+                color: Colors.grey[700],
+              ),
             ),
           ),
         )
@@ -74,7 +115,7 @@ class _SignUpState extends State<SignUp> {
           'Email :',
           style: TextStyle(
             decoration: TextDecoration.underline,
-            color: Colors.red[600],
+            color: Colors.redAccent[700],
             fontSize: 15.0,
           ),
         ),
@@ -83,6 +124,7 @@ class _SignUpState extends State<SignUp> {
           alignment: Alignment.topLeft,
           height: 50.0,
           child: TextFormField(
+            controller: _emailController,
             validator: (String value) {
               if (value.isEmpty) {
                 return 'Champ Obligatoire !';
@@ -97,16 +139,22 @@ class _SignUpState extends State<SignUp> {
               _email = value;
             },
             keyboardType: TextInputType.emailAddress,
-            style: TextStyle(color: Colors.red[600]),
+            style: TextStyle(
+              color: Colors.grey[700],
+            ),
             decoration: InputDecoration(
-              errorStyle: TextStyle(color: Colors.red[600]),
+              errorStyle: TextStyle(
+                color: Colors.red[300],
+              ),
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
                 Icons.email,
-                color: Colors.red[600],
+                color: Colors.redAccent[700],
               ),
               hintText: 'Saisir votre email',
-              hintStyle: TextStyle(color: Colors.grey[600]),
+              hintStyle: TextStyle(
+                color: Colors.grey[700],
+              ),
             ),
           ),
         )
@@ -122,7 +170,7 @@ class _SignUpState extends State<SignUp> {
           'N° CIN :',
           style: TextStyle(
             decoration: TextDecoration.underline,
-            color: Colors.red[600],
+            color: Colors.redAccent[700],
             fontSize: 15.0,
           ),
         ),
@@ -133,6 +181,7 @@ class _SignUpState extends State<SignUp> {
           alignment: Alignment.topLeft,
           height: 50.0,
           child: TextFormField(
+            controller: _cinController,
             validator: (String value) {
               if (value.isEmpty) {
                 return 'Champ Obligatoire !';
@@ -146,16 +195,22 @@ class _SignUpState extends State<SignUp> {
               _cin = value;
             },
             keyboardType: TextInputType.number,
-            style: TextStyle(color: Colors.red[600]),
+            style: TextStyle(
+              color: Colors.grey[700],
+            ),
             decoration: InputDecoration(
-              errorStyle: TextStyle(color: Colors.red[600]),
+              errorStyle: TextStyle(
+                color: Colors.red[300],
+              ),
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
                 Icons.badge,
-                color: Colors.red[600],
+                color: Colors.redAccent[700],
               ),
               hintText: 'Saisir votre numero de CIN',
-              hintStyle: TextStyle(color: Colors.grey[600]),
+              hintStyle: TextStyle(
+                color: Colors.grey[700],
+              ),
             ),
           ),
         )
@@ -171,7 +226,7 @@ class _SignUpState extends State<SignUp> {
           'Telephone :',
           style: TextStyle(
             decoration: TextDecoration.underline,
-            color: Colors.red[600],
+            color: Colors.redAccent[700],
             fontSize: 15.0,
           ),
         ),
@@ -182,6 +237,7 @@ class _SignUpState extends State<SignUp> {
           alignment: Alignment.topLeft,
           height: 50.0,
           child: TextFormField(
+            controller: _phoneController,
             validator: (String value) {
               if (value.isEmpty) {
                 return 'Champ Obligatoire !';
@@ -195,16 +251,22 @@ class _SignUpState extends State<SignUp> {
               _tel = value;
             },
             keyboardType: TextInputType.number,
-            style: TextStyle(color: Colors.red[600]),
+            style: TextStyle(
+              color: Colors.grey[700],
+            ),
             decoration: InputDecoration(
-              errorStyle: TextStyle(color: Colors.red[600]),
+              errorStyle: TextStyle(
+                color: Colors.red[300],
+              ),
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
                 Icons.phone,
-                color: Colors.red[600],
+                color: Colors.redAccent[700],
               ),
               hintText: 'Saisir votre numero de telephone',
-              hintStyle: TextStyle(color: Colors.grey[600]),
+              hintStyle: TextStyle(
+                color: Colors.grey[700],
+              ),
             ),
           ),
         )
@@ -220,7 +282,7 @@ class _SignUpState extends State<SignUp> {
           'Mot de passe :',
           style: TextStyle(
             decoration: TextDecoration.underline,
-            color: Colors.red[600],
+            color: Colors.redAccent[700],
             fontSize: 15.0,
           ),
         ),
@@ -238,16 +300,22 @@ class _SignUpState extends State<SignUp> {
             },
             obscureText: true,
             keyboardType: TextInputType.emailAddress,
-            style: TextStyle(color: Colors.red[600]),
+            style: TextStyle(
+              color: Colors.grey[700],
+            ),
             decoration: InputDecoration(
-              errorStyle: TextStyle(color: Colors.red[600]),
+              errorStyle: TextStyle(
+                color: Colors.red[300],
+              ),
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
                 Icons.lock,
-                color: Colors.red[600],
+                color: Colors.redAccent[700],
               ),
               hintText: 'Saisir votre mot de passe',
-              hintStyle: TextStyle(color: Colors.grey[700]),
+              hintStyle: TextStyle(
+                color: Colors.grey[700],
+              ),
             ),
           ),
         ),
@@ -265,13 +333,19 @@ class _SignUpState extends State<SignUp> {
             },
             obscureText: true,
             keyboardType: TextInputType.emailAddress,
-            style: TextStyle(color: Colors.red[600]),
+            style: TextStyle(
+              color: Colors.grey[700],
+            ),
             decoration: InputDecoration(
-              errorStyle: TextStyle(color: Colors.red[600]),
+              errorStyle: TextStyle(
+                color: Colors.red[300],
+              ),
               prefixIcon: Icon(Icons.lock),
               contentPadding: EdgeInsets.only(top: 14.0),
               hintText: 'Confirmer votre mot de passe',
-              hintStyle: TextStyle(color: Colors.grey[700]),
+              hintStyle: TextStyle(
+                color: Colors.grey[700],
+              ),
             ),
           ),
         )
@@ -287,7 +361,7 @@ class _SignUpState extends State<SignUp> {
           'Adresse :',
           style: TextStyle(
             decoration: TextDecoration.underline,
-            color: Colors.red[600],
+            color: Colors.redAccent[700],
             fontSize: 15.0,
           ),
         ),
@@ -298,6 +372,7 @@ class _SignUpState extends State<SignUp> {
           alignment: Alignment.topLeft,
           height: 50.0,
           child: TextFormField(
+            controller: _adressController,
             validator: (String value) {
               if (value.isEmpty) {
                 return 'Champ Obligatoire !';
@@ -307,13 +382,17 @@ class _SignUpState extends State<SignUp> {
             onSaved: (String value) {
               _adresse = value;
             },
-            style: TextStyle(color: Colors.red[600]),
+            style: TextStyle(
+              color: Colors.grey[700],
+            ),
             decoration: InputDecoration(
-              errorStyle: TextStyle(color: Colors.red[600]),
+              errorStyle: TextStyle(
+                color: Colors.red[300],
+              ),
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
                 Icons.add_location_alt_rounded,
-                color: Colors.red[600],
+                color: Colors.redAccent[700],
               ),
               hintText: 'Saisir votre adresse',
               hintStyle: TextStyle(color: Colors.grey[700]),
@@ -365,7 +444,7 @@ class _SignUpState extends State<SignUp> {
                       Text(
                         'S\'inscrire',
                         style: TextStyle(
-                            color: Colors.red[600],
+                            color: Colors.redAccent[700],
                             fontFamily: 'OpenSans',
                             fontSize: 35.0,
                             fontWeight: FontWeight.bold),
@@ -408,11 +487,13 @@ class _SignUpState extends State<SignUp> {
                       SizedBox(height: 50.0),
                       Container(
                         child: CheckboxListTile(
+                          checkColor: Colors.white,
+                          activeColor: Colors.black,
                           controlAffinity: ListTileControlAffinity.leading,
                           title: Text(
                             'Je suis un secouriste',
                             style: TextStyle(
-                                color: Colors.red[600],
+                                color: Colors.redAccent[700],
                                 decoration: TextDecoration.underline),
                           ),
                           value: _checkbox,
@@ -428,13 +509,47 @@ class _SignUpState extends State<SignUp> {
                           padding: EdgeInsets.symmetric(vertical: 25.0),
                           width: double.infinity,
                           child: RaisedButton(
-                            onPressed: () {
+                            onPressed: () async {
                               _form.currentState.validate();
+                              var email = _emailController.text;
+                              var password = _pass.text;
+                              var name = _nameController.text;
+                              var cin = _cinController.text;
+                              var phone = _phoneController.text;
+                              var address = _adressController.text;
+
+                              if (name.length < 4)
+                                displayDialog(
+                                    context, "erreur", "nom invalide");
+                              else if (password.length < 4)
+                                displayDialog(
+                                    context, "erreur", "mot de passe invalide");
+                              else {
+                                var res = await attemptSignUp(
+                                    email, password, name, cin, phone, address);
+                                if (res == 200) {
+                                  displayDialog(context, "Succes",
+                                      "Le secouriste est crée");
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => SignIn()));
+                                } else if (res == 400)
+                                  displayDialog(
+                                      context,
+                                      "Le nom d'utilisateur existe deja",
+                                      "connectez vous si vous avez déja un compte.");
+                                else {
+                                  print(res);
+                                  displayDialog(
+                                      context, "Erreur", "Erreur inconnu.");
+                                }
+                              }
                             },
                             padding: EdgeInsets.all(15.0),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30.0)),
-                            color: Colors.red[600],
+                            color: Colors.redAccent[700],
                             child: Text(
                               'S\'inscrire',
                               style: TextStyle(
@@ -448,28 +563,30 @@ class _SignUpState extends State<SignUp> {
                           )),
                       //SIGNIN
                       GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => SignIn()),
-                            );
-                          },
-                          child: RichText(
-                              text: TextSpan(children: [
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => SignIn()),
+                          );
+                        },
+                        child: RichText(
+                          text: TextSpan(children: [
                             TextSpan(
                                 text: "Vous avez déjà un compte? ",
                                 style: TextStyle(
-                                    color: Colors.red[600],
+                                    color: Colors.redAccent[700],
                                     fontSize: 17.0,
                                     fontWeight: FontWeight.w400)),
                             TextSpan(
                                 text: "Se connecter",
                                 style: TextStyle(
                                     decoration: TextDecoration.underline,
-                                    color: Colors.red[600],
+                                    color: Colors.redAccent[700],
                                     fontSize: 20.0,
                                     fontWeight: FontWeight.bold))
-                          ])))
+                          ]),
+                        ),
+                      )
                     ],
                   ),
                 ),

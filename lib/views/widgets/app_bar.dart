@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+//import 'package:google_fonts/google_fonts.dart';
 
 class AppBarComponent extends StatelessWidget implements PreferredSizeWidget {
   @override
@@ -8,10 +8,10 @@ class AppBarComponent extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.red,
+      backgroundColor: Colors.redAccent[700],
       title: Text(
         'Croissant Rouge',
-        style: GoogleFonts.ptSans(color: Colors.white),
+        //style: GoogleFonts.ptSans(color: Colors.white),
       ),
       centerTitle: true,
     );
