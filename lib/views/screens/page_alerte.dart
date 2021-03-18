@@ -14,7 +14,20 @@ Future<String> attemptLogInUser(String userId) async {
 }
 
 class PageAlerte extends StatelessWidget {
-<<<<<<< HEAD:lib/views/screens/page_alerte.dart
+  // To get Device Details
+  static Future<List<String>> getDeviceDetails() async {
+    String deviceName;
+    String deviceVersion;
+    String identifier;
+    final DeviceInfoPlugin deviceInfoPlugin = new DeviceInfoPlugin();
+    var build = await deviceInfoPlugin.androidInfo;
+    deviceName = build.model;
+    deviceVersion = build.version.toString();
+    identifier = build.androidId; //UUID for Android
+//if (!mounted) return;
+    return [deviceName, deviceVersion, identifier];
+  }
+
   Widget popupMenuButton() {
     return PopupMenuButton<String>(
       icon: Icon(
@@ -37,20 +50,6 @@ class PageAlerte extends StatelessWidget {
         )
       ],
     );
-=======
-// To get Device Details
-  static Future<List<String>> getDeviceDetails() async {
-    String deviceName;
-    String deviceVersion;
-    String identifier;
-    final DeviceInfoPlugin deviceInfoPlugin = new DeviceInfoPlugin();
-    var build = await deviceInfoPlugin.androidInfo;
-    deviceName = build.model;
-    deviceVersion = build.version.toString();
-    identifier = build.androidId; //UUID for Android
-//if (!mounted) return;
-    return [deviceName, deviceVersion, identifier];
->>>>>>> sprint3/signinBackFront:lib/views/page_alerte.dart
   }
 
   @override
@@ -113,16 +112,12 @@ class PageAlerte extends StatelessWidget {
           ),
           RaisedButton(
             color: Colors.redAccent[700],
-<<<<<<< HEAD:lib/views/screens/page_alerte.dart
-            onPressed: () {
-              Navigator.of(context).pushNamed('/options');
-=======
             onPressed: () async {
               var details = await getDeviceDetails();
               var userId = details[2];
               var res = await attemptLogInUser(userId);
               print(res);
->>>>>>> sprint3/signinBackFront:lib/views/page_alerte.dart
+              Navigator.of(context).pushNamed('/options');
             },
             child: Text(
               'Alerter',

@@ -233,7 +233,7 @@ class SignIn extends StatelessWidget {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => PageAlerte()));
+                                        builder: (context) => Profile()));
                               } else {
                                 displayDialog(
                                     context, "Erreur", "Compte introuvable");
