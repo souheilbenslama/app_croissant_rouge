@@ -1,9 +1,25 @@
 import 'package:app_croissant_rouge/views/widgets/customized_dialog.dart';
+import 'package:app_croissant_rouge/views/widgets/notification_dialog.dart';
+import '../widgets/pdf_viewer_from_asset.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
+import 'package:device_info/device_info.dart';
+import 'package:http/http.dart' as http;
+
+// The Server to the backend
+const SERVER_IP = 'http://192.168.1.8:3000';
+// The method to register the user
+Future<String> attemptLogInUser(String userId) async {
+  var res =
+      await http.post("$SERVER_IP/users/normalUser", body: {"userid": userId});
+  if (res.statusCode == 200) return res.body;
+  return null;
+}
 
 class PageAlerte extends StatelessWidget {
   Widget popupMenuButton() {
     return PopupMenuButton<String>(
+      //PopMenuButton because we need a menu for the settings
       icon: Icon(
         Icons.settings,
         color: Colors.black,
@@ -26,6 +42,20 @@ class PageAlerte extends StatelessWidget {
     );
   }
 
+// To get Device Details
+  static Future<List<String>> getDeviceDetails() async {
+    String deviceName;
+    String deviceVersion;
+    String identifier;
+    final DeviceInfoPlugin deviceInfoPlugin = new DeviceInfoPlugin();
+    var build = await deviceInfoPlugin.androidInfo;
+    deviceName = build.model;
+    deviceVersion = build.version.toString();
+    identifier = build.androidId; //UUID for Android
+//if (!mounted) return;
+    return [deviceName, deviceVersion, identifier];
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,6 +64,7 @@ class PageAlerte extends StatelessWidget {
         actions: [
           // Used the actions to have the icons of the "App Bar" aligned in the same line
           IconButton(
+            // When the icon pressed it'll take as to the map page
             iconSize: 35,
             icon: Icon(
               Icons.location_on,
@@ -50,6 +81,7 @@ class PageAlerte extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
                 IconButton(
+                  // This icon button when pressed it'll take as to the signin or to the profile page if the secouriste is connected
                   onPressed: () {
                     Navigator.of(context).pushNamed('/signIn');
                   },
@@ -60,6 +92,7 @@ class PageAlerte extends StatelessWidget {
                   ),
                 ),
                 Padding(
+                  // The padding contains the the settings icon and its functions : PopUpMenuButton
                   padding: const EdgeInsets.only(
                     right: 8.0,
                     bottom: 4.0,
@@ -85,9 +118,15 @@ class PageAlerte extends StatelessWidget {
             ),
           ),
           RaisedButton(
+            // Don't like the design : needs changing
+            // Alerter when pressed will take us to the questions page
             color: Colors.redAccent[700],
-            onPressed: () {
+            onPressed: () async {
+              var details = await getDeviceDetails();
+              var userId = details[2];
+              var res = await attemptLogInUser(userId);
               Navigator.of(context).pushNamed('/options');
+              print(res);
             },
             child: Text(
               'Alerter',
@@ -96,6 +135,7 @@ class PageAlerte extends StatelessWidget {
                 fontSize: 80,
               ),
             ),
+            // we used the option shape here so the button cand have a rounded shape
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20.0),
               side: BorderSide(color: Colors.black),
@@ -123,7 +163,37 @@ class PageAlerte extends StatelessWidget {
                   ),
                 ),
                 FlatButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    // To see if the notification widget works or not
+                    /*showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return NotificationDialog();
+                      },
+                    );*/
+
+                    // This Method will show the pdf without creating a widget => a simple pdf transition
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => Scaffold(
+                          appBar: AppBar(
+                            title: const Text('Documentation'),
+                            backgroundColor: Colors.redAccent[700],
+                          ),
+                          body: PDF().fromAsset('assets/file/dummy.pdf'),
+                        ),
+                      ),
+                    );
+                    /* Navigator.push(
+                      context,
+                      MaterialPageRoute<dynamic>(
+                        builder: (_) => PDFViewerFromAsset(
+                          pdfAssetPath: 'assets/file/dummy.pdf',
+                        ),
+                      ),
+                    );*/
+                  },
                   child: Text(
                     'Documentation',
                     style: TextStyle(
