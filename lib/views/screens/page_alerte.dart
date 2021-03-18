@@ -1,5 +1,7 @@
 import 'package:app_croissant_rouge/views/widgets/customized_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:location/location.dart';
+import 'package:app_croissant_rouge/model/locationData.dart';
 
 class PageAlerte extends StatelessWidget {
   Widget popupMenuButton() {
@@ -28,6 +30,16 @@ class PageAlerte extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    LocationData _currentLocation;
+    var location = Location();
+
+    Future<LocationData> _getLocation() async {
+      try {
+        var userLocation = await location.getLocation();
+        _currentLocation = ;
+      } catch (e) {}
+    }
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.redAccent[700],
@@ -86,9 +98,7 @@ class PageAlerte extends StatelessWidget {
           ),
           RaisedButton(
             color: Colors.redAccent[700],
-            onPressed: () {
-              Navigator.of(context).pushNamed('/options');
-            },
+            onPressed: _getLocation,
             child: Text(
               'Alerter',
               style: TextStyle(
