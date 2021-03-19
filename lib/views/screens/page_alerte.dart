@@ -71,7 +71,7 @@ class PageAlerte extends StatelessWidget {
               color: Colors.black,
             ),
             onPressed: () {
-              Navigator.of(context).pushNamed('/map');
+              Navigator.of(context).pushNamed('/publicmap');
             },
           ),
           Container(
@@ -124,9 +124,9 @@ class PageAlerte extends StatelessWidget {
             onPressed: () async {
               var details = await getDeviceDetails();
               var userId = details[2];
-              var res = await attemptLogInUser(userId);
+              //var res = await attemptLogInUser(userId);
               Navigator.of(context).pushNamed('/options');
-              print(res);
+              //print(res);
             },
             child: Text(
               'Alerter',
