@@ -1,15 +1,31 @@
 import 'package:app_croissant_rouge/views/screens/Protection.dart';
 import 'package:app_croissant_rouge/views/widgets/customized_dialog.dart';
+import 'package:app_croissant_rouge/views/widgets/notification_dialog.dart';
+import '../widgets/pdf_viewer_from_asset.dart';
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 import 'package:app_croissant_rouge/model/locationData.dart';
+import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
+import 'package:device_info/device_info.dart';
+import 'package:http/http.dart' as http;
+
+// The Server to the backend
+const SERVER_IP = 'http://192.168.1.8:3000';
+// The method to register the user
+Future<String> attemptLogInUser(String userId) async {
+  var res =
+      await http.post("$SERVER_IP/users/normalUser", body: {"userid": userId});
+  if (res.statusCode == 200) return res.body;
+  return null;
+}
 
 class PageAlerte extends StatelessWidget {
   Widget popupMenuButton() {
     return PopupMenuButton<String>(
+      //PopMenuButton because we need a menu for the settings
       icon: Icon(
         Icons.settings,
-        color: Colors.black,
+        color: Colors.white70,
         size: 35,
       ),
       itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
@@ -29,6 +45,20 @@ class PageAlerte extends StatelessWidget {
     );
   }
 
+// To get Device Details
+  static Future<List<String>> getDeviceDetails() async {
+    String deviceName;
+    String deviceVersion;
+    String identifier;
+    final DeviceInfoPlugin deviceInfoPlugin = new DeviceInfoPlugin();
+    var build = await deviceInfoPlugin.androidInfo;
+    deviceName = build.model;
+    deviceVersion = build.version.toString();
+    identifier = build.androidId; //UUID for Android
+//if (!mounted) return;
+    return [deviceName, deviceVersion, identifier];
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,10 +67,11 @@ class PageAlerte extends StatelessWidget {
         actions: [
           // Used the actions to have the icons of the "App Bar" aligned in the same line
           IconButton(
+            // When the icon pressed it'll take as to the map page
             iconSize: 35,
             icon: Icon(
               Icons.location_on,
-              color: Colors.black,
+              color: Colors.white70,
             ),
             onPressed: () {
               Navigator.of(context).pushNamed('/map');
@@ -53,16 +84,18 @@ class PageAlerte extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
                 IconButton(
+                  // This icon button when pressed it'll take as to the signin or to the profile page if the secouriste is connected
                   onPressed: () {
                     Navigator.of(context).pushNamed('/signIn');
                   },
                   iconSize: 35,
                   icon: Icon(
                     Icons.account_circle,
-                    color: Colors.black,
+                    color: Colors.white70,
                   ),
                 ),
                 Padding(
+                  // The padding contains the the settings icon and its functions : PopUpMenuButton
                   padding: const EdgeInsets.only(
                     right: 8.0,
                     bottom: 4.0,
@@ -76,35 +109,121 @@ class PageAlerte extends StatelessWidget {
       ),
       backgroundColor: Colors.white,
       body: Column(
-        mainAxisAlignment: MainAxisAlignment
-            .spaceBetween, // space between to keep a certain space between the children of the Column
+        //mainAxisAlignment: MainAxisAlignment.spaceBetween, // space between to keep a certain space between the children of the Column
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.only(top: 80.0),
+            padding: const EdgeInsets.only(top: 60.0),
             child: Image.asset(
               'assets/logo.jpg',
               width: 150,
               height: 150,
             ),
           ),
-          RaisedButton(
-            color: Colors.redAccent[700],
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Protection()),
-              );
-            },
-            child: Text(
-              'Alerter',
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 80,
+          SizedBox(
+            height: 70.0,
+          ),
+          Container(
+            height: 70.0,
+            margin: EdgeInsets.all(20),
+            child: RaisedButton(
+              onPressed: () async {
+                var details = await getDeviceDetails();
+                var userId = details[2];
+                //var res = await attemptLogInUser(userId);
+                Navigator.of(context).pushNamed('/options');
+                //print(res);
+              },
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(80.0)),
+              padding: EdgeInsets.all(0.0),
+              child: Ink(
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [Color(0xFFe84f4c), Color(0xFFe2231e)],
+                      begin: Alignment.centerRight,
+                      end: Alignment.centerLeft,
+                    ),
+                    borderRadius: BorderRadius.circular(30.0)),
+                child: Container(
+                  constraints: BoxConstraints(maxWidth: 250.0, minHeight: 50.0),
+                  alignment: Alignment.center,
+                  child: Text(
+                    "Alerter",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.white, fontSize: 50),
+                  ),
+                ),
               ),
             ),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20.0),
-              side: BorderSide(color: Colors.black),
+          ),
+          Container(
+            height: 50.0,
+            width: 120.0,
+            margin: EdgeInsets.all(20),
+            child: RaisedButton(
+              onPressed: () async {
+                var details = await getDeviceDetails();
+                var userId = details[2];
+                //var res = await attemptLogInUser(userId);
+                Navigator.of(context).pushNamed('/options');
+                //print(res);
+              },
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(100.0)),
+              padding: EdgeInsets.all(0.0),
+              child: Ink(
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [Color(0xFFe84f4c), Color(0xFFe2231e)],
+                      begin: Alignment.centerRight,
+                      end: Alignment.centerLeft,
+                    ),
+                    borderRadius: BorderRadius.circular(30.0)),
+                child: Container(
+                  constraints: BoxConstraints(maxWidth: 250.0, minHeight: 50.0),
+                  alignment: Alignment.center,
+                  child: Text(
+                    "Contacter nous",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.white, fontSize: 10),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Container(
+            height: 50.0,
+            width: 120.0,
+            margin: EdgeInsets.all(20),
+            child: RaisedButton(
+              onPressed: () async {
+                var details = await getDeviceDetails();
+                var userId = details[2];
+                //var res = await attemptLogInUser(userId);
+                Navigator.of(context).pushNamed('/options');
+                //print(res);
+              },
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(100.0)),
+              padding: EdgeInsets.all(0.0),
+              child: Ink(
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [Color(0xFFe84f4c), Color(0xFFe2231e)],
+                      begin: Alignment.centerRight,
+                      end: Alignment.centerLeft,
+                    ),
+                    borderRadius: BorderRadius.circular(30.0)),
+                child: Container(
+                  constraints: BoxConstraints(maxWidth: 250.0, minHeight: 50.0),
+                  alignment: Alignment.center,
+                  child: Text(
+                    "Documentation",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.white, fontSize: 10),
+                  ),
+                ),
+              ),
             ),
           ),
           Container(
@@ -129,7 +248,37 @@ class PageAlerte extends StatelessWidget {
                   ),
                 ),
                 FlatButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    // To see if the notification widget works or not
+                    /*showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return NotificationDialog();
+                      },
+                    );*/
+
+                    // This Method will show the pdf without creating a widget => a simple pdf transition
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => Scaffold(
+                          appBar: AppBar(
+                            title: const Text('Documentation'),
+                            backgroundColor: Colors.redAccent[700],
+                          ),
+                          body: PDF().fromAsset('assets/file/dummy.pdf'),
+                        ),
+                      ),
+                    );
+                    /* Navigator.push(
+                      context,
+                      MaterialPageRoute<dynamic>(
+                        builder: (_) => PDFViewerFromAsset(
+                          pdfAssetPath: 'assets/file/dummy.pdf',
+                        ),
+                      ),
+                    );*/
+                  },
                   child: Text(
                     'Documentation',
                     style: TextStyle(

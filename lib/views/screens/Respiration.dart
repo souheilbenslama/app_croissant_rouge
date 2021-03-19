@@ -1,6 +1,9 @@
 //KHALIL
+import 'dart:ffi';
+
 import 'package:app_croissant_rouge/model/ChoixRespiration.dart';
 import 'package:app_croissant_rouge/views/screens/Conscience.dart';
+import 'package:app_croissant_rouge/views/screens/page_alerte.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:location/location.dart';
@@ -110,9 +113,22 @@ class _RespirationState extends State<Respiration> {
                       }
 
                       _locationData = await location.getLocation();
+                      String altitude = _locationData.altitude.toString();
+                      String latitude = _locationData.latitude.toString();
+                      String longitude = _locationData.longitude.toString();
+                      String accuracy = _locationData.accuracy.toString();
+                      String time = _locationData.time.toString();
+                      String heading = _locationData.heading.toString();
+                      String speed = _locationData.speed.toString();
+                      String speedAccuracy =
+                          _locationData.speedAccuracy.toString();
                       const number = '198';
                       bool res =
                           await FlutterPhoneDirectCaller.callNumber(number);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => PageAlerte()));
                     },
                     child: Text("Next"),
                   ),
