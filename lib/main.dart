@@ -1,4 +1,5 @@
 import 'package:app_croissant_rouge/models/route_generator.dart';
+import 'package:app_croissant_rouge/views/screens/admin_dashboard.dart';
 import 'package:app_croissant_rouge/views/screens/chat_screen.dart';
 import 'package:app_croissant_rouge/views/screens/MyHomePage.dart';
 import 'package:app_croissant_rouge/views/screens/Profile.dart';
@@ -23,14 +24,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
-        initialRoute: '/',
-        onGenerateRoute: RouteGenerator.generateRoute,
-        theme: ThemeData(
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-        ),
-        //home: SignUp(),
-        home: PageAlerte());
+      debugShowCheckedModeBanner: false,
+      title: 'Flutter Demo',
+      initialRoute: '/',
+      onGenerateRoute: RouteGenerator.generateRoute,
+      theme: ThemeData(
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
+      //home: SignUp(),
+      //home: PageAlerte()
+      home: AdminDashboard(),
+    );
   }
 }
