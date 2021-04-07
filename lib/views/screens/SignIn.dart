@@ -1,4 +1,5 @@
 //KHALIL
+import 'package:app_croissant_rouge/views/screens/SignUp.dart';
 import 'package:app_croissant_rouge/views/screens/page_alerte.dart';
 import 'package:app_croissant_rouge/views/screens/Profile.dart';
 import 'package:flutter/material.dart';
@@ -259,8 +260,7 @@ class SignIn extends StatelessWidget {
                           onTap: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(
-                                  builder: (context) => Profile()),
+                              MaterialPageRoute(builder: (context) => SignUp()),
                             );
                           },
                           child: RichText(

@@ -1,7 +1,10 @@
+import 'package:app_croissant_rouge/views/screens/Protection.dart';
 import 'package:app_croissant_rouge/views/widgets/customized_dialog.dart';
 import 'package:app_croissant_rouge/views/widgets/notification_dialog.dart';
 import '../widgets/pdf_viewer_from_asset.dart';
 import 'package:flutter/material.dart';
+import 'package:location/location.dart';
+import 'package:app_croissant_rouge/model/locationData.dart';
 import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
 import 'package:device_info/device_info.dart';
 import 'package:http/http.dart' as http;
@@ -22,7 +25,7 @@ class PageAlerte extends StatelessWidget {
       //PopMenuButton because we need a menu for the settings
       icon: Icon(
         Icons.settings,
-        color: Colors.black,
+        color: Colors.white70,
         size: 35,
       ),
       itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
@@ -68,7 +71,7 @@ class PageAlerte extends StatelessWidget {
             iconSize: 35,
             icon: Icon(
               Icons.location_on,
-              color: Colors.black,
+              color: Colors.white70,
             ),
             onPressed: () {
               Navigator.of(context).pushNamed('/map');
@@ -88,7 +91,7 @@ class PageAlerte extends StatelessWidget {
                   iconSize: 35,
                   icon: Icon(
                     Icons.account_circle,
-                    color: Colors.black,
+                    color: Colors.white70,
                   ),
                 ),
                 Padding(
@@ -106,39 +109,121 @@ class PageAlerte extends StatelessWidget {
       ),
       backgroundColor: Colors.white,
       body: Column(
-        mainAxisAlignment: MainAxisAlignment
-            .spaceBetween, // space between to keep a certain space between the children of the Column
+        //mainAxisAlignment: MainAxisAlignment.spaceBetween, // space between to keep a certain space between the children of the Column
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.only(top: 80.0),
+            padding: const EdgeInsets.only(top: 60.0),
             child: Image.asset(
               'assets/logo.jpg',
               width: 150,
               height: 150,
             ),
           ),
-          RaisedButton(
-            // Don't like the design : needs changing
-            // Alerter when pressed will take us to the questions page
-            color: Colors.redAccent[700],
-            onPressed: () async {
-              var details = await getDeviceDetails();
-              var userId = details[2];
-              var res = await attemptLogInUser(userId);
-              Navigator.of(context).pushNamed('/options');
-              print(res);
-            },
-            child: Text(
-              'Alerter',
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 80,
+          SizedBox(
+            height: 70.0,
+          ),
+          Container(
+            height: 70.0,
+            margin: EdgeInsets.all(20),
+            child: RaisedButton(
+              onPressed: () async {
+                var details = await getDeviceDetails();
+                var userId = details[2];
+                //var res = await attemptLogInUser(userId);
+                Navigator.of(context).pushNamed('/options');
+                //print(res);
+              },
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(80.0)),
+              padding: EdgeInsets.all(0.0),
+              child: Ink(
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [Color(0xFFe84f4c), Color(0xFFe2231e)],
+                      begin: Alignment.centerRight,
+                      end: Alignment.centerLeft,
+                    ),
+                    borderRadius: BorderRadius.circular(30.0)),
+                child: Container(
+                  constraints: BoxConstraints(maxWidth: 250.0, minHeight: 50.0),
+                  alignment: Alignment.center,
+                  child: Text(
+                    "Alerter",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.white, fontSize: 50),
+                  ),
+                ),
               ),
             ),
-            // we used the option shape here so the button cand have a rounded shape
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20.0),
-              side: BorderSide(color: Colors.black),
+          ),
+          Container(
+            height: 50.0,
+            width: 120.0,
+            margin: EdgeInsets.all(20),
+            child: RaisedButton(
+              onPressed: () async {
+                var details = await getDeviceDetails();
+                var userId = details[2];
+                //var res = await attemptLogInUser(userId);
+                Navigator.of(context).pushNamed('/options');
+                //print(res);
+              },
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(100.0)),
+              padding: EdgeInsets.all(0.0),
+              child: Ink(
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [Color(0xFFe84f4c), Color(0xFFe2231e)],
+                      begin: Alignment.centerRight,
+                      end: Alignment.centerLeft,
+                    ),
+                    borderRadius: BorderRadius.circular(30.0)),
+                child: Container(
+                  constraints: BoxConstraints(maxWidth: 250.0, minHeight: 50.0),
+                  alignment: Alignment.center,
+                  child: Text(
+                    "Contacter nous",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.white, fontSize: 10),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Container(
+            height: 50.0,
+            width: 120.0,
+            margin: EdgeInsets.all(20),
+            child: RaisedButton(
+              onPressed: () async {
+                var details = await getDeviceDetails();
+                var userId = details[2];
+                //var res = await attemptLogInUser(userId);
+                Navigator.of(context).pushNamed('/options');
+                //print(res);
+              },
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(100.0)),
+              padding: EdgeInsets.all(0.0),
+              child: Ink(
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [Color(0xFFe84f4c), Color(0xFFe2231e)],
+                      begin: Alignment.centerRight,
+                      end: Alignment.centerLeft,
+                    ),
+                    borderRadius: BorderRadius.circular(30.0)),
+                child: Container(
+                  constraints: BoxConstraints(maxWidth: 250.0, minHeight: 50.0),
+                  alignment: Alignment.center,
+                  child: Text(
+                    "Documentation",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.white, fontSize: 10),
+                  ),
+                ),
+              ),
             ),
           ),
           Container(
