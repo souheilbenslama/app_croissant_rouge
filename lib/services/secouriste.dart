@@ -1,13 +1,20 @@
 import 'dart:convert';
 import 'package:app_croissant_rouge/models/secouriste.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
-Future<bool> updateDisponibility(String id, bool isFree) async {
+//updating rescuer's disponibility (disponible-indisponible)
+Future<bool> updateDisponibility(bool isFree) async {
   var client = http.Client();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String jwt = prefs.getString("jwt");
+  var jwtDecoded = jsonDecode('jwt');
+  var token = jwtDecoded["token"];
   var updated = false;
   try {
     var response = await client.put(
-      "http://localhost:3000" + "disponibility/:" + id.toString(),
+      'http://localhost:3000/disponibility',
+      headers: {'Authorization': '$token'},
       body: {isFree: isFree},
     );
     if (response.statusCode == 200) {
