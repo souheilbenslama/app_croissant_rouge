@@ -74,7 +74,7 @@ class PageAlerte extends StatelessWidget {
               color: Colors.white70,
             ),
             onPressed: () {
-              Navigator.of(context).pushNamed('/map');
+              Navigator.of(context).pushNamed('/publicmap');
             },
           ),
           Container(
