@@ -20,6 +20,20 @@ Future<String> attemptLogInUser(String userId) async {
 }
 
 class PageAlerte extends StatelessWidget {
+  // To get Device Details
+  static Future<List<String>> getDeviceDetails() async {
+    String deviceName;
+    String deviceVersion;
+    String identifier;
+    final DeviceInfoPlugin deviceInfoPlugin = new DeviceInfoPlugin();
+    var build = await deviceInfoPlugin.androidInfo;
+    deviceName = build.model;
+    deviceVersion = build.version.toString();
+    identifier = build.androidId; //UUID for Android
+//if (!mounted) return;
+    return [deviceName, deviceVersion, identifier];
+  }
+
   Widget popupMenuButton() {
     return PopupMenuButton<String>(
       //PopMenuButton because we need a menu for the settings
@@ -43,20 +57,6 @@ class PageAlerte extends StatelessWidget {
         )
       ],
     );
-  }
-
-// To get Device Details
-  static Future<List<String>> getDeviceDetails() async {
-    String deviceName;
-    String deviceVersion;
-    String identifier;
-    final DeviceInfoPlugin deviceInfoPlugin = new DeviceInfoPlugin();
-    var build = await deviceInfoPlugin.androidInfo;
-    deviceName = build.model;
-    deviceVersion = build.version.toString();
-    identifier = build.androidId; //UUID for Android
-//if (!mounted) return;
-    return [deviceName, deviceVersion, identifier];
   }
 
   @override
