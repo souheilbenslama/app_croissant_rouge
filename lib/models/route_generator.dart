@@ -1,3 +1,4 @@
+import 'package:app_croissant_rouge/models/accident.dart';
 import 'package:app_croissant_rouge/views/screens/PublicMap.dart';
 import 'package:flutter/material.dart';
 
@@ -21,8 +22,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => SignIn());
       case '/map':
         return MaterialPageRoute(builder: (_) => MapPage());
-      case '/publicmap':
-        return MaterialPageRoute(builder: (_) => PublicMap());
+      //case '/publicmap':
+      //return MaterialPageRoute(builder: (_) => PublicMap( ());
       case '/options':
         return MaterialPageRoute(builder: (_) => Protection());
       case '/listeSecouristes':

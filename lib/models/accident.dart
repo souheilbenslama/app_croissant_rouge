@@ -1,15 +1,16 @@
 import 'package:app_croissant_rouge/model/locationData.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class Accident {
-  int id;
-  int id_temoin;
-  int id_secouriste;
+  String id;
+  String id_temoin;
+  String id_secouriste;
   String protectionDesc;
   String respirationDesc;
   String hemorragieDesc;
   String conscienceDesc;
   String status;
-  LocationData localisation;
+  LatLng localisation;
 
   Accident(
       {this.id,
@@ -22,9 +23,9 @@ class Accident {
       this.respirationDesc,
       this.status});
   Accident.fromJson(Map<dynamic, dynamic> json)
-      : id = int.parse(json["id"]),
-        id_temoin = int.parse(json["id_temoin"]),
-        id_secouriste = int.parse(json["id_secouriste"]),
+      : id = json["id"],
+        id_temoin = json["id_temoin"],
+        id_secouriste = json["id_secouriste"],
         protectionDesc = json["protectionDesc"],
         respirationDesc = json["respirationDesc"],
         hemorragieDesc = json["hemorragieDesc"],
