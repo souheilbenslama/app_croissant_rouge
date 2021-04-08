@@ -16,17 +16,7 @@ const LatLng SOURCE_LOCATION = LatLng(35.427163, 10.9903381);
 const LatLng DEST_LOCATION = LatLng(35.4236578, 10.9921817);
 
 class PublicMap extends StatefulWidget {
-  Set<Marker> markers = HashSet<Marker>();
-
-  PublicMap(List<Accident> list) {
-    list.forEach((element) {
-      markers.add(Marker(
-          markerId: MarkerId(element.id),
-          position: LatLng(
-              element.localisation.latitude, element.localisation.longitude),
-          infoWindow: InfoWindow(title: element.id, snippet: element.status)));
-    });
-  }
+  PublicMap() {}
 
   @override
   _PublicMapState createState() => _PublicMapState();
@@ -34,6 +24,7 @@ class PublicMap extends StatefulWidget {
 
 class _PublicMapState extends State<PublicMap> {
   Completer<GoogleMapController> _controller = Completer();
+  Set<Marker> markers = HashSet<Marker>();
 
   Set<Marker> _markers = Set<Marker>();
 
@@ -141,6 +132,14 @@ class _PublicMapState extends State<PublicMap> {
 
   @override
   Widget build(BuildContext context) {
+    List<Accident> list = ModalRoute.of(context).settings.arguments;
+    list.forEach((element) {
+      markers.add(Marker(
+          markerId: MarkerId(element.id),
+          position: LatLng(
+              element.localisation.latitude, element.localisation.longitude),
+          infoWindow: InfoWindow(title: element.id, snippet: element.status)));
+    });
     CameraPosition initialCameraPosition = CameraPosition(
         zoom: CAMERA_ZOOM,
         tilt: CAMERA_TILT,
@@ -171,7 +170,7 @@ class _PublicMapState extends State<PublicMap> {
               showPinsOnMap();
             },
             initialCameraPosition: initialCameraPosition,
-            markers: this.widget.markers,
+            markers: markers,
             //circles: _markers,
           ),
           Align(

@@ -1,10 +1,10 @@
+import 'package:app_croissant_rouge/services/accident.dart';
 import 'package:app_croissant_rouge/views/screens/Protection.dart';
 import 'package:app_croissant_rouge/views/widgets/customized_dialog.dart';
 import 'package:app_croissant_rouge/views/widgets/notification_dialog.dart';
 import '../widgets/pdf_viewer_from_asset.dart';
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
-import 'package:app_croissant_rouge/model/locationData.dart';
 import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
 import 'package:device_info/device_info.dart';
 import 'package:http/http.dart' as http;
@@ -74,7 +74,8 @@ class PageAlerte extends StatelessWidget {
               color: Colors.white70,
             ),
             onPressed: () {
-              Navigator.of(context).pushNamed('/publicmap');
+              Navigator.of(context).pushNamed('/publicmap',
+                  arguments: getInProgressInterventions());
             },
           ),
           Container(

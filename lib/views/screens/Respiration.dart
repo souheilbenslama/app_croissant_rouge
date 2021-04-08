@@ -1,7 +1,7 @@
 //KHALIL
 import 'dart:ffi';
 
-import 'package:app_croissant_rouge/model/ChoixRespiration.dart';
+import 'file:///C:/Users/USER/Bureau/projects/app_croissant_rouge/lib/models/ChoixRespiration.dart';
 import 'package:app_croissant_rouge/views/screens/Conscience.dart';
 import 'package:app_croissant_rouge/views/screens/page_alerte.dart';
 import 'package:flutter/material.dart';

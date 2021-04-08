@@ -1,5 +1,5 @@
 //KHALIL
-import 'package:app_croissant_rouge/model/ChoixProtection.dart';
+import 'package:app_croissant_rouge/models/ChoixProtection.dart';
 import 'package:app_croissant_rouge/views/screens/Hemorragie.dart';
 import 'package:flutter/material.dart';
 

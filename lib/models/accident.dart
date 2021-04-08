@@ -1,4 +1,3 @@
-import 'package:app_croissant_rouge/model/locationData.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class Accident {
