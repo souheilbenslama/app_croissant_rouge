@@ -1,5 +1,6 @@
 //KHALIL
-import 'file:///C:/Users/USER/Bureau/projects/app_croissant_rouge/lib/models/ChoixConscience.dart';
+
+import 'package:app_croissant_rouge/models/ChoixConscience.dart';
 import 'package:app_croissant_rouge/views/screens/Hemorragie.dart';
 import 'package:app_croissant_rouge/views/screens/Respiration.dart';
 import 'package:flutter/material.dart';
