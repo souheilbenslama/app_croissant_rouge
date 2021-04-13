@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:app_croissant_rouge/model/locationData.dart';
 
 class Accident {
