@@ -59,12 +59,11 @@ class _InstructionsState extends State<Instructions> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
-      ),
-    return ListView.builder(
-      key: _listKey,
-      itemCount: _instructionsTiles.length,
-      itemBuilder: (context, index) {
+        title: Text(widget.title)),
+      body: ListView.builder(
+            key: _listKey,
+            itemCount: _instructionsTiles.length,
+            itemBuilder: (context, index) {
         return _instructionsTiles[index];
       }
     );
