@@ -1,7 +1,9 @@
+import 'package:app_croissant_rouge/models/accident.dart';
 import 'package:app_croissant_rouge/services/accident.dart';
 import 'package:app_croissant_rouge/views/screens/Protection.dart';
 import 'package:app_croissant_rouge/views/widgets/customized_dialog.dart';
 import 'package:app_croissant_rouge/views/widgets/notification_dialog.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../widgets/pdf_viewer_from_asset.dart';
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
@@ -73,9 +75,13 @@ class PageAlerte extends StatelessWidget {
               Icons.location_on,
               color: Colors.white70,
             ),
-            onPressed: () {
-              Navigator.of(context).pushNamed('/publicmap',
-                  arguments: getInProgressInterventions());
+            onPressed: () async {
+              var arguments =
+                  await AccidentService.getInProgressInterventions();
+              print(arguments);
+              Navigator.of(context).pushNamed('/publicmap', arguments: [
+                new Accident(id: "AZE", localisation: LatLng(35.34, 34.34))
+              ]);
             },
           ),
           Container(
@@ -200,7 +206,7 @@ class PageAlerte extends StatelessWidget {
               onPressed: () async {
                 var details = await getDeviceDetails();
                 var userId = details[2];
-                //var res = await attemptLogInUser(userId);
+                var res = await attemptLogInUser(userId);
                 Navigator.of(context).pushNamed('/options');
                 //print(res);
               },

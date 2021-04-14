@@ -16,8 +16,6 @@ const LatLng SOURCE_LOCATION = LatLng(35.427163, 10.9903381);
 const LatLng DEST_LOCATION = LatLng(35.4236578, 10.9921817);
 
 class PublicMap extends StatefulWidget {
-  PublicMap() {}
-
   @override
   _PublicMapState createState() => _PublicMapState();
 }
@@ -132,14 +130,17 @@ class _PublicMapState extends State<PublicMap> {
 
   @override
   Widget build(BuildContext context) {
-    List<Accident> list = ModalRoute.of(context).settings.arguments;
-    list.forEach((element) {
-      markers.add(Marker(
-          markerId: MarkerId(element.id),
-          position: LatLng(
-              element.localisation.latitude, element.localisation.longitude),
-          infoWindow: InfoWindow(title: element.id, snippet: element.status)));
-    });
+    // List<Accident> list = ModalRoute.of(context).settings.arguments;
+    //list.forEach((element) {
+    // markers.add(Marker(
+    //   markerId: MarkerId(element.id),
+    // position: LatLng(
+    //   element.localisation.latitude, element.localisation.longitude),
+    //infoWindow: InfoWindow(title: element.id, snippet: element.status)));
+    //});
+
+    markers.add(marker);
+
     CameraPosition initialCameraPosition = CameraPosition(
         zoom: CAMERA_ZOOM,
         tilt: CAMERA_TILT,

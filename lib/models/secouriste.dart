@@ -23,7 +23,7 @@ class Secouriste {
 
     return Secouriste(
         id: secourist["id"],
-        imgUrl: secourist["token"],
+        // imgUrl: secourist["token"],
         name: secourist["name"],
         email: secourist["email"],
         isFree: secourist['isFree'],

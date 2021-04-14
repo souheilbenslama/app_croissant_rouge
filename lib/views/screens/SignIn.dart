@@ -221,7 +221,8 @@ class SignIn extends StatelessWidget {
                               var password = _passwordController.text;
                               var jwt = await LoginServiceImp()
                                   .attemptLogIn(username, password);
-                              print("attempt to login finished " + jwt);
+                              print(jwt);
+                              //print("attempt to login finished " + jwt);
                               if (jwt != null) {
                                 final prefs =
                                     await SharedPreferences.getInstance();
