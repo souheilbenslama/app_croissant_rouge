@@ -1,4 +1,7 @@
+import 'dart:ffi';
+
 import 'package:app_croissant_rouge/models/accident.dart';
+import 'package:app_croissant_rouge/accidentProvider.dart';
 import 'package:app_croissant_rouge/models/route_generator.dart';
 import 'package:app_croissant_rouge/views/screens/PublicMap.dart';
 import 'package:app_croissant_rouge/views/screens/admin_dashboard.dart';
@@ -11,6 +14,7 @@ import 'package:app_croissant_rouge/views/screens/map_page.dart';
 import 'package:app_croissant_rouge/views/screens/test_map.dart';
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
+import 'package:provider/provider.dart';
 
 import 'views/screens/page_alerte.dart';
 
@@ -23,7 +27,8 @@ import 'views/screens/page_alerte.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(ChangeNotifierProvider(
+      create: (context) => AccidentProvider(), child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
