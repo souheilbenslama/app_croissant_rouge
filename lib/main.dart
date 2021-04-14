@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
      //home: PageAlerte(),
-     home: Instructions(),
+     home: InstructionList(),
     );
   }
 }

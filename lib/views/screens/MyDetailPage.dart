@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import './models/Instruction.dart';
+import 'package:app_croissant_rouge/models/Instruction.dart';
 
 class Details extends StatelessWidget {
 
@@ -22,7 +22,7 @@ class Details extends StatelessWidget {
               child: Hero(
                 tag: 'case-img-${instruction.img}',
                 child: Image.asset(
-                  'images/${instruction.img}',
+                  'assets/${instruction.img}',
                   height: 360,
                   fit: BoxFit.cover,
                   alignment: Alignment.topCenter,
