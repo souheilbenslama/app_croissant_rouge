@@ -1,20 +1,15 @@
 //KHALIL
+import 'dart:convert';
+
+import 'package:app_croissant_rouge/models/secouriste.dart';
+import 'package:app_croissant_rouge/services/login_service.dart';
 import 'package:app_croissant_rouge/views/screens/SignUp.dart';
 import 'package:app_croissant_rouge/views/screens/page_alerte.dart';
 import 'package:app_croissant_rouge/views/screens/Profile.dart';
 import 'package:flutter/material.dart';
+
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-
-// The Server to the backend
-const SERVER_IP = 'http://192.168.1.8:3000';
-// The method that will try to attempt to login
-Future<String> attemptLogIn(String username, String password) async {
-  var res = await http.post("$SERVER_IP/users/login",
-      body: {"email": username, "password": password});
-  if (res.statusCode == 200) return res.body;
-  return null;
-}
 
 // Displaying dialogs
 void displayDialog(BuildContext context, String title, String text) =>
@@ -224,17 +219,21 @@ class SignIn extends StatelessWidget {
                               print("form valdiated ");
                               var username = _usernameController.text;
                               var password = _passwordController.text;
-                              var jwt = await attemptLogIn(username, password);
+                              var jwt = await LoginServiceImp()
+                                  .attemptLogIn(username, password);
                               print("attempt to login finished " + jwt);
                               if (jwt != null) {
                                 final prefs =
                                     await SharedPreferences.getInstance();
                                 prefs.setString("jwt", jwt);
                                 print("string set to " + jwt);
+
+                                var ss = Secouriste.fromJson(jsonDecode(jwt));
+
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => Profile()));
+                                        builder: (context) => Profile(ss)));
                               } else {
                                 displayDialog(
                                     context, "Erreur", "Compte introuvable");

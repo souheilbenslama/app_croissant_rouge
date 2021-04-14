@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:app_croissant_rouge/models/secouriste.dart';
 import 'package:flutter/material.dart';
 import 'package:lite_rolling_switch/lite_rolling_switch.dart';
 // The package used to get the location
@@ -78,7 +79,14 @@ Future<String> location(double longitude, double latitude) async {
   return null;
 }
 
+// ignore: must_be_immutable
 class Profile extends StatelessWidget {
+  Secouriste secourite;
+
+  Profile(Secouriste secou) {
+    this.secourite = secou;
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -125,7 +133,7 @@ class Profile extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Text(
-                                      "Nom et prénom",
+                                      this.secourite.name,
                                       style: Theme.of(context).textTheme.title,
                                     ),
                                     ListTile(
@@ -198,22 +206,24 @@ class Profile extends StatelessWidget {
                           Divider(),
                           ListTile(
                             title: Text("Numéro"),
-                            subtitle: Text("99822080"),
+                            subtitle: Text(this.secourite.phone.toString()),
                             leading: Icon(Icons.call),
                           ),
                           ListTile(
-                            title: Text("Sexe"),
-                            subtitle: Text("femme"),
-                            leading: Icon(Icons.person_sharp),
+                            title: Text("Email"),
+                            subtitle: Text(this.secourite.email),
+                            leading: Icon(Icons.email_outlined),
                           ),
                           ListTile(
                             title: Text("Age"),
-                            subtitle: Text("22"),
+                            subtitle: (this.secourite.age != null)
+                                ? Text(this.secourite.age.toString())
+                                : Text("22"),
                             leading: Icon(Icons.format_align_center),
                           ),
                           ListTile(
                             title: Text("Gouvernorat"),
-                            subtitle: Text("Ariana"),
+                            subtitle: Text(this.secourite.address.toString()),
                             leading: Icon(Icons.place),
                           ),
                         ],

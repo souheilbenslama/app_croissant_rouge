@@ -1,4 +1,5 @@
 //KHALIL
+import 'package:app_croissant_rouge/services/login_service.dart';
 import 'package:app_croissant_rouge/views/screens/SignIn.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -20,21 +21,6 @@ void displayDialog(BuildContext context, String title, String text) =>
       builder: (context) =>
           AlertDialog(title: Text(title), content: Text(text)),
     );
-
-// The method used to sign up
-Future<int> attemptSignUp(String email, String password, String name,
-    String cin, String phone, String address) async {
-  var res = await http.post('$SERVER_IP/users/signup', body: {
-    "email": email,
-    "password": password,
-    "name": name,
-    "cin": cin,
-    "address": address,
-    "phone": phone
-  });
-  print(res.body);
-  return res.statusCode;
-}
 
 class SignUp extends StatefulWidget {
   @override
@@ -525,7 +511,7 @@ class _SignUpState extends State<SignUp> {
                                 displayDialog(
                                     context, "erreur", "mot de passe invalide");
                               else {
-                                var res = await attemptSignUp(
+                                var res = await LoginServiceImp().attemptSignUp(
                                     email, password, name, cin, phone, address);
                                 if (res == 200) {
                                   displayDialog(context, "Succes",
