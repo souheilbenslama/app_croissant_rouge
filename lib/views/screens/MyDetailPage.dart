@@ -1,53 +1,59 @@
 import 'package:flutter/material.dart';
+import './models/Instruction.dart';
 
-import 'Instruction.dart';
+class Details extends StatelessWidget {
 
-class MyDetailPage extends StatefulWidget {
-  Case _cas;
-
-  MyDetailPage(Case cas) {
-    _cas = cas;
-  }
-
-  @override
-  _MyDetailPageState createState() => _MyDetailPageState(_cas);
-}
-
-class _MyDetailPageState extends State<MyDetailPage> {
-  Case cas;
-
-  _MyDetailPageState(Case cas) {
-    this.cas = cas;
-  }
+  final Instruction instruction;
+  Details({ @required this.instruction });
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        title: Text(cas.title),
+        backgroundColor: Colors.redAccent[700],
+        elevation: 0,
       ),
-      body: Center(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: <Widget>[
-          Hero(
-            transitionOnUserGestures: true,
-            tag: cas,
-            child: Transform.scale(
-              scale: 2.0,
-              child: Image.asset(cas.img),
+      extendBodyBehindAppBar: true,
+      body: Container(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            ClipRRect(
+              child: Hero(
+                tag: 'case-img-${instruction.img}',
+                child: Image.asset(
+                  'images/${instruction.img}',
+                  height: 360,
+                  fit: BoxFit.cover,
+                  alignment: Alignment.topCenter,
+                ),
+              )
             ),
-          ),
-          Card(
-              elevation: 8,
-              margin: EdgeInsets.all(16),
-              child: Container(
-                padding: EdgeInsets.all(16),
-                child: Text(cas.body),
-              )),
-        ],
-      )),
+            SizedBox(height: 30),
+            ListTile(
+              title: Text(
+                instruction.title,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                  color: Colors.grey[800]
+                )
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(18),
+              child: Text(
+                '${instruction.steps}'
+                ,
+                style: TextStyle(
+                  color: Colors.grey[600],
+                  height: 1.4
+                )
+              )
+            ),
+          ],
+        ),
+      )
     );
   }
 }

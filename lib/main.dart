@@ -2,7 +2,7 @@ import 'package:app_croissant_rouge/views/screens/chat_screen.dart';
 import 'package:app_croissant_rouge/views/screens/MyHomePage.dart';
 import 'package:flutter/material.dart';
 import './views/screens/Profile.dart';
-
+import './views/screens/Instruction.dart';
 import './views/page_alerte.dart';
 
 void main() {
@@ -18,7 +18,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: PageAlerte(),
+     // home: PageAlerte(),
+     home: Instructions(),
     );
   }
 }

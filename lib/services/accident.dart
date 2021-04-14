@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 
 //get the list of interventions in progress
 Future<List<Accident>> getInProgressInterventions() async {
-  var Client = http.Client;
+  var Client = http.Client();
   var res = await Client.get('http://localhost:3000/accident/inprogress');
   if (res.statusCode == 200) {
     List<dynamic> body = jsonDecode(res.body);
@@ -21,7 +21,7 @@ Future<List<Accident>> getInProgressInterventions() async {
 //update the intervention's status to finished
 Future<bool> updateToFinished(int id) async {
   var updated = false;
-  var Client = http.Client;
+  var Client = http.Client();
   try {
   var res = await Client.put('http://localhost:3000/accident/finished/' + id.toString());
   if (res.statusCode == 200) {
