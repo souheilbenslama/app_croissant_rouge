@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import './MyDetailPage.dart';
-import './models/Instruction.dart';
+import 'package:app_croissant_rouge/models/Instruction.dart';
 
-class Insctructions extends StatefulWidget {
+class Instructions extends StatefulWidget {
   @override
   _InstructionsState createState() => _InstructionsState();
 }
@@ -66,6 +66,6 @@ class _InstructionsState extends State<Instructions> {
             itemBuilder: (context, index) {
         return _instructionsTiles[index];
       }
-    );
+    ));
   }
 }
