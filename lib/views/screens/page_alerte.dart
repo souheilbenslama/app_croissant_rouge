@@ -66,6 +66,7 @@ class PageAlerte extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.redAccent[700],
         actions: [
           // Used the actions to have the icons of the "App Bar" aligned in the same line
@@ -241,40 +242,6 @@ class PageAlerte extends StatelessWidget {
                   alignment: Alignment.center,
                   child: Text(
                     "Documentation",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(color: Colors.white, fontSize: 15),
-                  ),
-                ),
-              ),
-            ),
-          ),
-          //VOIR LA CARTE
-          Container(
-            margin: EdgeInsets.only(left: 70.0, top: 20.0),
-            height: 55.0,
-            width: 150.0,
-            //margin: EdgeInsets.all(20),
-            child: RaisedButton(
-              onPressed: () {
-                Navigator.of(context).pushNamed('/publicmap',
-                    arguments: AccidentService.getInProgressInterventions());
-              },
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(100.0)),
-              padding: EdgeInsets.all(0.0),
-              child: Ink(
-                decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [Color(0xFFe84f4c), Color(0xFFe2231e)],
-                      begin: Alignment.centerRight,
-                      end: Alignment.centerLeft,
-                    ),
-                    borderRadius: BorderRadius.circular(30.0)),
-                child: Container(
-                  constraints: BoxConstraints(maxWidth: 250.0, minHeight: 50.0),
-                  alignment: Alignment.center,
-                  child: Text(
-                    "Voir la carte",
                     textAlign: TextAlign.center,
                     style: TextStyle(color: Colors.white, fontSize: 15),
                   ),
