@@ -22,7 +22,7 @@ class Details extends StatelessWidget {
               child: Hero(
                 tag: 'case-img-${instruction.img}',
                 child: Image.asset(
-                  'assets/${instruction.img}',
+                  'assets/images/${instruction.img}',
                   height: 360,
                   fit: BoxFit.cover,
                   alignment: Alignment.topCenter,
