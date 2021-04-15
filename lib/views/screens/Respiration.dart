@@ -3,6 +3,7 @@
 import 'package:app_croissant_rouge/models/ChoixRespiration.dart';
 import 'package:app_croissant_rouge/accidentProvider.dart';
 import 'package:app_croissant_rouge/views/screens/Conscience.dart';
+import 'package:app_croissant_rouge/views/screens/Instruction.dart';
 import 'package:app_croissant_rouge/views/screens/page_alerte.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
@@ -147,7 +148,7 @@ class _RespirationState extends State<Respiration> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => PageAlerte()));
+                              builder: (context) => InstructionList()));
                     },
                     child: Text("Next"),
                   ),

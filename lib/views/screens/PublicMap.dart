@@ -28,7 +28,7 @@ class _PublicMapState extends State<PublicMap> {
 
   Marker marker = Marker(
       markerId: MarkerId("testing"),
-      position: LatLng(35.427163, 10.9903381),
+      position: LatLng(37.4221, 10.9903381),
       infoWindow: InfoWindow(title: "test", snippet: '*'),
       onTap: () {},
       onDragEnd: (LatLng position) {});

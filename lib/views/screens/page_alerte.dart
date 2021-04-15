@@ -13,7 +13,7 @@ import 'package:device_info/device_info.dart';
 import 'package:http/http.dart' as http;
 
 // The Server to the backend
-const SERVER_IP = 'http://192.168.1.8:3000';
+const SERVER_IP = 'http://192.168.43.68:3000';
 // The method to register the user
 Future<String> attemptLogInUser(String userId) async {
   var res =
@@ -147,9 +147,9 @@ class PageAlerte extends StatelessWidget {
               onPressed: () async {
                 var details = await getDeviceDetails();
                 var userId = details[2];
-                //var res = await attemptLogInUser(userId);
+                var res = await attemptLogInUser(userId);
                 Navigator.of(context).pushNamed('/options');
-                //print(res);
+                print(res);
               },
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(80.0)),
@@ -220,10 +220,18 @@ class PageAlerte extends StatelessWidget {
             margin: EdgeInsets.only(left: 70, top: 20.0),
             child: RaisedButton(
               onPressed: () async {
-                var details = await getDeviceDetails();
-                var userId = details[2];
-                var res = await attemptLogInUser(userId);
-                Navigator.of(context).pushNamed('/options');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => Scaffold(
+                      appBar: AppBar(
+                        title: const Text('Documentation'),
+                        backgroundColor: Colors.redAccent[700],
+                      ),
+                      body: PDF().fromAsset('assets/file/dummy.pdf'),
+                    ),
+                  ),
+                );
                 //print(res);
               },
               shape: RoundedRectangleBorder(

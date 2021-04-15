@@ -19,7 +19,8 @@ class _MapPageState extends State<MapPage> {
   Marker marker = Marker(
       markerId: MarkerId("testing"),
       position: LatLng(36.85, 10.15),
-      infoWindow: InfoWindow(title: "test", snippet: '*'),
+      infoWindow:
+          InfoWindow(title: "test Accident ", snippet: '\n description  '),
       onTap: () {},
       onDragEnd: (LatLng position) {});
 
