@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
       ),
       //home: SignUp(),
       //home: MapePage()
-      home: PublicMap(),
+      home: PageAlerte(),
     );
   }
 }

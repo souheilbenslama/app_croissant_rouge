@@ -3,6 +3,7 @@ import 'package:app_croissant_rouge/services/accident.dart';
 import 'package:app_croissant_rouge/views/screens/Protection.dart';
 import 'package:app_croissant_rouge/views/widgets/customized_dialog.dart';
 import 'package:app_croissant_rouge/views/widgets/notification_dialog.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../widgets/pdf_viewer_from_asset.dart';
 import 'package:flutter/material.dart';
@@ -68,50 +69,57 @@ class PageAlerte extends StatelessWidget {
         backgroundColor: Colors.redAccent[700],
         actions: [
           // Used the actions to have the icons of the "App Bar" aligned in the same line
-          IconButton(
-            // When the icon pressed it'll take as to the map page
-            iconSize: 35,
-            icon: Icon(
-              Icons.location_on,
-              color: Colors.white70,
-            ),
-            onPressed: () async {
-              var arguments =
-                  await AccidentService.getInProgressInterventions();
-              print(arguments);
-              Navigator.of(context).pushNamed('/publicmap', arguments: [
-                new Accident(id: "AZE", localisation: LatLng(35.34, 34.34))
-              ]);
-            },
-          ),
           Container(
-            // Used the container because i want the other 2 icons in the end and since i used .start for previous row i'll be applied automatically to the others
-            width: 360,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                IconButton(
-                  // This icon button when pressed it'll take as to the signin or to the profile page if the secouriste is connected
-                  onPressed: () {
-                    Navigator.of(context).pushNamed('/signIn');
-                  },
-                  iconSize: 35,
-                  icon: Icon(
-                    Icons.account_circle,
-                    color: Colors.white70,
-                  ),
-                ),
-                Padding(
-                  // The padding contains the the settings icon and its functions : PopUpMenuButton
-                  padding: const EdgeInsets.only(
-                    right: 8.0,
-                    bottom: 4.0,
-                  ),
-                  child: popupMenuButton(),
-                ),
-              ],
-            ),
-          ),
+              width: MediaQuery.of(context).size.width,
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    IconButton(
+                      // When the icon pressed it'll take as to the map page
+                      iconSize: 35,
+                      icon: Icon(
+                        Icons.location_on,
+                        color: Colors.white70,
+                      ),
+                      onPressed: () async {
+                        var arguments =
+                            await AccidentService.getInProgressInterventions();
+                        print(arguments);
+                        Navigator.of(context).pushNamed('/publicmap',
+                            arguments: [
+                              new Accident(
+                                  id: "AZE", localisation: LatLng(35.34, 34.34))
+                            ]);
+                      },
+                    ),
+
+                    // Used the container because i want the other 2 icons in the end and since i used .start for previous row i'll be applied automatically to the others
+                    Container(
+                        child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: <Widget>[
+                        IconButton(
+                          // This icon button when pressed it'll take as to the signin or to the profile page if the secouriste is connected
+                          onPressed: () {
+                            Navigator.of(context).pushNamed('/signIn');
+                          },
+                          iconSize: 35,
+                          icon: Icon(
+                            Icons.account_circle,
+                            color: Colors.white70,
+                          ),
+                        ),
+                        Padding(
+                          // The padding contains the the settings icon and its functions : PopUpMenuButton
+                          padding: const EdgeInsets.only(
+                            right: 8.0,
+                            bottom: 4.0,
+                          ),
+                          child: popupMenuButton(),
+                        ),
+                      ],
+                    )),
+                  ]))
         ],
       ),
       backgroundColor: Colors.white,
