@@ -23,17 +23,15 @@ Future<bool> updateToFinished(int id) async {
   var updated = false;
   var Client = http.Client();
   try {
-  var res = await Client.put('http://localhost:3000/accident/finished/' + id.toString());
-  if (res.statusCode == 200) {
-    updated = true;
-  } 
-  else if (res.statusCode == 403){
-     //go to login screen
-  }
-  }   
-  catch (Exception) {
+    var res = await Client.put(
+        'http://localhost:3000/accident/finished/' + id.toString());
+    if (res.statusCode == 200) {
+      updated = true;
+    } else if (res.statusCode == 403) {
+      //go to login screen
+    }
+  } catch (Exception) {
     return updated;
   }
   return updated;
-  }
 }

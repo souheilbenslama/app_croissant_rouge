@@ -7,12 +7,12 @@ class Secouriste {
   bool isFree;
   final int phone;
   Secouriste({
-    this.id, 
+    this.id,
     this.imgUrl,
     this.name,
     this.email,
     this.age,
     this.isFree,
     this.phone,
-  })
+  });
 }
