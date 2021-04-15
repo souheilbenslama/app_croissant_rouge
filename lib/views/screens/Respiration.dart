@@ -117,17 +117,25 @@ class _RespirationState extends State<Respiration> {
                       double latitude = _locationData.latitude;
                       double longitude = _locationData.longitude;
 
-                      final doc = Provider.of<AccidentProvider>(context);
+                      final doc =
+                          Provider.of<AccidentProvider>(context, listen: false);
 
                       choix.forEach((element) {
                         if (element.value) {
                           doc.addRespiration(element);
                         }
                       });
+
                       print('CHOIX : ');
                       doc.choixRespiration.forEach((element) {
                         print(element);
                       });
+
+                      Map test = doc.getInfo();
+
+                      print("/////////////////:");
+                      print(test);
+                      print("/////////////");
 
                       doc.setLatitude(latitude);
                       print('LATITUDE : ' + doc.latitude.toString());

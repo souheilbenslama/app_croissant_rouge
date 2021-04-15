@@ -92,7 +92,7 @@ class _HemorragieState extends State<Hemorragie> {
                     onPressed: () {
                       choix.forEach((element) {
                         if (element.value) {
-                          Provider.of<AccidentProvider>(context)
+                          Provider.of<AccidentProvider>(context, listen: false)
                               .addHemorragie(element);
                         }
                       });

@@ -41,4 +41,8 @@ class AccidentProvider with ChangeNotifier {
     this.choixProtection.add(choix);
     notifyListeners();
   }
+
+  Map getInfo() {
+    return {"hemorragie": this.choixHemorragie.last};
+  }
 }

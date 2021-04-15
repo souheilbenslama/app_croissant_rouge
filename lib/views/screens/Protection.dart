@@ -84,7 +84,7 @@ class _ProtectionState extends State<Protection> {
                     onPressed: () {
                       choix.forEach((element) {
                         if (element.value) {
-                          Provider.of<AccidentProvider>(context)
+                          Provider.of<AccidentProvider>(context, listen: false)
                               .addProtection(element);
                         }
                       });

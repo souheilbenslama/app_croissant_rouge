@@ -91,7 +91,7 @@ class _ConscienceState extends State<Conscience> {
                     onPressed: () {
                       choix.forEach((element) {
                         if (element.value) {
-                          Provider.of<AccidentProvider>(context)
+                          Provider.of<AccidentProvider>(context, listen: false)
                               .addConscience(element);
                         }
                       });
