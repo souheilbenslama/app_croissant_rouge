@@ -126,8 +126,9 @@ class PageAlerte extends StatelessWidget {
       body: Column(
         //mainAxisAlignment: MainAxisAlignment.spaceBetween, // space between to keep a certain space between the children of the Column
         children: <Widget>[
+          //LOGO
           Padding(
-            padding: const EdgeInsets.only(top: 60.0),
+            padding: const EdgeInsets.only(top: 60.0, left: 60.0, bottom: 40.0),
             child: Image.asset(
               'assets/logo.jpg',
               width: 150,
@@ -137,9 +138,10 @@ class PageAlerte extends StatelessWidget {
           SizedBox(
             height: 70.0,
           ),
+          //ALERTER
           Container(
-            height: 70.0,
-            margin: EdgeInsets.all(20),
+            height: 110.0,
+            margin: EdgeInsets.only(left: 80.0),
             child: RaisedButton(
               onPressed: () async {
                 var details = await getDeviceDetails();
@@ -171,17 +173,21 @@ class PageAlerte extends StatelessWidget {
               ),
             ),
           ),
+          SizedBox(height: 65.0),
+          //CONTACTER NOUS
           Container(
-            height: 50.0,
-            width: 120.0,
-            margin: EdgeInsets.all(20),
+            margin: EdgeInsets.only(left: 70.0),
+            height: 55.0,
+            width: 150.0,
+            //margin: EdgeInsets.all(20),
             child: RaisedButton(
-              onPressed: () async {
-                var details = await getDeviceDetails();
-                var userId = details[2];
-                //var res = await attemptLogInUser(userId);
-                Navigator.of(context).pushNamed('/options');
-                //print(res);
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return CustomizedDialog('Contacter nous sur 25789369');
+                  },
+                );
               },
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(100.0)),
@@ -200,16 +206,17 @@ class PageAlerte extends StatelessWidget {
                   child: Text(
                     "Contacter nous",
                     textAlign: TextAlign.center,
-                    style: TextStyle(color: Colors.white, fontSize: 10),
+                    style: TextStyle(color: Colors.white, fontSize: 15),
                   ),
                 ),
               ),
             ),
           ),
+          //DOCUMENTATION
           Container(
-            height: 50.0,
-            width: 120.0,
-            margin: EdgeInsets.all(20),
+            height: 55.0,
+            width: 150.0,
+            margin: EdgeInsets.only(left: 70, top: 20.0),
             child: RaisedButton(
               onPressed: () async {
                 var details = await getDeviceDetails();
@@ -235,73 +242,44 @@ class PageAlerte extends StatelessWidget {
                   child: Text(
                     "Documentation",
                     textAlign: TextAlign.center,
-                    style: TextStyle(color: Colors.white, fontSize: 10),
+                    style: TextStyle(color: Colors.white, fontSize: 15),
                   ),
                 ),
               ),
             ),
           ),
+          //VOIR LA CARTE
           Container(
-            width: 410,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                FlatButton(
-                  onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return CustomizedDialog('Contacter nous sur 25789369');
-                      },
-                    );
-                  },
-                  child: Text(
-                    'Contacter-nous',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
+            margin: EdgeInsets.only(left: 70.0, top: 20.0),
+            height: 55.0,
+            width: 150.0,
+            //margin: EdgeInsets.all(20),
+            child: RaisedButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed('/publicmap',
+                    arguments: AccidentService.getInProgressInterventions());
+              },
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(100.0)),
+              padding: EdgeInsets.all(0.0),
+              child: Ink(
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [Color(0xFFe84f4c), Color(0xFFe2231e)],
+                      begin: Alignment.centerRight,
+                      end: Alignment.centerLeft,
                     ),
+                    borderRadius: BorderRadius.circular(30.0)),
+                child: Container(
+                  constraints: BoxConstraints(maxWidth: 250.0, minHeight: 50.0),
+                  alignment: Alignment.center,
+                  child: Text(
+                    "Voir la carte",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.white, fontSize: 15),
                   ),
                 ),
-                FlatButton(
-                  onPressed: () {
-                    // To see if the notification widget works or not
-                    /*showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return NotificationDialog();
-                      },
-                    );*/
-
-                    // This Method will show the pdf without creating a widget => a simple pdf transition
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => Scaffold(
-                          appBar: AppBar(
-                            title: const Text('Documentation'),
-                            backgroundColor: Colors.redAccent[700],
-                          ),
-                          body: PDF().fromAsset('assets/file/dummy.pdf'),
-                        ),
-                      ),
-                    );
-                    /* Navigator.push(
-                      context,
-                      MaterialPageRoute<dynamic>(
-                        builder: (_) => PDFViewerFromAsset(
-                          pdfAssetPath: 'assets/file/dummy.pdf',
-                        ),
-                      ),
-                    );*/
-                  },
-                  child: Text(
-                    'Documentation',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ],
+              ),
             ),
           ),
         ],

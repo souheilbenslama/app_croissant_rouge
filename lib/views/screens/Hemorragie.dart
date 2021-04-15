@@ -1,9 +1,11 @@
 //KHALIL
 import 'package:app_croissant_rouge/models/ChoixHemorragie.dart';
+import 'package:app_croissant_rouge/accidentProvider.dart';
 
 import 'package:app_croissant_rouge/views/screens/Conscience.dart';
 import 'package:app_croissant_rouge/views/screens/Protection.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Hemorragie extends StatefulWidget {
   @override
@@ -88,6 +90,12 @@ class _HemorragieState extends State<Hemorragie> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(16.0))),
                     onPressed: () {
+                      choix.forEach((element) {
+                        if (element.value) {
+                          Provider.of<AccidentProvider>(context, listen: false)
+                              .addHemorragie(element);
+                        }
+                      });
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => Conscience()),
