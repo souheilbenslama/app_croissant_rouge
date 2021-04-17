@@ -1,6 +1,8 @@
+import 'package:app_croissant_rouge/accidentProvider.dart';
 import 'package:app_croissant_rouge/models/accident.dart';
 import 'package:app_croissant_rouge/services/accident.dart';
 import 'package:app_croissant_rouge/views/screens/Protection.dart';
+import 'package:app_croissant_rouge/views/screens/admin_dashboard.dart';
 import 'package:app_croissant_rouge/views/widgets/customized_dialog.dart';
 import 'package:app_croissant_rouge/views/widgets/notification_dialog.dart';
 import 'package:flutter/cupertino.dart';
@@ -11,9 +13,10 @@ import 'package:location/location.dart';
 import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
 import 'package:device_info/device_info.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 // The Server to the backend
-const SERVER_IP = 'http://192.168.43.68:3000';
+const SERVER_IP = 'http://192.168.1.7:3000';
 // The method to register the user
 Future<String> attemptLogInUser(String userId) async {
   var res =
@@ -118,6 +121,20 @@ class PageAlerte extends StatelessWidget {
                           ),
                           child: popupMenuButton(),
                         ),
+                        IconButton(
+                          // This icon button when pressed it'll take as to the signin or to the profile page if the secouriste is connected
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => AdminDashboard()));
+                          },
+                          iconSize: 35,
+                          icon: Icon(
+                            Icons.admin_panel_settings,
+                            color: Colors.white70,
+                          ),
+                        ),
                       ],
                     )),
                   ]))
@@ -148,7 +165,10 @@ class PageAlerte extends StatelessWidget {
                 var details = await getDeviceDetails();
                 var userId = details[2];
                 var res = await attemptLogInUser(userId);
-                Navigator.of(context).pushNamed('/options');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Protection()),
+                );
                 print(res);
               },
               shape: RoundedRectangleBorder(

@@ -4,6 +4,8 @@ import 'package:intl/intl.dart';
 class ListeInterventions extends StatefulWidget {
   @override
   _ListeInterventionsState createState() => _ListeInterventionsState();
+  final interventions;
+  ListeInterventions({Key key, @required this.interventions}) : super(key: key);
 }
 
 class _ListeInterventionsState extends State<ListeInterventions> {
@@ -22,7 +24,7 @@ class _ListeInterventionsState extends State<ListeInterventions> {
       ),
       body: Container(
         child: ListView.builder(
-          itemCount: 3,
+          itemCount: widget.interventions.length,
           itemBuilder: (context, index) {
             return Card(
               color: Colors.white,
@@ -31,7 +33,9 @@ class _ListeInterventionsState extends State<ListeInterventions> {
                 title: Column(
                   children: [
                     Text(
-                      "Intervention de " + secouristes[index],
+                      "Intervention de " + widget.interventions[index] != null
+                          ? widget.interventions[index]
+                          : "none",
                       style: TextStyle(
                         fontSize: 20,
                       ),

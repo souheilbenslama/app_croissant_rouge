@@ -5,19 +5,19 @@ import 'package:app_croissant_rouge/models/ChoixRespiration.dart';
 import 'package:flutter/material.dart';
 
 class AccidentProvider with ChangeNotifier {
-  double latitude;
-  double longitude;
+  String latitude;
+  String longitude;
   List<ChoixConscience> choixConscience = [];
   List<ChoixHemorragie> choixHemorragie = [];
   List<ChoixRespiration> choixRespiration = [];
   List<ChoixProtection> choixProtection = [];
 
-  setLatitude(double latitude) {
+  setLatitude(String latitude) {
     this.latitude = latitude;
     notifyListeners();
   }
 
-  setLongitude(double longitude) {
+  setLongitude(String longitude) {
     this.longitude = longitude;
     notifyListeners();
   }
@@ -43,6 +43,13 @@ class AccidentProvider with ChangeNotifier {
   }
 
   Map getInfo() {
-    return {"hemorragie": this.choixHemorragie.last};
+    return {
+      "hemorragie": this.choixHemorragie.last.title,
+      "respiration": this.choixRespiration.last.title,
+      "protection": this.choixProtection.last.title,
+      "conscience": this.choixConscience.last.title,
+      "latitude": latitude.toString(),
+      "longitude": longitude.toString(),
+    };
   }
 }
