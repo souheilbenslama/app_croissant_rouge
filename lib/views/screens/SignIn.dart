@@ -228,9 +228,8 @@ class SignIn extends StatelessWidget {
                                     await SharedPreferences.getInstance();
                                 prefs.setString("jwt", jwt);
                                 print("string set to " + jwt);
-
+                                //if ()
                                 var ss = Secouriste.fromJson(jsonDecode(jwt));
-
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
