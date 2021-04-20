@@ -1,5 +1,6 @@
 import 'package:app_croissant_rouge/models/accident.dart';
 import 'package:app_croissant_rouge/views/screens/PublicMap.dart';
+import 'package:app_croissant_rouge/views/screens/admin_dashboard.dart';
 import 'package:flutter/material.dart';
 
 import '../views/screens/page_alerte.dart';
@@ -32,6 +33,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => ListeInterventions());
       case '/interventionParSecouriste':
         return MaterialPageRoute(builder: (_) => InterventionParSecouriste());
+      case '/dashboard':
+        return MaterialPageRoute(builder: (_) => AdminDashboard());
       default:
         // if there is no such named route in the switch statement
         return _errorRoute();
