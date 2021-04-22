@@ -27,6 +27,9 @@ class _AdminDashboardState extends State<AdminDashboard> {
                 ),
               ),
             ),
+            SizedBox(
+              height: 10.0,
+            ),
             Padding(
               padding: EdgeInsets.all(12.0),
               child: Center(
@@ -37,8 +40,8 @@ class _AdminDashboardState extends State<AdminDashboard> {
                         Navigator.of(context).pushNamed('/listeSecouristes');
                       },
                       child: SizedBox(
-                        width: 360.0,
-                        height: 150.0,
+                        width: 180.0,
+                        height: 180.0,
                         child: Card(
                           elevation: 8,
                           color: Colors.white70,
@@ -66,6 +69,9 @@ class _AdminDashboardState extends State<AdminDashboard> {
                           ),
                         ),
                       ),
+                    ),
+                    SizedBox(
+                      height: 10.0,
                     ),
                     GestureDetector(
                       onTap: () {
@@ -102,7 +108,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
                         ),
                       ),
                     ),
-                    GestureDetector(
+                    /*GestureDetector(
                       onTap: null,
                       child: SizedBox(
                         width: 180.0,
@@ -134,7 +140,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
                           ),
                         ),
                       ),
-                    ),
+                    ),*/
                   ],
                 ),
               ),
