@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:app_croissant_rouge/services/accident.dart';
 import 'package:app_croissant_rouge/views/screens/Profile.dart';
 import 'package:app_croissant_rouge/views/screens/Protection.dart';
@@ -44,7 +46,8 @@ class PageAlerte extends StatefulWidget {
 
 class _PageAlerteState extends State<PageAlerte> {
   Map decodedToken;
-  String token;
+  Object token;
+  String jwt;
   Widget popupMenuButton() {
     return PopupMenuButton<String>(
       //PopMenuButton because we need a menu for the settings
@@ -98,9 +101,11 @@ class _PageAlerteState extends State<PageAlerte> {
             (BuildContext context, AsyncSnapshot<SharedPreferences> snapshot) {
           bool isAdmin() {
             if (snapshot.hasData) {
-              token = snapshot.data.getString("jwt");
-              if (token != null) {
+              jwt = snapshot.data.getString("jwt");
+              if (jwt != null) {
+                token = jsonDecode(jwt)["token"];
                 decodedToken = JwtDecoder.decode(token);
+                print(decodedToken);
                 if (decodedToken["isAdmin"]) {
                   return true;
                 } else
@@ -123,7 +128,8 @@ class _PageAlerteState extends State<PageAlerte> {
                   ),
                   onPressed: () {
                     Navigator.of(context).pushNamed('/publicmap',
-                        arguments: getInProgressInterventions());
+                        arguments:
+                            AccidentService.getInProgressInterventions());
                   },
                 ),
                 Container(
