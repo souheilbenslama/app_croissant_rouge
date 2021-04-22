@@ -1,4 +1,5 @@
 import 'package:app_croissant_rouge/models/accident.dart';
+import 'package:app_croissant_rouge/views/screens/Profile.dart';
 import 'package:app_croissant_rouge/views/screens/PublicMap.dart';
 import 'package:app_croissant_rouge/views/screens/admin_dashboard.dart';
 import 'package:flutter/material.dart';
