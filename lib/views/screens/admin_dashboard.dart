@@ -108,39 +108,6 @@ class _AdminDashboardState extends State<AdminDashboard> {
                         ),
                       ),
                     ),
-                    /*GestureDetector(
-                      onTap: null,
-                      child: SizedBox(
-                        width: 180.0,
-                        height: 180.0,
-                        child: Card(
-                          elevation: 8,
-                          color: Colors.white70,
-                          child: Padding(
-                            padding: EdgeInsets.all(20.0),
-                            child: Column(
-                              children: <Widget>[
-                                Image.asset(
-                                  'assets/location.png',
-                                  width: 64.0,
-                                ),
-                                SizedBox(
-                                  height: 10.0,
-                                ),
-                                Text(
-                                  "Liste des interventions par localité",
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18.0,
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),*/
                   ],
                 ),
               ),

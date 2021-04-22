@@ -10,20 +10,29 @@ class ActivateAccount extends StatelessWidget {
         backgroundColor: Colors.redAccent[700],
         title: Text("Liste des Interventions"),
       ),
-      body: Row(
-        children: <Widget>[
-          TextField(
-            obscureText: true,
-            decoration: InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: 'Ecrire votre Code',
-            ),
+      body: Padding(
+        padding: const EdgeInsets.only(
+          top: 10.0,
+          left: 10.0,
+          right: 10.0,
+        ),
+        child: Center(
+          child: Row(
+            children: <Widget>[
+              TextField(
+                obscureText: true,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Ecrire votre Code',
+                ),
+              ),
+              RaisedButton(
+                onPressed: () {},
+                child: Text('Valider'),
+              ),
+            ],
           ),
-          RaisedButton(
-            onPressed: () {},
-            child: Text('Valider'),
-          )
-        ],
+        ),
       ),
     );
   }

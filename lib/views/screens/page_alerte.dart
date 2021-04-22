@@ -110,7 +110,8 @@ class _PageAlerteState extends State<PageAlerte> {
                   return true;
                 } else
                   return false;
-              }
+              } else
+                return false;
             }
           }
 
@@ -154,8 +155,9 @@ class _PageAlerteState extends State<PageAlerte> {
                         // This icon button when pressed it'll take as to the signin or to the profile page if the secouriste is connected
                         onPressed: () {
                           if (snapshot.hasData) {
-                            token = snapshot.data.getString("jwt");
-                            if (token != null) {
+                            jwt = snapshot.data.getString("jwt");
+                            if (jwt != null) {
+                              token = jsonDecode(jwt)["token"];
                               decodedToken = JwtDecoder.decode(token);
                               if (decodedToken["isActivated"]) {
                                 Navigator.push(
@@ -172,9 +174,10 @@ class _PageAlerteState extends State<PageAlerte> {
                                           decodedToken['verificationCode'])),
                                 );
                               }
+                            } else {
+                              Navigator.of(context).pushNamed('/signIn');
                             }
                           }
-                          //Navigator.of(context).pushNamed('/signIn');
                         },
                         iconSize: 35,
                         icon: Icon(
