@@ -8,6 +8,8 @@ import '../../services/interventions.dart';
 class ListeInterventions extends StatefulWidget {
   @override
   _ListeInterventionsState createState() => _ListeInterventionsState();
+  final interventions;
+  ListeInterventions({Key key, @required this.interventions}) : super(key: key);
 }
 
 class Debouncer {

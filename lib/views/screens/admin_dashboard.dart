@@ -1,4 +1,23 @@
+import 'dart:convert';
+
+import 'package:app_croissant_rouge/views/screens/liste_interventions.dart';
+import 'package:app_croissant_rouge/views/screens/liste_secouristes.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
+// The backend server
+const SERVER_IP = 'http://192.168.1.7:3000';
+// The method to get the list of secourists
+Future<List<dynamic>> listSecourists() async {
+  var res = await http.get("$SERVER_IP/users/list");
+  return res.statusCode == 200 ? jsonDecode(res.body) : null;
+}
+
+// The method to get the list of interventions
+Future<List<dynamic>> listinterventions() async {
+  var res = await http.get("$SERVER_IP/accident/inprogress");
+  return res.statusCode == 200 ? jsonDecode(res.body) : null;
+}
 
 class AdminDashboard extends StatefulWidget {
   @override
@@ -36,8 +55,22 @@ class _AdminDashboardState extends State<AdminDashboard> {
                 child: Wrap(
                   children: <Widget>[
                     GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).pushNamed('/listeSecouristes');
+                      onTap: () async {
+                        final arraySecouristes = await listSecourists();
+                        var secouristes = [];
+                        for (var i = 0; i < arraySecouristes.length; i++) {
+                          print("it is " + arraySecouristes.length.toString());
+
+                          secouristes.add(arraySecouristes[i]["name"]);
+                        }
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => ListeSecouristes(
+                              secouristes: secouristes,
+                            ),
+                          ),
+                        );
                       },
                       child: SizedBox(
                         width: 180.0,
@@ -74,8 +107,22 @@ class _AdminDashboardState extends State<AdminDashboard> {
                       height: 10.0,
                     ),
                     GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).pushNamed('/listeInterventions');
+                      onTap: () async {
+                        final arrayintervention = await listinterventions();
+                        var interventions = [];
+                        for (var i = 0; i < arrayintervention.length; i++) {
+                          print("it is " + arrayintervention.length.toString());
+
+                          interventions.add(arrayintervention[i]["id_temoin"]);
+                        }
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => ListeInterventions(
+                              interventions: interventions,
+                            ),
+                          ),
+                        );
                       },
                       child: SizedBox(
                         width: 180.0,
@@ -132,7 +179,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
                                   style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 18.0,
+                                    fontSize: 13.0,
                                   ),
                                 )
                               ],

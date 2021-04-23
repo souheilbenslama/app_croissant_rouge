@@ -9,6 +9,31 @@ import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:location/location.dart';
 import 'package:provider/provider.dart';
+import 'package:http/http.dart' as http;
+import 'package:device_info/device_info.dart';
+
+const SERVER_IP = 'http://192.168.1.7:3000';
+// The method to create the accident
+Future<String> createAccident(
+    String id_temoin,
+    String longitude,
+    String latitude,
+    String protectionDesc,
+    String hemorragieDesc,
+    String respirationDesc,
+    String conscienceDesc) async {
+  var res = await http.post("$SERVER_IP/accident", body: {
+    "id_temoin": id_temoin,
+    "longitude": longitude,
+    "latitude": latitude,
+    "protectionDesc": protectionDesc,
+    "hemorragieDesc": hemorragieDesc,
+    "respirationDesc": respirationDesc,
+    "conscienceDesc": conscienceDesc
+  });
+
+  return res.statusCode == 200 ? res.body : null;
+}
 
 class Respiration extends StatefulWidget {
   @override
@@ -22,6 +47,18 @@ class _RespirationState extends State<Respiration> {
     ChoixRespiration(title: "Reponse3"),
     ChoixRespiration(title: "Reponse4"),
   ];
+  static Future<List<String>> getDeviceDetails() async {
+    String deviceName;
+    String deviceVersion;
+    String identifier;
+    final DeviceInfoPlugin deviceInfoPlugin = new DeviceInfoPlugin();
+    var build = await deviceInfoPlugin.androidInfo;
+    deviceName = build.model;
+    deviceVersion = build.version.toString();
+    identifier = build.androidId; //UUID for Android
+//if (!mounted) return;
+    return [deviceName, deviceVersion, identifier];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -115,8 +152,8 @@ class _RespirationState extends State<Respiration> {
                       }
 
                       _locationData = await location.getLocation();
-                      double latitude = _locationData.latitude;
-                      double longitude = _locationData.longitude;
+                      String latitude = _locationData.latitude.toString();
+                      String longitude = _locationData.longitude.toString();
 
                       final doc =
                           Provider.of<AccidentProvider>(context, listen: false);
@@ -127,21 +164,30 @@ class _RespirationState extends State<Respiration> {
                         }
                       });
 
+                      doc.setLatitude(latitude);
+                      print('LATITUDE : ' + doc.latitude.toString());
+                      doc.setLongitude(longitude);
+                      print('LONGITUDE : ' + doc.longitude.toString());
                       print('CHOIX : ');
                       doc.choixRespiration.forEach((element) {
                         print(element);
                       });
 
-                      Map test = doc.getInfo();
-
+                      var jsondoc = doc.getInfo();
+                      var details = await getDeviceDetails();
+                      var userId = details[2];
+                      var res2 = await createAccident(
+                          userId,
+                          jsondoc["longitude"],
+                          jsondoc["latitude"],
+                          jsondoc["protection"],
+                          jsondoc["hemorragie"],
+                          jsondoc["respiration"],
+                          jsondoc["conscience"]);
                       print("/////////////////:");
-                      print(test);
+                      print(res2);
                       print("/////////////");
 
-                      doc.setLatitude(latitude);
-                      print('LATITUDE : ' + doc.latitude.toString());
-                      doc.setLongitude(longitude);
-                      print('LONGITUDE : ' + doc.longitude.toString());
                       const number = '198';
                       bool res =
                           await FlutterPhoneDirectCaller.callNumber(number);
