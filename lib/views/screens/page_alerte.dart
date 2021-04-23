@@ -101,8 +101,10 @@ class _PageAlerteState extends State<PageAlerte> {
             (BuildContext context, AsyncSnapshot<SharedPreferences> snapshot) {
           bool isAdmin() {
             if (snapshot.hasData) {
+              print(snapshot.data);
               jwt = snapshot.data.getString("jwt");
-              if (jwt != null) {
+
+              if ((jwt != null)) {
                 token = jsonDecode(jwt)["token"];
                 decodedToken = JwtDecoder.decode(token);
                 print(decodedToken);
@@ -111,7 +113,9 @@ class _PageAlerteState extends State<PageAlerte> {
                 } else
                   return false;
               }
-            }
+              return false;
+            } else
+              return false;
           }
 
           return Scaffold(
@@ -154,9 +158,11 @@ class _PageAlerteState extends State<PageAlerte> {
                         // This icon button when pressed it'll take as to the signin or to the profile page if the secouriste is connected
                         onPressed: () {
                           if (snapshot.hasData) {
-                            token = snapshot.data.getString("jwt");
-                            if (token != null) {
+                            jwt = snapshot.data.getString("jwt");
+                            if (jwt != null) {
+                              token = jsonDecode(jwt)["token"];
                               decodedToken = JwtDecoder.decode(token);
+                              print(decodedToken);
                               if (decodedToken["isActivated"]) {
                                 Navigator.push(
                                   context,
@@ -172,9 +178,10 @@ class _PageAlerteState extends State<PageAlerte> {
                                           decodedToken['verificationCode'])),
                                 );
                               }
+                            } else {
+                              Navigator.of(context).pushNamed('/signIn');
                             }
                           }
-                          //Navigator.of(context).pushNamed('/signIn');
                         },
                         iconSize: 35,
                         icon: Icon(
