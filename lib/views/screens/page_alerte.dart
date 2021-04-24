@@ -1,3 +1,4 @@
+import 'package:app_croissant_rouge/accidentProvider.dart';
 import 'package:app_croissant_rouge/models/accident.dart';
 import 'package:app_croissant_rouge/services/accident.dart';
 import 'package:app_croissant_rouge/views/screens/Protection.dart';
@@ -11,6 +12,7 @@ import 'package:location/location.dart';
 import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
 import 'package:device_info/device_info.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 // The Server to the backend
 const SERVER_IP = 'http://192.168.43.68:3000';
@@ -64,6 +66,7 @@ class PageAlerte extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final doc = Provider.of<AccidentProvider>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -82,15 +85,15 @@ class PageAlerte extends StatelessWidget {
                         Icons.location_on,
                         color: Colors.white70,
                       ),
-                      onPressed: () async {
-                        var arguments =
-                            await AccidentService.getInProgressInterventions();
+                      onPressed: () {
+                        var arguments = doc.getInterventions();
                         print(arguments);
-                        Navigator.of(context).pushNamed('/publicmap',
-                            arguments: [
+                        Navigator.of(context)
+                            .pushNamed('/publicmap', arguments: arguments);
+                        /*[
                               new Accident(
                                   id: "AZE", localisation: LatLng(35.34, 34.34))
-                            ]);
+                            ]); */
                       },
                     ),
 
@@ -145,11 +148,11 @@ class PageAlerte extends StatelessWidget {
             margin: EdgeInsets.only(left: 80.0),
             child: RaisedButton(
               onPressed: () async {
-                var details = await getDeviceDetails();
-                var userId = details[2];
-                var res = await attemptLogInUser(userId);
+                //var details = await getDeviceDetails();
+                //var userId = details[2];
+                //var res = await attemptLogInUser(userId);
                 Navigator.of(context).pushNamed('/options');
-                print(res);
+                //print(res);
               },
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(80.0)),

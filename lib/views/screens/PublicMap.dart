@@ -31,7 +31,16 @@ class _PublicMapState extends State<PublicMap> {
       position: LatLng(37.4221, 10.9903381),
       infoWindow: InfoWindow(title: "test", snippet: '*'),
       onTap: () {},
-      onDragEnd: (LatLng position) {});
+      onDragEnd: (LatLng position) {},
+      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueViolet));
+
+  Marker marker2 = Marker(
+      markerId: MarkerId("testing2"),
+      position: LatLng(38.4221, 11.9903381),
+      infoWindow: InfoWindow(title: "test2", snippet: '*'),
+      onTap: () {},
+      onDragEnd: (LatLng position) {},
+      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueViolet));
 
   MapType mapType = MapType.normal;
   // the user's initial location and current location
@@ -83,7 +92,6 @@ class _PublicMapState extends State<PublicMap> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     location = new Location();
     getLocation();
@@ -130,16 +138,17 @@ class _PublicMapState extends State<PublicMap> {
 
   @override
   Widget build(BuildContext context) {
-    // List<Accident> list = ModalRoute.of(context).settings.arguments;
-    //list.forEach((element) {
-    // markers.add(Marker(
-    //   markerId: MarkerId(element.id),
-    // position: LatLng(
-    //   element.localisation.latitude, element.localisation.longitude),
-    //infoWindow: InfoWindow(title: element.id, snippet: element.status)));
-    //});
+    List<Accident> accidentList = ModalRoute.of(context).settings.arguments;
+    accidentList.forEach((element) {
+      markers.add(Marker(
+      markerId: MarkerId(element.id),
+      position: LatLng(
+      element.localisation.latitude, element.localisation.longitude),
+      infoWindow: InfoWindow(title: element.id, snippet: element.status)));
+    }); 
 
-    markers.add(marker);
+    //markers.add(marker);
+    //markers.add(marker2);
 
     CameraPosition initialCameraPosition = CameraPosition(
         zoom: CAMERA_ZOOM,

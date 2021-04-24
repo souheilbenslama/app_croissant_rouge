@@ -129,7 +129,7 @@ class _RespirationState extends State<Respiration> {
 
                       print('CHOIX : ');
                       doc.choixRespiration.forEach((element) {
-                        print(element);
+                      print(element);
                       });
 
                       Map test = doc.getInfo();

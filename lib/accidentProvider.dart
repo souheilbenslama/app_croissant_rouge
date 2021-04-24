@@ -2,7 +2,10 @@ import 'package:app_croissant_rouge/models/ChoixConscience.dart';
 import 'package:app_croissant_rouge/models/ChoixHemorragie.dart';
 import 'package:app_croissant_rouge/models/ChoixProtection.dart';
 import 'package:app_croissant_rouge/models/ChoixRespiration.dart';
+import 'package:app_croissant_rouge/services/accident.dart';
 import 'package:flutter/material.dart';
+
+import 'models/accident.dart';
 
 class AccidentProvider with ChangeNotifier {
   double latitude;
@@ -44,5 +47,11 @@ class AccidentProvider with ChangeNotifier {
 
   Map getInfo() {
     return {"hemorragie": this.choixHemorragie.last};
+  }
+
+  Future<List<Accident>> getInterventions() async {
+    var args = await AccidentService.getInProgressInterventions();
+    notifyListeners();
+    return args;
   }
 }

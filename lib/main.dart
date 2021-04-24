@@ -11,6 +11,7 @@ import 'package:app_croissant_rouge/views/screens/Profile.dart';
 import 'package:app_croissant_rouge/views/screens/SignUp.dart';
 import 'package:app_croissant_rouge/views/screens/SignIn.dart';
 import 'package:app_croissant_rouge/views/screens/map_page.dart';
+import 'package:app_croissant_rouge/views/screens/testNotification.dart';
 import 'package:app_croissant_rouge/views/screens/test_map.dart';
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
@@ -46,7 +47,8 @@ class MyApp extends StatelessWidget {
       ),
       //home: SignUp(),
       //home: MapePage()
-      home: PageAlerte(),
+      //home: PageAlerte(),
+      home: TestNotification(),
     );
   }
 }
