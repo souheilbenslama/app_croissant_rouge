@@ -129,7 +129,7 @@ class PageAlerte extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment
-            .end, // space between to keep a certain space between the children of the Column
+            .center, // space between to keep a certain space between the children of the Column
         children: <Widget>[
           //LOGO
           Padding(
@@ -140,9 +140,12 @@ class PageAlerte extends StatelessWidget {
               height: 150,
             ),
           ),
-          SizedBox(),
+          SizedBox(
+            height: MediaQuery.of(context).size.height / 20,
+          ),
           //ALERTER
-          Container(
+          Center(
+              child: Container(
             height: 110.0,
             margin: EdgeInsets.only(),
             child: RaisedButton(
@@ -178,8 +181,7 @@ class PageAlerte extends StatelessWidget {
                 ),
               ),
             ),
-          ),
-          SizedBox(),
+          )),
           //CONTACTER NOUS
           Container(
             margin: EdgeInsets.only(),
