@@ -38,4 +38,26 @@ class AccidentService {
     }
     return updated;
   }
+
+// The method to create the accident
+  static Future<String> createAccident(
+      String id_temoin,
+      String longitude,
+      String latitude,
+      String protectionDesc,
+      String hemorragieDesc,
+      String respirationDesc,
+      String conscienceDesc) async {
+    var res = await http.post("$SERVER_IP/accident", body: {
+      "id_temoin": id_temoin,
+      "longitude": longitude,
+      "latitude": latitude,
+      "protectionDesc": protectionDesc,
+      "hemorragieDesc": hemorragieDesc,
+      "respirationDesc": respirationDesc,
+      "conscienceDesc": conscienceDesc
+    });
+
+    return res.statusCode == 200 ? res.body : null;
+  }
 }

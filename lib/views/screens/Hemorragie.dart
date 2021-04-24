@@ -1,9 +1,9 @@
 //KHALIL
-import 'package:app_croissant_rouge/models/ChoixHemorragie.dart';
+import 'package:app_croissant_rouge/models/choix_hemorragie.dart';
 import 'package:app_croissant_rouge/accidentProvider.dart';
 
 import 'package:app_croissant_rouge/views/screens/Conscience.dart';
-import 'package:app_croissant_rouge/views/screens/Protection.dart';
+import 'package:app_croissant_rouge/views/screens/protection.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

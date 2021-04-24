@@ -1,6 +1,6 @@
 import 'package:app_croissant_rouge/views/screens/chat_screen.dart';
 import 'package:flutter/material.dart';
-import './MyDetailPage.dart';
+import 'my_detail_page.dart';
 import 'package:app_croissant_rouge/models/Instruction.dart';
 
 class InstructionList extends StatefulWidget {

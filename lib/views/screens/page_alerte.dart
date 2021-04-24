@@ -1,14 +1,13 @@
 import 'package:app_croissant_rouge/accidentProvider.dart';
 import 'package:app_croissant_rouge/models/accident.dart';
-import 'package:app_croissant_rouge/services/accident.dart';
-import 'package:app_croissant_rouge/views/screens/Protection.dart';
+import 'package:app_croissant_rouge/services/accident_service.dart';
+import 'package:app_croissant_rouge/services/user_service.dart';
+import 'package:app_croissant_rouge/views/screens/protection.dart';
+import 'package:app_croissant_rouge/views/screens/admin_dashboard.dart';
 import 'package:app_croissant_rouge/views/widgets/customized_dialog.dart';
-import 'package:app_croissant_rouge/views/widgets/notification_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import '../widgets/pdf_viewer_from_asset.dart';
 import 'package:flutter/material.dart';
-import 'package:location/location.dart';
 import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
 import 'package:device_info/device_info.dart';
 import 'package:http/http.dart' as http;
@@ -121,6 +120,20 @@ class PageAlerte extends StatelessWidget {
                           ),
                           child: popupMenuButton(),
                         ),
+                        IconButton(
+                          // This icon button when pressed it'll take as to the signin or to the profile page if the secouriste is connected
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => AdminDashboard()));
+                          },
+                          iconSize: 35,
+                          icon: Icon(
+                            Icons.admin_panel_settings,
+                            color: Colors.white70,
+                          ),
+                        ),
                       ],
                     )),
                   ]))
@@ -128,11 +141,13 @@ class PageAlerte extends StatelessWidget {
       ),
       backgroundColor: Colors.white,
       body: Column(
-        //mainAxisAlignment: MainAxisAlignment.spaceBetween, // space between to keep a certain space between the children of the Column
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment
+            .center, // space between to keep a certain space between the children of the Column
         children: <Widget>[
           //LOGO
           Padding(
-            padding: const EdgeInsets.only(top: 60.0, left: 60.0, bottom: 40.0),
+            padding: const EdgeInsets.only(),
             child: Image.asset(
               'assets/logo.jpg',
               width: 150,
@@ -140,12 +155,13 @@ class PageAlerte extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 70.0,
+            height: MediaQuery.of(context).size.height / 20,
           ),
           //ALERTER
-          Container(
+          Center(
+              child: Container(
             height: 110.0,
-            margin: EdgeInsets.only(left: 80.0),
+            margin: EdgeInsets.only(),
             child: RaisedButton(
               onPressed: () async {
                 //var details = await getDeviceDetails();
@@ -176,11 +192,10 @@ class PageAlerte extends StatelessWidget {
                 ),
               ),
             ),
-          ),
-          SizedBox(height: 65.0),
+          )),
           //CONTACTER NOUS
           Container(
-            margin: EdgeInsets.only(left: 70.0),
+            margin: EdgeInsets.only(),
             height: 55.0,
             width: 150.0,
             //margin: EdgeInsets.all(20),
@@ -220,7 +235,7 @@ class PageAlerte extends StatelessWidget {
           Container(
             height: 55.0,
             width: 150.0,
-            margin: EdgeInsets.only(left: 70, top: 20.0),
+            margin: EdgeInsets.only(),
             child: RaisedButton(
               onPressed: () async {
                 Navigator.push(
@@ -235,7 +250,6 @@ class PageAlerte extends StatelessWidget {
                     ),
                   ),
                 );
-                //print(res);
               },
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(100.0)),

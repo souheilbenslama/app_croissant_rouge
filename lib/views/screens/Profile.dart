@@ -1,13 +1,9 @@
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:app_croissant_rouge/models/secouriste.dart';
+import 'package:app_croissant_rouge/services/secouriste_service.dart';
 import 'package:flutter/material.dart';
 import 'package:lite_rolling_switch/lite_rolling_switch.dart';
 // The package used to get the location
 import 'package:geolocator/geolocator.dart';
-import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 
 /// this function  Determine the current position of the device.
 ///
@@ -48,35 +44,6 @@ Future<Position> _determinePosition() async {
   // When we reach here, permissions are granted and we can
   // continue accessing the position of the device.
   return await Geolocator.getCurrentPosition();
-}
-
-// The function to update the lcation
-// The Server to the backend
-const SERVER_IP = 'http://192.168.1.8:3000';
-// The function to get the token from shared preferences
-Future<String> getToken() async {
-  final SharedPreferences prefs = await SharedPreferences.getInstance();
-  return prefs.getString('jwt');
-}
-
-// The method that will try to attempt to login
-Future<String> location(double longitude, double latitude) async {
-  var jwt = await getToken();
-  var jwtDecoded = jsonDecode(jwt);
-  var token = jwtDecoded["token"];
-  var res = await http.put("$SERVER_IP/secouriste/location",
-      //headers: {HttpHeaders.authorizationHeader: token},
-      headers: {
-        'Authorization': '$token',
-      }, body: {
-    "longitude": longitude.toString(),
-    "latitude": latitude.toString()
-  });
-  print(res.statusCode);
-  print(res);
-  print("token = " + token);
-  if (res.statusCode == 200) return res.body;
-  return null;
 }
 
 // ignore: must_be_immutable
@@ -151,7 +118,7 @@ class Profile extends StatelessWidget {
                                           if (position == true) {
                                             Position pos =
                                                 await _determinePosition();
-                                            var res = await location(
+                                            var res = await updateLocation(
                                                 pos.longitude, pos.latitude);
                                             print(res);
                                           }
