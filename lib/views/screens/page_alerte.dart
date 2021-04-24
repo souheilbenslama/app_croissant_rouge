@@ -127,24 +127,24 @@ class PageAlerte extends StatelessWidget {
       ),
       backgroundColor: Colors.white,
       body: Column(
-        //mainAxisAlignment: MainAxisAlignment.spaceBetween, // space between to keep a certain space between the children of the Column
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment
+            .end, // space between to keep a certain space between the children of the Column
         children: <Widget>[
           //LOGO
           Padding(
-            padding: const EdgeInsets.only(top: 60.0, left: 60.0, bottom: 40.0),
+            padding: const EdgeInsets.only(),
             child: Image.asset(
               'assets/logo.jpg',
               width: 150,
               height: 150,
             ),
           ),
-          SizedBox(
-            height: 70.0,
-          ),
+          SizedBox(),
           //ALERTER
           Container(
             height: 110.0,
-            margin: EdgeInsets.only(left: 80.0),
+            margin: EdgeInsets.only(),
             child: RaisedButton(
               onPressed: () async {
                 var details = await getDeviceDetails();
@@ -179,10 +179,10 @@ class PageAlerte extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 65.0),
+          SizedBox(),
           //CONTACTER NOUS
           Container(
-            margin: EdgeInsets.only(left: 70.0),
+            margin: EdgeInsets.only(),
             height: 55.0,
             width: 150.0,
             //margin: EdgeInsets.all(20),
@@ -222,7 +222,7 @@ class PageAlerte extends StatelessWidget {
           Container(
             height: 55.0,
             width: 150.0,
-            margin: EdgeInsets.only(left: 70, top: 20.0),
+            margin: EdgeInsets.only(),
             child: RaisedButton(
               onPressed: () async {
                 Navigator.push(
@@ -237,7 +237,6 @@ class PageAlerte extends StatelessWidget {
                     ),
                   ),
                 );
-                //print(res);
               },
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(100.0)),

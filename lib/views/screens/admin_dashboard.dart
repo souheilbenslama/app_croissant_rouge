@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:app_croissant_rouge/services/admin_service.dart';
 import 'package:app_croissant_rouge/views/screens/liste_interventions.dart';
 import 'package:app_croissant_rouge/views/screens/liste_secouristes.dart';

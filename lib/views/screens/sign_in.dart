@@ -3,9 +3,9 @@ import 'dart:convert';
 
 import 'package:app_croissant_rouge/models/secouriste.dart';
 import 'package:app_croissant_rouge/services/login_service.dart';
-import 'package:app_croissant_rouge/views/screens/SignUp.dart';
+import 'package:app_croissant_rouge/views/screens/sign_up.dart';
 import 'package:app_croissant_rouge/views/screens/page_alerte.dart';
-import 'package:app_croissant_rouge/views/screens/Profile.dart';
+import 'package:app_croissant_rouge/views/screens/profile.dart';
 import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;
