@@ -6,7 +6,7 @@ import 'package:app_croissant_rouge/models/route_generator.dart';
 import 'package:app_croissant_rouge/views/screens/PublicMap.dart';
 import 'package:app_croissant_rouge/views/screens/admin_dashboard.dart';
 import 'package:app_croissant_rouge/views/screens/chat_screen.dart';
-import 'package:app_croissant_rouge/views/screens/MyHomePage.dart';
+import 'package:app_croissant_rouge/views/screens/my_home_page.dart';
 import 'package:app_croissant_rouge/views/screens/Profile.dart';
 import 'package:app_croissant_rouge/views/screens/SignUp.dart';
 import 'package:app_croissant_rouge/views/screens/SignIn.dart';

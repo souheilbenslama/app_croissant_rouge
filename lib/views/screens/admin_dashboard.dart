@@ -1,23 +1,9 @@
 import 'dart:convert';
 
+import 'package:app_croissant_rouge/services/admin_service.dart';
 import 'package:app_croissant_rouge/views/screens/liste_interventions.dart';
 import 'package:app_croissant_rouge/views/screens/liste_secouristes.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-
-// The backend server
-const SERVER_IP = 'http://192.168.1.7:3000';
-// The method to get the list of secourists
-Future<List<dynamic>> listSecourists() async {
-  var res = await http.get("$SERVER_IP/users/list");
-  return res.statusCode == 200 ? jsonDecode(res.body) : null;
-}
-
-// The method to get the list of interventions
-Future<List<dynamic>> listinterventions() async {
-  var res = await http.get("$SERVER_IP/accident/inprogress");
-  return res.statusCode == 200 ? jsonDecode(res.body) : null;
-}
 
 class AdminDashboard extends StatefulWidget {
   @override
@@ -56,7 +42,8 @@ class _AdminDashboardState extends State<AdminDashboard> {
                   children: <Widget>[
                     GestureDetector(
                       onTap: () async {
-                        final arraySecouristes = await listSecourists();
+                        final arraySecouristes =
+                            await AdminService.listSecourists();
                         var secouristes = [];
                         for (var i = 0; i < arraySecouristes.length; i++) {
                           print("it is " + arraySecouristes.length.toString());
@@ -108,7 +95,8 @@ class _AdminDashboardState extends State<AdminDashboard> {
                     ),
                     GestureDetector(
                       onTap: () async {
-                        final arrayintervention = await listinterventions();
+                        final arrayintervention =
+                            await AdminService.listinterventions();
                         var interventions = [];
                         for (var i = 0; i < arrayintervention.length; i++) {
                           print("it is " + arrayintervention.length.toString());

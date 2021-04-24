@@ -1,29 +1,14 @@
-import 'package:app_croissant_rouge/accidentProvider.dart';
 import 'package:app_croissant_rouge/models/accident.dart';
-import 'package:app_croissant_rouge/services/accident.dart';
+import 'package:app_croissant_rouge/services/accident_service.dart';
+import 'package:app_croissant_rouge/services/user_service.dart';
 import 'package:app_croissant_rouge/views/screens/Protection.dart';
 import 'package:app_croissant_rouge/views/screens/admin_dashboard.dart';
 import 'package:app_croissant_rouge/views/widgets/customized_dialog.dart';
-import 'package:app_croissant_rouge/views/widgets/notification_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import '../widgets/pdf_viewer_from_asset.dart';
 import 'package:flutter/material.dart';
-import 'package:location/location.dart';
 import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
 import 'package:device_info/device_info.dart';
-import 'package:http/http.dart' as http;
-import 'package:provider/provider.dart';
-
-// The Server to the backend
-const SERVER_IP = 'http://192.168.1.7:3000';
-// The method to register the user
-Future<String> attemptLogInUser(String userId) async {
-  var res =
-      await http.post("$SERVER_IP/users/normalUser", body: {"userid": userId});
-  if (res.statusCode == 200) return res.body;
-  return null;
-}
 
 class PageAlerte extends StatelessWidget {
   // To get Device Details
@@ -164,7 +149,7 @@ class PageAlerte extends StatelessWidget {
               onPressed: () async {
                 var details = await getDeviceDetails();
                 var userId = details[2];
-                var res = await attemptLogInUser(userId);
+                var res = await UserService.attemptLogInUser(userId);
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => Protection()),

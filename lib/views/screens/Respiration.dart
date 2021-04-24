@@ -1,5 +1,7 @@
 //KHALIL
 
+import 'dart:ffi';
+
 import 'package:app_croissant_rouge/models/ChoixRespiration.dart';
 import 'package:app_croissant_rouge/accidentProvider.dart';
 import 'package:app_croissant_rouge/views/screens/Conscience.dart';
@@ -164,9 +166,9 @@ class _RespirationState extends State<Respiration> {
                         }
                       });
 
-                      doc.setLatitude(latitude);
+                      doc.setLatitude(double.parse(latitude));
                       print('LATITUDE : ' + doc.latitude.toString());
-                      doc.setLongitude(longitude);
+                      doc.setLongitude(double.parse(longitude));
                       print('LONGITUDE : ' + doc.longitude.toString());
                       print('CHOIX : ');
                       doc.choixRespiration.forEach((element) {
