@@ -1,7 +1,7 @@
-import 'package:app_croissant_rouge/models/ChoixConscience.dart';
-import 'package:app_croissant_rouge/models/ChoixHemorragie.dart';
-import 'package:app_croissant_rouge/models/ChoixProtection.dart';
-import 'package:app_croissant_rouge/models/ChoixRespiration.dart';
+import 'package:app_croissant_rouge/models/choix_conscience.dart';
+import 'package:app_croissant_rouge/models/choix_hemorragie.dart';
+import 'package:app_croissant_rouge/models/choix_protection.dart';
+import 'package:app_croissant_rouge/models/choix_respiration.dart';
 import 'package:flutter/material.dart';
 
 class AccidentProvider with ChangeNotifier {

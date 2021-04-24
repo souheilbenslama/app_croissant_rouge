@@ -1,7 +1,7 @@
 import 'package:app_croissant_rouge/models/accident.dart';
 import 'package:app_croissant_rouge/services/accident_service.dart';
 import 'package:app_croissant_rouge/services/user_service.dart';
-import 'package:app_croissant_rouge/views/screens/Protection.dart';
+import 'package:app_croissant_rouge/views/screens/protection.dart';
 import 'package:app_croissant_rouge/views/screens/admin_dashboard.dart';
 import 'package:app_croissant_rouge/views/widgets/customized_dialog.dart';
 import 'package:flutter/cupertino.dart';

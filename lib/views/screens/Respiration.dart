@@ -1,9 +1,8 @@
 //KHALIL
 
-import 'dart:ffi';
-
-import 'package:app_croissant_rouge/models/ChoixRespiration.dart';
+import 'package:app_croissant_rouge/models/choix_respiration.dart';
 import 'package:app_croissant_rouge/accidentProvider.dart';
+import 'package:app_croissant_rouge/services/accident_service.dart';
 import 'package:app_croissant_rouge/views/screens/Conscience.dart';
 import 'package:app_croissant_rouge/views/screens/Instruction.dart';
 import 'package:app_croissant_rouge/views/screens/page_alerte.dart';
@@ -13,29 +12,6 @@ import 'package:location/location.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:device_info/device_info.dart';
-
-const SERVER_IP = 'http://192.168.1.7:3000';
-// The method to create the accident
-Future<String> createAccident(
-    String id_temoin,
-    String longitude,
-    String latitude,
-    String protectionDesc,
-    String hemorragieDesc,
-    String respirationDesc,
-    String conscienceDesc) async {
-  var res = await http.post("$SERVER_IP/accident", body: {
-    "id_temoin": id_temoin,
-    "longitude": longitude,
-    "latitude": latitude,
-    "protectionDesc": protectionDesc,
-    "hemorragieDesc": hemorragieDesc,
-    "respirationDesc": respirationDesc,
-    "conscienceDesc": conscienceDesc
-  });
-
-  return res.statusCode == 200 ? res.body : null;
-}
 
 class Respiration extends StatefulWidget {
   @override
@@ -166,9 +142,9 @@ class _RespirationState extends State<Respiration> {
                         }
                       });
 
-                      doc.setLatitude(double.parse(latitude));
+                      doc.setLatitude(latitude);
                       print('LATITUDE : ' + doc.latitude.toString());
-                      doc.setLongitude(double.parse(longitude));
+                      doc.setLongitude(longitude);
                       print('LONGITUDE : ' + doc.longitude.toString());
                       print('CHOIX : ');
                       doc.choixRespiration.forEach((element) {
@@ -178,7 +154,7 @@ class _RespirationState extends State<Respiration> {
                       var jsondoc = doc.getInfo();
                       var details = await getDeviceDetails();
                       var userId = details[2];
-                      var res2 = await createAccident(
+                      var res2 = await AccidentService.createAccident(
                           userId,
                           jsondoc["longitude"],
                           jsondoc["latitude"],
