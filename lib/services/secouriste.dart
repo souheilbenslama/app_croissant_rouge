@@ -13,7 +13,7 @@ Future<bool> updateDisponibility(bool isFree) async {
   var updated = false;
   try {
     var response = await client.put(
-      'http://localhost:3000/disponibility',
+      'http://192.168.56.17:3000/disponibility',
       headers: {'Authorization': '$token'},
       body: {isFree: isFree},
     );

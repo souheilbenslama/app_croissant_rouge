@@ -101,8 +101,10 @@ class _PageAlerteState extends State<PageAlerte> {
             (BuildContext context, AsyncSnapshot<SharedPreferences> snapshot) {
           bool isAdmin() {
             if (snapshot.hasData) {
+              print(snapshot.data);
               jwt = snapshot.data.getString("jwt");
-              if (jwt != null) {
+
+              if ((jwt != null)) {
                 token = jsonDecode(jwt)["token"];
                 decodedToken = JwtDecoder.decode(token);
                 print(decodedToken);
@@ -110,9 +112,10 @@ class _PageAlerteState extends State<PageAlerte> {
                   return true;
                 } else
                   return false;
-              } else
-                return false;
-            }
+              }
+              return false;
+            } else
+              return false;
           }
 
           return Scaffold(
@@ -159,6 +162,7 @@ class _PageAlerteState extends State<PageAlerte> {
                             if (jwt != null) {
                               token = jsonDecode(jwt)["token"];
                               decodedToken = JwtDecoder.decode(token);
+                              print(decodedToken);
                               if (decodedToken["isActivated"]) {
                                 Navigator.push(
                                   context,

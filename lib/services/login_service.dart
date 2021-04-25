@@ -1,7 +1,7 @@
 import 'package:http/http.dart' as http;
 
 // The Server to the backend
-const SERVER_IP = 'http://192.168.43.68:3000';
+const SERVER_IP = 'http://192.168.56.17:3000';
 
 // The service class
 abstract class LoginService {
