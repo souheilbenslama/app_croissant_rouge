@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:app_croissant_rouge/models/secouriste.dart';
 import 'package:app_croissant_rouge/services/accident.dart';
 import 'package:app_croissant_rouge/views/screens/Profile.dart';
 import 'package:app_croissant_rouge/views/screens/Protection.dart';
@@ -17,7 +18,7 @@ import 'package:http/http.dart' as http;
 import 'package:jwt_decoder/jwt_decoder.dart';
 
 // The Server to the backend
-const SERVER_IP = 'http://192.168.1.8:3000';
+const SERVER_IP = 'http://192.168.43.68:3000';
 // The method to register the user
 Future<String> attemptLogInUser(String userId) async {
   var res =
@@ -104,7 +105,7 @@ class _PageAlerteState extends State<PageAlerte> {
             if (snapshot.hasData) {
               print(snapshot.data);
               jwt = snapshot.data.getString("jwt");
-
+              print("hell");
               if ((jwt != null)) {
                 token = jsonDecode(jwt)["token"];
                 decodedToken = JwtDecoder.decode(token);
@@ -128,7 +129,7 @@ class _PageAlerteState extends State<PageAlerte> {
                 token = jsonDecode(jwt)["token"];
                 decodedToken = JwtDecoder.decode(token);
                 print(decodedToken);
-                if (decodedToken["isSecouriste"]) {
+                if (decodedToken["isAdmin"]) {
                   return true;
                 } else
                   return false;
@@ -143,7 +144,7 @@ class _PageAlerteState extends State<PageAlerte> {
               backgroundColor: Colors.redAccent[700],
               actions: [
                 // Used the actions to have the icons of the "App Bar" aligned in the same line
-                if (isAdmin())
+                if (!isSecouriste())
                   IconButton(
                     // When the icon pressed it'll take as to the map page
                     iconSize: 35,
@@ -181,15 +182,18 @@ class _PageAlerteState extends State<PageAlerte> {
                           if (snapshot.hasData) {
                             jwt = snapshot.data.getString("jwt");
                             if (jwt != null) {
+                              final decodedjwt = jsonDecode(jwt);
+                              print(decodedjwt);
                               token = jsonDecode(jwt)["token"];
                               decodedToken = JwtDecoder.decode(token);
                               print(decodedToken);
-                              if (decodedToken["isActivated"]) {
+                              if (decodedToken["isNormalUser"]) {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) =>
-                                        Profile(decodedToken['Secouriste']),
+                                    builder: (context) => Profile(
+                                        Secouriste.fromJson(
+                                            decodedjwt['Secouriste'])),
                                   ),
                                 );
                               } else {
@@ -239,133 +243,143 @@ class _PageAlerteState extends State<PageAlerte> {
                 SizedBox(
                   height: 70.0,
                 ),
-                if (isAdmin())
-                  Container(
-                    height: 70.0,
-                    margin: EdgeInsets.all(20),
-                    child: RaisedButton(
-                      onPressed: () async {
-                        var details = await PageAlerte.getDeviceDetails();
-                        var userId = details[2];
-                        //var res = await attemptLogInUser(userId);
-                        Navigator.of(context).pushNamed('/options');
-                        //print(res);
-                      },
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(80.0)),
-                      padding: EdgeInsets.all(0.0),
-                      child: Ink(
-                        decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [Color(0xFFe84f4c), Color(0xFFe2231e)],
-                              begin: Alignment.centerRight,
-                              end: Alignment.centerLeft,
+                isSecouriste()
+                    ? Container(
+                        height: 50.0,
+                        width: 140.0,
+                        margin: EdgeInsets.all(20),
+                        child: RaisedButton(
+                          onPressed: () {
+                            Navigator.of(context).pushNamed('/publicmap',
+                                arguments: AccidentService
+                                    .getInProgressInterventions());
+                          },
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(100.0)),
+                          padding: EdgeInsets.all(0.0),
+                          child: Ink(
+                            decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  colors: [
+                                    Color(0xFFe84f4c),
+                                    Color(0xFFe2231e)
+                                  ],
+                                  begin: Alignment.centerRight,
+                                  end: Alignment.centerLeft,
+                                ),
+                                borderRadius: BorderRadius.circular(30.0)),
+                            child: Container(
+                              constraints: BoxConstraints(
+                                  maxWidth: 250.0, minHeight: 50.0),
+                              alignment: Alignment.center,
+                              child: Text(
+                                "Voir Map",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 20.0),
+                              ),
                             ),
-                            borderRadius: BorderRadius.circular(30.0)),
-                        child: Container(
-                          constraints:
-                              BoxConstraints(maxWidth: 250.0, minHeight: 50.0),
-                          alignment: Alignment.center,
-                          child: Text(
-                            "Alerter",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(color: Colors.white, fontSize: 50),
                           ),
                         ),
-                      ),
-                    ),
-                  ),
-                if (isSecouriste())
-                  Container(
-                    height: 50.0,
-                    width: 140.0,
-                    margin: EdgeInsets.all(20),
-                    child: RaisedButton(
-                      onPressed: () {
-                        Navigator.of(context).pushNamed('/publicmap',
-                            arguments:
-                                AccidentService.getInProgressInterventions());
-                      },
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(100.0)),
-                      padding: EdgeInsets.all(0.0),
-                      child: Ink(
-                        decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [Color(0xFFe84f4c), Color(0xFFe2231e)],
-                              begin: Alignment.centerRight,
-                              end: Alignment.centerLeft,
+                      )
+                    : Container(
+                        height: 70.0,
+                        margin: EdgeInsets.all(20),
+                        child: RaisedButton(
+                          onPressed: () async {
+                            var details = await PageAlerte.getDeviceDetails();
+                            var userId = details[2];
+                            //var res = await attemptLogInUser(userId);
+                            Navigator.of(context).pushNamed('/options');
+                            //print(res);
+                          },
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(80.0)),
+                          padding: EdgeInsets.all(0.0),
+                          child: Ink(
+                            decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  colors: [
+                                    Color(0xFFe84f4c),
+                                    Color(0xFFe2231e)
+                                  ],
+                                  begin: Alignment.centerRight,
+                                  end: Alignment.centerLeft,
+                                ),
+                                borderRadius: BorderRadius.circular(30.0)),
+                            child: Container(
+                              constraints: BoxConstraints(
+                                  maxWidth: 250.0, minHeight: 50.0),
+                              alignment: Alignment.center,
+                              child: Text(
+                                "Alerter",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 50),
+                              ),
                             ),
-                            borderRadius: BorderRadius.circular(30.0)),
-                        child: Container(
-                          constraints:
-                              BoxConstraints(maxWidth: 250.0, minHeight: 50.0),
-                          alignment: Alignment.center,
-                          child: Text(
-                            "Voir Map",
-                            textAlign: TextAlign.center,
-                            style:
-                                TextStyle(color: Colors.white, fontSize: 20.0),
                           ),
                         ),
                       ),
-                    ),
-                  ),
-                if (isSecouriste())
-                  Container(
-                    height: 50.0,
-                    width: 180.0,
-                    margin: EdgeInsets.all(20),
-                    child: LiteRollingSwitch(
-                      value: true,
-                      textOn: "Disponible",
-                      textOff: "Non Disponible",
-                      colorOn: Colors.green,
-                      colorOff: Colors.redAccent[700],
-                      iconOn: Icons.done,
-                      iconOff: Icons.alarm_off,
-                      textSize: 18.0,
-                      onChanged: (bool position) {
-                        print("The button is $position");
-                      },
-                    ),
-                  ),
-                Container(
-                  height: 50.0,
-                  width: 120.0,
-                  margin: EdgeInsets.all(20),
-                  child: RaisedButton(
-                    onPressed: () async {
-                      var details = await PageAlerte.getDeviceDetails();
-                      var userId = details[2];
-                      //var res = await attemptLogInUser(userId);
-                      Navigator.of(context).pushNamed('/options');
-                      //print(res);
-                    },
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(100.0)),
-                    padding: EdgeInsets.all(0.0),
-                    child: Ink(
-                      decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [Color(0xFFe84f4c), Color(0xFFe2231e)],
-                            begin: Alignment.centerRight,
-                            end: Alignment.centerLeft,
+                isSecouriste()
+                    ? Container(
+                        height: 50.0,
+                        width: 180.0,
+                        margin: EdgeInsets.all(20),
+                        child: LiteRollingSwitch(
+                          value: true,
+                          textOn: "Disponible",
+                          textOff: "Non Disponible",
+                          colorOn: Colors.green,
+                          colorOff: Colors.redAccent[700],
+                          iconOn: Icons.done,
+                          iconOff: Icons.alarm_off,
+                          textSize: 18.0,
+                          onChanged: (bool position) {
+                            print("The button is $position");
+                          },
+                        ),
+                      )
+                    : Container(
+                        height: 50.0,
+                        width: 120.0,
+                        margin: EdgeInsets.all(20),
+                        child: RaisedButton(
+                          onPressed: () async {
+                            var details = await PageAlerte.getDeviceDetails();
+                            var userId = details[2];
+                            //var res = await attemptLogInUser(userId);
+                            Navigator.of(context).pushNamed('/options');
+                            //print(res);
+                          },
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(100.0)),
+                          padding: EdgeInsets.all(0.0),
+                          child: Ink(
+                            decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  colors: [
+                                    Color(0xFFe84f4c),
+                                    Color(0xFFe2231e)
+                                  ],
+                                  begin: Alignment.centerRight,
+                                  end: Alignment.centerLeft,
+                                ),
+                                borderRadius: BorderRadius.circular(30.0)),
+                            child: Container(
+                              constraints: BoxConstraints(
+                                  maxWidth: 250.0, minHeight: 50.0),
+                              alignment: Alignment.center,
+                              child: Text(
+                                "Contacter nous",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 10),
+                              ),
+                            ),
                           ),
-                          borderRadius: BorderRadius.circular(30.0)),
-                      child: Container(
-                        constraints:
-                            BoxConstraints(maxWidth: 250.0, minHeight: 50.0),
-                        alignment: Alignment.center,
-                        child: Text(
-                          "Contacter nous",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.white, fontSize: 10),
                         ),
                       ),
-                    ),
-                  ),
-                ),
                 Container(
                   height: 50.0,
                   width: 120.0,

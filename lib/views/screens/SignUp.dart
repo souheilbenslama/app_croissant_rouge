@@ -503,6 +503,7 @@ class _SignUpState extends State<SignUp> {
                               var cin = _cinController.text;
                               var phone = _phoneController.text;
                               var address = _adressController.text;
+                              var isNormalUser = !_checkbox;
 
                               if (name.length < 4)
                                 displayDialog(
@@ -512,7 +513,13 @@ class _SignUpState extends State<SignUp> {
                                     context, "erreur", "mot de passe invalide");
                               else {
                                 var res = await LoginServiceImp().attemptSignUp(
-                                    email, password, name, cin, phone, address);
+                                    email,
+                                    password,
+                                    name,
+                                    cin,
+                                    phone,
+                                    address,
+                                    isNormalUser);
                                 if (res == 200) {
                                   displayDialog(context, "Succes",
                                       "Le secouriste est crée");

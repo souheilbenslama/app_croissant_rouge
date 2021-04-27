@@ -48,7 +48,7 @@ class MyApp extends StatelessWidget {
       //home: SignUp(),
       //home: MapePage()
       home: PageAlerte(),
-      //home: FeedSecouriste(),
+      // home: FeedSecouriste(),
     );
   }
 }
