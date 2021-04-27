@@ -10,6 +10,7 @@ import 'package:app_croissant_rouge/views/screens/MyHomePage.dart';
 import 'package:app_croissant_rouge/views/screens/Profile.dart';
 import 'package:app_croissant_rouge/views/screens/SignUp.dart';
 import 'package:app_croissant_rouge/views/screens/SignIn.dart';
+import 'package:app_croissant_rouge/views/screens/feed_secouriste.dart';
 import 'package:app_croissant_rouge/views/screens/map_page.dart';
 import 'package:app_croissant_rouge/views/screens/test_map.dart';
 import 'package:flutter/material.dart';
@@ -47,7 +48,7 @@ class MyApp extends StatelessWidget {
       //home: SignUp(),
       //home: MapePage()
       home: PageAlerte(),
-      //home: AdminDashboard(),
+      //home: FeedSecouriste(),
     );
   }
 }

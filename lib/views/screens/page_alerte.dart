@@ -6,6 +6,7 @@ import 'package:app_croissant_rouge/views/screens/Protection.dart';
 import 'package:app_croissant_rouge/views/screens/activate_account.dart';
 import 'package:app_croissant_rouge/views/widgets/customized_dialog.dart';
 import 'package:app_croissant_rouge/views/widgets/notification_dialog.dart';
+import 'package:lite_rolling_switch/lite_rolling_switch.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../widgets/pdf_viewer_from_asset.dart';
 import 'package:flutter/material.dart';
@@ -118,24 +119,44 @@ class _PageAlerteState extends State<PageAlerte> {
               return false;
           }
 
+          bool isSecouriste() {
+            if (snapshot.hasData) {
+              print(snapshot.data);
+              jwt = snapshot.data.getString("jwt");
+
+              if ((jwt != null)) {
+                token = jsonDecode(jwt)["token"];
+                decodedToken = JwtDecoder.decode(token);
+                print(decodedToken);
+                if (decodedToken["isSecouriste"]) {
+                  return true;
+                } else
+                  return false;
+              }
+              return false;
+            } else
+              return false;
+          }
+
           return Scaffold(
             appBar: AppBar(
               backgroundColor: Colors.redAccent[700],
               actions: [
                 // Used the actions to have the icons of the "App Bar" aligned in the same line
-                IconButton(
-                  // When the icon pressed it'll take as to the map page
-                  iconSize: 35,
-                  icon: Icon(
-                    Icons.location_on,
-                    color: Colors.white70,
+                if (isAdmin())
+                  IconButton(
+                    // When the icon pressed it'll take as to the map page
+                    iconSize: 35,
+                    icon: Icon(
+                      Icons.location_on,
+                      color: Colors.white70,
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pushNamed('/publicmap',
+                          arguments:
+                              AccidentService.getInProgressInterventions());
+                    },
                   ),
-                  onPressed: () {
-                    Navigator.of(context).pushNamed('/publicmap',
-                        arguments:
-                            AccidentService.getInProgressInterventions());
-                  },
-                ),
                 Container(
                   // Used the container because i want the other 2 icons in the end and since i used .start for previous row i'll be applied automatically to the others
                   width: 360,
@@ -167,15 +188,16 @@ class _PageAlerteState extends State<PageAlerte> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>
-                                          Profile(decodedToken['Secouriste'])),
+                                    builder: (context) =>
+                                        Profile(decodedToken['Secouriste']),
+                                  ),
                                 );
                               } else {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => ActivateAccount(
-                                          decodedToken['verificationCode'])),
+                                    builder: (context) => ActivateAccount(),
+                                  ),
                                 );
                               }
                             } else {
@@ -217,41 +239,97 @@ class _PageAlerteState extends State<PageAlerte> {
                 SizedBox(
                   height: 70.0,
                 ),
-                Container(
-                  height: 70.0,
-                  margin: EdgeInsets.all(20),
-                  child: RaisedButton(
-                    onPressed: () async {
-                      var details = await PageAlerte.getDeviceDetails();
-                      var userId = details[2];
-                      //var res = await attemptLogInUser(userId);
-                      Navigator.of(context).pushNamed('/options');
-                      //print(res);
-                    },
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(80.0)),
-                    padding: EdgeInsets.all(0.0),
-                    child: Ink(
-                      decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [Color(0xFFe84f4c), Color(0xFFe2231e)],
-                            begin: Alignment.centerRight,
-                            end: Alignment.centerLeft,
+                if (isAdmin())
+                  Container(
+                    height: 70.0,
+                    margin: EdgeInsets.all(20),
+                    child: RaisedButton(
+                      onPressed: () async {
+                        var details = await PageAlerte.getDeviceDetails();
+                        var userId = details[2];
+                        //var res = await attemptLogInUser(userId);
+                        Navigator.of(context).pushNamed('/options');
+                        //print(res);
+                      },
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(80.0)),
+                      padding: EdgeInsets.all(0.0),
+                      child: Ink(
+                        decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [Color(0xFFe84f4c), Color(0xFFe2231e)],
+                              begin: Alignment.centerRight,
+                              end: Alignment.centerLeft,
+                            ),
+                            borderRadius: BorderRadius.circular(30.0)),
+                        child: Container(
+                          constraints:
+                              BoxConstraints(maxWidth: 250.0, minHeight: 50.0),
+                          alignment: Alignment.center,
+                          child: Text(
+                            "Alerter",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(color: Colors.white, fontSize: 50),
                           ),
-                          borderRadius: BorderRadius.circular(30.0)),
-                      child: Container(
-                        constraints:
-                            BoxConstraints(maxWidth: 250.0, minHeight: 50.0),
-                        alignment: Alignment.center,
-                        child: Text(
-                          "Alerter",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.white, fontSize: 50),
                         ),
                       ),
                     ),
                   ),
-                ),
+                if (isSecouriste())
+                  Container(
+                    height: 50.0,
+                    width: 140.0,
+                    margin: EdgeInsets.all(20),
+                    child: RaisedButton(
+                      onPressed: () {
+                        Navigator.of(context).pushNamed('/publicmap',
+                            arguments:
+                                AccidentService.getInProgressInterventions());
+                      },
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(100.0)),
+                      padding: EdgeInsets.all(0.0),
+                      child: Ink(
+                        decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [Color(0xFFe84f4c), Color(0xFFe2231e)],
+                              begin: Alignment.centerRight,
+                              end: Alignment.centerLeft,
+                            ),
+                            borderRadius: BorderRadius.circular(30.0)),
+                        child: Container(
+                          constraints:
+                              BoxConstraints(maxWidth: 250.0, minHeight: 50.0),
+                          alignment: Alignment.center,
+                          child: Text(
+                            "Voir Map",
+                            textAlign: TextAlign.center,
+                            style:
+                                TextStyle(color: Colors.white, fontSize: 20.0),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                if (isSecouriste())
+                  Container(
+                    height: 50.0,
+                    width: 180.0,
+                    margin: EdgeInsets.all(20),
+                    child: LiteRollingSwitch(
+                      value: true,
+                      textOn: "Disponible",
+                      textOff: "Non Disponible",
+                      colorOn: Colors.green,
+                      colorOff: Colors.redAccent[700],
+                      iconOn: Icons.done,
+                      iconOff: Icons.alarm_off,
+                      textSize: 18.0,
+                      onChanged: (bool position) {
+                        print("The button is $position");
+                      },
+                    ),
+                  ),
                 Container(
                   height: 50.0,
                   width: 120.0,

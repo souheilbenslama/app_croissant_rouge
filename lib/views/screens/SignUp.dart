@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 // The Server to the backend
-const SERVER_IP = 'http://192.168.1.8:3000';
+const SERVER_IP = 'http://192.168.56.17:3000';
 
 final TextEditingController _nameController = TextEditingController();
 final TextEditingController _passwordController = TextEditingController();
