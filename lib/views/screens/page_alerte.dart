@@ -77,25 +77,6 @@ class _PageAlerteState extends State<PageAlerte> {
 
   @override
   Widget build(BuildContext context) {
-    /* var prefs;
-    Future<void> initState() async {
-      super.initState();
-      prefs = await SharedPreferences.getInstance();
-    }
-
-    bool isAdmin() {
-      token = prefs.getString("token");
-      if (token != null) {
-        decodedToken = JwtDecoder.decode(token);
-        if (decodedToken["isAdmin"]) {
-          return true;
-        } else {
-          return false;
-        }
-      } else {
-        return false;
-      }
-    }*/
     Future<SharedPreferences> prefs = SharedPreferences.getInstance();
     return FutureBuilder(
         future: prefs,
@@ -129,7 +110,7 @@ class _PageAlerteState extends State<PageAlerte> {
                 token = jsonDecode(jwt)["token"];
                 decodedToken = JwtDecoder.decode(token);
                 print(decodedToken);
-                if (decodedToken["isAdmin"]) {
+                if (decodedToken["isSecouriste"]) {
                   return true;
                 } else
                   return false;
@@ -187,7 +168,8 @@ class _PageAlerteState extends State<PageAlerte> {
                               token = jsonDecode(jwt)["token"];
                               decodedToken = JwtDecoder.decode(token);
                               print(decodedToken);
-                              if (decodedToken["isNormalUser"]) {
+                              if (!decodedToken["isNormalUser"] &
+                                  decodedToken["isActivated"]) {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
@@ -196,7 +178,8 @@ class _PageAlerteState extends State<PageAlerte> {
                                             decodedjwt['Secouriste'])),
                                   ),
                                 );
-                              } else {
+                              } else if (decodedToken["isNormalUser"] &
+                                  !decodedToken["isActivated"]) {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
@@ -321,65 +304,23 @@ class _PageAlerteState extends State<PageAlerte> {
                           ),
                         ),
                       ),
-                isSecouriste()
-                    ? Container(
-                        height: 50.0,
-                        width: 180.0,
-                        margin: EdgeInsets.all(20),
-                        child: LiteRollingSwitch(
-                          value: true,
-                          textOn: "Disponible",
-                          textOff: "Non Disponible",
-                          colorOn: Colors.green,
-                          colorOff: Colors.redAccent[700],
-                          iconOn: Icons.done,
-                          iconOff: Icons.alarm_off,
-                          textSize: 18.0,
-                          onChanged: (bool position) {
-                            print("The button is $position");
-                          },
-                        ),
-                      )
-                    : Container(
-                        height: 50.0,
-                        width: 120.0,
-                        margin: EdgeInsets.all(20),
-                        child: RaisedButton(
-                          onPressed: () async {
-                            var details = await PageAlerte.getDeviceDetails();
-                            var userId = details[2];
-                            //var res = await attemptLogInUser(userId);
-                            Navigator.of(context).pushNamed('/options');
-                            //print(res);
-                          },
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(100.0)),
-                          padding: EdgeInsets.all(0.0),
-                          child: Ink(
-                            decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  colors: [
-                                    Color(0xFFe84f4c),
-                                    Color(0xFFe2231e)
-                                  ],
-                                  begin: Alignment.centerRight,
-                                  end: Alignment.centerLeft,
-                                ),
-                                borderRadius: BorderRadius.circular(30.0)),
-                            child: Container(
-                              constraints: BoxConstraints(
-                                  maxWidth: 250.0, minHeight: 50.0),
-                              alignment: Alignment.center,
-                              child: Text(
-                                "Contacter nous",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 10),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
+                if (isSecouriste())
+                  Padding(
+                    padding: EdgeInsets.only(top: 20),
+                    child: LiteRollingSwitch(
+                      value: true,
+                      textOn: 'Available',
+                      textOff: 'Not Available',
+                      colorOn: Colors.green,
+                      colorOff: Colors.red[700],
+                      iconOn: Icons.done,
+                      iconOff: Icons.alarm_off,
+                      textSize: 13.0,
+                      onChanged: (bool state) {
+                        print('turned ${(state) ? 'on' : 'off'}');
+                      },
+                    ),
+                  ),
                 Container(
                   height: 50.0,
                   width: 120.0,
@@ -408,7 +349,7 @@ class _PageAlerteState extends State<PageAlerte> {
                             BoxConstraints(maxWidth: 250.0, minHeight: 50.0),
                         alignment: Alignment.center,
                         child: Text(
-                          "Documentation",
+                          "Contacter nous",
                           textAlign: TextAlign.center,
                           style: TextStyle(color: Colors.white, fontSize: 10),
                         ),
@@ -416,6 +357,43 @@ class _PageAlerteState extends State<PageAlerte> {
                     ),
                   ),
                 ),
+                if (isAdmin())
+                  Container(
+                    height: 50.0,
+                    width: 120.0,
+                    margin: EdgeInsets.all(20),
+                    child: RaisedButton(
+                      onPressed: () async {
+                        var details = await PageAlerte.getDeviceDetails();
+                        var userId = details[2];
+                        //var res = await attemptLogInUser(userId);
+                        Navigator.of(context).pushNamed('/options');
+                        //print(res);
+                      },
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(100.0)),
+                      padding: EdgeInsets.all(0.0),
+                      child: Ink(
+                        decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [Color(0xFFe84f4c), Color(0xFFe2231e)],
+                              begin: Alignment.centerRight,
+                              end: Alignment.centerLeft,
+                            ),
+                            borderRadius: BorderRadius.circular(30.0)),
+                        child: Container(
+                          constraints:
+                              BoxConstraints(maxWidth: 250.0, minHeight: 50.0),
+                          alignment: Alignment.center,
+                          child: Text(
+                            "Documentation",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(color: Colors.white, fontSize: 10),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                 Container(
                   width: 410,
                   child: Row(
