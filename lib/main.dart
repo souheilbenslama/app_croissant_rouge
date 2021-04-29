@@ -1,5 +1,6 @@
 import 'dart:ffi';
 
+import 'package:app_croissant_rouge/lang/localization_service.dart';
 import 'package:app_croissant_rouge/models/accident.dart';
 import 'package:app_croissant_rouge/accidentProvider.dart';
 import 'package:app_croissant_rouge/models/route_generator.dart';
@@ -14,6 +15,7 @@ import 'package:app_croissant_rouge/views/screens/map_page.dart';
 import 'package:app_croissant_rouge/views/screens/testNotification.dart';
 import 'package:app_croissant_rouge/views/screens/test_map.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:location/location.dart';
 import 'package:provider/provider.dart';
 
@@ -37,9 +39,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Accident> ll = new List();
 
-    return MaterialApp(
+    return GetMaterialApp(
+      translations: LocalizationService(),
+      locale: Locale('fr', 'FR'),
+      fallbackLocale: Locale('fr', 'FR'),
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: '',
       initialRoute: '/',
       onGenerateRoute: RouteGenerator.generateRoute,
       theme: ThemeData(
@@ -47,8 +52,8 @@ class MyApp extends StatelessWidget {
       ),
       //home: SignUp(),
       //home: MapePage()
-      //home: PageAlerte(),
-      home: TestNotification(),
+      home: PageAlerte(),
+      //home: TestNotification(),
     );
   }
 }

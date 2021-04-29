@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:lite_rolling_switch/lite_rolling_switch.dart';
 // The package used to get the location
 import 'package:geolocator/geolocator.dart';
+import 'package:get/get.dart';
 
 /// this function  Determine the current position of the device.
 ///
@@ -63,7 +64,7 @@ class Profile extends StatelessWidget {
           backgroundColor: Colors.redAccent[700],
           // Here we take the value from the MyHomePage object that was created by
           // the App.build method, and use it to set our appbar title.
-          title: Text("Profil"),
+          title: Text("profil".tr),
         ),
         body: SingleChildScrollView(
           child: Stack(
@@ -107,8 +108,8 @@ class Profile extends StatelessWidget {
                                       contentPadding: EdgeInsets.all(10),
                                       title: LiteRollingSwitch(
                                         value: true,
-                                        textOn: 'disponible',
-                                        textOff: 'indisponible',
+                                        textOn: 'dispo'.tr,
+                                        textOff: 'indispo'.tr,
                                         colorOn: Colors.green[700],
                                         colorOff: Colors.red[700],
                                         iconOn: Icons.notifications_active,
@@ -168,28 +169,28 @@ class Profile extends StatelessWidget {
                       child: Column(
                         children: <Widget>[
                           ListTile(
-                            title: Text("À propos"),
+                            title: Text("apropos".tr),
                           ),
                           Divider(),
                           ListTile(
-                            title: Text("Numéro"),
+                            title: Text("num".tr),
                             subtitle: Text(this.secourite.phone.toString()),
                             leading: Icon(Icons.call),
                           ),
                           ListTile(
-                            title: Text("Email"),
+                            title: Text("email".tr),
                             subtitle: Text(this.secourite.email),
                             leading: Icon(Icons.email_outlined),
                           ),
                           ListTile(
-                            title: Text("Age"),
+                            title: Text("age".tr),
                             subtitle: (this.secourite.age != null)
                                 ? Text(this.secourite.age.toString())
                                 : Text("22"),
                             leading: Icon(Icons.format_align_center),
                           ),
                           ListTile(
-                            title: Text("Gouvernorat"),
+                            title: Text("gouvernorat".tr),
                             subtitle: Text(this.secourite.address.toString()),
                             leading: Icon(Icons.place),
                           ),

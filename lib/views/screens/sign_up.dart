@@ -3,6 +3,7 @@ import 'package:app_croissant_rouge/services/login_service.dart';
 import 'package:app_croissant_rouge/views/screens/sign_in.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:get/get.dart';
 
 // The Server to the backend
 const SERVER_IP = 'http://192.168.1.8:3000';
@@ -46,7 +47,7 @@ class _SignUpState extends State<SignUp> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          'Nom Complet :',
+          'nom'.tr,
           style: TextStyle(
             decoration: TextDecoration.underline,
             color: Colors.redAccent[700],
@@ -63,7 +64,7 @@ class _SignUpState extends State<SignUp> {
             controller: _nameController,
             validator: (String value) {
               if (value.isEmpty) {
-                return 'Champ Obligatoire !';
+                return 'obligatoire'.tr;
               }
               return null;
             },
@@ -82,7 +83,7 @@ class _SignUpState extends State<SignUp> {
                 Icons.person,
                 color: Colors.redAccent[700],
               ),
-              hintText: 'Saisir votre nom',
+              hintText: 'nomHint'.tr,
               hintStyle: TextStyle(
                 color: Colors.grey[700],
               ),
@@ -98,7 +99,7 @@ class _SignUpState extends State<SignUp> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          'Email :',
+          'email'.tr + ' : ',
           style: TextStyle(
             decoration: TextDecoration.underline,
             color: Colors.redAccent[700],
@@ -113,11 +114,11 @@ class _SignUpState extends State<SignUp> {
             controller: _emailController,
             validator: (String value) {
               if (value.isEmpty) {
-                return 'Champ Obligatoire !';
+                return 'obligatoire'.tr;
               }
               if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
                   .hasMatch(value)) {
-                return 'Saisir un email valide';
+                return 'mailInvalide'.tr;
               }
               return null;
             },
@@ -137,7 +138,7 @@ class _SignUpState extends State<SignUp> {
                 Icons.email,
                 color: Colors.redAccent[700],
               ),
-              hintText: 'Saisir votre email',
+              hintText: 'mailHint'.tr,
               hintStyle: TextStyle(
                 color: Colors.grey[700],
               ),
@@ -153,7 +154,7 @@ class _SignUpState extends State<SignUp> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          'N° CIN :',
+          'cin'.tr,
           style: TextStyle(
             decoration: TextDecoration.underline,
             color: Colors.redAccent[700],
@@ -170,10 +171,10 @@ class _SignUpState extends State<SignUp> {
             controller: _cinController,
             validator: (String value) {
               if (value.isEmpty) {
-                return 'Champ Obligatoire !';
+                return 'obligatoire'.tr;
               }
               if (!RegExp("^[0-9]*").hasMatch(value)) {
-                return 'Saisir un numero valide';
+                return 'numInvalide'.tr;
               }
               return null;
             },
@@ -193,7 +194,7 @@ class _SignUpState extends State<SignUp> {
                 Icons.badge,
                 color: Colors.redAccent[700],
               ),
-              hintText: 'Saisir votre numero de CIN',
+              hintText: 'cinHint'.tr,
               hintStyle: TextStyle(
                 color: Colors.grey[700],
               ),
@@ -209,7 +210,7 @@ class _SignUpState extends State<SignUp> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          'Telephone :',
+          'tel'.tr,
           style: TextStyle(
             decoration: TextDecoration.underline,
             color: Colors.redAccent[700],
@@ -226,10 +227,10 @@ class _SignUpState extends State<SignUp> {
             controller: _phoneController,
             validator: (String value) {
               if (value.isEmpty) {
-                return 'Champ Obligatoire !';
+                return 'obligatoire'.tr;
               }
               if (!RegExp("^[0-9]*").hasMatch(value)) {
-                return 'Saisir un numero valide';
+                return 'numInvalide'.tr;
               }
               return null;
             },
@@ -249,7 +250,7 @@ class _SignUpState extends State<SignUp> {
                 Icons.phone,
                 color: Colors.redAccent[700],
               ),
-              hintText: 'Saisir votre numero de telephone',
+              hintText: 'telHint'.tr,
               hintStyle: TextStyle(
                 color: Colors.grey[700],
               ),
@@ -265,7 +266,7 @@ class _SignUpState extends State<SignUp> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          'Mot de passe :',
+          'mdp'.tr,
           style: TextStyle(
             decoration: TextDecoration.underline,
             color: Colors.redAccent[700],
@@ -281,7 +282,7 @@ class _SignUpState extends State<SignUp> {
           child: TextFormField(
             controller: _pass,
             validator: (val) {
-              if (val.isEmpty) return 'Champ Obligatoire !';
+              if (val.isEmpty) return 'obligatoire'.tr;
               return null;
             },
             obscureText: true,
@@ -298,7 +299,7 @@ class _SignUpState extends State<SignUp> {
                 Icons.lock,
                 color: Colors.redAccent[700],
               ),
-              hintText: 'Saisir votre mot de passe',
+              hintText: 'mdpHint'.tr,
               hintStyle: TextStyle(
                 color: Colors.grey[700],
               ),
@@ -312,9 +313,8 @@ class _SignUpState extends State<SignUp> {
           child: TextFormField(
             controller: _confirmPass,
             validator: (val) {
-              if (val.isEmpty) return 'Champ Obligatoire !';
-              if (val != _pass.text)
-                return 'Les mots de passe ne sont pas identiques';
+              if (val.isEmpty) return 'obligatoire'.tr;
+              if (val != _pass.text) return 'mdpNonIdentiques'.tr;
               return null;
             },
             obscureText: true,
@@ -328,7 +328,7 @@ class _SignUpState extends State<SignUp> {
               ),
               prefixIcon: Icon(Icons.lock),
               contentPadding: EdgeInsets.only(top: 14.0),
-              hintText: 'Confirmer votre mot de passe',
+              hintText: 'mdpHint2'.tr,
               hintStyle: TextStyle(
                 color: Colors.grey[700],
               ),
@@ -344,7 +344,7 @@ class _SignUpState extends State<SignUp> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          'Adresse :',
+          'adresse'.tr + ' : ',
           style: TextStyle(
             decoration: TextDecoration.underline,
             color: Colors.redAccent[700],
@@ -361,7 +361,7 @@ class _SignUpState extends State<SignUp> {
             controller: _adressController,
             validator: (String value) {
               if (value.isEmpty) {
-                return 'Champ Obligatoire !';
+                return 'obligatoire'.tr;
               }
               return null;
             },
@@ -380,7 +380,7 @@ class _SignUpState extends State<SignUp> {
                 Icons.add_location_alt_rounded,
                 color: Colors.redAccent[700],
               ),
-              hintText: 'Saisir votre adresse',
+              hintText: 'adresseHint'.tr,
               hintStyle: TextStyle(color: Colors.grey[700]),
             ),
           ),
@@ -428,7 +428,7 @@ class _SignUpState extends State<SignUp> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        'S\'inscrire',
+                        'sinscrire'.tr,
                         style: TextStyle(
                             color: Colors.redAccent[700],
                             fontFamily: 'OpenSans',
@@ -477,7 +477,7 @@ class _SignUpState extends State<SignUp> {
                           activeColor: Colors.black,
                           controlAffinity: ListTileControlAffinity.leading,
                           title: Text(
-                            'Je suis un secouriste',
+                            'jeSuisSecouriste'.tr,
                             style: TextStyle(
                                 color: Colors.redAccent[700],
                                 decoration: TextDecoration.underline),
@@ -506,16 +506,16 @@ class _SignUpState extends State<SignUp> {
 
                               if (name.length < 4)
                                 displayDialog(
-                                    context, "erreur", "nom invalide");
+                                    context, "erreur".tr, "errNom".tr);
                               else if (password.length < 4)
                                 displayDialog(
-                                    context, "erreur", "mot de passe invalide");
+                                    context, "erreur".tr, "errMdp".tr);
                               else {
                                 var res = await LoginServiceImp().attemptSignUp(
                                     email, password, name, cin, phone, address);
                                 if (res == 200) {
-                                  displayDialog(context, "Succes",
-                                      "Le secouriste est crée");
+                                  displayDialog(context, "succes".tr,
+                                      "secouristeCree".tr);
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
@@ -523,12 +523,12 @@ class _SignUpState extends State<SignUp> {
                                 } else if (res == 400)
                                   displayDialog(
                                       context,
-                                      "Le nom d'utilisateur existe deja",
-                                      "connectez vous si vous avez déja un compte.");
+                                      "nomExiste".tr,
+                                      "nomExiste2".tr);
                                 else {
                                   print(res);
                                   displayDialog(
-                                      context, "Erreur", "Erreur inconnu.");
+                                      context, "erreur".tr, "errInconnue".tr);
                                 }
                               }
                             },
@@ -537,7 +537,7 @@ class _SignUpState extends State<SignUp> {
                                 borderRadius: BorderRadius.circular(30.0)),
                             color: Colors.redAccent[700],
                             child: Text(
-                              'S\'inscrire',
+                              'sinscrire'.tr,
                               style: TextStyle(
                                 color: Colors.white,
                                 letterSpacing: 1.5,
@@ -558,13 +558,13 @@ class _SignUpState extends State<SignUp> {
                         child: RichText(
                           text: TextSpan(children: [
                             TextSpan(
-                                text: "Vous avez déjà un compte? ",
+                                text: "vousAvez".tr,
                                 style: TextStyle(
                                     color: Colors.redAccent[700],
                                     fontSize: 17.0,
                                     fontWeight: FontWeight.w400)),
                             TextSpan(
-                                text: "Se connecter",
+                                text: "seConnecter".tr,
                                 style: TextStyle(
                                     decoration: TextDecoration.underline,
                                     color: Colors.redAccent[700],

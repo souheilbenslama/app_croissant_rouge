@@ -4,6 +4,7 @@ import 'package:app_croissant_rouge/accidentProvider.dart';
 import 'package:app_croissant_rouge/views/screens/Hemorragie.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:get/get.dart';
 
 class Protection extends StatefulWidget {
   @override
@@ -22,7 +23,7 @@ class _ProtectionState extends State<Protection> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Center(child: Text('Protection')),
+          title: Center(child: Text('protection'.tr)),
           backgroundColor: Colors.redAccent[700],
         ),
         body: ListView(
@@ -75,7 +76,7 @@ class _ProtectionState extends State<Protection> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(16.0))),
                     onPressed: null,
-                    child: Text("Previous"),
+                    child: Text("previousButton".tr),
                   ),
                   RaisedButton(
                     color: Color.fromRGBO(226, 56, 50, 50),
@@ -93,7 +94,7 @@ class _ProtectionState extends State<Protection> {
                         MaterialPageRoute(builder: (context) => Hemorragie()),
                       );
                     },
-                    child: Text("Next"),
+                    child: Text("nextButton".tr),
                   ),
                 ],
               ),

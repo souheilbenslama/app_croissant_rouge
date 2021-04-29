@@ -1,4 +1,5 @@
 import 'package:app_croissant_rouge/accidentProvider.dart';
+import 'package:app_croissant_rouge/lang/localization_service.dart';
 import 'package:app_croissant_rouge/models/accident.dart';
 import 'package:app_croissant_rouge/services/accident_service.dart';
 import 'package:app_croissant_rouge/services/user_service.dart';
@@ -12,6 +13,7 @@ import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
 import 'package:device_info/device_info.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
+import 'package:get/get.dart';
 
 // The Server to the backend
 const SERVER_IP = 'http://192.168.43.68:3000';
@@ -23,7 +25,12 @@ Future<String> attemptLogInUser(String userId) async {
   return null;
 }
 
-class PageAlerte extends StatelessWidget {
+class PageAlerte extends StatefulWidget {
+  @override
+  _PageAlerteState createState() => _PageAlerteState();
+}
+
+class _PageAlerteState extends State<PageAlerte> {
   // To get Device Details
   static Future<List<String>> getDeviceDetails() async {
     String deviceName;
@@ -49,16 +56,36 @@ class PageAlerte extends StatelessWidget {
       itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
         PopupMenuItem(
           child: FlatButton(
-            onPressed: null,
+            onPressed: () {
+              setState(() {
+                LocalizationService().changeLocale('Francais');
+              });
+            },
             child: Text(
-              "Langue",
+              "Français",
               style: TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
               ),
             ),
           ),
-        )
+        ),
+        PopupMenuItem(
+          child: FlatButton(
+            onPressed: () {
+              setState(() {
+                LocalizationService().changeLocale('Arabe');
+              });
+            },
+            child: Text(
+              "Arabe",
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ),
       ],
     );
   }
@@ -185,7 +212,7 @@ class PageAlerte extends StatelessWidget {
                   constraints: BoxConstraints(maxWidth: 250.0, minHeight: 50.0),
                   alignment: Alignment.center,
                   child: Text(
-                    "Alerter",
+                    "alerter".tr,
                     textAlign: TextAlign.center,
                     style: TextStyle(color: Colors.white, fontSize: 50),
                   ),
@@ -204,7 +231,7 @@ class PageAlerte extends StatelessWidget {
                 showDialog(
                   context: context,
                   builder: (BuildContext context) {
-                    return CustomizedDialog('Contacter nous sur 25789369');
+                    return CustomizedDialog('contacterSur'.tr);
                   },
                 );
               },
@@ -223,7 +250,7 @@ class PageAlerte extends StatelessWidget {
                   constraints: BoxConstraints(maxWidth: 250.0, minHeight: 50.0),
                   alignment: Alignment.center,
                   child: Text(
-                    "Contacter nous",
+                    "contacter".tr,
                     textAlign: TextAlign.center,
                     style: TextStyle(color: Colors.white, fontSize: 15),
                   ),
@@ -243,7 +270,7 @@ class PageAlerte extends StatelessWidget {
                   MaterialPageRoute(
                     builder: (_) => Scaffold(
                       appBar: AppBar(
-                        title: const Text('Documentation'),
+                        title: Text("documentation".tr),
                         backgroundColor: Colors.redAccent[700],
                       ),
                       body: PDF().fromAsset('assets/file/dummy.pdf'),
@@ -266,7 +293,7 @@ class PageAlerte extends StatelessWidget {
                   constraints: BoxConstraints(maxWidth: 250.0, minHeight: 50.0),
                   alignment: Alignment.center,
                   child: Text(
-                    "Documentation",
+                    "documentation".tr,
                     textAlign: TextAlign.center,
                     style: TextStyle(color: Colors.white, fontSize: 15),
                   ),
