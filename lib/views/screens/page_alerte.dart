@@ -175,15 +175,25 @@ class _PageAlerteState extends State<PageAlerte> {
                                   MaterialPageRoute(
                                     builder: (context) => Profile(
                                         Secouriste.fromJson(
-                                            decodedjwt['Secouriste'])),
+                                            decodedjwt)),
                                   ),
                                 );
-                              } else if (decodedToken["isNormalUser"] &
+                              } else if (!decodedToken["isNormalUser"] &
                                   !decodedToken["isActivated"]) {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => ActivateAccount(),
+                                  ),
+                                );
+                              } else if (decodedToken["isNormalUser"] 
+                                  ) {
+                               Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => Profile(
+                                        Secouriste.fromJson(
+                                            decodedjwt)),
                                   ),
                                 );
                               }
