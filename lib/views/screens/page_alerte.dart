@@ -131,7 +131,7 @@ class PageAlerte extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 60.0, left: 60.0, bottom: 40.0),
             child: Image.asset(
-              'assets/logo.jpg',
+              'assets/profil.png',
               width: 150,
               height: 150,
             ),

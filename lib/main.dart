@@ -1,5 +1,5 @@
 import 'dart:ffi';
-
+import 'package:app_croissant_rouge/views/screens/Instruction.dart';
 import 'package:app_croissant_rouge/models/accident.dart';
 import 'package:app_croissant_rouge/accidentProvider.dart';
 import 'package:app_croissant_rouge/models/route_generator.dart';
@@ -46,7 +46,8 @@ class MyApp extends StatelessWidget {
       ),
       //home: SignUp(),
       //home: MapePage()
-      home: PageAlerte(),
+      //home: PageAlerte(),
+      home: InstructionList(),
     );
   }
 }

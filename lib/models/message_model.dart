@@ -2,12 +2,9 @@ import 'package:app_croissant_rouge/models/user_model.dart';
 
 class Message {
   final User sender;
-  final String time;
   final String text;
-  final bool isLiked;
-  final bool unread;
 
-  Message({this.sender, this.time, this.text, this.isLiked, this.unread});
+  Message({this.sender, this.text});
 }
 
 final User currentUser =
@@ -27,42 +24,11 @@ final User iruka =
 List<User> favorites = [yui, haruka, suya, hanabi, neji, iruka];
 
 // Example chats on home screen
-List<Message> chats = [
-  Message(
-      sender: yui,
-      time: '5:30 PM',
-      text: "Halo kaka lagi apa?",
-      isLiked: true,
-      unread: false),
-  Message(
-      sender: suya,
-      time: '4:30 PM',
-      text: "Kak jadi latihan engga?",
-      isLiked: false,
-      unread: false),
-  Message(
-      sender: haruka,
-      time: '5:60 PM',
-      text: "Nanti uang nya sama mamah",
-      isLiked: true,
-      unread: true),
-  Message(
-      sender: ryuu,
-      time: '7:30 PM',
-      text: "Hayuk mabar kak",
-      isLiked: false,
-      unread: true),
-  Message(
-      sender: iruka,
-      time: '7:30 PM',
-      text: "Perhatian bagi seluruh warga agar ikut kerja bakti",
-      isLiked: false,
-      unread: true)
-];
+List<Message> chats = [];
 
 // Example chats in chat screen
 List<Message> messages = [
-  Message(
+  /*Message(
       sender: currentUser,
       time: '5:36 PM',
       text: "Aamiin",
@@ -97,5 +63,5 @@ List<Message> messages = [
       time: '7:30 PM',
       text: "Mudah-mudahan mamah cepet pulang :')",
       isLiked: false,
-      unread: true)
+      unread: true)*/
 ];

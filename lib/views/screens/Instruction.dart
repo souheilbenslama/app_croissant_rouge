@@ -2,6 +2,8 @@ import 'package:app_croissant_rouge/views/screens/chat_screen.dart';
 import 'package:flutter/material.dart';
 import './MyDetailPage.dart';
 import 'package:app_croissant_rouge/models/Instruction.dart';
+import 'package:app_croissant_rouge/views/screens/page_alerte.dart';
+import 'package:app_croissant_rouge/views/widgets/rating.dart';
 
 class InstructionList extends StatefulWidget {
   @override
@@ -9,6 +11,93 @@ class InstructionList extends StatefulWidget {
 }
 
 class _InstructionListState extends State<InstructionList> {
+  //rating Dialog
+  int _rating;
+  createRatingDialog(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (buildContext) {
+          return Container(
+            decoration: BoxDecoration(
+                shape: BoxShape.rectangle,
+                color: Colors.transparent,
+                borderRadius: BorderRadius.all(Radius.circular(12))),
+            padding: EdgeInsets.all(40.0),
+            margin: EdgeInsets.all(20.0),
+            height: 200,
+            width: 120,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                //logo croissant rouge
+                Container(
+                  child: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Image.asset(
+                      'assets/profil.png',
+                      height: 120,
+                      width: 100,
+                    ),
+                  ),
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                      color: Colors.redAccent[700],
+                      shape: BoxShape.rectangle,
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(12),
+                          topRight: Radius.circular(12))),
+                ),
+                Container(
+                    decoration: BoxDecoration(
+                        shape: BoxShape.rectangle,
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                            bottomRight: Radius.circular(12),
+                            bottomLeft: Radius.circular(12))),
+                    child: Column(children: [
+                      SizedBox(
+                        height: 24,
+                      ),
+                      Text(
+                        'NOTE DE SECOURISTE',
+                        style: TextStyle(fontSize: 18, color: Colors.black87),
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Rating((rating) {
+                        setState(() {
+                          _rating = rating;
+                        });
+                      }, 5),
+                      SizedBox(
+                        width: 10,
+                        height: 10,
+                      ),
+                      RaisedButton(
+                        shape: new RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(30.0),
+                        ),
+                        onPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => PageAlerte()),
+                        ),
+                        child: Text('Soumettre'),
+                        color: Colors.white,
+                        textColor: Colors.redAccent[100],
+                      ),
+                      SizedBox(
+                        width: 10,
+                        height: 10,
+                      ),
+                    ]))
+              ],
+            ),
+          );
+        });
+  }
+
   List<Widget> _instructionTiles = [];
   final GlobalKey _listKey = GlobalKey();
 
@@ -79,71 +168,81 @@ class _InstructionListState extends State<InstructionList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //messaginButton
       floatingActionButton: FloatingActionButton(
-        onPressed: () => {
-          showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return ChatScreen();
-              })
-        },
-        tooltip: 'Increment',
-        backgroundColor: Colors.red,
-        child: Icon(Icons.messenger),
-      ),
+          onPressed: () => {
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return ChatScreen();
+                    })
+              },
+          tooltip: 'Increment',
+          backgroundColor: Colors.redAccent[700],
+          child: Icon(Icons.messenger)),
+      //appBar
       appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: Center(child: Text('Instructions')),
+        title: Center(
+            child: Text(
+          'Instructions',
+          textAlign: TextAlign.center,
+        )),
         backgroundColor: Colors.redAccent[700],
+        automaticallyImplyLeading: true,
+        leading: IconButton(
+          icon: Icon(Icons.home_outlined, size: 30),
+          onPressed: () => Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => PageAlerte()),
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         physics: ScrollPhysics(),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            ListView.builder(
-                physics: NeverScrollableScrollPhysics(),
-                key: _listKey,
-                shrinkWrap: true,
-                itemCount: _instructionTiles.length,
-                itemBuilder: (context, index) {
-                  return _instructionTiles[index];
-                }), //CONTACTER NOUS
-            Container(
-              padding: EdgeInsets.only(top: 60),
-              height: 120.0,
-              width: 150.0,
-              //margin: EdgeInsets.all(20),
-              child: RaisedButton(
-                onPressed: () {
-                  Navigator.of(context).pushNamed('/');
-                },
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(100.0)),
-                padding: EdgeInsets.all(0.0),
-                child: Ink(
-                  decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [Color(0xFFe84f4c), Color(0xFFe2231e)],
-                        begin: Alignment.centerRight,
-                        end: Alignment.centerLeft,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  key: _listKey,
+                  shrinkWrap: true,
+                  itemCount: _instructionTiles.length,
+                  itemBuilder: (context, index) {
+                    return _instructionTiles[index];
+                  }), //CONTACTER NOUS
+              //EndAlertButton
+              Container(
+                padding: EdgeInsets.only(top: 60),
+                height: 120.0,
+                width: 150.0,
+                //margin: EdgeInsets.all(20),
+                child: RaisedButton(
+                  onPressed: () => createRatingDialog(context),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(100.0)),
+                  padding: EdgeInsets.all(0.0),
+                  child: Ink(
+                    decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [Color(0xFFe84f4c), Color(0xF28482)],
+                          begin: Alignment.centerRight,
+                          end: Alignment.centerLeft,
+                        ),
+                        borderRadius: BorderRadius.circular(30.0)),
+                    child: Container(
+                      constraints:
+                          BoxConstraints(maxWidth: 250.0, minHeight: 50.0),
+                      alignment: Alignment.center,
+                      child: Text(
+                        "Terminer ",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: Colors.white, fontSize: 20),
                       ),
-                      borderRadius: BorderRadius.circular(30.0)),
-                  child: Container(
-                    constraints:
-                        BoxConstraints(maxWidth: 250.0, minHeight: 50.0),
-                    alignment: Alignment.center,
-                    child: Text(
-                      "Terminer ",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.white, fontSize: 25),
                     ),
                   ),
                 ),
               ),
-            ),
-          ],
-        ),
+            ]),
       ),
     );
   }

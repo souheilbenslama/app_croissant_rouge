@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:app_croissant_rouge/models/user_model.dart';
 import 'package:app_croissant_rouge/models/message_model.dart';
+import 'package:intl/intl.dart';
 
 class ChatScreen extends StatefulWidget {
   final User user;
@@ -10,6 +11,35 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
+  String sentMessage;
+  final _textController = TextEditingController();
+  final _scrollController = ScrollController();
+  //socket
+  /*void initState() {
+    //Creating the socket
+    socketIO = SocketIOManager().createSocketIO(
+      'http://192.168.43.68:3000',
+      '/',
+    );
+    //Call init before doing anything with socket
+    socketIO.init();
+    //Subscribe to an event to listen to
+    socketIO.subscribe('receive_message', (jsonData) {
+      //Convert the JSON data received into a Map
+      Map<String, dynamic> data = json.decode(jsonData);
+      this.setState(() => messages.add(data['message']));
+      _scrollController.animateTo(
+        _scrollController.position.maxScrollExtent,
+        duration: Duration(milliseconds: 600),
+        curve: Curves.ease,
+      );
+    });
+    //Connect to the socket
+    socketIO.connect();
+    super.initState();
+  }*/
+
+  //Message
   _buildMessage(Message message, bool isMe) {
     final Container msg = Container(
       width: MediaQuery.of(context).size.width * 0.3,
@@ -18,13 +48,15 @@ class _ChatScreenState extends State<ChatScreen> {
           : EdgeInsets.only(top: 8.0, bottom: 8.0),
       padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
       decoration: isMe
-          ? BoxDecoration(
+          ? //the UI if you are the sender
+          BoxDecoration(
               color: Colors.red.shade400,
               borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(15.0),
                   bottomLeft: Radius.circular(15.0),
                   topRight: Radius.circular(15.0)))
-          : BoxDecoration(
+          : //the UI if you are the receiver
+          BoxDecoration(
               color: Color(0xFFe4f1fe),
               borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(15.0),
@@ -33,13 +65,6 @@ class _ChatScreenState extends State<ChatScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(
-            message.time,
-            style: TextStyle(
-                color: Colors.blueGrey,
-                fontSize: 13.0,
-                fontWeight: FontWeight.bold),
-          ),
           SizedBox(
             height: 8.0,
           ),
@@ -57,7 +82,7 @@ class _ChatScreenState extends State<ChatScreen> {
     return msg;
   }
 
-  _buildMessageComposer() {
+  _buildMessageComposer(Function f) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 8.0),
       height: 70.0,
@@ -66,16 +91,19 @@ class _ChatScreenState extends State<ChatScreen> {
         children: <Widget>[
           Expanded(
             child: TextField(
+              controller: _textController,
               textCapitalization: TextCapitalization.sentences,
-              onChanged: (value) {},
-              decoration: InputDecoration(hintText: 'Send a message..'),
+              onChanged: (value) {
+                sentMessage = value;
+              },
+              decoration: InputDecoration(hintText: 'message..'),
             ),
           ),
           IconButton(
             icon: Icon(Icons.send),
             iconSize: 25.0,
             color: Colors.red.shade400,
-            onPressed: () {},
+            onPressed: f,
           ),
         ],
       ),
@@ -122,7 +150,15 @@ class _ChatScreenState extends State<ChatScreen> {
                         }),
                   )),
             ),
-            _buildMessageComposer(),
+            _buildMessageComposer(() {
+              setState(() {
+                messages = [
+                  ...messages,
+                  Message(sender: yui, text: sentMessage)
+                ];
+                _textController.clear();
+              });
+            })
           ],
         ),
       ),
