@@ -43,6 +43,7 @@ class _ChatScreenState extends State<ChatScreen> {
   _buildMessage(Message message, bool isMe) {
     final Container msg = Container(
       width: MediaQuery.of(context).size.width * 0.3,
+      height: MediaQuery.of(context).size.height * 0.08,
       margin: isMe
           ? EdgeInsets.only(top: 7.0, bottom: 8.0, left: 80.0)
           : EdgeInsets.only(top: 8.0, bottom: 8.0),
@@ -54,7 +55,8 @@ class _ChatScreenState extends State<ChatScreen> {
               borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(15.0),
                   bottomLeft: Radius.circular(15.0),
-                  topRight: Radius.circular(15.0)))
+                  topRight: Radius.circular(15.0)),
+            )
           : //the UI if you are the receiver
           BoxDecoration(
               color: Color(0xFFe4f1fe),
@@ -153,8 +155,8 @@ class _ChatScreenState extends State<ChatScreen> {
             _buildMessageComposer(() {
               setState(() {
                 messages = [
+                  Message(sender: yui, text: sentMessage),
                   ...messages,
-                  Message(sender: yui, text: sentMessage)
                 ];
                 _textController.clear();
               });

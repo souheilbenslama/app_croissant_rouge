@@ -35,7 +35,7 @@ class _InstructionListState extends State<InstructionList> {
                     padding: const EdgeInsets.all(12.0),
                     child: Image.asset(
                       'assets/profil.png',
-                      height: 120,
+                      height: 80,
                       width: 100,
                     ),
                   ),
@@ -224,7 +224,7 @@ class _InstructionListState extends State<InstructionList> {
                   child: Ink(
                     decoration: BoxDecoration(
                         gradient: LinearGradient(
-                          colors: [Color(0xFFe84f4c), Color(0xF28482)],
+                          colors: [Color(0xFFe84f4c), Color(0xFFe2231e)],
                           begin: Alignment.centerRight,
                           end: Alignment.centerLeft,
                         ),
