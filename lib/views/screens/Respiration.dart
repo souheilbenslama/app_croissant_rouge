@@ -12,6 +12,7 @@ import 'package:location/location.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:device_info/device_info.dart';
+import 'package:get/get.dart';
 
 class Respiration extends StatefulWidget {
   @override
@@ -42,7 +43,7 @@ class _RespirationState extends State<Respiration> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Center(child: Text('Respiration')),
+          title: Center(child: Text('respiration'.tr)),
           backgroundColor: Colors.redAccent[700],
         ),
         body: ListView(
@@ -100,7 +101,7 @@ class _RespirationState extends State<Respiration> {
                         MaterialPageRoute(builder: (context) => Conscience()),
                       );
                     },
-                    child: Text("Previous"),
+                    child: Text("previousButton".tr),
                   ),
                   RaisedButton(
                     color: Color.fromRGBO(226, 56, 50, 50),
@@ -148,7 +149,7 @@ class _RespirationState extends State<Respiration> {
                       print('LONGITUDE : ' + doc.longitude.toString());
                       print('CHOIX : ');
                       doc.choixRespiration.forEach((element) {
-                      print(element);
+                        print(element);
                       });
 
                       var jsondoc = doc.getInfo();
@@ -174,7 +175,7 @@ class _RespirationState extends State<Respiration> {
                           MaterialPageRoute(
                               builder: (context) => InstructionList()));
                     },
-                    child: Text("Next"),
+                    child: Text("nextButton".tr),
                   ),
                 ],
               ),

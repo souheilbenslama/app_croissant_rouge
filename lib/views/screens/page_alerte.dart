@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:app_croissant_rouge/accidentProvider.dart';
+import 'package:app_croissant_rouge/lang/localization_service.dart';
 import 'package:app_croissant_rouge/models/accident.dart';
 import 'package:app_croissant_rouge/models/secouriste.dart';
 import 'package:app_croissant_rouge/services/accident_service.dart';
@@ -20,6 +21,7 @@ import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:lite_rolling_switch/lite_rolling_switch.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:get/get.dart';
 
 // The Server to the backend
 const SERVER_IP = 'http://192.168.43.68:3000';
@@ -31,7 +33,12 @@ Future<String> attemptLogInUser(String userId) async {
   return null;
 }
 
-class PageAlerte extends StatelessWidget {
+class PageAlerte extends StatefulWidget {
+  @override
+  _PageAlerteState createState() => _PageAlerteState();
+}
+
+class _PageAlerteState extends State<PageAlerte> {
   Map decodedToken;
   Object token;
   String jwt;
@@ -60,16 +67,36 @@ class PageAlerte extends StatelessWidget {
       itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
         PopupMenuItem(
           child: FlatButton(
-            onPressed: null,
+            onPressed: () {
+              setState(() {
+                LocalizationService().changeLocale('Francais');
+              });
+            },
             child: Text(
-              "Langue",
+              "Français",
               style: TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
               ),
             ),
           ),
-        )
+        ),
+        PopupMenuItem(
+          child: FlatButton(
+            onPressed: () {
+              setState(() {
+                LocalizationService().changeLocale('Arabe');
+              });
+            },
+            child: Text(
+              "Arabe",
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ),
       ],
     );
   }
@@ -335,7 +362,7 @@ class PageAlerte extends StatelessWidget {
                                         maxWidth: 250.0, minHeight: 50.0),
                                     alignment: Alignment.center,
                                     child: Text(
-                                      "Alerter",
+                                      "alerter".tr,
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                           color: Colors.white, fontSize: 50),
@@ -373,7 +400,7 @@ class PageAlerte extends StatelessWidget {
                               context: context,
                               builder: (BuildContext context) {
                                 return CustomizedDialog(
-                                    'Contacter nous sur 25789369');
+                                    'Contacter nous sur 25789369'.tr);
                               },
                             );
                           },
@@ -396,7 +423,7 @@ class PageAlerte extends StatelessWidget {
                                   maxWidth: 250.0, minHeight: 50.0),
                               alignment: Alignment.center,
                               child: Text(
-                                "Contacter nous",
+                                "contacter".tr,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 15),
@@ -445,7 +472,7 @@ class PageAlerte extends StatelessWidget {
                                   maxWidth: 250.0, minHeight: 50.0),
                               alignment: Alignment.center,
                               child: Text(
-                                "Documentation",
+                                "documentation".tr,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 15),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:app_croissant_rouge/models/user_model.dart';
 import 'package:app_croissant_rouge/models/message_model.dart';
+import 'package:get/get.dart';
 
 class ChatScreen extends StatefulWidget {
   final User user;
@@ -68,7 +69,7 @@ class _ChatScreenState extends State<ChatScreen> {
             child: TextField(
               textCapitalization: TextCapitalization.sentences,
               onChanged: (value) {},
-              decoration: InputDecoration(hintText: 'Send a message..'),
+              decoration: InputDecoration(hintText: 'chatHintText'.tr),
             ),
           ),
           IconButton(

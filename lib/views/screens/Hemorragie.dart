@@ -6,6 +6,7 @@ import 'package:app_croissant_rouge/views/screens/Conscience.dart';
 import 'package:app_croissant_rouge/views/screens/protection.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:get/get.dart';
 
 class Hemorragie extends StatefulWidget {
   @override
@@ -25,7 +26,7 @@ class _HemorragieState extends State<Hemorragie> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Center(child: Text('Hemorragie')),
+          title: Center(child: Text('hemorragie'.tr)),
           backgroundColor: Colors.redAccent[700],
         ),
         body: ListView(
@@ -83,7 +84,7 @@ class _HemorragieState extends State<Hemorragie> {
                         MaterialPageRoute(builder: (context) => Protection()),
                       );
                     },
-                    child: Text("Previous"),
+                    child: Text("previousButton".tr),
                   ),
                   RaisedButton(
                     color: Color.fromRGBO(226, 56, 50, 50),
@@ -101,7 +102,7 @@ class _HemorragieState extends State<Hemorragie> {
                         MaterialPageRoute(builder: (context) => Conscience()),
                       );
                     },
-                    child: Text("Next"),
+                    child: Text("nextButton".tr),
                   ),
                 ],
               ),

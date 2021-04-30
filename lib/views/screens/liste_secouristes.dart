@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ListeSecouristes extends StatefulWidget {
   final secouristes;
@@ -22,7 +23,7 @@ class _ListeSecouristesState extends State<ListeSecouristes> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.redAccent[700],
-        title: Text("Liste des Secouristes"),
+        title: Text("listeSec".tr),
       ),
       body: ListView.builder(
         itemCount: widget.secouristes.length,

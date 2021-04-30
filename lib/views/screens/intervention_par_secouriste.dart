@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:get/get.dart';
 
 class InterventionParSecouriste extends StatefulWidget {
   @override
@@ -13,7 +14,7 @@ class _InterventionParSecouristeState extends State<InterventionParSecouriste> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.redAccent[700],
-        title: Text("Liste des Interventions"),
+        title: Text("listeInter".tr),
       ),
       body: Container(
         child: ListView.builder(
@@ -26,7 +27,7 @@ class _InterventionParSecouristeState extends State<InterventionParSecouriste> {
                 title: Column(
                   children: [
                     Text(
-                      "Ariana",
+                      "ariana".tr,
                       style: TextStyle(
                         fontSize: 18.0,
                         color: Colors.grey[800],

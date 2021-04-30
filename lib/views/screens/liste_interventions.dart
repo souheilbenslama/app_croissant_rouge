@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'dart:async';
 import '../../models/interventions.dart';
 import '../../services/interventions.dart';
+import 'package:get/get.dart';
 
 class ListeInterventions extends StatefulWidget {
   @override
@@ -47,14 +48,14 @@ class _ListeInterventionsState extends State<ListeInterventions> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.redAccent[700],
-        title: Text("Liste des Interventions"),
+        title: Text("listeInter".tr),
       ),
       body: Column(
         children: [
           TextField(
             decoration: InputDecoration(
                 contentPadding: EdgeInsets.all(15.0),
-                hintText: 'Ecrire La Région'),
+                hintText: 'hintRegion'.tr),
             onChanged: (string) {
               _debouncer.run(() {
                 setState(() {
@@ -85,7 +86,7 @@ class _ListeInterventionsState extends State<ListeInterventions> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          "Intervention de " +
+                          "interDe".tr +
                               filteredInterventions[index].name,
                           style: TextStyle(
                             fontSize: 20,
