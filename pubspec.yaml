@@ -42,6 +42,7 @@ dependencies:
   provider:
   flutter_local_notifications: ^1.4.4+4
   rxdart:
+  jwt_decoder: ^1.0.4
   
   device_info: ^0.4.0+4
   
