@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lite_rolling_switch/lite_rolling_switch.dart';
 
 class ListeSecouristes extends StatefulWidget {
   final secouristes;
@@ -35,15 +36,55 @@ class _ListeSecouristesState extends State<ListeSecouristes> {
             child: Card(
               color: Colors.white,
               elevation: 3,
-              child: ListTile(
-                title: Text(
-                  widget.secouristes[index] != null
-                      ? widget.secouristes[index]
-                      : "none",
-                  style: TextStyle(
-                    fontSize: 20,
+              child: Row(
+                children: [
+                  ListTile(
+                    title: Text(
+                      widget.secouristes[index] != null
+                          ? widget.secouristes[index]
+                          : "none",
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
+                    ),
                   ),
-                ),
+                  Column(
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.only(top: 20),
+                        child: LiteRollingSwitch(
+                          value: true,
+                          textOn: 'Activer',
+                          textOff: 'Desactiver',
+                          colorOn: Colors.green,
+                          colorOff: Colors.red[700],
+                          iconOn: Icons.done,
+                          iconOff: Icons.alarm_off,
+                          textSize: 13.0,
+                          onChanged: (bool state) {
+                            print('turned ${(state) ? 'on' : 'off'}');
+                          },
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 20),
+                        child: LiteRollingSwitch(
+                          value: true,
+                          textOn: 'Admin',
+                          textOff: 'Normal',
+                          colorOn: Colors.green,
+                          colorOff: Colors.red[700],
+                          iconOn: Icons.done,
+                          iconOff: Icons.alarm_off,
+                          textSize: 13.0,
+                          onChanged: (bool state) {
+                            print('turned ${(state) ? 'on' : 'off'}');
+                          },
+                        ),
+                      ),
+                    ],
+                  )
+                ],
               ),
             ),
           );

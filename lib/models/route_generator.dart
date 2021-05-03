@@ -26,8 +26,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => PublicMap());
       case '/options':
         return MaterialPageRoute(builder: (_) => Protection());
-      case '/listeSecouristes':
-        return MaterialPageRoute(builder: (_) => ListeSecouristes());
+      /*case '/listeSecouristes':
+        return MaterialPageRoute(builder: (_) => ListeSecouristes());*/
       case '/listeInterventions':
         return MaterialPageRoute(builder: (_) => ListeInterventions());
       case '/interventionParSecouriste':

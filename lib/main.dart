@@ -4,6 +4,7 @@ import 'package:app_croissant_rouge/lang/localization_service.dart';
 import 'package:app_croissant_rouge/models/accident.dart';
 import 'package:app_croissant_rouge/accidentProvider.dart';
 import 'package:app_croissant_rouge/models/route_generator.dart';
+import 'package:app_croissant_rouge/views/screens/admin_dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -37,8 +38,9 @@ class MyApp extends StatelessWidget {
       ),
       //home: SignUp(),
       //home: MapePage()
-      home: PageAlerte(),
+      //home: PageAlerte(),
       //home: TestNotification(),
+      home: AdminDashboard(),
     );
   }
 }
