@@ -31,4 +31,14 @@ class Secouriste {
         address: secourist['address'],
         age: secourist['age']);
   }
+
+  Map<dynamic, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "email": email,
+        "isFree": isFree,
+        "phone": phone,
+        "address": address,
+        "age": age,
+      };
 }

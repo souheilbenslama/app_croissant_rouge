@@ -1,5 +1,7 @@
 import 'package:app_croissant_rouge/models/accident.dart';
+import 'package:app_croissant_rouge/models/secouriste.dart';
 import 'package:app_croissant_rouge/services/accident.dart';
+import 'package:app_croissant_rouge/services/socket_service.dart';
 import 'package:app_croissant_rouge/views/screens/Protection.dart';
 import 'package:app_croissant_rouge/views/widgets/customized_dialog.dart';
 import 'package:app_croissant_rouge/views/widgets/notification_dialog.dart';
@@ -48,7 +50,10 @@ class PageAlerte extends StatelessWidget {
       itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
         PopupMenuItem(
           child: FlatButton(
-            onPressed: null,
+            onPressed: () => {
+              SocketService.connect()
+              //new Secouriste(id: "6043e2753e49f934a8c5bfab"))
+            },
             child: Text(
               "Langue",
               style: TextStyle(
@@ -145,6 +150,8 @@ class PageAlerte extends StatelessWidget {
             margin: EdgeInsets.only(left: 80.0),
             child: RaisedButton(
               onPressed: () async {
+                SocketService.alerter();
+                SocketService.disconnect();
                 var details = await getDeviceDetails();
                 var userId = details[2];
                 var res = await attemptLogInUser(userId);
