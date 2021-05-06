@@ -61,6 +61,23 @@ class Profile extends StatelessWidget {
       home: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(
+                Icons.logout,
+              ),
+              onPressed: () async {
+                SharedPreferences preferences =
+                    await SharedPreferences.getInstance();
+                await preferences.remove('token');
+                Navigator.of(context).push(
+                  new MaterialPageRoute(
+                    builder: (BuildContext context) => new SignIn(),
+                  ),
+                );
+              },
+            ),
+          ],
           backgroundColor: Colors.redAccent[700],
           // Here we take the value from the MyHomePage object that was created by
           // the App.build method, and use it to set our appbar title.

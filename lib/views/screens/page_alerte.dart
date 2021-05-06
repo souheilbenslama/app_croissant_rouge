@@ -161,6 +161,7 @@ class _PageAlerteState extends State<PageAlerte> {
                           children: [
                             isSecouriste()
                                 ? IconButton(
+                                    onPressed: null,
                                     // When the icon pressed it'll take as to the map page
                                     iconSize: 35,
                                     icon: Icon(

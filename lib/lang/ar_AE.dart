@@ -71,6 +71,6 @@ const Map<String, String> arAE = {
   "nomExiste2": "سجل الدخول اذا كان لديك حساب.",
   "errInconnue": "خطأ غير معروف.",
   "vousAvez": "هل لديك حساب؟",
-  "seConnecter": "تسجيل الدخول",
+  "seConnecter": " تسجيل الدخول",
   "croissantRouge": "الهلال الأحمر"
 };

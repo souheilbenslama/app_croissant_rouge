@@ -145,7 +145,7 @@ class SignIn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //appBar: ,
+      //appBar:
       body: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
         child: Stack(
@@ -229,12 +229,16 @@ class SignIn extends StatelessWidget {
                                 prefs.setString("jwt", jwt);
                                 print("string set to " + jwt);
 
-                                var ss = Secouriste.fromJson(jsonDecode(jwt));
+                                //var ss = Secouriste.fromJson(jsonDecode(jwt));
 
+                                /*Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Profile(ss)));*/
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => Profile(ss)));
+                                        builder: (context) => PageAlerte()));
                               } else {
                                 displayDialog(context, "erreur".tr,
                                     "compteIntrouvable".tr);
