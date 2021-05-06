@@ -145,7 +145,10 @@ class SignIn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //appBar: ,
+      appBar: AppBar(
+        backgroundColor: Colors.redAccent[700],
+        title: Text("Sign In".tr),
+      ),
       body: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
         child: Stack(
@@ -257,28 +260,34 @@ class SignIn extends StatelessWidget {
                           )),
                       //SIGNUP
                       GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => SignUp()),
-                            );
-                          },
-                          child: RichText(
-                              text: TextSpan(children: [
-                            TextSpan(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => SignUp()),
+                          );
+                        },
+                        child: RichText(
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
                                 text: "pasDeCompte".tr,
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 18.0,
-                                    fontWeight: FontWeight.w400)),
-                            TextSpan(
+                                    fontWeight: FontWeight.w400),
+                              ),
+                              TextSpan(
                                 text: "sinscrire".tr,
                                 style: TextStyle(
                                     decoration: TextDecoration.underline,
                                     color: Colors.white,
                                     fontSize: 18.0,
-                                    fontWeight: FontWeight.bold))
-                          ])))
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),

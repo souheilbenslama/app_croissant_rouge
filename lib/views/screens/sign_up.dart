@@ -392,6 +392,10 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.redAccent[700],
+        title: Text("Sign Up".tr),
+      ),
       body: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
         child: Stack(
@@ -522,9 +526,7 @@ class _SignUpState extends State<SignUp> {
                                           builder: (context) => SignIn()));
                                 } else if (res == 400)
                                   displayDialog(
-                                      context,
-                                      "nomExiste".tr,
-                                      "nomExiste2".tr);
+                                      context, "nomExiste".tr, "nomExiste2".tr);
                                 else {
                                   print(res);
                                   displayDialog(

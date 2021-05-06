@@ -1,10 +1,13 @@
 import 'package:app_croissant_rouge/models/secouriste.dart';
 import 'package:app_croissant_rouge/services/secouriste_service.dart';
+import 'package:app_croissant_rouge/views/screens/sign_in.dart';
+import 'package:app_croissant_rouge/views/screens/sign_up.dart';
 import 'package:flutter/material.dart';
 import 'package:lite_rolling_switch/lite_rolling_switch.dart';
 // The package used to get the location
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 /// this function  Determine the current position of the device.
 ///
@@ -58,6 +61,7 @@ class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
@@ -65,6 +69,23 @@ class Profile extends StatelessWidget {
           // Here we take the value from the MyHomePage object that was created by
           // the App.build method, and use it to set our appbar title.
           title: Text("profil".tr),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(
+                Icons.logout,
+              ),
+              onPressed: () async {
+                SharedPreferences preferences =
+                    await SharedPreferences.getInstance();
+                await preferences.remove('token');
+                Navigator.of(context).push(
+                  new MaterialPageRoute(
+                    builder: (BuildContext context) => new SignIn(),
+                  ),
+                );
+              },
+            ),
+          ],
         ),
         body: SingleChildScrollView(
           child: Stack(
@@ -103,28 +124,6 @@ class Profile extends StatelessWidget {
                                     Text(
                                       this.secourite.name,
                                       style: Theme.of(context).textTheme.title,
-                                    ),
-                                    ListTile(
-                                      contentPadding: EdgeInsets.all(10),
-                                      title: LiteRollingSwitch(
-                                        value: true,
-                                        textOn: 'dispo'.tr,
-                                        textOff: 'indispo'.tr,
-                                        colorOn: Colors.green[700],
-                                        colorOff: Colors.red[700],
-                                        iconOn: Icons.notifications_active,
-                                        iconOff: Icons.notifications_off,
-                                        textSize: 18.0,
-                                        onChanged: (bool position) async {
-                                          if (position == true) {
-                                            Position pos =
-                                                await _determinePosition();
-                                            var res = await updateLocation(
-                                                pos.longitude, pos.latitude);
-                                            print(res);
-                                          }
-                                        },
-                                      ),
                                     ),
                                   ],
                                 ),

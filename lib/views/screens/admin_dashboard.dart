@@ -1,7 +1,9 @@
+import 'package:app_croissant_rouge/models/secouriste.dart';
 import 'package:app_croissant_rouge/services/admin_service.dart';
 import 'package:app_croissant_rouge/views/screens/liste_interventions.dart';
 import 'package:app_croissant_rouge/views/screens/liste_secouristes.dart';
 import 'package:flutter/material.dart';
+import './Profile.dart';
 
 class AdminDashboard extends StatefulWidget {
   @override
@@ -40,14 +42,26 @@ class _AdminDashboardState extends State<AdminDashboard> {
                   children: <Widget>[
                     GestureDetector(
                       onTap: () async {
-                        final arraySecouristes =
+                        /*final arraySecouristes =
                             await AdminService.listSecourists();
                         var secouristes = [];
                         for (var i = 0; i < arraySecouristes.length; i++) {
                           print("it is " + arraySecouristes.length.toString());
 
                           secouristes.add(arraySecouristes[i]["name"]);
-                        }
+                        }*/
+                        var secouristes = [
+                          new Secouriste(
+                            name: "Amal",
+                            email: "amal@test.com",
+                            isFree: false,
+                          ),
+                          new Secouriste(
+                            name: "Amal",
+                            email: "amal@test.com",
+                            isFree: true,
+                          ),
+                        ];
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -141,8 +155,21 @@ class _AdminDashboardState extends State<AdminDashboard> {
                         ),
                       ),
                     ),
-                    /*GestureDetector(
-                      onTap: null,
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Profile(new Secouriste(
+                              name: 'Amal Missaoui',
+                              address: 'Kairouan',
+                              email: 'amal@amal.tn',
+                              age: 21,
+                              phone: '95682691',
+                            )),
+                          ),
+                        );
+                      },
                       child: SizedBox(
                         width: 180.0,
                         height: 180.0,
@@ -161,7 +188,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
                                   height: 10.0,
                                 ),
                                 Text(
-                                  "Liste des interventions par localité",
+                                  "Profile",
                                   style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold,
@@ -173,7 +200,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
                           ),
                         ),
                       ),
-                    ),*/
+                    ),
                   ],
                 ),
               ),
