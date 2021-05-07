@@ -61,6 +61,11 @@ class _AdminDashboardState extends State<AdminDashboard> {
                             email: "amal@test.com",
                             isFree: true,
                           ),
+                          new Secouriste(
+                            name: "test",
+                            email: "test@test.com",
+                            isFree: true,
+                          ),
                         ];
                         Navigator.push(
                           context,
@@ -147,52 +152,6 @@ class _AdminDashboardState extends State<AdminDashboard> {
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 20.0,
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Profile(new Secouriste(
-                              name: 'Amal Missaoui',
-                              address: 'Kairouan',
-                              email: 'amal@amal.tn',
-                              age: 21,
-                              phone: '95682691',
-                            )),
-                          ),
-                        );
-                      },
-                      child: SizedBox(
-                        width: 180.0,
-                        height: 180.0,
-                        child: Card(
-                          elevation: 8,
-                          color: Colors.white70,
-                          child: Padding(
-                            padding: EdgeInsets.all(20.0),
-                            child: Column(
-                              children: <Widget>[
-                                Image.asset(
-                                  'assets/location.png',
-                                  width: 64.0,
-                                ),
-                                SizedBox(
-                                  height: 10.0,
-                                ),
-                                Text(
-                                  "Profile",
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 13.0,
                                   ),
                                 )
                               ],

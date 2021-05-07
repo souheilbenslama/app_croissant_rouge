@@ -69,23 +69,6 @@ class Profile extends StatelessWidget {
           // Here we take the value from the MyHomePage object that was created by
           // the App.build method, and use it to set our appbar title.
           title: Text("profil".tr),
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(
-                Icons.logout,
-              ),
-              onPressed: () async {
-                SharedPreferences preferences =
-                    await SharedPreferences.getInstance();
-                await preferences.remove('token');
-                Navigator.of(context).push(
-                  new MaterialPageRoute(
-                    builder: (BuildContext context) => new SignIn(),
-                  ),
-                );
-              },
-            ),
-          ],
         ),
         body: SingleChildScrollView(
           child: Stack(
