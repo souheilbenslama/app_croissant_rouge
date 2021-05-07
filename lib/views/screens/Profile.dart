@@ -60,12 +60,25 @@ class Profile extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: WillPopScope(
-          onWillPop: () {
-            Navigator.of(context).pushNamed('/');
-          },
+          onWillPop: () async =>
+              false /*async {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => PageAlerte()),
+            );
+          }*/
+          ,
           child: Scaffold(
             backgroundColor: Colors.white,
             appBar: AppBar(
+              leading: IconButton(
+                icon: Icon(
+                  Icons.arrow_back,
+                ),
+                onPressed: () {
+                  Navigator.of(context).pushNamed('/');
+                },
+              ),
               actions: <Widget>[
                 IconButton(
                   icon: Icon(
