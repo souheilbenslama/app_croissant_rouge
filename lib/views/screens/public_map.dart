@@ -193,7 +193,9 @@ class _PublicMapState extends State<PublicMap> {
               return Scaffold(
                 floatingActionButtonLocation:
                     FloatingActionButtonLocation.centerDocked,
-                appBar: AppBarComponent(),
+                appBar: AppBar(
+                  automaticallyImplyLeading: true,
+                ),
                 body: Stack(
                   children: [
                     GoogleMap(

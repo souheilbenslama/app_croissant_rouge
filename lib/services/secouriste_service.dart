@@ -1,9 +1,42 @@
 import 'dart:convert';
 import 'package:app_croissant_rouge/models/secouriste.dart';
+
 import 'package:http/http.dart' as http;
+import 'package:location/location.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 const SERVER_IP = 'http://192.168.1.8:3000';
+
+/// this function  Determine the current position of the device.
+///
+/// When the location services are not enabled or permissions
+/// are denied the `Future` will return an error.
+
+Future<LocationData> getPosition() async {
+  Location location;
+  location = new Location();
+  LocationData currentLocation;
+  bool _serviceEnabled;
+  PermissionStatus _permissionGranted;
+  // Test if location services are enabled.
+  _serviceEnabled = await location.serviceEnabled();
+
+  _serviceEnabled = await location.serviceEnabled();
+  if (!_serviceEnabled) {
+    _serviceEnabled = await location.requestService();
+    _permissionGranted = await location.hasPermission();
+  }
+
+  if (_permissionGranted == PermissionStatus.denied) {
+    _permissionGranted = await location.requestPermission();
+  }
+
+  if (_permissionGranted != PermissionStatus.granted) {
+    currentLocation = await location.getLocation();
+
+    return currentLocation;
+  }
+}
 
 //updating rescuer's disponibility (disponible-indisponible)
 Future<bool> updateDisponibility(bool isFree) async {
