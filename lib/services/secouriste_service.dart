@@ -51,9 +51,9 @@ Future<String> updateLocation(double longitude, double latitude) async {
     "longitude": longitude.toString(),
     "latitude": latitude.toString()
   });
-  print(res.statusCode);
-  print(res);
-  print("token = " + token);
+  //print(res.statusCode);
+  // print(res);
+  //print("token = " + token);
   if (res.statusCode == 200) return res.body;
   return null;
 }

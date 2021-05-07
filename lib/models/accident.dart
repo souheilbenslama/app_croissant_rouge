@@ -30,7 +30,7 @@ class Accident {
         hemorragieDesc = json["hemorragieDesc"],
         conscienceDesc = json["conscienceDesc"],
         status = json["status"],
-        localisation = json["LocationData"];
+        localisation = LatLng(json["latitude"], json["longitude"]);
   Map<dynamic, dynamic> toJson() => {
         "id": id,
         "id_secouriste": id_secouriste,

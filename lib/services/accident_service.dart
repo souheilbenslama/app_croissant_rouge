@@ -10,6 +10,7 @@ class AccidentService {
   static Future<List<Accident>> getInProgressInterventions() async {
     var Client = http.Client();
     var res = await Client.get('$SERVER_IP/accident/inprogress');
+
     if (res.statusCode == 200) {
       List<dynamic> body = jsonDecode(res.body);
       List<Accident> interventionsInProgress =

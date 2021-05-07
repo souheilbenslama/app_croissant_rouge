@@ -104,7 +104,7 @@ class _PageAlerteState extends State<PageAlerte> {
 
   @override
   Widget build(BuildContext context) {
-    final doc = Provider.of<AccidentProvider>(context, listen: false);
+    final doc = Provider.of<AccidentProvider>(context, listen: true);
     Future<SharedPreferences> prefs = SharedPreferences.getInstance();
 
     return new WillPopScope(
@@ -115,13 +115,13 @@ class _PageAlerteState extends State<PageAlerte> {
                 AsyncSnapshot<SharedPreferences> snapshot) {
               bool isAdmin() {
                 if (snapshot.hasData) {
-                  print(snapshot.data);
+                  //print(snapshot.data);
                   jwt = snapshot.data.getString("jwt");
                   print("hell");
                   if ((jwt != null)) {
                     token = jsonDecode(jwt)["token"];
                     decodedToken = JwtDecoder.decode(token);
-                    print(decodedToken);
+                    //  print(decodedToken);
                     if (decodedToken["isAdmin"]) {
                       return true;
                     } else
@@ -134,13 +134,13 @@ class _PageAlerteState extends State<PageAlerte> {
 
               bool isActivated() {
                 if (snapshot.hasData) {
-                  print(snapshot.data);
+                  //  print(snapshot.data);
                   jwt = snapshot.data.getString("jwt");
 
                   if ((jwt != null)) {
                     token = jsonDecode(jwt)["token"];
                     decodedToken = JwtDecoder.decode(token);
-                    print(decodedToken);
+                    // print(decodedToken);
                     if (decodedToken["isActivated"]) {
                       return true;
                     } else
@@ -153,13 +153,13 @@ class _PageAlerteState extends State<PageAlerte> {
 
               bool isSecouriste() {
                 if (snapshot.hasData) {
-                  print(snapshot.data);
+                  //print(snapshot.data);
                   jwt = snapshot.data.getString("jwt");
 
                   if ((jwt != null)) {
                     token = jsonDecode(jwt)["token"];
                     decodedToken = JwtDecoder.decode(token);
-                    print(decodedToken);
+                    // print(decodedToken);
                     if (!decodedToken["isNormalUser"]) {
                       return true;
                     } else
@@ -190,13 +190,17 @@ class _PageAlerteState extends State<PageAlerte> {
                                           Icons.location_on,
                                           color: Colors.white70,
                                         ),
-                                        onPressed: () {
+                                        onPressed: () async {
                                           var arguments =
-                                              doc.getInterventions();
+                                              await doc.getInterventions();
+                                          print(
+                                              "tttttttttttttttttttttttttttttttttttt");
                                           print(arguments);
-                                          Navigator.of(context).pushNamed(
-                                              '/publicmap',
-                                              arguments: arguments);
+                                          print(
+                                              "tttttttttttttttttttttttttttttttttttt");
+                                          // Navigator.of(context).pushNamed(
+                                          //   '/publicmap',
+                                          //   arguments: arguments);
                                         },
                                       ),
                                 // Used the container because i want the other 2 icons in the end and since i used .start for previous row i'll be applied automatically to the others
@@ -229,11 +233,11 @@ class _PageAlerteState extends State<PageAlerte> {
                                             if (jwt != null) {
                                               final decodedjwt =
                                                   jsonDecode(jwt);
-                                              print(decodedjwt);
+                                              //print(decodedjwt);
                                               token = jsonDecode(jwt)["token"];
                                               decodedToken =
                                                   JwtDecoder.decode(token);
-                                              print(decodedToken);
+                                              // print(decodedToken);
                                               if (!decodedToken[
                                                       "isNormalUser"] &
                                                   decodedToken["isActivated"]) {
@@ -340,11 +344,12 @@ class _PageAlerteState extends State<PageAlerte> {
                                   width: 140.0,
                                   margin: EdgeInsets.all(20),
                                   child: RaisedButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pushNamed(
-                                          '/publicmap',
-                                          arguments: AccidentService
-                                              .getInProgressInterventions());
+                                    onPressed: () async {
+                                      var arguments =
+                                          await doc.getInterventions();
+                                      Navigator.of(context)
+                                          .pushReplacementNamed('/publicmap',
+                                              arguments: arguments);
                                     },
                                     shape: RoundedRectangleBorder(
                                         borderRadius:

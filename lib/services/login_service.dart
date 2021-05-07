@@ -50,7 +50,7 @@ class LoginServiceImp extends LoginService {
       "address": address,
       "phone": phone
     });
-    print(res.body);
+//    print(res.body);
     return res.statusCode;
   }
 }
