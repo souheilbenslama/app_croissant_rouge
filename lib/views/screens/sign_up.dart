@@ -516,15 +516,13 @@ class _SignUpState extends State<SignUp> {
                                 if (res == 200) {
                                   displayDialog(context, "succes".tr,
                                       "secouristeCree".tr);
-                                  Navigator.push(
+                                  Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => SignIn()));
                                 } else if (res == 400)
                                   displayDialog(
-                                      context,
-                                      "nomExiste".tr,
-                                      "nomExiste2".tr);
+                                      context, "nomExiste".tr, "nomExiste2".tr);
                                 else {
                                   print(res);
                                   displayDialog(

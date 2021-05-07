@@ -5,6 +5,7 @@ import 'package:app_croissant_rouge/lang/localization_service.dart';
 import 'package:app_croissant_rouge/models/accident.dart';
 import 'package:app_croissant_rouge/models/secouriste.dart';
 import 'package:app_croissant_rouge/services/accident_service.dart';
+import 'package:app_croissant_rouge/services/login_service.dart';
 import 'package:app_croissant_rouge/services/user_service.dart';
 import 'package:app_croissant_rouge/views/screens/Profile.dart';
 import 'package:app_croissant_rouge/views/screens/activate_account.dart';
@@ -129,6 +130,25 @@ class _PageAlerteState extends State<PageAlerte> {
               return false;
           }
 
+          bool isActivated() {
+            if (snapshot.hasData) {
+              print(snapshot.data);
+              jwt = snapshot.data.getString("jwt");
+
+              if ((jwt != null)) {
+                token = jsonDecode(jwt)["token"];
+                decodedToken = JwtDecoder.decode(token);
+                print(decodedToken);
+                if (decodedToken["isActivated"]) {
+                  return true;
+                } else
+                  return false;
+              }
+              return false;
+            } else
+              return false;
+          }
+
           bool isSecouriste() {
             if (snapshot.hasData) {
               print(snapshot.data);
@@ -159,15 +179,8 @@ class _PageAlerteState extends State<PageAlerte> {
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            isSecouriste()
-                                ? IconButton(
-                                    onPressed: null,
-                                    // When the icon pressed it'll take as to the map page
-                                    iconSize: 35,
-                                    icon: Icon(
-                                      Icons.location_on,
-                                      color: Colors.white70,
-                                    ))
+                            isSecouriste() && isActivated()
+                                ? SizedBox()
                                 : IconButton(
                                     // When the icon pressed it'll take as to the map page
                                     iconSize: 35,
@@ -189,7 +202,9 @@ class _PageAlerteState extends State<PageAlerte> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: <Widget>[
-                                  if (isAdmin())
+                                  if (isAdmin() &&
+                                      isSecouriste() &&
+                                      isActivated())
                                     IconButton(
                                       // This icon button when pressed it'll take as to the signin or to the profile page if the secouriste is connected
                                       onPressed: () {
@@ -204,7 +219,7 @@ class _PageAlerteState extends State<PageAlerte> {
                                     ),
                                   IconButton(
                                     // This icon button when pressed it'll take as to the signin or to the profile page if the secouriste is connected
-                                    onPressed: () {
+                                    onPressed: () async {
                                       if (snapshot.hasData) {
                                         jwt = snapshot.data.getString("jwt");
                                         if (jwt != null) {
@@ -227,13 +242,31 @@ class _PageAlerteState extends State<PageAlerte> {
                                           } else if (!decodedToken[
                                                   "isNormalUser"] &
                                               !decodedToken["isActivated"]) {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    ActivateAccount(),
-                                              ),
-                                            );
+                                            var jwt = await LoginServiceImp()
+                                                .attempttogetProfile();
+                                            if (jwt != null) {
+                                              var ss = Secouriste.fromJson(
+                                                  jsonDecode(jwt));
+                                              if (ss.isActivated) {
+                                                final prefs =
+                                                    await SharedPreferences
+                                                        .getInstance();
+                                                prefs.setString("jwt", jwt);
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            Profile(ss)));
+                                              } else {
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        ActivateAccount(),
+                                                  ),
+                                                );
+                                              }
+                                            }
                                           } else if (decodedToken[
                                               "isNormalUser"]) {
                                             Navigator.push(
@@ -289,7 +322,7 @@ class _PageAlerteState extends State<PageAlerte> {
                       SizedBox(
                         height: MediaQuery.of(context).size.height / 20,
                       ),
-                      isSecouriste()
+                      isSecouriste() && isActivated()
                           ? Container(
                               height: 50.0,
                               width: 140.0,
@@ -372,7 +405,7 @@ class _PageAlerteState extends State<PageAlerte> {
                                 ),
                               ),
                             )),
-                      if (isSecouriste())
+                      if (isSecouriste() && isActivated())
                         Padding(
                           padding: EdgeInsets.only(top: 20),
                           child: LiteRollingSwitch(

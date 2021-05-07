@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:app_croissant_rouge/services/secouriste_service.dart';
 import 'package:http/http.dart' as http;
 
 // The Server to the backend
@@ -16,6 +19,21 @@ class LoginServiceImp extends LoginService {
   Future<String> attemptLogIn(String username, String password) async {
     var res = await http.post("$SERVER_IP/users/login",
         body: {"email": username, "password": password});
+    if (res.statusCode == 200) return res.body;
+    return null;
+  }
+
+  Future<String> attempttogetProfile() async {
+    var jwt = await getToken();
+    var jwtDecoded = jsonDecode(jwt);
+    var token = jwtDecoded["token"];
+
+    var res = await http.get(
+      "$SERVER_IP/users/profile",
+      headers: {
+        'Authorization': '$token',
+      },
+    );
     if (res.statusCode == 200) return res.body;
     return null;
   }

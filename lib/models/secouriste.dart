@@ -6,6 +6,9 @@ class Secouriste {
   final String address;
   final int age;
   bool isFree;
+  bool isAdmin;
+  bool isNormalUser;
+  bool isActivated;
   final String phone;
 
   Secouriste(
@@ -15,6 +18,9 @@ class Secouriste {
       this.email,
       this.age,
       this.isFree,
+      this.isAdmin,
+      this.isActivated,
+      this.isNormalUser,
       this.phone,
       this.address});
 
@@ -24,9 +30,13 @@ class Secouriste {
     return Secouriste(
         id: secourist["id"],
         // imgUrl: secourist["token"],
+
         name: secourist["name"],
         email: secourist["email"],
         isFree: secourist['isFree'],
+        isActivated: secourist['isActivated'],
+        isAdmin: secourist['isAdmin'],
+        isNormalUser: secourist['isNormalUser'],
         phone: secourist['phone'],
         address: secourist['address'],
         age: secourist['age']);
