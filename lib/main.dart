@@ -7,7 +7,7 @@ import 'package:app_croissant_rouge/models/route_generator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-
+import 'package:app_croissant_rouge/views/screens/profile_update.dart';
 import 'views/screens/page_alerte.dart';
 
 import 'dart:convert' show json, base64, ascii;
@@ -37,8 +37,9 @@ class MyApp extends StatelessWidget {
       ),
       //home: SignUp(),
       //home: MapePage()
-      home: PageAlerte(),
+      //home: PageAlerte(),
       //home: TestNotification(),
+      home: ProfileUpdate(),
     );
   }
 }

@@ -127,7 +127,10 @@ class _InstructionListState extends State<InstructionList> {
                     child: Text(
                       "endButton".tr,
                       textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.white, fontSize: 25),
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          letterSpacing: 2.2),
                     ),
                   ),
                 ),

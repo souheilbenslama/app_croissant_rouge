@@ -1,5 +1,6 @@
 import 'package:app_croissant_rouge/models/secouriste.dart';
 import 'package:app_croissant_rouge/services/secouriste_service.dart';
+import 'package:app_croissant_rouge/views/screens/profile_update.dart';
 import 'package:flutter/material.dart';
 import 'package:lite_rolling_switch/lite_rolling_switch.dart';
 // The package used to get the location
@@ -61,11 +62,23 @@ class Profile extends StatelessWidget {
       home: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          backgroundColor: Colors.redAccent[700],
-          // Here we take the value from the MyHomePage object that was created by
-          // the App.build method, and use it to set our appbar title.
-          title: Text("profil".tr),
-        ),
+            backgroundColor: Colors.redAccent[700],
+            // Here we take the value from the MyHomePage object that was created by
+            // the App.build method, and use it to set our appbar title.
+            title: Text("profil".tr),
+            actions: [
+              IconButton(
+                icon: Icon(
+                  Icons.settings,
+                  color: Colors.white,
+                  size: 30,
+                ),
+                onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ProfileUpdate()),
+                ),
+              ),
+            ]),
         body: SingleChildScrollView(
           child: Stack(
             children: <Widget>[
@@ -169,7 +182,7 @@ class Profile extends StatelessWidget {
                       child: Column(
                         children: <Widget>[
                           ListTile(
-                            title: Text("apropos".tr),
+                            title: Text("à propos".tr),
                           ),
                           Divider(),
                           ListTile(
