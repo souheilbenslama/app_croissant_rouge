@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:app_croissant_rouge/views/screens/profile_update.dart';
 import 'views/screens/page_alerte.dart';
-
+import 'package:app_croissant_rouge/views/screens/etapes.dart';
 import 'dart:convert' show json, base64, ascii;
 import './views/screens/page_alerte.dart';
 import 'views/screens/page_alerte.dart';
@@ -39,7 +39,8 @@ class MyApp extends StatelessWidget {
       //home: MapePage()
       //home: PageAlerte(),
       //home: TestNotification(),
-      home: ProfileUpdate(),
+      //home: ProfileUpdate(),
+      home: StepList(),
     );
   }
 }

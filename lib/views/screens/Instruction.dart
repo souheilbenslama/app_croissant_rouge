@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'my_detail_page.dart';
 import 'package:app_croissant_rouge/models/Instruction.dart';
 import 'package:get/get.dart';
+import 'package:app_croissant_rouge/views/screens/page_alerte.dart';
 
 class InstructionList extends StatefulWidget {
   @override
