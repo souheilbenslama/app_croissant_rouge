@@ -129,7 +129,7 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                 height: 35,
               ),
               buildTextField("Nom", 'nom'.tr, namecontroller),
-              buildTextField("E-mail", 'email'.tr, emailcontroller),
+              // buildTextField("E-mail", 'email'.tr, emailcontroller),
               //buildTextField("À propos", "À propos".tr,TextEditingController(text: this.secouriste.description)),
               buildTextField("Num", 'Num'.tr, phonecontroller),
               buildTextField("Age", 'age'.tr, agecontroller),

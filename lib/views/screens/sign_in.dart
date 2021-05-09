@@ -227,18 +227,18 @@ class SignIn extends StatelessWidget {
 
                                     var ss =
                                         Secouriste.fromJson(jsonDecode(jwt));
-                                    if (ss.isActivated) {
-                                      Navigator.pushReplacement(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  Profile(ss)));
-                                    } else {
+                                    if (!ss.isActivated && !ss.isNormalUser) {
                                       Navigator.pushReplacement(
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
                                                   ActivateAccount()));
+                                    } else {
+                                      Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  Profile(ss)));
                                     }
                                   } else {
                                     displayDialog(context, "erreur".tr,

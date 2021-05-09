@@ -233,25 +233,12 @@ class _PageAlerteState extends State<PageAlerte> {
                                                   JwtDecoder.decode(token);
                                               // print(decodedToken);
                                               if (!decodedToken[
-                                                      "isNormalUser"] &
-                                                  decodedToken["isActivated"]) {
-                                                Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        Profile(
-                                                            Secouriste.fromJson(
-                                                                decodedjwt)),
-                                                  ),
-                                                );
-                                              } else if (!decodedToken[
-                                                      "isNormalUser"] &
-                                                  !decodedToken[
-                                                      "isActivated"]) {
+                                                  "isNormalUser"]) {
                                                 var jwt =
                                                     await LoginServiceImp()
                                                         .attempttogetProfile();
                                                 if (jwt != null) {
+                                                  print(jwt);
                                                   var ss = Secouriste.fromJson(
                                                       jsonDecode(jwt));
                                                   if (ss.isActivated) {

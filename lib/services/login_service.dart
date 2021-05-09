@@ -37,7 +37,8 @@ class LoginServiceImp extends LoginService {
         'Authorization': '$token',
       },
     );
-    if (res.statusCode == 200) return res.body;
+    if (res.statusCode == 200) print(res.body);
+    return res.body;
     return null;
   }
 
