@@ -59,7 +59,8 @@ const Map<String, String> frFR = {
   "cinHint": "Saisir votre numero de CIN", //
   "tel": "Téléphone :", //
   "telHint": "Saisir votre numéro de téléphone", //
-  "ageHint": "Saisir votre age", //
+  "ageHint": "Saisir votre age",
+  "emptyfield": "champ vide non accepté", //
   "adresse": "Gouvernorat", //
   "adresseHint": "Saisir votre gouvernorat", //
   "jeSuisSecouriste": "Je suis un secouriste", //

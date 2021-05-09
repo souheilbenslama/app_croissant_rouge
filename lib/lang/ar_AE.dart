@@ -60,6 +60,7 @@ const Map<String, String> arAE = {
   "tel": "رقم الهاتف :",
   "telHint": "أدخل رقم هاتفك",
   "ageHint": "أدخل عمرك",
+  "emptyfield": "معطيات فارغة",
   "adresse": "المحافظة",
   "adresseHint": "أدخل محافظتك",
   "jeSuisSecouriste": "أنا منقذ",

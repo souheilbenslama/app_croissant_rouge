@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'dart:convert';
 import 'package:app_croissant_rouge/models/secouriste.dart';
+import 'package:app_croissant_rouge/services/login_service.dart';
 import 'package:get/get.dart';
 import 'package:app_croissant_rouge/views/screens/Profile.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileUpdate extends StatefulWidget {
   final Secouriste secouriste;
@@ -12,8 +15,47 @@ class ProfileUpdate extends StatefulWidget {
 }
 
 class _ProfileUpdateState extends State<ProfileUpdate> {
+  String error = "";
+  updateProfile(String email, String name, String cin, String phone,
+      String address, String age) async {
+    if (email.isEmpty || name.isEmpty || cin.isEmpty || phone.isEmpty) {
+      error = "emptyfield".tr;
+    }
+
+    if (email.isEmail) {
+      var res = await LoginServiceImp()
+          .attempttoupdate(email, name, cin, phone, address, age);
+
+      if (res.statusCode == 200) {
+        var prefs = await SharedPreferences.getInstance();
+        await prefs.remove("jwt");
+        await prefs.setString("jwt", res.body);
+        final decodedjwt = jsonDecode(res.body);
+
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    Profile(Secouriste.fromJson(decodedjwt))));
+      } else {
+        error = res.body;
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    TextEditingController namecontroller =
+        TextEditingController(text: this.widget.secouriste.name);
+    TextEditingController emailcontroller =
+        TextEditingController(text: this.widget.secouriste.email);
+    TextEditingController phonecontroller =
+        TextEditingController(text: this.widget.secouriste.phone);
+    TextEditingController agecontroller =
+        TextEditingController(text: this.widget.secouriste.age.toString());
+    TextEditingController gouvernoratcontroller =
+        TextEditingController(text: this.widget.secouriste.gouvernorat);
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -86,23 +128,13 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
               SizedBox(
                 height: 35,
               ),
-              buildTextField("Nom", 'nom'.tr,
-                  TextEditingController(text: this.widget.secouriste.name)),
-              buildTextField("E-mail", 'email'.tr,
-                  TextEditingController(text: this.widget.secouriste.email)),
+              buildTextField("Nom", 'nom'.tr, namecontroller),
+              buildTextField("E-mail", 'email'.tr, emailcontroller),
               //buildTextField("À propos", "À propos".tr,TextEditingController(text: this.secouriste.description)),
-              buildTextField("Num", 'Num'.tr,
-                  TextEditingController(text: this.widget.secouriste.phone)),
+              buildTextField("Num", 'Num'.tr, phonecontroller),
+              buildTextField("Age", 'age'.tr, agecontroller),
               buildTextField(
-                  "Age",
-                  'age'.tr,
-                  TextEditingController(
-                      text: this.widget.secouriste.age.toString())),
-              buildTextField(
-                  "Gouvernorat",
-                  'gouvernorat'.tr,
-                  TextEditingController(
-                      text: this.widget.secouriste.gouvernorat)),
+                  "Gouvernorat", 'gouvernorat'.tr, gouvernoratcontroller),
               SizedBox(
                 height: 35,
               ),
@@ -113,12 +145,7 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                     padding: EdgeInsets.symmetric(horizontal: 50),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20)),
-                    onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              Profile(this.widget.secouriste)),
-                    ),
+                    onPressed: () => Navigator.of(context).pop(),
                     child: Text("Annuler",
                         style: TextStyle(
                             fontSize: 14,
@@ -126,7 +153,15 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                             color: Colors.black)),
                   ),
                   RaisedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      updateProfile(
+                          emailcontroller.text,
+                          namecontroller.text,
+                          this.widget.secouriste.cin,
+                          phonecontroller.text,
+                          gouvernoratcontroller.text,
+                          agecontroller.text);
+                    },
                     color: Colors.redAccent[700],
                     padding: EdgeInsets.symmetric(horizontal: 50),
                     elevation: 2,

@@ -2,6 +2,7 @@ class Secouriste {
   final String id;
   final String imgUrl;
   final String name;
+  final String cin;
   final String email;
   final String gouvernorat;
   final int age;
@@ -14,6 +15,7 @@ class Secouriste {
   Secouriste(
       {this.id,
       this.imgUrl,
+      this.cin,
       this.name,
       this.email,
       this.age,
@@ -30,7 +32,7 @@ class Secouriste {
     return Secouriste(
         id: secourist["id"],
         // imgUrl: secourist["token"],
-
+        cin: secourist["cin"],
         name: secourist["name"],
         email: secourist["email"],
         isFree: secourist['isFree'],
