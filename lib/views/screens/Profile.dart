@@ -1,13 +1,10 @@
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:app_croissant_rouge/models/secouriste.dart';
+import 'package:app_croissant_rouge/services/secouriste_service.dart';
 import 'package:flutter/material.dart';
 import 'package:lite_rolling_switch/lite_rolling_switch.dart';
 // The package used to get the location
 import 'package:geolocator/geolocator.dart';
-import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:get/get.dart';
 
 /// this function  Determine the current position of the device.
 ///
@@ -50,35 +47,6 @@ Future<Position> _determinePosition() async {
   return await Geolocator.getCurrentPosition();
 }
 
-// The function to update the lcation
-// The Server to the backend
-const SERVER_IP = 'http://192.168.1.8:3000';
-// The function to get the token from shared preferences
-Future<String> getToken() async {
-  final SharedPreferences prefs = await SharedPreferences.getInstance();
-  return prefs.getString('jwt');
-}
-
-// The method that will try to attempt to login
-Future<String> location(double longitude, double latitude) async {
-  var jwt = await getToken();
-  var jwtDecoded = jsonDecode(jwt);
-  var token = jwtDecoded["token"];
-  var res = await http.put("$SERVER_IP/secouriste/location",
-      //headers: {HttpHeaders.authorizationHeader: token},
-      headers: {
-        'Authorization': '$token',
-      }, body: {
-    "longitude": longitude.toString(),
-    "latitude": latitude.toString()
-  });
-  print(res.statusCode);
-  print(res);
-  print("token = " + token);
-  if (res.statusCode == 200) return res.body;
-  return null;
-}
-
 // ignore: must_be_immutable
 class Profile extends StatelessWidget {
   Secouriste secourite;
@@ -96,7 +64,7 @@ class Profile extends StatelessWidget {
           backgroundColor: Colors.redAccent[700],
           // Here we take the value from the MyHomePage object that was created by
           // the App.build method, and use it to set our appbar title.
-          title: Text("Profil"),
+          title: Text("profil".tr),
         ),
         body: SingleChildScrollView(
           child: Stack(
@@ -140,8 +108,8 @@ class Profile extends StatelessWidget {
                                       contentPadding: EdgeInsets.all(10),
                                       title: LiteRollingSwitch(
                                         value: true,
-                                        textOn: 'disponible',
-                                        textOff: 'indisponible',
+                                        textOn: 'dispo'.tr,
+                                        textOff: 'indispo'.tr,
                                         colorOn: Colors.green[700],
                                         colorOff: Colors.red[700],
                                         iconOn: Icons.notifications_active,
@@ -151,7 +119,7 @@ class Profile extends StatelessWidget {
                                           if (position == true) {
                                             Position pos =
                                                 await _determinePosition();
-                                            var res = await location(
+                                            var res = await updateLocation(
                                                 pos.longitude, pos.latitude);
                                             print(res);
                                           }
@@ -201,28 +169,28 @@ class Profile extends StatelessWidget {
                       child: Column(
                         children: <Widget>[
                           ListTile(
-                            title: Text("À propos"),
+                            title: Text("apropos".tr),
                           ),
                           Divider(),
                           ListTile(
-                            title: Text("Numéro"),
+                            title: Text("num".tr),
                             subtitle: Text(this.secourite.phone.toString()),
                             leading: Icon(Icons.call),
                           ),
                           ListTile(
-                            title: Text("Email"),
+                            title: Text("email".tr),
                             subtitle: Text(this.secourite.email),
                             leading: Icon(Icons.email_outlined),
                           ),
                           ListTile(
-                            title: Text("Age"),
+                            title: Text("age".tr),
                             subtitle: (this.secourite.age != null)
                                 ? Text(this.secourite.age.toString())
                                 : Text("22"),
                             leading: Icon(Icons.format_align_center),
                           ),
                           ListTile(
-                            title: Text("Gouvernorat"),
+                            title: Text("gouvernorat".tr),
                             subtitle: Text(this.secourite.address.toString()),
                             leading: Icon(Icons.place),
                           ),

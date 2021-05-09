@@ -1,31 +1,18 @@
 import 'dart:ffi';
 
+import 'package:app_croissant_rouge/lang/localization_service.dart';
 import 'package:app_croissant_rouge/models/accident.dart';
 import 'package:app_croissant_rouge/accidentProvider.dart';
 import 'package:app_croissant_rouge/models/route_generator.dart';
-import 'package:app_croissant_rouge/views/screens/PublicMap.dart';
-import 'package:app_croissant_rouge/views/screens/admin_dashboard.dart';
-import 'package:app_croissant_rouge/views/screens/chat_screen.dart';
-import 'package:app_croissant_rouge/views/screens/MyHomePage.dart';
-import 'package:app_croissant_rouge/views/screens/Profile.dart';
-import 'package:app_croissant_rouge/views/screens/SignUp.dart';
-import 'package:app_croissant_rouge/views/screens/SignIn.dart';
-import 'package:app_croissant_rouge/views/screens/map_page.dart';
-import 'package:app_croissant_rouge/views/screens/test_map.dart';
-import 'package:app_croissant_rouge/views/screens/test_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:location/location.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 import 'views/screens/page_alerte.dart';
 
-import './views/screens/Profile.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import './views/screens/Profile.dart';
 import 'dart:convert' show json, base64, ascii;
 import './views/screens/page_alerte.dart';
 import 'views/screens/page_alerte.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 void main() {
   runApp(ChangeNotifierProvider(
@@ -37,9 +24,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Accident> ll = new List();
 
-    return MaterialApp(
+    return GetMaterialApp(
+      translations: LocalizationService(),
+      locale: Locale('fr', 'FR'),
+      fallbackLocale: Locale('fr', 'FR'),
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: '',
       initialRoute: '/',
       onGenerateRoute: RouteGenerator.generateRoute,
       theme: ThemeData(
@@ -47,7 +37,8 @@ class MyApp extends StatelessWidget {
       ),
       //home: SignUp(),
       //home: MapePage()
-      home: MessageTest(),
+      home: PageAlerte(),
+      //home: TestNotification(),
     );
   }
 }

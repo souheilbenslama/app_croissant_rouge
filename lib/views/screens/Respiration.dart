@@ -1,7 +1,8 @@
 //KHALIL
 
-import 'package:app_croissant_rouge/models/ChoixRespiration.dart';
+import 'package:app_croissant_rouge/models/choix_respiration.dart';
 import 'package:app_croissant_rouge/accidentProvider.dart';
+import 'package:app_croissant_rouge/services/accident_service.dart';
 import 'package:app_croissant_rouge/views/screens/Conscience.dart';
 import 'package:app_croissant_rouge/views/screens/Instruction.dart';
 import 'package:app_croissant_rouge/views/screens/page_alerte.dart';
@@ -9,6 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:location/location.dart';
 import 'package:provider/provider.dart';
+import 'package:http/http.dart' as http;
+import 'package:device_info/device_info.dart';
+import 'package:get/get.dart';
 
 class Respiration extends StatefulWidget {
   @override
@@ -22,12 +26,24 @@ class _RespirationState extends State<Respiration> {
     ChoixRespiration(title: "Reponse3"),
     ChoixRespiration(title: "Reponse4"),
   ];
+  static Future<List<String>> getDeviceDetails() async {
+    String deviceName;
+    String deviceVersion;
+    String identifier;
+    final DeviceInfoPlugin deviceInfoPlugin = new DeviceInfoPlugin();
+    var build = await deviceInfoPlugin.androidInfo;
+    deviceName = build.model;
+    deviceVersion = build.version.toString();
+    identifier = build.androidId; //UUID for Android
+//if (!mounted) return;
+    return [deviceName, deviceVersion, identifier];
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Center(child: Text('Respiration')),
+          title: Center(child: Text('respiration'.tr)),
           backgroundColor: Colors.redAccent[700],
         ),
         body: ListView(
@@ -85,7 +101,7 @@ class _RespirationState extends State<Respiration> {
                         MaterialPageRoute(builder: (context) => Conscience()),
                       );
                     },
-                    child: Text("Previous"),
+                    child: Text("previousButton".tr),
                   ),
                   RaisedButton(
                     color: Color.fromRGBO(226, 56, 50, 50),
@@ -115,8 +131,8 @@ class _RespirationState extends State<Respiration> {
                       }
 
                       _locationData = await location.getLocation();
-                      double latitude = _locationData.latitude;
-                      double longitude = _locationData.longitude;
+                      String latitude = _locationData.latitude.toString();
+                      String longitude = _locationData.longitude.toString();
 
                       final doc =
                           Provider.of<AccidentProvider>(context, listen: false);
@@ -127,21 +143,30 @@ class _RespirationState extends State<Respiration> {
                         }
                       });
 
+                      doc.setLatitude(latitude);
+                      print('LATITUDE : ' + doc.latitude.toString());
+                      doc.setLongitude(longitude);
+                      print('LONGITUDE : ' + doc.longitude.toString());
                       print('CHOIX : ');
                       doc.choixRespiration.forEach((element) {
                         print(element);
                       });
 
-                      Map test = doc.getInfo();
-
+                      var jsondoc = doc.getInfo();
+                      var details = await getDeviceDetails();
+                      var userId = details[2];
+                      var res2 = await AccidentService.createAccident(
+                          userId,
+                          jsondoc["longitude"],
+                          jsondoc["latitude"],
+                          jsondoc["protection"],
+                          jsondoc["hemorragie"],
+                          jsondoc["respiration"],
+                          jsondoc["conscience"]);
                       print("/////////////////:");
-                      print(test);
+                      print(res2);
                       print("/////////////");
 
-                      doc.setLatitude(latitude);
-                      print('LATITUDE : ' + doc.latitude.toString());
-                      doc.setLongitude(longitude);
-                      print('LONGITUDE : ' + doc.longitude.toString());
                       const number = '198';
                       bool res =
                           await FlutterPhoneDirectCaller.callNumber(number);
@@ -150,7 +175,7 @@ class _RespirationState extends State<Respiration> {
                           MaterialPageRoute(
                               builder: (context) => InstructionList()));
                     },
-                    child: Text("Next"),
+                    child: Text("nextButton".tr),
                   ),
                 ],
               ),

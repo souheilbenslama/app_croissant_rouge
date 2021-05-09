@@ -1,11 +1,12 @@
 //KHALIL
 
-import 'package:app_croissant_rouge/models/ChoixConscience.dart';
+import 'package:app_croissant_rouge/models/choix_conscience.dart';
 import 'package:app_croissant_rouge/accidentProvider.dart';
 import 'package:app_croissant_rouge/views/screens/Hemorragie.dart';
-import 'package:app_croissant_rouge/views/screens/Respiration.dart';
+import 'package:app_croissant_rouge/views/screens/respiration.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:get/get.dart';
 
 class Conscience extends StatefulWidget {
   @override
@@ -24,7 +25,7 @@ class _ConscienceState extends State<Conscience> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Center(child: Text('Conscience')),
+          title: Center(child: Text('conscience'.tr)),
           backgroundColor: Colors.redAccent[700],
         ),
         body: ListView(
@@ -82,7 +83,7 @@ class _ConscienceState extends State<Conscience> {
                         MaterialPageRoute(builder: (context) => Hemorragie()),
                       );
                     },
-                    child: Text("Previous"),
+                    child: Text("previousButton".tr),
                   ),
                   RaisedButton(
                     color: Color.fromRGBO(226, 56, 50, 50),
@@ -100,7 +101,7 @@ class _ConscienceState extends State<Conscience> {
                         MaterialPageRoute(builder: (context) => Respiration()),
                       );
                     },
-                    child: Text("Next"),
+                    child: Text("nextButton".tr),
                   ),
                 ],
               ),

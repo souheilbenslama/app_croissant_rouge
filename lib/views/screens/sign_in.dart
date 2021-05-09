@@ -3,11 +3,11 @@ import 'dart:convert';
 
 import 'package:app_croissant_rouge/models/secouriste.dart';
 import 'package:app_croissant_rouge/services/login_service.dart';
-import 'package:app_croissant_rouge/views/screens/SignUp.dart';
+import 'package:app_croissant_rouge/views/screens/sign_up.dart';
 import 'package:app_croissant_rouge/views/screens/page_alerte.dart';
-import 'package:app_croissant_rouge/views/screens/Profile.dart';
+import 'package:app_croissant_rouge/views/screens/profile.dart';
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -33,7 +33,7 @@ class SignIn extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          'Email :',
+          'email'.tr + " :",
           style: TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.white,
@@ -50,11 +50,11 @@ class SignIn extends StatelessWidget {
             controller: _usernameController,
             validator: (String value) {
               if (value.isEmpty) {
-                return 'Champ Obligatoire !';
+                return 'obligatoire'.tr;
               }
               if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
                   .hasMatch(value)) {
-                return 'Il faut saisir un email valide';
+                return 'mailInvalide'.tr;
               }
               return null;
             },
@@ -70,7 +70,7 @@ class SignIn extends StatelessWidget {
                 Icons.email,
                 color: Colors.white,
               ),
-              hintText: 'Saisir votre e-mail',
+              hintText: 'mailHint'.tr,
               hintStyle: TextStyle(color: Colors.grey[300]),
             ),
           ),
@@ -84,7 +84,7 @@ class SignIn extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          'Mot de passe :',
+          'mdp'.tr,
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
@@ -100,7 +100,7 @@ class SignIn extends StatelessWidget {
           child: TextFormField(
             controller: _passwordController,
             validator: (val) {
-              if (val.isEmpty) return 'Veuillez saisir le mot de passe !';
+              if (val.isEmpty) return 'mdpInvalide'.tr;
               return null;
             },
             onSaved: (String value) {
@@ -116,7 +116,7 @@ class SignIn extends StatelessWidget {
                 Icons.lock,
                 color: Colors.white,
               ),
-              hintText: 'Saisir votre mot de passe',
+              hintText: 'mdpHint'.tr,
               hintStyle: TextStyle(color: Colors.grey[300]),
             ),
           ),
@@ -132,7 +132,7 @@ class SignIn extends StatelessWidget {
         padding: EdgeInsets.only(right: 0.0),
         onPressed: () {},
         child: Text(
-          'Mot de passe oublié?',
+          'mdpOublie'.tr,
           style: TextStyle(
               decoration: TextDecoration.underline,
               color: Colors.white,
@@ -190,7 +190,7 @@ class SignIn extends StatelessWidget {
                         height: 30.0,
                       ),
                       Text(
-                        'Login',
+                        'login'.tr,
                         style: TextStyle(
                             color: Colors.white,
                             fontFamily: 'OpenSans',
@@ -236,8 +236,8 @@ class SignIn extends StatelessWidget {
                                     MaterialPageRoute(
                                         builder: (context) => Profile(ss)));
                               } else {
-                                displayDialog(
-                                    context, "Erreur", "Compte introuvable");
+                                displayDialog(context, "erreur".tr,
+                                    "compteIntrouvable".tr);
                               }
                             },
                             padding: EdgeInsets.all(15.0),
@@ -245,7 +245,7 @@ class SignIn extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(30.0)),
                             color: Colors.white,
                             child: Text(
-                              'Connexion',
+                              'connexion'.tr,
                               style: TextStyle(
                                 color: Colors.black,
                                 letterSpacing: 1.5,
@@ -266,13 +266,13 @@ class SignIn extends StatelessWidget {
                           child: RichText(
                               text: TextSpan(children: [
                             TextSpan(
-                                text: "Vous n'avez pas de compte? ",
+                                text: "pasDeCompte".tr,
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 18.0,
                                     fontWeight: FontWeight.w400)),
                             TextSpan(
-                                text: "S'inscrire",
+                                text: "sinscrire".tr,
                                 style: TextStyle(
                                     decoration: TextDecoration.underline,
                                     color: Colors.white,

@@ -1,3 +1,6 @@
+import 'package:app_croissant_rouge/services/admin_service.dart';
+import 'package:app_croissant_rouge/views/screens/liste_interventions.dart';
+import 'package:app_croissant_rouge/views/screens/liste_secouristes.dart';
 import 'package:flutter/material.dart';
 
 class AdminDashboard extends StatefulWidget {
@@ -27,18 +30,36 @@ class _AdminDashboardState extends State<AdminDashboard> {
                 ),
               ),
             ),
+            SizedBox(
+              height: 10.0,
+            ),
             Padding(
               padding: EdgeInsets.all(12.0),
               child: Center(
                 child: Wrap(
                   children: <Widget>[
                     GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).pushNamed('/listeSecouristes');
+                      onTap: () async {
+                        final arraySecouristes =
+                            await AdminService.listSecourists();
+                        var secouristes = [];
+                        for (var i = 0; i < arraySecouristes.length; i++) {
+                          print("it is " + arraySecouristes.length.toString());
+
+                          secouristes.add(arraySecouristes[i]["name"]);
+                        }
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => ListeSecouristes(
+                              secouristes: secouristes,
+                            ),
+                          ),
+                        );
                       },
                       child: SizedBox(
-                        width: 360.0,
-                        height: 150.0,
+                        width: 180.0,
+                        height: 180.0,
                         child: Card(
                           elevation: 8,
                           color: Colors.white70,
@@ -67,9 +88,27 @@ class _AdminDashboardState extends State<AdminDashboard> {
                         ),
                       ),
                     ),
+                    SizedBox(
+                      height: 10.0,
+                    ),
                     GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).pushNamed('/listeInterventions');
+                      onTap: () async {
+                        final arrayintervention =
+                            await AdminService.listinterventions();
+                        var interventions = [];
+                        for (var i = 0; i < arrayintervention.length; i++) {
+                          print("it is " + arrayintervention.length.toString());
+
+                          interventions.add(arrayintervention[i]["id_temoin"]);
+                        }
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => ListeInterventions(
+                              interventions: interventions,
+                            ),
+                          ),
+                        );
                       },
                       child: SizedBox(
                         width: 180.0,
@@ -102,7 +141,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
                         ),
                       ),
                     ),
-                    GestureDetector(
+                    /*GestureDetector(
                       onTap: null,
                       child: SizedBox(
                         width: 180.0,
@@ -126,7 +165,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
                                   style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 18.0,
+                                    fontSize: 13.0,
                                   ),
                                 )
                               ],
@@ -134,7 +173,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
                           ),
                         ),
                       ),
-                    ),
+                    ),*/
                   ],
                 ),
               ),
