@@ -512,7 +512,13 @@ class _SignUpState extends State<SignUp> {
                                     context, "erreur".tr, "errMdp".tr);
                               else {
                                 var res = await LoginServiceImp().attemptSignUp(
-                                    email, password, name, cin, phone, address);
+                                    email,
+                                    password,
+                                    name,
+                                    cin,
+                                    phone,
+                                    address,
+                                    _checkbox);
                                 if (res == 200) {
                                   displayDialog(context, "succes".tr,
                                       "secouristeCree".tr);
@@ -520,9 +526,12 @@ class _SignUpState extends State<SignUp> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => SignIn()));
-                                } else if (res == 400)
+                                } else if (res == 404)
                                   displayDialog(
                                       context, "nomExiste".tr, "nomExiste2".tr);
+                                else if (res == 404)
+                                  displayDialog(context, "Verifdonné".tr,
+                                      "Verifdonné2".tr);
                                 else {
                                   print(res);
                                   displayDialog(

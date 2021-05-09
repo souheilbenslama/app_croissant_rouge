@@ -59,16 +59,18 @@ const Map<String, String> frFR = {
   "cinHint": "Saisir votre numero de CIN", //
   "tel": "Téléphone :", //
   "telHint": "Saisir votre numéro de téléphone", //
-  "adresse": "Adresse", //
-  "adresseHint": "Saisir votre adresse", //
+  "adresse": "Gouvernorat", //
+  "adresseHint": "Saisir votre gouvernorat", //
   "jeSuisSecouriste": "Je suis un secouriste", //
   "errNom": "Nom Invalide !", //
   "errMdp": "Mot de passe invalide !", //
   "secouristeCree": "Le secouriste est créé", //
   "erreur": "Erreur", //
   "succes": "Succès", //
-  "nomExiste": "Le nom d'utilisateur existe déjà", //
+  "nomExiste": "L'email d'utilisateur existe déjà", //
   "nomExiste2": "connectez vous si vous avez déja un compte.", //
+  "Verifdonnée": " données erronées ", //
+  "Verifdonnéé2": " vous devez verifier vos données ", //
   "errInconnue": "Erreur inconnue.", //
   "vousAvez": "Vous avez déjà un compte?", //
   "seConnecter": " Se connecter", //
