@@ -10,6 +10,8 @@ import 'models/accident.dart';
 class AccidentProvider with ChangeNotifier {
   String latitude;
   String longitude;
+  bool respire;
+  bool conscient;
   List<ChoixConscience> choixConscience = [];
   List<ChoixHemorragie> choixHemorragie = [];
   List<ChoixRespiration> choixRespiration = [];
@@ -22,6 +24,16 @@ class AccidentProvider with ChangeNotifier {
 
   setLongitude(String longitude) {
     this.longitude = longitude;
+    notifyListeners();
+  }
+
+  setRespire(bool val) {
+    this.respire = val;
+    notifyListeners();
+  }
+
+  setConscient(bool val) {
+    this.conscient = val;
     notifyListeners();
   }
 
@@ -53,6 +65,8 @@ class AccidentProvider with ChangeNotifier {
       "conscience": this.choixConscience.last.title,
       "latitude": latitude.toString(),
       "longitude": longitude.toString(),
+      "respire": this.respire,
+      "conscient": this.conscient
     };
   }
 

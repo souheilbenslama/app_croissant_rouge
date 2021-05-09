@@ -6,6 +6,7 @@ import 'package:app_croissant_rouge/services/accident_service.dart';
 import 'package:app_croissant_rouge/views/screens/Conscience.dart';
 import 'package:app_croissant_rouge/views/screens/Instruction.dart';
 import 'package:app_croissant_rouge/views/screens/page_alerte.dart';
+import 'package:app_croissant_rouge/views/screens/respiration2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:location/location.dart';
@@ -98,7 +99,7 @@ class _RespirationState extends State<Respiration> {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => Conscience()),
+                        MaterialPageRoute(builder: (context) => Respire()),
                       );
                     },
                     child: Text("previousButton".tr),
