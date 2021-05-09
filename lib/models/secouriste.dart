@@ -50,7 +50,7 @@ class Secouriste {
         "email": email,
         "isFree": isFree,
         "phone": phone,
-        "address": address,
+        "address": gouvernorat,
         "age": age,
       };
 }
