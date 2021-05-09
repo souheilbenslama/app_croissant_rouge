@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'package:app_croissant_rouge/services/secouriste_service.dart';
 import 'package:app_croissant_rouge/accidentProvider.dart';
 import 'package:app_croissant_rouge/lang/localization_service.dart';
 import 'package:app_croissant_rouge/models/secouriste.dart';
@@ -17,6 +17,8 @@ import 'package:lite_rolling_switch/lite_rolling_switch.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:get/get.dart';
+import 'package:location/location.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 // The Server to the backend
 const SERVER_IP = 'http://192.168.43.68:3000';
@@ -37,6 +39,9 @@ class _PageAlerteState extends State<PageAlerte> {
   Map decodedToken;
   Object token;
   String jwt;
+  Location location;
+  Future<LocationData> currentlocation;
+  LocationData localisation;
   // To get Device Details
   static Future<List<String>> getDeviceDetails() async {
     String deviceName;
@@ -100,6 +105,8 @@ class _PageAlerteState extends State<PageAlerte> {
   Widget build(BuildContext context) {
     final doc = Provider.of<AccidentProvider>(context, listen: true);
     Future<SharedPreferences> prefs = SharedPreferences.getInstance();
+    location = new Location();
+    currentlocation = getPosition();
 
     return new WillPopScope(
         onWillPop: () async => false,
@@ -410,22 +417,69 @@ class _PageAlerteState extends State<PageAlerte> {
                                   ),
                                 )),
                           if (isSecouriste() && isActivated())
-                            Padding(
-                              padding: EdgeInsets.only(top: 20),
-                              child: LiteRollingSwitch(
-                                value: true,
-                                textOn: 'Available',
-                                textOff: 'Not Available',
-                                colorOn: Colors.green,
-                                colorOff: Colors.red[700],
-                                iconOn: Icons.done,
-                                iconOff: Icons.alarm_off,
-                                textSize: 13.0,
-                                onChanged: (bool state) {
-                                  print('turned ${(state) ? 'on' : 'off'}');
-                                },
-                              ),
-                            ),
+                            FutureBuilder(
+                                future: currentlocation,
+                                builder: (BuildContext context,
+                                    AsyncSnapshot<LocationData>
+                                        locationsnapshot) {
+                                  if (locationsnapshot.hasData) {
+                                    this.localisation = locationsnapshot.data;
+
+                                    var subscription = location
+                                        .onLocationChanged
+                                        .listen((LocationData cLoc) {
+                                      // cLoc contains the lat and long of the
+                                      // current user's position in real time,
+                                      // so we're holding on to it
+                                      this.localisation = cLoc;
+                                      print(this.localisation);
+                                      print(
+                                          "///////////////////////////////////////////////${cLoc.latitude}");
+                                      print(
+                                          "///////////////////////////////////////////////${cLoc.longitude}");
+                                      updateLocation(
+                                          this.localisation.longitude,
+                                          this.localisation.latitude);
+                                    });
+
+                                    return Padding(
+                                        padding: EdgeInsets.only(),
+                                        child: Container(
+                                          height: 55,
+                                          width: 155,
+                                          child: LiteRollingSwitch(
+                                            value: false,
+                                            textOn: 'Available',
+                                            textOff: 'Not Available',
+                                            colorOn: Colors.green,
+                                            colorOff: Colors.red[700],
+                                            iconOn: Icons.done,
+                                            iconOff: Icons.alarm_off,
+                                            textSize: 13.0,
+                                            onChanged: (bool state) {
+                                              if (state == true) {
+                                                subscription.resume();
+                                                updateDisponibility(true);
+                                              } else {
+                                                subscription.pause();
+                                                updateDisponibility(false);
+                                              }
+                                            },
+                                          ),
+                                        ));
+                                  } else {
+                                    return Container(
+                                        color: Colors.white,
+                                        child: Align(
+                                            alignment: Alignment.center,
+                                            child: Center(
+                                                child: SpinKitFadingCircle(
+                                              color: Colors.grey[800],
+                                              size: 80,
+                                            ))));
+                                  }
+                                }),
+
                           //CONTACTER NOUS
                           Container(
                             margin: EdgeInsets.only(),

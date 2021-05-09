@@ -58,15 +58,12 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
 
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         centerTitle: true,
         title: Text("Modifier le profil",
             style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500)),
         backgroundColor: Colors.redAccent[700],
         elevation: 1,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () {},
-        ),
       ),
       body: Container(
         padding: EdgeInsets.only(left: 16, top: 25, right: 16),
