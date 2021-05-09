@@ -3,7 +3,7 @@ class Secouriste {
   final String imgUrl;
   final String name;
   final String email;
-  final String address;
+  final String gouvernorat;
   final int age;
   bool isFree;
   bool isAdmin;
@@ -22,7 +22,7 @@ class Secouriste {
       this.isActivated,
       this.isNormalUser,
       this.phone,
-      this.address});
+      this.gouvernorat});
 
   factory Secouriste.fromJson(Map<dynamic, dynamic> json) {
     var secourist = json["Secouriste"];
@@ -38,7 +38,7 @@ class Secouriste {
         isAdmin: secourist['isAdmin'],
         isNormalUser: secourist['isNormalUser'],
         phone: secourist['phone'],
-        address: secourist['address'],
+        gouvernorat: secourist['gouvernorat'],
         age: secourist['age']);
   }
 }

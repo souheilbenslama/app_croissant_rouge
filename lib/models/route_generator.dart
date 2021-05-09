@@ -1,4 +1,3 @@
-import 'package:app_croissant_rouge/models/accident.dart';
 import 'package:app_croissant_rouge/views/screens/public_map.dart';
 import 'package:flutter/material.dart';
 
@@ -6,15 +5,13 @@ import '../views/screens/page_alerte.dart';
 import '../views/screens/map_page.dart';
 import '../views/screens/protection.dart';
 import '../views/screens/sign_in.dart';
-import '../views/screens/liste_interventions.dart';
-import '../views/screens/liste_secouristes.dart';
+
 import '../views/screens/admin_dashboard.dart';
 import '../views/screens/intervention_par_secouriste.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     // Getting arguments passed in while calling Navigator.pushNamed
-    final args = settings.arguments;
 
     switch (settings.name) {
       case '/':
@@ -29,10 +26,6 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => Protection());
       case '/dashboard':
         return MaterialPageRoute(builder: (_) => AdminDashboard());
-      case '/listeSecouristes':
-        return MaterialPageRoute(builder: (_) => ListeSecouristes());
-      case '/listeInterventions':
-        return MaterialPageRoute(builder: (_) => ListeInterventions());
       case '/interventionParSecouriste':
         return MaterialPageRoute(builder: (_) => InterventionParSecouriste());
       default:

@@ -5,12 +5,10 @@ import 'package:app_croissant_rouge/accidentProvider.dart';
 import 'package:app_croissant_rouge/services/accident_service.dart';
 import 'package:app_croissant_rouge/views/screens/Conscience.dart';
 import 'package:app_croissant_rouge/views/screens/Instruction.dart';
-import 'package:app_croissant_rouge/views/screens/page_alerte.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:location/location.dart';
 import 'package:provider/provider.dart';
-import 'package:http/http.dart' as http;
 import 'package:device_info/device_info.dart';
 import 'package:get/get.dart';
 
@@ -168,8 +166,7 @@ class _RespirationState extends State<Respiration> {
                       print("/////////////");
 
                       const number = '198';
-                      bool res =
-                          await FlutterPhoneDirectCaller.callNumber(number);
+                      await FlutterPhoneDirectCaller.callNumber(number);
                       Navigator.push(
                           context,
                           MaterialPageRoute(

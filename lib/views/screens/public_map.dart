@@ -4,7 +4,6 @@ import 'package:app_croissant_rouge/models/accident.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:app_croissant_rouge/views/widgets/app_bar.dart';
 import 'package:location/location.dart';
 import 'dart:async';
 import 'package:provider/provider.dart';
@@ -119,6 +118,7 @@ class _PublicMapState extends State<PublicMap> {
   @override
   @protected
   @mustCallSuper
+  // ignore: must_call_super
   void didChangeDependencies() {
     doc = Provider.of<AccidentProvider>(context, listen: false);
     arguments = doc.getInterventions();
@@ -172,7 +172,7 @@ class _PublicMapState extends State<PublicMap> {
 
     return WillPopScope(
         onWillPop: () {
-          Navigator.of(context).pushNamed('/');
+          return Navigator.of(context).pushNamed('/');
         },
         child: FutureBuilder(
             future: accidentList,

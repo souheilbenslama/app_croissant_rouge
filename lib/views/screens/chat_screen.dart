@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:app_croissant_rouge/models/user_model.dart';
 import 'package:app_croissant_rouge/models/message_model.dart';
-import 'package:flutter/material.dart';
-import 'package:app_croissant_rouge/models/user_model.dart';
-import 'package:app_croissant_rouge/models/message_model.dart';
 
 class ChatScreen extends StatefulWidget {
   final User user;
@@ -15,7 +12,6 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
   String sentMessage;
   final _textController = TextEditingController();
-  final _scrollController = ScrollController();
   //socket
   /*void initState() {
     //Creating the socket

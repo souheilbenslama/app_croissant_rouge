@@ -5,11 +5,9 @@ import 'package:app_croissant_rouge/models/secouriste.dart';
 import 'package:app_croissant_rouge/services/login_service.dart';
 import 'package:app_croissant_rouge/views/screens/activate_account.dart';
 import 'package:app_croissant_rouge/views/screens/sign_up.dart';
-import 'package:app_croissant_rouge/views/screens/page_alerte.dart';
 import 'package:app_croissant_rouge/views/screens/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 // Displaying dialogs
@@ -21,8 +19,6 @@ void displayDialog(BuildContext context, String title, String text) =>
     );
 
 class SignIn extends StatelessWidget {
-  String _email;
-  String _pass;
   // Defining the passwordcontroller and the email controller
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -58,9 +54,6 @@ class SignIn extends StatelessWidget {
                 return 'mailInvalide'.tr;
               }
               return null;
-            },
-            onSaved: (String value) {
-              _email = value;
             },
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(color: Colors.white),
@@ -104,9 +97,6 @@ class SignIn extends StatelessWidget {
               if (val.isEmpty) return 'mdpInvalide'.tr;
               return null;
             },
-            onSaved: (String value) {
-              _pass = value;
-            },
             obscureText: true,
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(color: Colors.white),
@@ -148,6 +138,7 @@ class SignIn extends StatelessWidget {
     return WillPopScope(
         onWillPop: () {
           Navigator.of(context).pushNamed('/');
+          return Navigator.of(context).pushNamed('/');
         },
         child: Scaffold(
           //appBar:

@@ -1,20 +1,20 @@
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class Accident {
-  String id;
-  String id_temoin;
-  String id_secouriste;
-  String protectionDesc;
-  String respirationDesc;
-  String hemorragieDesc;
-  String conscienceDesc;
-  String status;
-  LatLng localisation;
+  final String id;
+  final String idtemoin;
+  final String idsecouriste;
+  final String protectionDesc;
+  final String respirationDesc;
+  final String hemorragieDesc;
+  final String conscienceDesc;
+  final String status;
+  final LatLng localisation;
 
   Accident(
       {this.id,
-      this.id_secouriste,
-      this.id_temoin,
+      this.idsecouriste,
+      this.idtemoin,
       this.conscienceDesc,
       this.hemorragieDesc,
       this.localisation,
@@ -23,8 +23,8 @@ class Accident {
       this.status});
   Accident.fromJson(Map<dynamic, dynamic> json)
       : id = json["id"],
-        id_temoin = json["id_temoin"],
-        id_secouriste = json["id_secouriste"],
+        idtemoin = json["id_temoin"],
+        idsecouriste = json["id_secouriste"],
         protectionDesc = json["protectionDesc"],
         respirationDesc = json["respirationDesc"],
         hemorragieDesc = json["hemorragieDesc"],
@@ -33,8 +33,8 @@ class Accident {
         localisation = LatLng(json["latitude"], json["longitude"]);
   Map<dynamic, dynamic> toJson() => {
         "id": id,
-        "id_secouriste": id_secouriste,
-        "id_temoin": id_temoin,
+        "id_secouriste": idsecouriste,
+        "id_temoin": idtemoin,
         "protectionDesc": protectionDesc,
         "respirationDesc": respirationDesc,
         "hemorragieDesc": hemorragieDesc,

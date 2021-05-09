@@ -2,17 +2,13 @@
 import 'package:app_croissant_rouge/services/login_service.dart';
 import 'package:app_croissant_rouge/views/screens/sign_in.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 
-// The Server to the backend
-const SERVER_IP = 'http://192.168.1.8:3000';
-
 final TextEditingController _nameController = TextEditingController();
-final TextEditingController _passwordController = TextEditingController();
 final TextEditingController _emailController = TextEditingController();
 final TextEditingController _cinController = TextEditingController();
 final TextEditingController _phoneController = TextEditingController();
+final TextEditingController _ageController = TextEditingController();
 final TextEditingController _adressController = TextEditingController();
 
 // Displaying dialogs
@@ -29,13 +25,6 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-  String _name;
-  String _email;
-  String _password;
-  String _cin;
-  String _tel;
-  String _adresse;
-
   bool _checkbox = false;
 
   final GlobalKey<FormState> _form = GlobalKey<FormState>();
@@ -67,9 +56,6 @@ class _SignUpState extends State<SignUp> {
                 return 'obligatoire'.tr;
               }
               return null;
-            },
-            onSaved: (String value) {
-              _name = value;
             },
             style: TextStyle(
               color: Colors.grey[700],
@@ -121,9 +107,6 @@ class _SignUpState extends State<SignUp> {
                 return 'mailInvalide'.tr;
               }
               return null;
-            },
-            onSaved: (String value) {
-              _email = value;
             },
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(
@@ -178,9 +161,6 @@ class _SignUpState extends State<SignUp> {
               }
               return null;
             },
-            onSaved: (String value) {
-              _cin = value;
-            },
             keyboardType: TextInputType.number,
             style: TextStyle(
               color: Colors.grey[700],
@@ -234,9 +214,6 @@ class _SignUpState extends State<SignUp> {
               }
               return null;
             },
-            onSaved: (String value) {
-              _tel = value;
-            },
             keyboardType: TextInputType.number,
             style: TextStyle(
               color: Colors.grey[700],
@@ -251,6 +228,59 @@ class _SignUpState extends State<SignUp> {
                 color: Colors.redAccent[700],
               ),
               hintText: 'telHint'.tr,
+              hintStyle: TextStyle(
+                color: Colors.grey[700],
+              ),
+            ),
+          ),
+        )
+      ],
+    );
+  }
+
+  _buildAge() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          'age'.tr,
+          style: TextStyle(
+            decoration: TextDecoration.underline,
+            color: Colors.redAccent[700],
+            fontSize: 15.0,
+          ),
+        ),
+        SizedBox(
+          height: 10.0,
+        ),
+        Container(
+          alignment: Alignment.topLeft,
+          height: 50.0,
+          child: TextFormField(
+            controller: _ageController,
+            validator: (String value) {
+              if (value.isEmpty) {
+                return 'obligatoire'.tr;
+              }
+              if (!RegExp("^[0-9]*").hasMatch(value)) {
+                return 'ageInvalide'.tr;
+              }
+              return null;
+            },
+            keyboardType: TextInputType.number,
+            style: TextStyle(
+              color: Colors.grey[700],
+            ),
+            decoration: InputDecoration(
+              errorStyle: TextStyle(
+                color: Colors.red[300],
+              ),
+              contentPadding: EdgeInsets.only(top: 14.0),
+              prefixIcon: Icon(
+                Icons.calendar_today,
+                color: Colors.redAccent[700],
+              ),
+              hintText: 'ageHint'.tr,
               hintStyle: TextStyle(
                 color: Colors.grey[700],
               ),
@@ -365,9 +395,6 @@ class _SignUpState extends State<SignUp> {
               }
               return null;
             },
-            onSaved: (String value) {
-              _adresse = value;
-            },
             style: TextStyle(
               color: Colors.grey[700],
             ),
@@ -465,6 +492,10 @@ class _SignUpState extends State<SignUp> {
                       SizedBox(
                         height: 30.0,
                       ),
+                      _buildAge(),
+                      SizedBox(
+                        height: 30.0,
+                      ),
                       _buildAdress(),
                       SizedBox(
                         height: 30.0,
@@ -503,6 +534,7 @@ class _SignUpState extends State<SignUp> {
                               var cin = _cinController.text;
                               var phone = _phoneController.text;
                               var address = _adressController.text;
+                              var age = _ageController.text;
 
                               if (name.length < 4)
                                 displayDialog(
@@ -518,6 +550,7 @@ class _SignUpState extends State<SignUp> {
                                     cin,
                                     phone,
                                     address,
+                                    age,
                                     _checkbox);
                                 if (res == 200) {
                                   displayDialog(context, "succes".tr,

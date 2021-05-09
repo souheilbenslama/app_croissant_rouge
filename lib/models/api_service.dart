@@ -1,3 +1,3 @@
 class ApiService {
-  static final String PDF_URL = "../assets/file/fichier.pdf";
+  static const String PDFURL = "../assets/file/fichier.pdf";
 }

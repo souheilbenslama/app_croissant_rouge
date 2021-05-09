@@ -1,25 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:app_croissant_rouge/models/secouriste.dart';
-import 'package:app_croissant_rouge/services/secouriste_service.dart';
-import 'package:lite_rolling_switch/lite_rolling_switch.dart';
 import 'package:get/get.dart';
 import 'package:app_croissant_rouge/views/screens/Profile.dart';
 
 class ProfileUpdate extends StatefulWidget {
+  final Secouriste secouriste;
+  ProfileUpdate({this.secouriste});
+
   @override
   _ProfileUpdateState createState() => _ProfileUpdateState();
 }
 
 class _ProfileUpdateState extends State<ProfileUpdate> {
-  Secouriste secouriste;
-  Profile(Secouriste secou) {
-    this.secouriste = secou;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
+        title: Text("Modifier le profil",
+            style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500)),
         backgroundColor: Colors.redAccent[700],
         elevation: 1,
         leading: IconButton(
@@ -35,10 +34,6 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
           },
           child: ListView(
             children: [
-              Text(
-                "Modifier le profil",
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
-              ),
               SizedBox(
                 height: 15,
               ),
@@ -91,12 +86,23 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
               SizedBox(
                 height: 35,
               ),
-              buildTextField("Nom", 'nom'.tr),
-              buildTextField("E-mail", 'email'.tr),
-              buildTextField("À propos", "À propos".tr),
-              buildTextField("Num", 'Num'.tr),
-              buildTextField("Age", 'age'.tr),
-              buildTextField("Gouvernorat", 'gouvernorat'.tr),
+              buildTextField("Nom", 'nom'.tr,
+                  TextEditingController(text: this.widget.secouriste.name)),
+              buildTextField("E-mail", 'email'.tr,
+                  TextEditingController(text: this.widget.secouriste.email)),
+              //buildTextField("À propos", "À propos".tr,TextEditingController(text: this.secouriste.description)),
+              buildTextField("Num", 'Num'.tr,
+                  TextEditingController(text: this.widget.secouriste.phone)),
+              buildTextField(
+                  "Age",
+                  'age'.tr,
+                  TextEditingController(
+                      text: this.widget.secouriste.age.toString())),
+              buildTextField(
+                  "Gouvernorat",
+                  'gouvernorat'.tr,
+                  TextEditingController(
+                      text: this.widget.secouriste.gouvernorat)),
               SizedBox(
                 height: 35,
               ),
@@ -110,7 +116,8 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                     onPressed: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => Profile(secouriste)),
+                          builder: (context) =>
+                              Profile(this.widget.secouriste)),
                     ),
                     child: Text("Annuler",
                         style: TextStyle(
@@ -145,21 +152,23 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
     );
   }
 
-  Widget buildTextField(String labelText, String placeholder) {
+  Widget buildTextField(
+      String labelText, String placeholder, TextEditingController controller) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 35.0),
       child: TextField(
+        controller: controller,
         decoration: InputDecoration(
             contentPadding: EdgeInsets.only(bottom: 3),
             labelText: labelText,
             labelStyle: TextStyle(
-              fontSize: 18,
+              fontSize: 24,
               color: Colors.grey[800],
             ),
             floatingLabelBehavior: FloatingLabelBehavior.always,
             hintText: placeholder,
             hintStyle: TextStyle(
-              fontSize: 15,
+              fontSize: 18,
               color: Colors.grey[600],
             )),
       ),

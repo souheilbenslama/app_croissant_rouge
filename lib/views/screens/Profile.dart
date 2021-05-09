@@ -1,6 +1,6 @@
 import 'package:app_croissant_rouge/models/secouriste.dart';
 import 'package:app_croissant_rouge/services/secouriste_service.dart';
-import 'package:app_croissant_rouge/views/screens/page_alerte.dart';
+import 'package:app_croissant_rouge/views/screens/profile_update.dart';
 import 'package:app_croissant_rouge/views/screens/sign_in.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -46,6 +46,17 @@ class Profile extends StatelessWidget {
             actions: <Widget>[
               IconButton(
                 icon: Icon(
+                  Icons.edit,
+                  color: Colors.white,
+                ),
+                onPressed: () {
+                  Navigator.of(context).push(new MaterialPageRoute(
+                      builder: (BuildContext context) =>
+                          ProfileUpdate(secouriste: this.secourite)));
+                },
+              ),
+              IconButton(
+                icon: Icon(
                   Icons.logout,
                 ),
                 onPressed: () async {
@@ -82,7 +93,7 @@ class Profile extends StatelessWidget {
                       //    "///////////////////////////////////////////////${cLoc.latitude}");
                       //print(
                       //    "///////////////////////////////////////////////${cLoc.longitude}");
-                      //updateLocation(loca.longitude, loca.latitude);
+                      updateLocation(loca.longitude, loca.latitude);
                     });
                   }
 
@@ -122,12 +133,10 @@ class Profile extends StatelessWidget {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: <Widget>[
-                                              Text(
-                                                this.secourite.name,
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .title,
-                                              ),
+                                              Text(this.secourite.name,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .headline4),
                                               ListTile(
                                                 contentPadding:
                                                     EdgeInsets.all(10),
@@ -146,7 +155,7 @@ class Profile extends StatelessWidget {
                                                       (bool position) async {
                                                     if (position == true) {
                                                       LocationData pos =
-                                                          (await trackPosition())
+                                                          (trackPosition())
                                                               as LocationData;
                                                       var res =
                                                           await updateLocation(
@@ -223,8 +232,10 @@ class Profile extends StatelessWidget {
                                     ),
                                     ListTile(
                                       title: Text("gouvernorat".tr),
-                                      subtitle: Text(
-                                          this.secourite.address.toString()),
+                                      subtitle: Text(this
+                                          .secourite
+                                          .gouvernorat
+                                          .toString()),
                                       leading: Icon(Icons.place),
                                     ),
                                   ],

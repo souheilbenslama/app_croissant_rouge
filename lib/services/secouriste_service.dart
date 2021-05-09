@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:app_croissant_rouge/models/secouriste.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:location/location.dart';
@@ -36,6 +35,7 @@ Future<LocationData> getPosition() async {
 
     return currentLocation;
   }
+  return null;
 }
 
 //updating rescuer's disponibility (disponible-indisponible)
@@ -43,7 +43,7 @@ Future<bool> updateDisponibility(bool isFree) async {
   var client = http.Client();
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String jwt = prefs.getString("jwt");
-  var jwtDecoded = jsonDecode('jwt');
+  var jwtDecoded = jsonDecode(jwt);
   var token = jwtDecoded["token"];
   var updated = false;
   try {

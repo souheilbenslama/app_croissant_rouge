@@ -1,6 +1,5 @@
 import 'package:app_croissant_rouge/views/screens/page_alerte.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class ActivateAccount extends StatelessWidget {
   @override

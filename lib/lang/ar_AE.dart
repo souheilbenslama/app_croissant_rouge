@@ -59,6 +59,7 @@ const Map<String, String> arAE = {
   "cinHint": "ادخل رقم بطاقة تعريفك الوطنية",
   "tel": "رقم الهاتف :",
   "telHint": "أدخل رقم هاتفك",
+  "ageHint": "أدخل عمرك",
   "adresse": "المحافظة",
   "adresseHint": "أدخل محافظتك",
   "jeSuisSecouriste": "أنا منقذ",

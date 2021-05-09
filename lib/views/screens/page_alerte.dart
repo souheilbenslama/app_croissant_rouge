@@ -2,18 +2,12 @@ import 'dart:convert';
 
 import 'package:app_croissant_rouge/accidentProvider.dart';
 import 'package:app_croissant_rouge/lang/localization_service.dart';
-import 'package:app_croissant_rouge/models/accident.dart';
 import 'package:app_croissant_rouge/models/secouriste.dart';
-import 'package:app_croissant_rouge/services/accident_service.dart';
 import 'package:app_croissant_rouge/services/login_service.dart';
-import 'package:app_croissant_rouge/services/user_service.dart';
 import 'package:app_croissant_rouge/views/screens/Profile.dart';
 import 'package:app_croissant_rouge/views/screens/activate_account.dart';
-import 'package:app_croissant_rouge/views/screens/protection.dart';
-import 'package:app_croissant_rouge/views/screens/admin_dashboard.dart';
 import 'package:app_croissant_rouge/views/widgets/customized_dialog.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
 import 'package:device_info/device_info.dart';
