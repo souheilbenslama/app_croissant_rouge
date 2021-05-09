@@ -8,6 +8,7 @@ import '../views/screens/protection.dart';
 import '../views/screens/sign_in.dart';
 import '../views/screens/liste_interventions.dart';
 import '../views/screens/liste_secouristes.dart';
+import '../views/screens/admin_dashboard.dart';
 import '../views/screens/intervention_par_secouriste.dart';
 
 class RouteGenerator {
@@ -26,6 +27,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => PublicMap());
       case '/options':
         return MaterialPageRoute(builder: (_) => Protection());
+      case '/dashboard':
+        return MaterialPageRoute(builder: (_) => AdminDashboard());
       case '/listeSecouristes':
         return MaterialPageRoute(builder: (_) => ListeSecouristes());
       case '/listeInterventions':

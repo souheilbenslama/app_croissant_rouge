@@ -6,7 +6,7 @@ import 'package:app_croissant_rouge/accidentProvider.dart';
 import 'package:app_croissant_rouge/models/route_generator.dart';
 import 'package:app_croissant_rouge/models/secouriste.dart';
 import 'package:app_croissant_rouge/views/screens/Profile.dart';
-import 'package:app_croissant_rouge/views/screens/sign_in.dart';
+import 'package:app_croissant_rouge/views/screens/chat_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       //home: SignIn(),
-      //home: MapePage()
+      //home: ChatScreen()
       home: PageAlerte(),
       //home: TestNotification(),
       //home: Profile(ss),
