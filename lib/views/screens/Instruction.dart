@@ -1,6 +1,7 @@
 import 'package:app_croissant_rouge/views/screens/chat_screen.dart';
 import 'package:flutter/material.dart';
 import './MyDetailPage.dart';
+import 'package:get/get.dart';
 import 'package:app_croissant_rouge/models/Instruction.dart';
 import 'package:app_croissant_rouge/views/screens/page_alerte.dart';
 import 'package:app_croissant_rouge/views/widgets/rating.dart';
@@ -234,14 +235,17 @@ class _InstructionListState extends State<InstructionList> {
                           BoxConstraints(maxWidth: 250.0, minHeight: 50.0),
                       alignment: Alignment.center,
                       child: Text(
-                        "Terminer ",
+                        "endButton".tr,
                         textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.white, fontSize: 20),
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            letterSpacing: 2.2),
                       ),
                     ),
                   ),
                 ),
-              ),
+              )
             ]),
       ),
     );

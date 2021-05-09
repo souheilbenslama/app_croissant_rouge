@@ -12,7 +12,7 @@ import 'package:app_croissant_rouge/views/screens/chat_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-
+import 'package:app_croissant_rouge/views/screens/profile_update.dart';
 import 'views/screens/page_alerte.dart';
 
 import 'dart:convert' show json, base64, ascii;
