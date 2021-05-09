@@ -1,12 +1,12 @@
 import 'dart:collection';
+import 'package:app_croissant_rouge/accidentProvider.dart';
 import 'package:app_croissant_rouge/models/accident.dart';
-import 'package:app_croissant_rouge/views/screens/chat_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:app_croissant_rouge/views/widgets/app_bar.dart';
 import 'package:location/location.dart';
 import 'dart:async';
+import 'package:provider/provider.dart';
 
 const double CAMERA_ZOOM = 15;
 const double CAMERA_TILT = 20;
@@ -28,7 +28,7 @@ class _PublicMapState extends State<PublicMap> {
 
   Marker marker = Marker(
       markerId: MarkerId("testing"),
-      position: LatLng(37.4221, 10.9903381),
+      position: LatLng(37.4241, 10.9903381),
       infoWindow: InfoWindow(title: "test", snippet: '*'),
       onTap: () {},
       onDragEnd: (LatLng position) {},
@@ -36,7 +36,7 @@ class _PublicMapState extends State<PublicMap> {
 
   Marker marker2 = Marker(
       markerId: MarkerId("testing2"),
-      position: LatLng(38.4221, 11.9903381),
+      position: LatLng(37.4240, -122.0840),
       infoWindow: InfoWindow(title: "test2", snippet: '*'),
       onTap: () {},
       onDragEnd: (LatLng position) {},
@@ -50,6 +50,10 @@ class _PublicMapState extends State<PublicMap> {
   LocationData destinationLocation;
   // wrapper around the location API
   Location location;
+  dynamic doc;
+
+  var arguments;
+  Future<List<Accident>> accidentList;
 
   switchMapType() {
     setState(() {
@@ -93,6 +97,7 @@ class _PublicMapState extends State<PublicMap> {
   @override
   void initState() {
     super.initState();
+
     location = new Location();
     getLocation();
     // subscribe to changes in the user's location
@@ -108,6 +113,16 @@ class _PublicMapState extends State<PublicMap> {
     //setSourceAndDestinationIcons();
     // set the initial location
     getLocation();
+  }
+
+  @override
+  @protected
+  @mustCallSuper
+  // ignore: must_call_super
+  void didChangeDependencies() {
+    doc = Provider.of<AccidentProvider>(context, listen: false);
+    arguments = doc.getInterventions();
+    accidentList = arguments;
   }
 
   void showPinsOnMap() {}
@@ -138,17 +153,8 @@ class _PublicMapState extends State<PublicMap> {
 
   @override
   Widget build(BuildContext context) {
-    List<Accident> accidentList = ModalRoute.of(context).settings.arguments;
-    accidentList.forEach((element) {
-      markers.add(Marker(
-      markerId: MarkerId(element.id),
-      position: LatLng(
-      element.localisation.latitude, element.localisation.longitude),
-      infoWindow: InfoWindow(title: element.id, snippet: element.status)));
-    }); 
-
-    //markers.add(marker);
-    //markers.add(marker2);
+    markers.add(marker);
+    markers.add(marker2);
 
     CameraPosition initialCameraPosition = CameraPosition(
         zoom: CAMERA_ZOOM,
@@ -164,42 +170,69 @@ class _PublicMapState extends State<PublicMap> {
           bearing: CAMERA_BEARING);
     }
 
-    return Scaffold(
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      appBar: AppBarComponent(),
-      body: Stack(
-        children: [
-          GoogleMap(
-            myLocationEnabled: true,
-            compassEnabled: true,
-            mapType: mapType,
-            onMapCreated: (GoogleMapController controller) {
-              _controller.complete(controller);
-              // my map has completed being created;
-              // i'm ready to show the pins on the map
-              showPinsOnMap();
-            },
-            initialCameraPosition: initialCameraPosition,
-            markers: markers,
-            //circles: _markers,
-          ),
-          Align(
-            alignment: Alignment.bottomLeft,
-            child: Container(
-              margin: EdgeInsets.all(5.0),
-              decoration:
-                  BoxDecoration(shape: BoxShape.circle, color: Colors.white),
-              child: IconButton(
-                color: Colors.black,
-                onPressed: switchMapType,
-                icon: Icon(
-                  mapType == MapType.normal ? Icons.blur_circular : Icons.map,
+    return WillPopScope(
+        onWillPop: () {
+          return Navigator.of(context).pushNamed('/');
+        },
+        child: FutureBuilder(
+            future: accidentList,
+            builder: (BuildContext context, AsyncSnapshot snapshot) {
+              if (snapshot.hasData) {
+                var list = snapshot.data;
+                list.forEach((element) {
+                  print(element.localisation);
+                  markers.add(Marker(
+                      markerId: MarkerId(element.status),
+                      position: LatLng(element.localisation.latitude,
+                          element.localisation.longitude),
+                      infoWindow:
+                          InfoWindow(title: "hello", snippet: element.status)));
+                });
+              }
+
+              return Scaffold(
+                floatingActionButtonLocation:
+                    FloatingActionButtonLocation.centerDocked,
+                appBar: AppBar(
+                  automaticallyImplyLeading: true,
                 ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
+                body: Stack(
+                  children: [
+                    GoogleMap(
+                      myLocationEnabled: true,
+                      compassEnabled: true,
+                      mapType: mapType,
+                      onMapCreated: (GoogleMapController controller) {
+                        print("//////////////////////////////////////////////");
+                        _controller.complete(controller);
+                        // my map has completed being created;
+                        // i'm ready to show the pins on the map
+                        showPinsOnMap();
+                      },
+                      initialCameraPosition: initialCameraPosition,
+                      markers: markers,
+                      //circles: _markers,
+                    ),
+                    Align(
+                      alignment: Alignment.bottomLeft,
+                      child: Container(
+                        margin: EdgeInsets.all(5.0),
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle, color: Colors.white),
+                        child: IconButton(
+                          color: Colors.black,
+                          onPressed: switchMapType,
+                          icon: Icon(
+                            mapType == MapType.normal
+                                ? Icons.blur_circular
+                                : Icons.map,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            }));
   }
 }

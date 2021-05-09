@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:app_croissant_rouge/models/secouriste.dart';
 import 'package:app_croissant_rouge/models/accident.dart';
 import 'package:http/http.dart' as http;
 
@@ -8,8 +7,9 @@ const SERVER_IP = 'http://192.168.43.68:3000';
 class AccidentService {
 //get the list of interventions in progress
   static Future<List<Accident>> getInProgressInterventions() async {
-    var Client = http.Client();
-    var res = await Client.get('$SERVER_IP/accident/inprogress');
+    var client = http.Client();
+    var res = await client.get('$SERVER_IP/accident/inprogress');
+
     if (res.statusCode == 200) {
       List<dynamic> body = jsonDecode(res.body);
       List<Accident> interventionsInProgress =
@@ -24,10 +24,10 @@ class AccidentService {
 //update the intervention's status to finished
   static Future<bool> updateToFinished(int id) async {
     var updated = false;
-    var Client = http.Client();
+    var client = http.Client();
     try {
       var res =
-          await Client.put('$SERVER_IP/accident/finished/' + id.toString());
+          await client.put('$SERVER_IP/accident/finished/' + id.toString());
       if (res.statusCode == 200) {
         updated = true;
       } else if (res.statusCode == 403) {
@@ -41,7 +41,7 @@ class AccidentService {
 
 // The method to create the accident
   static Future<String> createAccident(
-      String id_temoin,
+      String idtemoin,
       String longitude,
       String latitude,
       String protectionDesc,
@@ -49,7 +49,7 @@ class AccidentService {
       String respirationDesc,
       String conscienceDesc) async {
     var res = await http.post("$SERVER_IP/accident", body: {
-      "id_temoin": id_temoin,
+      "id_temoin": idtemoin,
       "longitude": longitude,
       "latitude": latitude,
       "protectionDesc": protectionDesc,

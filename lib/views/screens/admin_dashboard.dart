@@ -44,7 +44,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
                             await AdminService.listSecourists();
                         var secouristes = [];
                         for (var i = 0; i < arraySecouristes.length; i++) {
-                          print("it is " + arraySecouristes.length.toString());
+                          // print("it is " + arraySecouristes.length.toString());
 
                           secouristes.add(arraySecouristes[i]["name"]);
                         }
@@ -97,7 +97,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
                             await AdminService.listinterventions();
                         var interventions = [];
                         for (var i = 0; i < arrayintervention.length; i++) {
-                          print("it is " + arrayintervention.length.toString());
+                          // print("it is " + arrayintervention.length.toString());
 
                           interventions.add(arrayintervention[i]["id_temoin"]);
                         }

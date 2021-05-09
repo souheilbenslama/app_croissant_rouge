@@ -1,3 +1,4 @@
+import 'package:app_croissant_rouge/views/screens/page_alerte.dart';
 import 'package:flutter/material.dart';
 
 class ActivateAccount extends StatelessWidget {
@@ -5,8 +6,21 @@ class ActivateAccount extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.redAccent[700],
         title: Text("Activate Account"),
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+          ),
+          onPressed: () {
+            Navigator.of(context).pushReplacement(
+              new MaterialPageRoute(
+                builder: (BuildContext context) => new PageAlerte(),
+              ),
+            );
+          },
+        ),
       ),
       body: Column(
         children: [

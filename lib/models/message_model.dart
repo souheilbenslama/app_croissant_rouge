@@ -62,7 +62,7 @@ List<Message> chats = [
 
 // Example chats in chat screen
 List<Message> messages = [
-  Message(
+  /*Message(
       sender: currentUser,
       time: '5:36 PM',
       text: "Aamiin",
@@ -97,5 +97,5 @@ List<Message> messages = [
       time: '7:30 PM',
       text: "Mudah-mudahan mamah cepet pulang :')",
       isLiked: false,
-      unread: true)
+      unread: true)*/
 ];

@@ -59,8 +59,10 @@ const Map<String, String> arAE = {
   "cinHint": "ادخل رقم بطاقة تعريفك الوطنية",
   "tel": "رقم الهاتف :",
   "telHint": "أدخل رقم هاتفك",
-  "adresse": "العنوان",
-  "adresseHint": "أدخل عنوانك",
+  "ageHint": "أدخل عمرك",
+  "emptyfield": "معطيات فارغة",
+  "adresse": "المحافظة",
+  "adresseHint": "أدخل محافظتك",
   "jeSuisSecouriste": "أنا منقذ",
   "errNom": "الاسم غير صحيح!",
   "errMdp": "كلمة المرور غير صحيحة!",
@@ -69,8 +71,10 @@ const Map<String, String> arAE = {
   "succes": "نجاح",
   "nomExiste": "اسم المستخدم موجود",
   "nomExiste2": "سجل الدخول اذا كان لديك حساب.",
+  "Verifdonnée": " بيانات خاطئة ", //
+  "Verifdonnée2": " يجب عليك التحقق من البيانات الخاصة بك ", //
   "errInconnue": "خطأ غير معروف.",
   "vousAvez": "هل لديك حساب؟",
-  "seConnecter": "تسجيل الدخول",
+  "seConnecter": " تسجيل الدخول",
   "croissantRouge": "الهلال الأحمر"
 };
