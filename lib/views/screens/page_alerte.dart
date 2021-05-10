@@ -4,6 +4,7 @@ import 'package:app_croissant_rouge/accidentProvider.dart';
 import 'package:app_croissant_rouge/lang/localization_service.dart';
 import 'package:app_croissant_rouge/models/secouriste.dart';
 import 'package:app_croissant_rouge/services/login_service.dart';
+import 'package:app_croissant_rouge/services/socket_service.dart';
 import 'package:app_croissant_rouge/views/screens/Profile.dart';
 import 'package:app_croissant_rouge/views/screens/activate_account.dart';
 import 'package:app_croissant_rouge/views/widgets/customized_dialog.dart';
@@ -458,8 +459,11 @@ class _PageAlerteState extends State<PageAlerte> {
                                             textSize: 13.0,
                                             onChanged: (bool state) {
                                               if (state == true) {
+                                                SocketService.connect();
                                                 subscription.resume();
                                                 updateDisponibility(true);
+
+                                                SocketService.connect();
                                               } else {
                                                 subscription.pause();
                                                 updateDisponibility(false);

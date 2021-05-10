@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
       //home: SignIn(),
       home: PageAlerte(),
       //home: InstructionList()
-      // home: PageAlerte(),
+      //home: PageAlerte(),
       //home: TestNotification(),
       //home: Profile(ss),
     );

@@ -23,7 +23,10 @@ class SocketService {
         print(message);
       });
 
-      socket.on('alerte', (data) => print(data));
+      socket.on(
+          'alerte',
+          (data) =>
+              print("good job souheil ***********************************"));
     });
 
     socket.onDisconnect((_) async {
