@@ -27,92 +27,118 @@ class _InterventionParSecouristeState extends State<InterventionParSecouriste> {
           Card(
             color: Colors.white,
             elevation: 3,
-            child: Column(
-              children: <Widget>[
-                Text(
-                  "Nom et prenom : ${widget.secouriste.name.toString()}",
-                  style: TextStyle(
-                    fontSize: 20,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  SizedBox(
+                    height: 10,
                   ),
-                ),
-                Text(
-                  "Age : ${widget.secouriste.age.toString()}",
-                  style: TextStyle(
-                    fontSize: 20,
-                  ),
-                ),
-                Text(
-                  "E-mail : ${widget.secouriste.email.toString()}",
-                  style: TextStyle(
-                    fontSize: 20,
-                  ),
-                ),
-                Text(
-                  "Numero : ${widget.secouriste.phone.toString()}",
-                  style: TextStyle(
-                    fontSize: 20,
-                  ),
-                ),
-                Text(
-                  "Adresse : ${widget.secouriste.address.toString()}",
-                  style: TextStyle(
-                    fontSize: 20,
-                  ),
-                ),
-                Text(
-                  "Code de verification : 156325",
-                  style: TextStyle(
-                    fontSize: 20,
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Column(
-                      children: <Widget>[
-                        IconButton(
-                          iconSize: 30,
-                          color: makeAdmin ? Colors.green : Colors.red,
-                          icon: Icon(Icons.person),
-                          onPressed: () {
-                            setState(() {
-                              makeAdmin = !makeAdmin;
-                            });
-                          },
-                        ),
-                        Text(
-                          makeAdmin ? "Admin" : "Normal User",
-                          style: TextStyle(
-                            fontSize: 16.0,
-                            color: makeAdmin ? Colors.green : Colors.red,
-                          ),
-                        ),
-                      ],
+                  Text(
+                    "Nom et prenom : ${widget.secouriste.name.toString()}",
+                    style: TextStyle(
+                      fontSize: 18,
                     ),
-                    Column(
-                      children: <Widget>[
-                        IconButton(
-                          iconSize: 30,
-                          color: active ? Colors.green : Colors.red,
-                          icon: Icon(active ? Icons.alarm_on : Icons.alarm_off),
-                          onPressed: () {
-                            setState(() {
-                              active = !active;
-                            });
-                          },
-                        ),
-                        Text(
-                          active ? "Activé" : "Desactivé",
-                          style: TextStyle(
-                            fontSize: 16.0,
-                            color: active ? Colors.green : Colors.red,
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    "Age : ${widget.secouriste.age.toString()}",
+                    style: TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    "E-mail : ${widget.secouriste.email.toString()}",
+                    style: TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    "Numero : ${widget.secouriste.phone.toString()}",
+                    style: TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    "Adresse : ${widget.secouriste.address.toString()}",
+                    style: TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    "Code de verification : 156325",
+                    style: TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Column(
+                        children: <Widget>[
+                          IconButton(
+                            iconSize: 30,
+                            color: makeAdmin ? Colors.green : Colors.red,
+                            icon: Icon(Icons.person),
+                            onPressed: () {
+                              setState(() {
+                                makeAdmin = !makeAdmin;
+                              });
+                            },
                           ),
-                        ),
-                      ],
-                    )
-                  ],
-                )
-              ],
+                          Text(
+                            makeAdmin ? "Admin" : "Normal User",
+                            style: TextStyle(
+                              fontSize: 16.0,
+                              color: makeAdmin ? Colors.green : Colors.red,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Column(
+                        children: <Widget>[
+                          IconButton(
+                            iconSize: 30,
+                            color: active ? Colors.green : Colors.red,
+                            icon:
+                                Icon(active ? Icons.alarm_on : Icons.alarm_off),
+                            onPressed: () {
+                              setState(() {
+                                active = !active;
+                              });
+                            },
+                          ),
+                          Text(
+                            active ? "Activé" : "Desactivé",
+                            style: TextStyle(
+                              fontSize: 16.0,
+                              color: active ? Colors.green : Colors.red,
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  )
+                ],
+              ),
             ),
           ),
           Container(
