@@ -1,6 +1,6 @@
 import 'package:app_croissant_rouge/views/screens/Conscience.dart';
 import 'package:app_croissant_rouge/views/screens/Conscience2.dart';
-import 'package:app_croissant_rouge/views/screens/Protection.dart';
+import 'package:app_croissant_rouge/views/screens/etapes.dart';
 import 'package:app_croissant_rouge/views/screens/Respiration.dart';
 import 'package:app_croissant_rouge/views/screens/etouffement.dart';
 import 'package:app_croissant_rouge/views/screens/listeDesCas.dart';
@@ -61,7 +61,7 @@ class Respire extends StatelessWidget {
                     } else {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => Protection()),
+                        MaterialPageRoute(builder: (context) => StepList()),
                       );
                     }
                   },

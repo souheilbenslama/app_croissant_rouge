@@ -2,13 +2,10 @@ import 'package:app_croissant_rouge/views/screens/chat_screen.dart';
 import 'package:flutter/material.dart';
 import './MyDetailPage.dart';
 import 'package:get/get.dart';
-<<<<<<< HEAD
 import 'package:app_croissant_rouge/models/Instruction.dart';
 import 'package:app_croissant_rouge/views/screens/page_alerte.dart';
 import 'package:app_croissant_rouge/views/widgets/rating.dart';
-=======
 import 'package:app_croissant_rouge/views/screens/page_alerte.dart';
->>>>>>> sprint9/Etapes
 
 class InstructionList extends StatefulWidget {
   @override
