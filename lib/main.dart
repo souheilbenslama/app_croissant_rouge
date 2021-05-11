@@ -10,6 +10,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'views/screens/page_alerte.dart';
+<<<<<<< HEAD
+=======
+import 'package:app_croissant_rouge/views/screens/etapes.dart';
+import 'dart:convert' show json, base64, ascii;
+>>>>>>> sprint9/Etapes
 import './views/screens/page_alerte.dart';
 
 void main() {
