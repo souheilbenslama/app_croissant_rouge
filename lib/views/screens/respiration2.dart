@@ -1,6 +1,8 @@
 import 'package:app_croissant_rouge/views/screens/Conscience.dart';
 import 'package:app_croissant_rouge/views/screens/Conscience2.dart';
 import 'package:app_croissant_rouge/views/screens/etapes.dart';
+import 'package:app_croissant_rouge/views/screens/page_alerte.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:app_croissant_rouge/views/screens/Respiration.dart';
 import 'package:app_croissant_rouge/views/screens/etouffement.dart';
 import 'package:app_croissant_rouge/views/screens/listeDesCas.dart';
@@ -94,7 +96,7 @@ class Respire extends StatelessWidget {
                 width: 205.5,
                 margin: EdgeInsets.only(),
                 child: RaisedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     final doc =
                         Provider.of<AccidentProvider>(context, listen: false);
                     bool conscient = doc.conscient;
@@ -105,9 +107,11 @@ class Respire extends StatelessWidget {
                         MaterialPageRoute(builder: (context) => Etouffement()),
                       );
                     } else {
-                      Navigator.push(
+                      const number = '198';
+                      await FlutterPhoneDirectCaller.callNumber(number);
+                      Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (context) => Respiration()),
+                        MaterialPageRoute(builder: (context) => PageAlerte()),
                       );
                     }
                   },
