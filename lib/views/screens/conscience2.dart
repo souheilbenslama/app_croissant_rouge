@@ -33,9 +33,9 @@ class Conscient extends StatelessWidget {
                 //fontWeight: FontWeight.bold,
                 fontStyle: FontStyle.italic,
               )),
-          SizedBox(
-            height: 120,
-          ),
+          //SizedBox(
+          //  height: 120,
+          //),
           Row(
             children: [
               Container(

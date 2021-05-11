@@ -21,21 +21,22 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-        translations: LocalizationService(),
-        locale: Locale('fr', 'FR'),
-        fallbackLocale: Locale('fr', 'FR'),
-        debugShowCheckedModeBanner: false,
-        title: '',
-        initialRoute: '/',
-        onGenerateRoute: RouteGenerator.generateRoute,
-        theme: ThemeData(
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-        ),
-        //home: SignIn(),
-        //home: MapePage()
-        //home: PageAlerte(),
-        //home: TestNotification(),
-        //home: Profile(ss),
-        home: Conscient());
+      translations: LocalizationService(),
+      locale: Locale('fr', 'FR'),
+      fallbackLocale: Locale('fr', 'FR'),
+      debugShowCheckedModeBanner: false,
+      title: '',
+      initialRoute: '/',
+      onGenerateRoute: RouteGenerator.generateRoute,
+      theme: ThemeData(
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
+      //home: SignIn(),
+      //home: MapePage()
+      home: PageAlerte(),
+      //home: TestNotification(),
+      //home: Profile(ss),
+      //home: Conscient()
+    );
   }
 }

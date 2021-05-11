@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../views/screens/page_alerte.dart';
 import '../views/screens/map_page.dart';
-import '../views/screens/protection.dart';
+import '../views/screens/conscience2.dart';
 import '../views/screens/sign_in.dart';
 
 import '../views/screens/admin_dashboard.dart';
@@ -23,7 +23,7 @@ class RouteGenerator {
       case '/publicmap':
         return MaterialPageRoute(builder: (_) => PublicMap());
       case '/options':
-        return MaterialPageRoute(builder: (_) => Protection());
+        return MaterialPageRoute(builder: (_) => Conscient());
       case '/dashboard':
         return MaterialPageRoute(builder: (_) => AdminDashboard());
       case '/interventionParSecouriste':
