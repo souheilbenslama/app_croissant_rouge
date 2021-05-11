@@ -1,10 +1,11 @@
 import 'package:app_croissant_rouge/views/screens/etouffement2.dart';
+import 'package:app_croissant_rouge/views/screens/listeDesCas.dart';
 import 'package:app_croissant_rouge/views/screens/respiration2.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../accidentProvider.dart';
 
-class Etouffement extends StatelessWidget {
+class Malaise extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,11 +27,11 @@ class Etouffement extends StatelessWidget {
           SizedBox(
             height: 50,
           ),
-          Text("Est-ce que la victime tousse ou emet un son?",
+          Text("La victime est-elle consciente et ne se sent pas bien?",
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.black.withOpacity(0.8),
-                fontSize: 60,
+                fontSize: 50,
                 //fontWeight: FontWeight.bold,
                 fontStyle: FontStyle.italic,
               )),
@@ -77,7 +78,7 @@ class Etouffement extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Etouffement2()),
+                      MaterialPageRoute(builder: (context) => ListeCas()),
                     );
                   },
                   shape: RoundedRectangleBorder(
