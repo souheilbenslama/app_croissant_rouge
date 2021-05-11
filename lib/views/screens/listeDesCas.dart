@@ -1,3 +1,7 @@
+import 'package:app_croissant_rouge/views/screens/brulure.dart';
+import 'package:app_croissant_rouge/views/screens/hemorragieExterne.dart';
+import 'package:app_croissant_rouge/views/screens/malaise.dart';
+import 'package:app_croissant_rouge/views/screens/plaies.dart';
 import 'package:flutter/material.dart';
 
 class ListeCas extends StatelessWidget {
@@ -43,7 +47,7 @@ class ListeCas extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => ListeCas()),
+                    MaterialPageRoute(builder: (context) => Malaise()),
                   );
                 },
                 shape: RoundedRectangleBorder(
@@ -81,7 +85,8 @@ class ListeCas extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => ListeCas()),
+                    MaterialPageRoute(
+                        builder: (context) => HemorragieExterne()),
                   );
                 },
                 shape: RoundedRectangleBorder(
@@ -119,7 +124,7 @@ class ListeCas extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => ListeCas()),
+                    MaterialPageRoute(builder: (context) => Plaies()),
                   );
                 },
                 shape: RoundedRectangleBorder(
@@ -157,7 +162,7 @@ class ListeCas extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => ListeCas()),
+                    MaterialPageRoute(builder: (context) => Brulure()),
                   );
                 },
                 shape: RoundedRectangleBorder(

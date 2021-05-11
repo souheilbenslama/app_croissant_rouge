@@ -12,10 +12,16 @@ class AccidentProvider with ChangeNotifier {
   String longitude;
   bool respire;
   bool conscient;
+  String description; //cas
   List<ChoixConscience> choixConscience = [];
   List<ChoixHemorragie> choixHemorragie = [];
   List<ChoixRespiration> choixRespiration = [];
   List<ChoixProtection> choixProtection = [];
+
+  setDescription(String cas) {
+    this.description = cas;
+    notifyListeners();
+  }
 
   setLatitude(String latitude) {
     this.latitude = latitude;
@@ -66,7 +72,8 @@ class AccidentProvider with ChangeNotifier {
       "latitude": latitude.toString(),
       "longitude": longitude.toString(),
       "respire": this.respire,
-      "conscient": this.conscient
+      "conscient": this.conscient,
+      "description": this.description
     };
   }
 
