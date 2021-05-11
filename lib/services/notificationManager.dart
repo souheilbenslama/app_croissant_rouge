@@ -57,13 +57,11 @@ class NotificationManager {
 
   Future<void> showNotification() async {
     var androidChannel = AndroidNotificationDetails(
-      'CHANNEL_ID',
-      'CHANNEL_NAME',
-      'CHANNEL_DESCRIPTION',
-      importance: Importance.Max,
-      priority: Priority.High,
-      playSound: true,
-    );
+        'CHANNEL_ID', 'CHANNEL_NAME', 'CHANNEL_DESCRIPTION',
+        importance: Importance.Max,
+        priority: Priority.High,
+        playSound: true,
+        sound: RawResourceAndroidNotificationSound('test3'));
 
     var iosChannel = IOSNotificationDetails();
     var platformChannel = NotificationDetails(androidChannel, iosChannel);

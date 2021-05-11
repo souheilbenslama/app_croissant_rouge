@@ -3,12 +3,14 @@ import 'package:app_croissant_rouge/accidentProvider.dart';
 import 'package:app_croissant_rouge/models/route_generator.dart';
 import 'package:app_croissant_rouge/models/secouriste.dart';
 import 'package:app_croissant_rouge/services/navigation_service.dart';
+import 'package:app_croissant_rouge/services/socket_service.dart';
 import 'package:app_croissant_rouge/views/screens/Respiration.dart';
 import 'package:app_croissant_rouge/views/screens/conscience2.dart';
 import 'package:app_croissant_rouge/views/screens/Profile.dart';
 import 'package:app_croissant_rouge/views/screens/map_page.dart';
 import 'package:app_croissant_rouge/views/screens/public_map.dart';
 import 'package:app_croissant_rouge/views/screens/sign_in.dart';
+import 'package:app_croissant_rouge/views/screens/testNotification.dart';
 import 'package:app_croissant_rouge/views/screens/test_map.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:app_croissant_rouge/views/screens/test_messaging.dart';
@@ -27,7 +29,44 @@ void main() {
       create: (context) => AccidentProvider(), child: MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    // TODO: implement dispose
+    super.dispose();
+  }
+
+// tracking if the app is in background or foreground
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    // TODO: implement didChangeAppLifecycleState
+    super.didChangeAppLifecycleState(state);
+
+    if (state == AppLifecycleState.inactive ||
+        state == AppLifecycleState.detached) return;
+
+    final isBackground = state == AppLifecycleState.paused;
+
+    if (isBackground) {
+      SocketService.status = false;
+    } else {
+      SocketService.status = true;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     GetIt locator = GetIt.instance;

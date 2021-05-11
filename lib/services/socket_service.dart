@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:app_croissant_rouge/locator.dart';
 import 'package:app_croissant_rouge/services/navigation_service.dart';
+import 'package:app_croissant_rouge/services/notificationManager.dart';
 import 'package:app_croissant_rouge/views/widgets/notification_dialog.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:app_croissant_rouge/models/secouriste.dart';
@@ -10,6 +11,7 @@ import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:socket_io_client/socket_io_client.dart';
 
 class SocketService {
+  static bool status = true;
   static IO.Socket socket =
       IO.io('http://192.168.43.68:3000', <String, dynamic>{
     'transports': ['websocket'],
@@ -27,7 +29,7 @@ class SocketService {
         print(message);
       });
 
-      socket.on('alerte', (data) {
+      socket.on('alerte', (data) async {
         print("good job souheil ***********************************");
 
         BotToast.showCustomNotification(
@@ -164,6 +166,9 @@ class SocketService {
                     ),
                   ));
             });
+        if (!status) {
+          await notificationManager.showNotification();
+        }
         /*BotToast.showAttachedWidget(
             attachedBuilder: (_) => Card(
                   child: Padding(
