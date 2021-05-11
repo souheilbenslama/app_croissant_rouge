@@ -43,6 +43,9 @@ dependencies:
   rxdart:
   jwt_decoder: ^1.0.4
   flutter_spinkit: "^4.1.2"
+  fluttertoast: ^7.1.1
+  bot_toast: ^3.0.5
+  get_it: ^5.0.2
   get:
   get_storage:
   

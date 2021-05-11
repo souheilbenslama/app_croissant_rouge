@@ -1,6 +1,7 @@
 import 'dart:collection';
 import 'package:app_croissant_rouge/accidentProvider.dart';
 import 'package:app_croissant_rouge/models/accident.dart';
+import 'package:app_croissant_rouge/views/widgets/app_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/material.dart';
@@ -193,9 +194,7 @@ class _PublicMapState extends State<PublicMap> {
               return Scaffold(
                 floatingActionButtonLocation:
                     FloatingActionButtonLocation.centerDocked,
-                appBar: AppBar(
-                  automaticallyImplyLeading: true,
-                ),
+                appBar: AppBarComponent(),
                 body: Stack(
                   children: [
                     GoogleMap(

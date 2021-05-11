@@ -325,20 +325,20 @@ class _PageAlerteState extends State<PageAlerte> {
                             ),
                           ),
                           SizedBox(
-                            height: MediaQuery.of(context).size.height / 20,
+                            height: MediaQuery.of(context).size.height / 30,
                           ),
                           isSecouriste() && isActivated()
                               ? Container(
-                                  height: 50.0,
+                                  height: 60.0,
                                   width: 140.0,
                                   margin: EdgeInsets.all(20),
                                   child: RaisedButton(
                                     onPressed: () async {
                                       var arguments =
                                           await doc.getInterventions();
-                                      Navigator.of(context)
-                                          .pushReplacementNamed('/publicmap',
-                                              arguments: arguments);
+                                      Navigator.of(context).pushNamed(
+                                          '/publicmap',
+                                          arguments: arguments);
                                     },
                                     shape: RoundedRectangleBorder(
                                         borderRadius:
@@ -417,73 +417,125 @@ class _PageAlerteState extends State<PageAlerte> {
                                     ),
                                   ),
                                 )),
-                          if (isSecouriste() && isActivated())
-                            FutureBuilder(
-                                future: currentlocation,
-                                builder: (BuildContext context,
-                                    AsyncSnapshot<LocationData>
-                                        locationsnapshot) {
-                                  if (locationsnapshot.hasData) {
-                                    this.localisation = locationsnapshot.data;
+                          (isSecouriste() && isActivated())
+                              ? FutureBuilder(
+                                  future: currentlocation,
+                                  builder: (BuildContext context,
+                                      AsyncSnapshot<LocationData>
+                                          locationsnapshot) {
+                                    if (locationsnapshot.hasData) {
+                                      this.localisation = locationsnapshot.data;
 
-                                    var subscription = location
-                                        .onLocationChanged
-                                        .listen((LocationData cLoc) {
-                                      // cLoc contains the lat and long of the
-                                      // current user's position in real time,
-                                      // so we're holding on to it
-                                      this.localisation = cLoc;
-                                      print(this.localisation);
-                                      print(
-                                          "///////////////////////////////////////////////${cLoc.latitude}");
-                                      print(
-                                          "///////////////////////////////////////////////${cLoc.longitude}");
-                                      updateLocation(
-                                          this.localisation.longitude,
-                                          this.localisation.latitude);
-                                    });
+                                      var subscription = location
+                                          .onLocationChanged
+                                          .listen((LocationData cLoc) {
+                                        // cLoc contains the lat and long of the
+                                        // current user's position in real time,
+                                        // so we're holding on to it
+                                        this.localisation = cLoc;
+                                        print(this.localisation);
+                                        print(
+                                            "///////////////////////////////////////////////${cLoc.latitude}");
+                                        print(
+                                            "///////////////////////////////////////////////${cLoc.longitude}");
+                                        updateLocation(
+                                            this.localisation.longitude,
+                                            this.localisation.latitude);
+                                      });
 
-                                    return Padding(
-                                        padding: EdgeInsets.only(),
-                                        child: Container(
-                                          height: 55,
-                                          width: 155,
-                                          child: LiteRollingSwitch(
-                                            value: false,
-                                            textOn: 'Available',
-                                            textOff: 'Not Available',
-                                            colorOn: Colors.green,
-                                            colorOff: Colors.red[700],
-                                            iconOn: Icons.done,
-                                            iconOff: Icons.alarm_off,
-                                            textSize: 13.0,
-                                            onChanged: (bool state) {
-                                              if (state == true) {
-                                                SocketService.connect();
-                                                subscription.resume();
-                                                updateDisponibility(true);
-
-                                                SocketService.connect();
-                                              } else {
-                                                subscription.pause();
-                                                updateDisponibility(false);
-                                              }
-                                            },
+                                      return Padding(
+                                          padding: EdgeInsets.only(),
+                                          child: Container(
+                                            height: 55,
+                                            width: 155,
+                                            child: LiteRollingSwitch(
+                                              value: false,
+                                              textOn: 'Available',
+                                              textOff: 'Not Available',
+                                              colorOn: Colors.green,
+                                              colorOff: Colors.red[700],
+                                              iconOn: Icons.done,
+                                              iconOff: Icons.alarm_off,
+                                              textSize: 13.0,
+                                              onChanged: (bool state) {
+                                                if (state == true) {
+                                                  SocketService.connect();
+                                                  subscription.resume();
+                                                  updateDisponibility(true);
+                                                } else {
+                                                  subscription.pause();
+                                                  updateDisponibility(false);
+                                                }
+                                              },
+                                            ),
+                                          ));
+                                    } else {
+                                      return Container(
+                                          color: Colors.white,
+                                          child: Align(
+                                              alignment: Alignment.center,
+                                              child: Center(
+                                                  child: SpinKitFadingCircle(
+                                                color: Colors.grey[800],
+                                                size: 80,
+                                              ))));
+                                    }
+                                  })
+                              :
+                              //DOCUMENTATION
+                              Container(
+                                  height: 55.0,
+                                  width: 150.0,
+                                  margin: EdgeInsets.only(),
+                                  child: RaisedButton(
+                                    onPressed: () async {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (_) => Scaffold(
+                                            appBar: AppBar(
+                                              title:
+                                                  const Text('Documentation'),
+                                              backgroundColor:
+                                                  Colors.redAccent[700],
+                                            ),
+                                            body: PDF().fromAsset(
+                                                'assets/file/dummy.pdf'),
                                           ),
-                                        ));
-                                  } else {
-                                    return Container(
-                                        color: Colors.white,
-                                        child: Align(
-                                            alignment: Alignment.center,
-                                            child: Center(
-                                                child: SpinKitFadingCircle(
-                                              color: Colors.grey[800],
-                                              size: 80,
-                                            ))));
-                                  }
-                                }),
-
+                                        ),
+                                      );
+                                    },
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(100.0)),
+                                    padding: EdgeInsets.all(0.0),
+                                    child: Ink(
+                                      decoration: BoxDecoration(
+                                          gradient: LinearGradient(
+                                            colors: [
+                                              Color(0xFFe84f4c),
+                                              Color(0xFFe2231e)
+                                            ],
+                                            begin: Alignment.centerRight,
+                                            end: Alignment.centerLeft,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(30.0)),
+                                      child: Container(
+                                        constraints: BoxConstraints(
+                                            maxWidth: 250.0, minHeight: 50.0),
+                                        alignment: Alignment.center,
+                                        child: Text(
+                                          "documentation".tr,
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 15),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
                           //CONTACTER NOUS
                           Container(
                             margin: EdgeInsets.only(),
@@ -520,55 +572,6 @@ class _PageAlerteState extends State<PageAlerte> {
                                   alignment: Alignment.center,
                                   child: Text(
                                     "contacter".tr,
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 15),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                          //DOCUMENTATION
-                          Container(
-                            height: 55.0,
-                            width: 150.0,
-                            margin: EdgeInsets.only(),
-                            child: RaisedButton(
-                              onPressed: () async {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (_) => Scaffold(
-                                      appBar: AppBar(
-                                        title: const Text('Documentation'),
-                                        backgroundColor: Colors.redAccent[700],
-                                      ),
-                                      body: PDF()
-                                          .fromAsset('assets/file/dummy.pdf'),
-                                    ),
-                                  ),
-                                );
-                              },
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(100.0)),
-                              padding: EdgeInsets.all(0.0),
-                              child: Ink(
-                                decoration: BoxDecoration(
-                                    gradient: LinearGradient(
-                                      colors: [
-                                        Color(0xFFe84f4c),
-                                        Color(0xFFe2231e)
-                                      ],
-                                      begin: Alignment.centerRight,
-                                      end: Alignment.centerLeft,
-                                    ),
-                                    borderRadius: BorderRadius.circular(30.0)),
-                                child: Container(
-                                  constraints: BoxConstraints(
-                                      maxWidth: 250.0, minHeight: 50.0),
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    "documentation".tr,
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 15),
