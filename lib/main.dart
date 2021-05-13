@@ -7,6 +7,9 @@ import 'package:app_croissant_rouge/services/socket_service.dart';
 import 'package:app_croissant_rouge/views/screens/Respiration.dart';
 import 'package:app_croissant_rouge/views/screens/conscience2.dart';
 import 'package:app_croissant_rouge/views/screens/Profile.dart';
+import 'package:app_croissant_rouge/views/screens/hemorragieExterneListe.dart';
+import 'package:app_croissant_rouge/views/screens/listeMalaise.dart';
+import 'package:app_croissant_rouge/views/screens/malaiseDiabetique.dart';
 import 'package:app_croissant_rouge/views/screens/map_page.dart';
 import 'package:app_croissant_rouge/views/screens/public_map.dart';
 import 'package:app_croissant_rouge/views/screens/sign_in.dart';
@@ -92,7 +95,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       home: PageAlerte(),
       //home: TestNotification(),
       //home: Profile(ss),
-      //home: Conscient()
+      //home: ListeMalaise()
     );
   }
 }
