@@ -31,18 +31,19 @@ class HemorragieExterne extends StatelessWidget {
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.black.withOpacity(0.8),
-                fontSize: 40,
+                fontSize: 30,
                 //fontWeight: FontWeight.bold,
                 fontStyle: FontStyle.italic,
               )),
           SizedBox(
-            height: 120,
+            height: 20,
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                height: 100.0,
-                width: 205.5,
+                height: 60.0,
+                width: 130.0,
                 margin: EdgeInsets.only(),
                 child: RaisedButton(
                   onPressed: null,
@@ -64,15 +65,18 @@ class HemorragieExterne extends StatelessWidget {
                       child: Text(
                         "Oui",
                         textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.white, fontSize: 50),
+                        style: TextStyle(color: Colors.white, fontSize: 30),
                       ),
                     ),
                   ),
                 ),
               ),
+              SizedBox(
+                width: 5,
+              ),
               Container(
-                height: 100.0,
-                width: 205.5,
+                height: 60.0,
+                width: 130.0,
                 margin: EdgeInsets.only(),
                 child: RaisedButton(
                   onPressed: () {
@@ -99,7 +103,7 @@ class HemorragieExterne extends StatelessWidget {
                       child: Text(
                         "Non",
                         textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.white, fontSize: 50),
+                        style: TextStyle(color: Colors.white, fontSize: 30),
                       ),
                     ),
                   ),

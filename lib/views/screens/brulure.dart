@@ -29,7 +29,7 @@ class Brulure extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.black.withOpacity(0.8),
-                  fontSize: 50,
+                  fontSize: 30,
                   //fontWeight: FontWeight.bold,
                   fontStyle: FontStyle.italic,
                 )),
@@ -37,7 +37,7 @@ class Brulure extends StatelessWidget {
               height: 50,
             ),
             Container(
-              height: 100,
+              height: 60.0,
               width: 190,
               margin: EdgeInsets.only(),
               child: RaisedButton(
@@ -60,7 +60,7 @@ class Brulure extends StatelessWidget {
                     child: Text(
                       "Brûlure simple",
                       textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.white, fontSize: 30),
+                      style: TextStyle(color: Colors.white, fontSize: 20),
                     ),
                   ),
                 ),
@@ -70,7 +70,7 @@ class Brulure extends StatelessWidget {
               height: 15,
             ),
             Container(
-              height: 100,
+              height: 60.0,
               width: 190,
               margin: EdgeInsets.only(),
               child: RaisedButton(
@@ -93,7 +93,7 @@ class Brulure extends StatelessWidget {
                     child: Text(
                       "Brûlure grave",
                       textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.white, fontSize: 30),
+                      style: TextStyle(color: Colors.white, fontSize: 20),
                     ),
                   ),
                 ),
