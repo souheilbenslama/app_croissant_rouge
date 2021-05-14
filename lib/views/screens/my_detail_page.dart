@@ -18,7 +18,7 @@ class Details extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               SizedBox(
-                height: 150,
+                height: 60,
               ),
               ClipRRect(
                   child: Hero(

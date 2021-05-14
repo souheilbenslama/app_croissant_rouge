@@ -76,6 +76,7 @@ class _StepListState extends State<StepList> {
           child: Image.asset(
             'assets/images/${instruction.img}',
             height: 50.0,
+            width: 50.0,
           ),
         ),
       ),
@@ -99,7 +100,7 @@ class _StepListState extends State<StepList> {
       //appBar
       appBar: AppBar(
         title: Center(
-            child: Text('Position Latérale de sécurité',
+            child: Text('Perte de connaissance-PLS',
                 textAlign: TextAlign.center, style: TextStyle(fontSize: 20))),
         backgroundColor: Colors.redAccent[700],
         automaticallyImplyLeading: true,
@@ -114,6 +115,7 @@ class _StepListState extends State<StepList> {
       body: SingleChildScrollView(
         physics: ScrollPhysics(),
         child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               ListView.builder(

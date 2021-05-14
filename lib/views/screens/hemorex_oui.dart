@@ -1,16 +1,17 @@
 import 'package:app_croissant_rouge/views/screens/chat_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'my_detail_page.dart';
 import 'package:app_croissant_rouge/models/Instruction.dart';
 import 'package:get/get.dart';
 import 'package:app_croissant_rouge/views/screens/page_alerte.dart';
 
-class EtoufNon extends StatefulWidget {
+class HemorexOui extends StatefulWidget {
   @override
-  _EtoufNonState createState() => _EtoufNonState();
+  _HemorexOuiState createState() => _HemorexOuiState();
 }
 
-class _EtoufNonState extends State<EtoufNon> {
+class _HemorexOuiState extends State<HemorexOui> {
   List<Widget> _instructionTiles = [];
   final GlobalKey _listKey = GlobalKey();
 
@@ -23,20 +24,25 @@ class _EtoufNonState extends State<EtoufNon> {
   void _addInstructions() {
     List<Instruction> _instructions = [
       Instruction(
-          title: 'Adule-Enfant'.tr,
-          img: 'adultkid11.png',
+          title: 'Hémorragie au travers d’un plaie',
+          img: 'b1.png',
           steps:
-              "-Donner 5 claques vigoureuse sur le dos.\n-Donner 5 compressions abdominale avec la pomme de la main.\n-Recommencer les 5 claques et les 5 compressions jusqu’à l’apparition de la toux."),
+              "-Comprimer immédiatement et fortement l’endroit qui saigne avec votre main.\n-Allonger la victime.\n-Alerter les secours.\n-Surveiller la victime et parler avec elle régulièrement.  "),
       Instruction(
-          title: 'Enceinte'.tr,
-          img: 'pregnant.png',
+          title: 'La victime vomit ou crache du sang ',
+          img: 'b2.png',
           steps:
-              "-Donner 5 claques vigoureuse sur le dos.\n-Donner 5 compressions du thorax avec la pomme de la main.  \n-Recommencer les 5 claques et les 5 compressions jusqu’à l’apparition de la toux."),
+              "-Si la victime est CONSCIENTE :La mettre à la position ou elle se sent le mieux.\n-Si la victime est INCONSCIENTE: La mettre allongée sur le coté.\n-Alerter les secours.\n-Appliquer les consignes du service des secours.\n-Conserver les vomissements ou les crachés si possible.\n-Surveiller la victime et parler avec elle régulièrement."),
       Instruction(
-          title: 'Nourrison'.tr,
-          img: 'infant.png',
+          title: 'La victime saigne du nez',
+          img: 'b3.png',
           steps:
-              "-Donner 5 claques vigoureuse sur le dos.\n-Donner 5 compressions du thorax avec 2 doigts. \n-Recommencer les 5 claques et les 5 compressions jusqu’à l’apparition de la toux."),
+              "-Faire asseoir la victime tête penchée en avant.\n-Lui demander de se moucher vigoureusement.\n-Lui demander de se comprimer les narines pendant 10 minutes.\n"),
+      Instruction(
+          title: 'La victime perd du sang d’un orifice naturel'.tr,
+          img: 'b4.png',
+          steps:
+              "-La victime perd du sang d’un orifice naturel.\n-Allonger la victime.\n-Alerter les secours.\n-Appliquer les consignes du service des secours.\n-Surveiller la victime et parler avec elle régulièrement."),
     ];
 
     _instructions.forEach((Instruction instruction) {
@@ -95,17 +101,24 @@ class _EtoufNonState extends State<EtoufNon> {
           icon: Icon(Icons.arrow_back),
           onPressed: () {},
         ),
+        title: Center(child: Text('Saignement'.tr)),
         backgroundColor: Colors.redAccent[700],
-        title: Text('Etouffement'),
       ),
       body: SingleChildScrollView(
         physics: ScrollPhysics(),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             SizedBox(
-              height: 200,
+              height: 25,
+            ),
+            Material(
+              child: Text(
+                '-Assurez vous que la victime est en sécurité (isoler la des risques).\n\n-Portez des gants ou glisser votre main dans un sac plastique imperméable (protégez vous).\n ',
+                style: TextStyle(fontSize: 20, color: Colors.grey[600]),
+                textAlign: TextAlign.center,
+              ),
             ),
             ListView.builder(
                 physics: NeverScrollableScrollPhysics(),
@@ -115,12 +128,6 @@ class _EtoufNonState extends State<EtoufNon> {
                 itemBuilder: (context, index) {
                   return _instructionTiles[index];
                 }), //CONTACTER NOUS
-            Container(
-              padding: EdgeInsets.only(top: 60),
-              height: 120.0,
-              width: 150.0,
-              //margin: EdgeInsets.all(20),
-            ),
           ],
         ),
       ),

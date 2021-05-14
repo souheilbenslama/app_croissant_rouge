@@ -11,6 +11,7 @@ import 'package:app_croissant_rouge/views/screens/profile_update.dart';
 import 'views/screens/page_alerte.dart';
 import 'package:app_croissant_rouge/views/screens/etapes.dart';
 import 'package:app_croissant_rouge/views/screens/etouffement_oui.dart';
+import 'package:app_croissant_rouge/views/screens/hemorex_oui.dart';
 import 'package:app_croissant_rouge/views/screens/etouffement_non.dart';
 import 'dart:convert' show json, base64, ascii;
 import './views/screens/page_alerte.dart';
@@ -43,7 +44,8 @@ class MyApp extends StatelessWidget {
       //home: TestNotification(),
       //home: ProfileUpdate(),
       //home: StepList(),
-      home: EtoufOui(),
+      //home: EtoufOui(),
+      home: HemorexOui(),
     );
   }
 }
