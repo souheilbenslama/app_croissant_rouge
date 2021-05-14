@@ -15,6 +15,12 @@ class ProfileUpdate extends StatefulWidget {
 }
 
 class _ProfileUpdateState extends State<ProfileUpdate> {
+  TextEditingController namecontroller;
+
+  TextEditingController emailcontroller;
+  TextEditingController phonecontroller;
+  TextEditingController agecontroller;
+  TextEditingController gouvernoratcontroller;
   String error = "";
   updateProfile(String email, String name, String cin, String phone,
       String address, String age) async {
@@ -44,18 +50,20 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    TextEditingController namecontroller =
-        TextEditingController(text: this.widget.secouriste.name);
-    TextEditingController emailcontroller =
-        TextEditingController(text: this.widget.secouriste.email);
-    TextEditingController phonecontroller =
-        TextEditingController(text: this.widget.secouriste.phone);
-    TextEditingController agecontroller =
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    namecontroller = TextEditingController(text: this.widget.secouriste.name);
+    emailcontroller = TextEditingController(text: this.widget.secouriste.email);
+    phonecontroller = TextEditingController(text: this.widget.secouriste.phone);
+    agecontroller =
         TextEditingController(text: this.widget.secouriste.age.toString());
-    TextEditingController gouvernoratcontroller =
+    gouvernoratcontroller =
         TextEditingController(text: this.widget.secouriste.gouvernorat);
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,

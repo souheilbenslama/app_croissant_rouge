@@ -419,6 +419,10 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.redAccent[700],
+        title: Text("Sign Up".tr),
+      ),
       body: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
         child: Stack(

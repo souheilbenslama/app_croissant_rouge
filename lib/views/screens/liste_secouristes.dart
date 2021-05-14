@@ -1,5 +1,8 @@
+import 'package:app_croissant_rouge/models/secouriste.dart';
+import 'package:app_croissant_rouge/views/screens/intervention_par_secouriste.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lite_rolling_switch/lite_rolling_switch.dart';
 
 class ListeSecouristes extends StatefulWidget {
   final secouristes;
@@ -9,15 +12,6 @@ class ListeSecouristes extends StatefulWidget {
 }
 
 class _ListeSecouristesState extends State<ListeSecouristes> {
-  var secouristes = [
-    "Polly Blair",
-    "Eleanor Leonard",
-    "Sydney Ramos",
-    "Georgia Miller",
-    "Austin Miller",
-    "Paul Mayor",
-    "John Doe",
-  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,29 +19,39 @@ class _ListeSecouristesState extends State<ListeSecouristes> {
         backgroundColor: Colors.redAccent[700],
         title: Text("listeSec".tr),
       ),
-      body: ListView.builder(
-        itemCount: widget.secouristes.length,
-        itemBuilder: (context, index) {
-          return GestureDetector(
-            onTap: () {
-              Navigator.of(context).pushNamed('/interventionParSecouriste');
-            },
-            child: Card(
-              color: Colors.white,
-              elevation: 3,
-              child: ListTile(
-                title: Text(
-                  widget.secouristes[index] != null
-                      ? widget.secouristes[index]
-                      : "none",
-                  style: TextStyle(
-                    fontSize: 20,
+      body: Container(
+        padding: EdgeInsets.all(10),
+        child: ListView.builder(
+          itemCount: widget.secouristes.length,
+          itemBuilder: (BuildContext context, int index) {
+            return Container(
+              height: 40,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => InterventionParSecouriste(
+                        secouriste: widget.secouristes[index],
+                      ),
+                    ),
+                  );
+                },
+                child: Card(
+                  elevation: 3,
+                  child: Text(
+                    widget.secouristes[index].name.toString(),
+                    style: TextStyle(
+                        color: Colors.grey[700],
+                        fontSize: 20,
+                        letterSpacing: 0.3,
+                        height: 1.3),
                   ),
                 ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }

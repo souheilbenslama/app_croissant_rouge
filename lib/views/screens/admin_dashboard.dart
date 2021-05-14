@@ -1,7 +1,9 @@
+import 'package:app_croissant_rouge/models/secouriste.dart';
 import 'package:app_croissant_rouge/services/admin_service.dart';
 import 'package:app_croissant_rouge/views/screens/liste_interventions.dart';
 import 'package:app_croissant_rouge/views/screens/liste_secouristes.dart';
 import 'package:flutter/material.dart';
+import './Profile.dart';
 
 class AdminDashboard extends StatefulWidget {
   @override
@@ -40,14 +42,31 @@ class _AdminDashboardState extends State<AdminDashboard> {
                   children: <Widget>[
                     GestureDetector(
                       onTap: () async {
-                        final arraySecouristes =
+                        /*final arraySecouristes =
                             await AdminService.listSecourists();
                         var secouristes = [];
                         for (var i = 0; i < arraySecouristes.length; i++) {
                           // print("it is " + arraySecouristes.length.toString());
 
                           secouristes.add(arraySecouristes[i]["name"]);
-                        }
+                        }*/
+                        var secouristes = [
+                          new Secouriste(
+                            name: "Amal",
+                            email: "amal@test.com",
+                            isFree: false,
+                          ),
+                          new Secouriste(
+                            name: "Amal",
+                            email: "amal@test.com",
+                            isFree: true,
+                          ),
+                          new Secouriste(
+                            name: "test",
+                            email: "test@test.com",
+                            isFree: true,
+                          ),
+                        ];
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -141,39 +160,6 @@ class _AdminDashboardState extends State<AdminDashboard> {
                         ),
                       ),
                     ),
-                    /*GestureDetector(
-                      onTap: null,
-                      child: SizedBox(
-                        width: 180.0,
-                        height: 180.0,
-                        child: Card(
-                          elevation: 8,
-                          color: Colors.white70,
-                          child: Padding(
-                            padding: EdgeInsets.all(20.0),
-                            child: Column(
-                              children: <Widget>[
-                                Image.asset(
-                                  'assets/location.png',
-                                  width: 64.0,
-                                ),
-                                SizedBox(
-                                  height: 10.0,
-                                ),
-                                Text(
-                                  "Liste des interventions par localité",
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 13.0,
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),*/
                   ],
                 ),
               ),
