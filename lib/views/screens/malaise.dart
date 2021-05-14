@@ -31,7 +31,7 @@ class Malaise extends StatelessWidget {
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.black.withOpacity(0.8),
-                fontSize: 50,
+                fontSize: 20,
                 //fontWeight: FontWeight.bold,
                 fontStyle: FontStyle.italic,
               )),
