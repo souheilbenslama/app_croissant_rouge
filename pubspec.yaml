@@ -49,6 +49,7 @@ dependencies:
   get_it: ^5.0.2
   get:
   get_storage:
+  flutter_staggered_grid_view:
   
   device_info: ^0.4.0+4
   
@@ -78,6 +79,10 @@ flutter:
     - assets/location.png
     - assets/first-aid-kit.png
     - assets/emergency2.png
+    - assets/saigne.png
+    - assets/orifice.jpg
+    - assets/saigneNez.jpg
+    - assets/vomit.png
     - lib/lang/ar_AE.dart
     - lib/lang/fr_FR.dart
 

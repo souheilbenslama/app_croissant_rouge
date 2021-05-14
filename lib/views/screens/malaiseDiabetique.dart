@@ -1,11 +1,10 @@
-import 'package:app_croissant_rouge/views/screens/etouffement2.dart';
 import 'package:app_croissant_rouge/views/screens/listeDesCas.dart';
 import 'package:app_croissant_rouge/views/screens/respiration2.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../accidentProvider.dart';
 
-class Malaise extends StatelessWidget {
+class MalaiseDiabetique extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,27 +26,25 @@ class Malaise extends StatelessWidget {
           SizedBox(
             height: 50,
           ),
-          Text("La victime est-elle consciente et ne se sent pas bien?",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.black.withOpacity(0.8),
-<<<<<<< HEAD
-                fontSize: 30,
-=======
-                fontSize: 20,
->>>>>>> sprint7/khalil
-                //fontWeight: FontWeight.bold,
-                fontStyle: FontStyle.italic,
-              )),
+          Text(
+            "La victime présente-t-elle : Paleur et/ou Sueur froide et/ou Sensation de faim?",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Colors.black.withOpacity(0.8),
+              fontSize: 30,
+              //fontWeight: FontWeight.bold,
+              fontStyle: FontStyle.italic,
+            ),
+          ),
           SizedBox(
-            height: 20,
+            height: 40,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
                 height: 60.0,
-                width: 130.5,
+                width: 130.0,
                 margin: EdgeInsets.only(),
                 child: RaisedButton(
                   onPressed: null,
@@ -76,7 +73,7 @@ class Malaise extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                width: 5,
+                width: 30,
               ),
               Container(
                 height: 60.0,
