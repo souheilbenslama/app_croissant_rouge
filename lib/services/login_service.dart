@@ -1,7 +1,10 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:app_croissant_rouge/services/secouriste_service.dart';
 import 'package:http/http.dart' as http;
+import 'package:async/async.dart';
+import 'package:path/path.dart';
 
 // The Server to the backend
 const SERVER_IP = 'http://192.168.43.68:3000';
@@ -87,6 +90,50 @@ class LoginServiceImp extends LoginService {
 
     if (res.statusCode == 200) {
       return res;
+    }
+  }
+
+  attemptToUpdate(String email, String name, String cin, String phone,
+      String address, String age, image) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String jwt = prefs.getString("jwt");
+    var jwtDecoded = jsonDecode(jwt);
+    var token = jwtDecoded["token"];
+
+    var stream;
+    var length;
+    var image2;
+    if (image != null) {
+      image2 = File(image.path);
+      stream = new http.ByteStream(DelegatingStream.typed(image2.openRead()));
+      length = await image2.length();
+    }
+    var uri = Uri.parse("$SERVER_IP/users/update");
+
+    var request = new http.MultipartRequest("POST", uri);
+    var multipartFile;
+
+    if (image != null) {
+      multipartFile = new http.MultipartFile('photo', stream, length,
+          filename: basename(image2.path));
+    }
+
+    //contentType: new MediaType('image', 'png'));
+    request.headers['Authorization'] = token;
+    if (image != null) {
+      request.files.add(multipartFile);
+    }
+    request.fields["name"] = name;
+    request.fields["email"] = email;
+    request.fields["cin"] = cin;
+    request.fields["gouvernorat"] = address;
+    request.fields["phone"] = phone;
+    request.fields["age"] = age;
+    var streamedResponse = await request.send();
+
+    var response = await http.Response.fromStream(streamedResponse);
+    if (response.statusCode == 200) {
+      return response;
     }
   }
 }

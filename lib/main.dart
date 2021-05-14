@@ -33,6 +33,8 @@ void main() {
 }
 
 class MyApp extends StatefulWidget {
+  GetIt locator;
+
   @override
   _MyAppState createState() => _MyAppState();
 }
@@ -42,6 +44,8 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   void initState() {
     // TODO: implement initState
     super.initState();
+    this.widget.locator = GetIt.instance;
+    this.widget.locator.registerLazySingleton(() => NavigationService());
     WidgetsBinding.instance.addObserver(this);
   }
 
@@ -72,10 +76,6 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    GetIt locator = GetIt.instance;
-
-    locator.registerLazySingleton(() => NavigationService());
-
     return GetMaterialApp(
       builder: BotToastInit(), //1. call BotToastInit
       navigatorObservers: [BotToastNavigatorObserver()],

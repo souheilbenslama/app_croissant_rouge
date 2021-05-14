@@ -114,27 +114,30 @@ class Profile extends StatelessWidget {
                                     ],
                                   ),
                                 ),
-                                Container(
-                                  width: 80,
-                                  height: 80,
-                                  margin: EdgeInsets.only(left: 15),
-                                  decoration: BoxDecoration(
-                                    boxShadow: [
-                                      BoxShadow(
-                                        offset: Offset(0, 0),
-                                        blurRadius: 10,
-                                        color: Colors.black.withOpacity(0.15),
+                                Positioned(
+                                    left: -10,
+                                    child: Container(
+                                      width: 100,
+                                      height: 100,
+                                      margin: EdgeInsets.only(left: 15),
+                                      decoration: BoxDecoration(
+                                        boxShadow: [
+                                          BoxShadow(
+                                            offset: Offset(0, 0),
+                                            blurRadius: 10,
+                                            color:
+                                                Colors.black.withOpacity(0.15),
+                                          ),
+                                        ],
+                                        shape: BoxShape.circle,
+                                        image: DecorationImage(
+                                          image: NetworkImage(
+                                            "http://192.168.43.68:3000/${this.secouriste.photo}",
+                                          ),
+                                          fit: BoxFit.cover,
+                                        ),
                                       ),
-                                    ],
-                                    borderRadius: BorderRadius.circular(10),
-                                    image: DecorationImage(
-                                      image: AssetImage(
-                                        "assets/profil.png",
-                                      ),
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                ),
+                                    )),
                               ],
                             ),
                             SizedBox(

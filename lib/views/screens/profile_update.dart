@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
+import 'dart:io';
 import 'package:app_croissant_rouge/models/secouriste.dart';
 import 'package:app_croissant_rouge/services/login_service.dart';
 import 'package:get/get.dart';
 import 'package:app_croissant_rouge/views/screens/Profile.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ProfileUpdate extends StatefulWidget {
   final Secouriste secouriste;
@@ -22,15 +24,65 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
   TextEditingController agecontroller;
   TextEditingController gouvernoratcontroller;
   String error = "";
+  PickedFile _image;
+
+  _imgFromCamera() async {
+    PickedFile image = await ImagePicker()
+        .getImage(source: ImageSource.camera, imageQuality: 50);
+
+    setState(() {
+      _image = image;
+    });
+  }
+
+  _imgFromGallery() async {
+    PickedFile image = await ImagePicker()
+        .getImage(source: ImageSource.gallery, imageQuality: 50);
+
+    setState(() {
+      _image = image;
+    });
+  }
+
+  void _showPicker(context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext bc) {
+          return SafeArea(
+            child: Container(
+              child: new Wrap(
+                children: <Widget>[
+                  new ListTile(
+                      leading: new Icon(Icons.photo_library),
+                      title: new Text('Photo Library'),
+                      onTap: () {
+                        _imgFromGallery();
+                        Navigator.of(context).pop();
+                      }),
+                  new ListTile(
+                    leading: new Icon(Icons.photo_camera),
+                    title: new Text('Camera'),
+                    onTap: () {
+                      _imgFromCamera();
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
   updateProfile(String email, String name, String cin, String phone,
-      String address, String age) async {
+      String address, String age, image) async {
     if (email.isEmpty || name.isEmpty || cin.isEmpty || phone.isEmpty) {
       error = "emptyfield".tr;
     }
 
     if (email.isEmail) {
       var res = await LoginServiceImp()
-          .attempttoupdate(email, name, cin, phone, address, age);
+          .attemptToUpdate(email, name, cin, phone, address, age, image);
 
       if (res.statusCode == 200) {
         var prefs = await SharedPreferences.getInstance();
@@ -64,6 +116,7 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
 
   @override
   Widget build(BuildContext context) {
+    print(this.widget.secouriste.photo);
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -87,45 +140,73 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
               Center(
                 child: Stack(
                   children: [
-                    Container(
-                      width: 130,
-                      height: 130,
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                              width: 4,
-                              color: Theme.of(context).scaffoldBackgroundColor),
-                          boxShadow: [
-                            BoxShadow(
-                                spreadRadius: 2,
-                                blurRadius: 10,
-                                color: Colors.black.withOpacity(0.1),
-                                offset: Offset(0, 10))
-                          ],
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: AssetImage(
-                                "assets/profil.png",
-                              ))),
-                    ),
+                    (_image == null)
+                        ? Container(
+                            width: 130,
+                            height: 130,
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                    width: 4,
+                                    color: Theme.of(context)
+                                        .scaffoldBackgroundColor),
+                                boxShadow: [
+                                  BoxShadow(
+                                      spreadRadius: 2,
+                                      blurRadius: 10,
+                                      color: Colors.black.withOpacity(0.1),
+                                      offset: Offset(0, 10))
+                                ],
+                                shape: BoxShape.circle,
+                                image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: NetworkImage(
+                                      "http://192.168.43.68:3000/${this.widget.secouriste.photo}",
+                                    ))),
+                          )
+                        : Container(
+                            width: 130,
+                            height: 130,
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                    width: 4,
+                                    color: Theme.of(context)
+                                        .scaffoldBackgroundColor),
+                                boxShadow: [
+                                  BoxShadow(
+                                      spreadRadius: 2,
+                                      blurRadius: 10,
+                                      color: Colors.black.withOpacity(0.1),
+                                      offset: Offset(0, 10))
+                                ],
+                                shape: BoxShape.circle,
+                                image: DecorationImage(
+                                  fit: BoxFit.cover,
+                                  image: FileImage(File(_image.path)),
+                                ))),
                     Positioned(
                         bottom: 0,
                         right: 0,
-                        child: Container(
-                          height: 40,
-                          width: 40,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                              width: 4,
-                              color: Theme.of(context).scaffoldBackgroundColor,
+                        child: GestureDetector(
+                          child: Container(
+                            height: 40,
+                            width: 40,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                width: 4,
+                                color:
+                                    Theme.of(context).scaffoldBackgroundColor,
+                              ),
+                              color: Colors.redAccent[100],
                             ),
-                            color: Colors.redAccent[100],
+                            child: Icon(
+                              Icons.edit,
+                              color: Colors.white,
+                            ),
                           ),
-                          child: Icon(
-                            Icons.edit,
-                            color: Colors.white,
-                          ),
+                          onTap: () {
+                            _showPicker(context);
+                          },
                         )),
                   ],
                 ),
@@ -165,7 +246,8 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                           this.widget.secouriste.cin,
                           phonecontroller.text,
                           gouvernoratcontroller.text,
-                          agecontroller.text);
+                          agecontroller.text,
+                          _image);
                     },
                     color: Colors.redAccent[700],
                     padding: EdgeInsets.symmetric(horizontal: 50),
