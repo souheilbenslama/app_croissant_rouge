@@ -48,13 +48,13 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     this.widget.locator.registerLazySingleton(() => NavigationService());
     WidgetsBinding.instance.addObserver(this);
   }
-
+/*
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
     // TODO: implement dispose
     super.dispose();
-  }
+  } */
 
 // tracking if the app is in background or foreground
   @override
