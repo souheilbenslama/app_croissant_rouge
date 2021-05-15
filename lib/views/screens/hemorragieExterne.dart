@@ -1,5 +1,5 @@
 import 'package:app_croissant_rouge/views/screens/listeDesCas.dart';
-import 'package:app_croissant_rouge/views/screens/respiration2.dart';
+import 'package:app_croissant_rouge/views/screens/hemorex_oui.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../accidentProvider.dart';
@@ -46,7 +46,12 @@ class HemorragieExterne extends StatelessWidget {
                 width: 130.0,
                 margin: EdgeInsets.only(),
                 child: RaisedButton(
-                  onPressed: null,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => HemorexOui()),
+                    );
+                  },
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(80.0)),
                   padding: EdgeInsets.all(0.0),

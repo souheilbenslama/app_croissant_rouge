@@ -5,6 +5,7 @@ import 'package:app_croissant_rouge/models/secouriste.dart';
 import 'package:app_croissant_rouge/services/login_service.dart';
 import 'package:app_croissant_rouge/views/screens/activate_account.dart';
 import 'package:app_croissant_rouge/views/screens/sign_up.dart';
+import 'package:app_croissant_rouge/views/screens/forget_password.dart';
 import 'package:app_croissant_rouge/views/screens/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -116,12 +117,15 @@ class SignIn extends StatelessWidget {
     );
   }
 
-  _buildForgotPassword() {
+  _buildForgotPassword(context) {
     return Container(
       alignment: Alignment.centerRight,
       child: FlatButton(
         padding: EdgeInsets.only(right: 0.0),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => ForgetPassword()));
+        },
         child: Text(
           'mdpOublie'.tr,
           style: TextStyle(
@@ -201,7 +205,7 @@ class SignIn extends StatelessWidget {
                             height: 30.0,
                           ),
                           _buildPassword(),
-                          _buildForgotPassword(),
+                          _buildForgotPassword(context),
                           SizedBox(
                             height: 20.0,
                           ),
