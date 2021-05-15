@@ -69,6 +69,8 @@ dev_dependencies:
 flutter:
   assets:
     - assets/profil.png
+    - assets/choking1.png
+    - assets/choking2.png
     - assets/logo.jpg
     - assets/images/
     - assets/file/dummy.pdf

@@ -18,7 +18,7 @@ class Details extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               SizedBox(
-                height: 30,
+                height: 60,
               ),
               ClipRRect(
                   child: Hero(
@@ -41,7 +41,8 @@ class Details extends StatelessWidget {
               Padding(
                   padding: EdgeInsets.all(18),
                   child: Text('${instruction.steps}',
-                      style: TextStyle(color: Colors.grey[600], height: 1.4))),
+                      style: TextStyle(
+                          color: Colors.grey[600], height: 1.4, fontSize: 18))),
             ],
           ),
         ));
