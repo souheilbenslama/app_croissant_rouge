@@ -3,10 +3,18 @@ import 'package:app_croissant_rouge/views/screens/reset_code.dart';
 import 'package:app_croissant_rouge/services/login_service.dart';
 import 'package:flutter/material.dart';
 
-class ForgetPassword extends StatelessWidget {
+class ForgetPassword extends StatefulWidget {
+  @override
+  _ForgetPasswordState createState() => _ForgetPasswordState();
+}
+
+class _ForgetPasswordState extends State<ForgetPassword> {
+  String errormessage;
+  FocusNode myFocusNode = new FocusNode();
   @override
   Widget build(BuildContext context) {
     final TextEditingController _emailController = TextEditingController();
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -27,6 +35,18 @@ class ForgetPassword extends StatelessWidget {
       ),
       body: Column(
         children: [
+          (errormessage == null)
+              ? SizedBox(height: size.height / 10)
+              : Container(
+                  height: size.height / 10,
+                  child: Center(
+                    child: Text(errormessage,
+                        style: TextStyle(
+                            color: Colors.black38,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500)),
+                  ),
+                ),
           Padding(
             padding: const EdgeInsets.only(
               bottom: 20.0,
@@ -37,19 +57,30 @@ class ForgetPassword extends StatelessWidget {
             child: TextField(
               obscureText: true,
               controller: _emailController,
+              focusNode: myFocusNode,
               decoration: InputDecoration(
-                border: OutlineInputBorder(),
+                focusedBorder: const OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.red, width: 0.9),
+                ),
                 labelText: 'Ecrire votre Email',
+                labelStyle: TextStyle(
+                    fontSize: 20.0,
+                    color: myFocusNode.hasFocus ? Colors.red : Colors.grey),
+                border: OutlineInputBorder(),
               ),
             ),
           ),
+          SizedBox(height: size.height / 10),
           RaisedButton(
             onPressed: () async {
               var res = await LoginServiceImp().forget(_emailController.text);
-              if (res == 200) {
-                print("done");
+              if (res.statusCode == 200) {
                 Navigator.of(context)
                     .push(MaterialPageRoute(builder: (context) => ResetCode()));
+              } else {
+                setState(() {
+                  errormessage = res.body;
+                });
               }
             },
             shape: RoundedRectangleBorder(
