@@ -23,7 +23,7 @@ class Conscient extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 50,
+            height: 80,
           ),
           Text(
             "La victime est-elle consciente?",
@@ -33,6 +33,7 @@ class Conscient extends StatelessWidget {
               fontSize: 30,
               //fontWeight: FontWeight.bold,
               fontStyle: FontStyle.italic,
+              letterSpacing: 2.2,
             ),
           ),
           SizedBox(
@@ -41,7 +42,26 @@ class Conscient extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
+              RaisedButton(
+                onPressed: () {
+                  final doc =
+                      Provider.of<AccidentProvider>(context, listen: false);
+                  doc.setConscient(true);
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) => Respire()));
+                },
+                color: Colors.redAccent[700],
+                padding: EdgeInsets.symmetric(horizontal: 50),
+                elevation: 2,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)),
+                child: Text(
+                  "Oui",
+                  style: TextStyle(
+                      fontSize: 14, letterSpacing: 2.2, color: Colors.white),
+                ),
+              ),
+              /*Container(
                 height: 60.0,
                 width: 130.0,
                 margin: EdgeInsets.only(),
@@ -76,11 +96,32 @@ class Conscient extends StatelessWidget {
                     ),
                   ),
                 ),
-              ),
+              ),*/
               SizedBox(
                 width: 30,
               ),
-              Container(
+              RaisedButton(
+                onPressed: () {
+                  final doc =
+                      Provider.of<AccidentProvider>(context, listen: false);
+                  doc.setConscient(false);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Respire()),
+                  );
+                },
+                color: Colors.redAccent[700],
+                padding: EdgeInsets.symmetric(horizontal: 50),
+                elevation: 2,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)),
+                child: Text(
+                  "Non",
+                  style: TextStyle(
+                      fontSize: 14, letterSpacing: 2.2, color: Colors.white),
+                ),
+              ),
+              /*Container(
                 height: 60.0,
                 width: 130.0,
                 margin: EdgeInsets.only(),
@@ -117,7 +158,7 @@ class Conscient extends StatelessWidget {
                     ),
                   ),
                 ),
-              )
+              )*/
             ],
           )
         ],

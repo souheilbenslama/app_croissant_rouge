@@ -23,7 +23,7 @@ class Plaies extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: 50,
+              height: 80,
             ),
             Text("La gravité de la plaie est ",
                 textAlign: TextAlign.center,
@@ -32,11 +32,28 @@ class Plaies extends StatelessWidget {
                   fontSize: 30,
                   //fontWeight: FontWeight.bold,
                   fontStyle: FontStyle.italic,
+                  letterSpacing: 2.2,
                 )),
             SizedBox(
-              height: 50,
+              height: 20,
             ),
             Container(
+              width: 200,
+              child: RaisedButton(
+                onPressed: () {},
+                color: Colors.redAccent[700],
+                padding: EdgeInsets.symmetric(horizontal: 50),
+                elevation: 2,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)),
+                child: Text(
+                  "Plaie simple",
+                  style: TextStyle(
+                      fontSize: 14, letterSpacing: 2.2, color: Colors.white),
+                ),
+              ),
+            ),
+            /*Container(
               height: 60.0,
               width: 190,
               margin: EdgeInsets.only(),
@@ -65,11 +82,27 @@ class Plaies extends StatelessWidget {
                   ),
                 ),
               ),
-            ),
+            ),*/
             SizedBox(
               height: 15,
             ),
             Container(
+              width: 200,
+              child: RaisedButton(
+                onPressed: () {},
+                color: Colors.redAccent[700],
+                padding: EdgeInsets.symmetric(horizontal: 50),
+                elevation: 2,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)),
+                child: Text(
+                  "Plaie grave",
+                  style: TextStyle(
+                      fontSize: 14, letterSpacing: 2.2, color: Colors.white),
+                ),
+              ),
+            ),
+            /*Container(
               height: 60.0,
               width: 190,
               margin: EdgeInsets.only(),
@@ -98,7 +131,7 @@ class Plaies extends StatelessWidget {
                   ),
                 ),
               ),
-            ),
+            ),*/
           ],
         ),
       ),
