@@ -29,6 +29,12 @@ import 'package:app_croissant_rouge/views/screens/hemorex_oui.dart';
 import 'package:app_croissant_rouge/views/screens/etouffement_non.dart';
 import 'dart:convert' show json, base64, ascii;
 import './views/screens/page_alerte.dart';
+import 'package:app_croissant_rouge/views/screens/fracture.dart';
+import 'package:app_croissant_rouge/views/screens/plaies_grave.dart';
+import 'package:app_croissant_rouge/views/screens/plaies_simples.dart';
+import 'package:app_croissant_rouge/views/screens/brulure_simple.dart';
+import 'package:app_croissant_rouge/views/screens/brulure_grave.dart';
+import 'package:app_croissant_rouge/views/screens/crise_nerfs.dart';
 
 void main() {
   runApp(ChangeNotifierProvider(
@@ -95,10 +101,17 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       ),
       //home: SignIn(),
       //home: MapPage()
-      home: PageAlerte(),
+      // home: PageAlerte(),
       //home: TestNotification(),
       //home: Profile(ss),
       //home: ListeMalaise()
+      home: HemorexOui(),
+      //home: Fracture(),
+      //home: PlaiesGraves(),
+      //home: PlaiesSimples(),
+      //home: BrulureSimple(),
+      //home: BrulureGrave(),
+      // home: CriseNerfs(),
     );
   }
 }
