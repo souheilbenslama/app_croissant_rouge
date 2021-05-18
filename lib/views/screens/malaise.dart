@@ -39,22 +39,30 @@ class Malaise extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 20,
+            height: 40,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              RaisedButton(
-                onPressed: () {},
-                color: Colors.redAccent[700],
-                padding: EdgeInsets.symmetric(horizontal: 50),
-                elevation: 2,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)),
-                child: Text(
-                  "Oui",
-                  style: TextStyle(
-                      fontSize: 14, letterSpacing: 2.2, color: Colors.white),
+              Container(
+                height: 50,
+                width: 150,
+                child: RaisedButton(
+                  onPressed: () {},
+                  color: Colors.redAccent[700],
+                  padding: EdgeInsets.symmetric(horizontal: 50),
+                  elevation: 2,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Text(
+                    "Oui",
+                    style: TextStyle(
+                      fontSize: 25,
+                      letterSpacing: 2.2,
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
               ),
               /* Container(
@@ -90,22 +98,27 @@ class Malaise extends StatelessWidget {
               SizedBox(
                 width: 30,
               ),
-              RaisedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => ListeCas()),
-                  );
-                },
-                color: Colors.redAccent[700],
-                padding: EdgeInsets.symmetric(horizontal: 50),
-                elevation: 2,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)),
-                child: Text(
-                  "Non",
-                  style: TextStyle(
-                      fontSize: 14, letterSpacing: 2.2, color: Colors.white),
+              Container(
+                height: 50,
+                width: 150,
+                child: RaisedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ListeCas()),
+                    );
+                  },
+                  color: Colors.redAccent[700],
+                  padding: EdgeInsets.symmetric(horizontal: 50),
+                  elevation: 2,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Text(
+                    "Non",
+                    style: TextStyle(
+                        fontSize: 25, letterSpacing: 2.2, color: Colors.white),
+                  ),
                 ),
               ),
               /*Container(

@@ -35,10 +35,11 @@ class Plaies extends StatelessWidget {
                   letterSpacing: 2.2,
                 )),
             SizedBox(
-              height: 20,
+              height: 40,
             ),
             Container(
-              width: 200,
+              height: 50,
+              width: 250,
               child: RaisedButton(
                 onPressed: () {},
                 color: Colors.redAccent[700],
@@ -49,7 +50,7 @@ class Plaies extends StatelessWidget {
                 child: Text(
                   "Plaie simple",
                   style: TextStyle(
-                      fontSize: 14, letterSpacing: 2.2, color: Colors.white),
+                      fontSize: 25, letterSpacing: 2.2, color: Colors.white),
                 ),
               ),
             ),
@@ -87,7 +88,8 @@ class Plaies extends StatelessWidget {
               height: 15,
             ),
             Container(
-              width: 200,
+              height: 50,
+              width: 250,
               child: RaisedButton(
                 onPressed: () {},
                 color: Colors.redAccent[700],
@@ -98,7 +100,7 @@ class Plaies extends StatelessWidget {
                 child: Text(
                   "Plaie grave",
                   style: TextStyle(
-                      fontSize: 14, letterSpacing: 2.2, color: Colors.white),
+                      fontSize: 25, letterSpacing: 2.2, color: Colors.white),
                 ),
               ),
             ),

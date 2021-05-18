@@ -27,20 +27,43 @@ class Etouffement extends StatelessWidget {
           SizedBox(
             height: 50,
           ),
-          Text("Est-ce que la victime tousse ou emet un son?",
-              textAlign: TextAlign.center,
-              style: TextStyle(
+          Text(
+            "Est-ce que la victime tousse ou emet un son?",
+            textAlign: TextAlign.center,
+            style: TextStyle(
                 color: Colors.black.withOpacity(0.8),
-                fontSize: 20,
+                fontSize: 30,
                 //fontWeight: FontWeight.bold,
                 fontStyle: FontStyle.italic,
-              )),
+                letterSpacing: 2.2),
+          ),
           SizedBox(
-            height: 120,
+            height: 40,
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
+                height: 50,
+                width: 150,
+                child: RaisedButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => EtoufOui()));
+                  },
+                  color: Colors.redAccent[700],
+                  padding: EdgeInsets.symmetric(horizontal: 50),
+                  elevation: 2,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)),
+                  child: Text(
+                    "Oui",
+                    style: TextStyle(
+                        fontSize: 25, letterSpacing: 2.2, color: Colors.white),
+                  ),
+                ),
+              ),
+              /*Container(
                 height: 100.0,
                 width: 205.5,
                 margin: EdgeInsets.only(),
@@ -72,8 +95,33 @@ class Etouffement extends StatelessWidget {
                     ),
                   ),
                 ),
+              ),*/
+              SizedBox(
+                width: 30,
               ),
               Container(
+                height: 50,
+                width: 150,
+                child: RaisedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => EtoufNon()),
+                    );
+                  },
+                  color: Colors.redAccent[700],
+                  padding: EdgeInsets.symmetric(horizontal: 50),
+                  elevation: 2,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)),
+                  child: Text(
+                    "Non",
+                    style: TextStyle(
+                        fontSize: 25, letterSpacing: 2.2, color: Colors.white),
+                  ),
+                ),
+              ),
+              /* Container(
                 height: 100.0,
                 width: 205.5,
                 margin: EdgeInsets.only(),
@@ -107,7 +155,7 @@ class Etouffement extends StatelessWidget {
                     ),
                   ),
                 ),
-              )
+              )*/
             ],
           )
         ],

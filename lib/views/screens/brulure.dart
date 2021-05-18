@@ -37,19 +37,23 @@ class Brulure extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: 20,
+              height: 40,
             ),
-            RaisedButton(
-              onPressed: () {},
-              color: Colors.redAccent[700],
-              padding: EdgeInsets.symmetric(horizontal: 50),
-              elevation: 2,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20)),
-              child: Text(
-                "Brûlure simple",
-                style: TextStyle(
-                    fontSize: 14, letterSpacing: 2.2, color: Colors.white),
+            Container(
+              height: 50,
+              width: 280,
+              child: RaisedButton(
+                onPressed: () {},
+                color: Colors.redAccent[700],
+                padding: EdgeInsets.symmetric(horizontal: 50),
+                elevation: 2,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)),
+                child: Text(
+                  "Brûlure simple",
+                  style: TextStyle(
+                      fontSize: 25, letterSpacing: 2.2, color: Colors.white),
+                ),
               ),
             ),
             /*Container(
@@ -85,17 +89,21 @@ class Brulure extends StatelessWidget {
             SizedBox(
               height: 15,
             ),
-            RaisedButton(
-              onPressed: () {},
-              color: Colors.redAccent[700],
-              padding: EdgeInsets.symmetric(horizontal: 50),
-              elevation: 2,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20)),
-              child: Text(
-                "Brûlure grave",
-                style: TextStyle(
-                    fontSize: 14, letterSpacing: 2.2, color: Colors.white),
+            Container(
+              height: 50,
+              width: 280,
+              child: RaisedButton(
+                onPressed: () {},
+                color: Colors.redAccent[700],
+                padding: EdgeInsets.symmetric(horizontal: 50),
+                elevation: 2,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)),
+                child: Text(
+                  "Brûlure grave",
+                  style: TextStyle(
+                      fontSize: 25, letterSpacing: 2.2, color: Colors.white),
+                ),
               ),
             ),
             /*Container(

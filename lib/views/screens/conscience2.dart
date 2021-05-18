@@ -37,28 +37,32 @@ class Conscient extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 20,
+            height: 40,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              RaisedButton(
-                onPressed: () {
-                  final doc =
-                      Provider.of<AccidentProvider>(context, listen: false);
-                  doc.setConscient(true);
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) => Respire()));
-                },
-                color: Colors.redAccent[700],
-                padding: EdgeInsets.symmetric(horizontal: 50),
-                elevation: 2,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)),
-                child: Text(
-                  "Oui",
-                  style: TextStyle(
-                      fontSize: 14, letterSpacing: 2.2, color: Colors.white),
+              Container(
+                height: 50,
+                width: 150,
+                child: RaisedButton(
+                  onPressed: () {
+                    final doc =
+                        Provider.of<AccidentProvider>(context, listen: false);
+                    doc.setConscient(true);
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => Respire()));
+                  },
+                  color: Colors.redAccent[700],
+                  padding: EdgeInsets.symmetric(horizontal: 50),
+                  elevation: 2,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)),
+                  child: Text(
+                    "Oui",
+                    style: TextStyle(
+                        fontSize: 25, letterSpacing: 2.2, color: Colors.white),
+                  ),
                 ),
               ),
               /*Container(
@@ -100,25 +104,29 @@ class Conscient extends StatelessWidget {
               SizedBox(
                 width: 30,
               ),
-              RaisedButton(
-                onPressed: () {
-                  final doc =
-                      Provider.of<AccidentProvider>(context, listen: false);
-                  doc.setConscient(false);
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Respire()),
-                  );
-                },
-                color: Colors.redAccent[700],
-                padding: EdgeInsets.symmetric(horizontal: 50),
-                elevation: 2,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)),
-                child: Text(
-                  "Non",
-                  style: TextStyle(
-                      fontSize: 14, letterSpacing: 2.2, color: Colors.white),
+              Container(
+                height: 50,
+                width: 150,
+                child: RaisedButton(
+                  onPressed: () {
+                    final doc =
+                        Provider.of<AccidentProvider>(context, listen: false);
+                    doc.setConscient(false);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Respire()),
+                    );
+                  },
+                  color: Colors.redAccent[700],
+                  padding: EdgeInsets.symmetric(horizontal: 50),
+                  elevation: 2,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)),
+                  child: Text(
+                    "Non",
+                    style: TextStyle(
+                        fontSize: 25, letterSpacing: 2.2, color: Colors.white),
+                  ),
                 ),
               ),
               /*Container(

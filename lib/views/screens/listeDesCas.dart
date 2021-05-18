@@ -26,7 +26,7 @@ class ListeCas extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: 20,
+              height: 40,
             ),
             Text(
               "Cas Possibles",
@@ -42,7 +42,8 @@ class ListeCas extends StatelessWidget {
               height: 30,
             ),
             Container(
-              width: 190,
+              height: 50,
+              width: 230,
               child: RaisedButton(
                 onPressed: () {
                   Navigator.push(
@@ -58,7 +59,7 @@ class ListeCas extends StatelessWidget {
                 child: Text(
                   "Malaise",
                   style: TextStyle(
-                      fontSize: 14, letterSpacing: 2.2, color: Colors.white),
+                      fontSize: 25, letterSpacing: 2.2, color: Colors.white),
                 ),
               ),
             ),
@@ -101,7 +102,8 @@ class ListeCas extends StatelessWidget {
               height: 10,
             ),
             Container(
-              width: 190,
+              height: 50,
+              width: 230,
               child: RaisedButton(
                 onPressed: () {
                   Navigator.push(
@@ -118,7 +120,7 @@ class ListeCas extends StatelessWidget {
                 child: Text(
                   "Hémorragie\n Externe",
                   style: TextStyle(
-                      fontSize: 14, letterSpacing: 2.2, color: Colors.white),
+                      fontSize: 20, letterSpacing: 2.2, color: Colors.white),
                 ),
               ),
             ),
@@ -126,7 +128,8 @@ class ListeCas extends StatelessWidget {
               height: 10,
             ),
             Container(
-              width: 190,
+              height: 50,
+              width: 230,
               child: RaisedButton(
                 onPressed: () {
                   Navigator.push(
@@ -142,7 +145,7 @@ class ListeCas extends StatelessWidget {
                 child: Text(
                   "Plaies",
                   style: TextStyle(
-                      fontSize: 14, letterSpacing: 2.2, color: Colors.white),
+                      fontSize: 25, letterSpacing: 2.2, color: Colors.white),
                 ),
               ),
             ),
@@ -185,7 +188,8 @@ class ListeCas extends StatelessWidget {
               height: 10,
             ),
             Container(
-              width: 190,
+              height: 50,
+              width: 230,
               child: RaisedButton(
                 onPressed: () {
                   Navigator.push(
@@ -201,7 +205,7 @@ class ListeCas extends StatelessWidget {
                 child: Text(
                   "Brûlures",
                   style: TextStyle(
-                      fontSize: 14, letterSpacing: 2.2, color: Colors.white),
+                      fontSize: 25, letterSpacing: 2.2, color: Colors.white),
                 ),
               ),
             ),
@@ -244,7 +248,8 @@ class ListeCas extends StatelessWidget {
               height: 10,
             ),
             Container(
-              width: 190,
+              height: 50,
+              width: 230,
               child: RaisedButton(
                 onPressed: () {
                   Navigator.push(
@@ -260,7 +265,7 @@ class ListeCas extends StatelessWidget {
                 child: Text(
                   "Fractures",
                   style: TextStyle(
-                      fontSize: 14, letterSpacing: 2.2, color: Colors.white),
+                      fontSize: 25, letterSpacing: 2.2, color: Colors.white),
                 ),
               ),
             ),
