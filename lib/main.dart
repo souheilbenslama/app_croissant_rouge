@@ -24,6 +24,9 @@ import 'package:provider/provider.dart';
 import 'locator.dart';
 import 'views/screens/page_alerte.dart';
 import 'package:app_croissant_rouge/views/screens/etapes.dart';
+import 'package:app_croissant_rouge/views/screens/etouffement_oui.dart';
+import 'package:app_croissant_rouge/views/screens/hemorex_oui.dart';
+import 'package:app_croissant_rouge/views/screens/etouffement_non.dart';
 import 'dart:convert' show json, base64, ascii;
 import './views/screens/page_alerte.dart';
 
@@ -48,13 +51,13 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     this.widget.locator.registerLazySingleton(() => NavigationService());
     WidgetsBinding.instance.addObserver(this);
   }
-
+/*
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
     // TODO: implement dispose
     super.dispose();
-  }
+  } */
 
 // tracking if the app is in background or foreground
   @override

@@ -193,16 +193,8 @@ class _PageAlerteState extends State<PageAlerte> {
                                           color: Colors.white70,
                                         ),
                                         onPressed: () async {
-                                          var arguments =
-                                              await doc.getInterventions();
-                                          print(
-                                              "tttttttttttttttttttttttttttttttttttt");
-                                          print(arguments);
-                                          print(
-                                              "tttttttttttttttttttttttttttttttttttt");
-                                          // Navigator.of(context).pushNamed(
-                                          //   '/publicmap',
-                                          //   arguments: arguments);
+                                          Navigator.of(context)
+                                              .pushNamed('/publicmap');
                                         },
                                       ),
                                 // Used the container because i want the other 2 icons in the end and since i used .start for previous row i'll be applied automatically to the others

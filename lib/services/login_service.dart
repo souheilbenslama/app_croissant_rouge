@@ -70,6 +70,38 @@ class LoginServiceImp extends LoginService {
     return res.statusCode;
   }
 
+  @override
+// The method used when password is forget
+  Future<int> forget(
+    String email,
+  ) async {
+    var res =
+        await http.post('$SERVER_IP/users/forget', body: {"email": email});
+    print(res.body);
+    return res.statusCode;
+  }
+
+  verifycode(
+    String code,
+  ) async {
+    var res =
+        await http.post('$SERVER_IP/users/verification', body: {"code": code});
+    print(res.body);
+    return res;
+  }
+
+  Future<int> resetPassword(
+      String password, String confirmPassword, String token) async {
+    var res = await http.post('$SERVER_IP/users/reset', headers: {
+      'Authorization': '$token',
+    }, body: {
+      "password": password,
+      "confirmPassword": confirmPassword
+    });
+    print(res.body);
+    return res.statusCode;
+  }
+
   attempttoupdate(String email, String name, String cin, String phone,
       String address, String age) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();

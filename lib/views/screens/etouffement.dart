@@ -1,5 +1,6 @@
 import 'package:app_croissant_rouge/views/screens/etouffement2.dart';
-import 'package:app_croissant_rouge/views/screens/respiration2.dart';
+import 'package:app_croissant_rouge/views/screens/etouffement_oui.dart';
+import 'package:app_croissant_rouge/views/screens/etouffement_non.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../accidentProvider.dart';
@@ -45,7 +46,10 @@ class Etouffement extends StatelessWidget {
                 width: 205.5,
                 margin: EdgeInsets.only(),
                 child: RaisedButton(
-                  onPressed: null,
+                  onPressed: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => EtoufOui()));
+                  },
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(80.0)),
                   padding: EdgeInsets.all(0.0),
@@ -78,7 +82,7 @@ class Etouffement extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Etouffement2()),
+                      MaterialPageRoute(builder: (context) => EtoufNon()),
                     );
                   },
                   shape: RoundedRectangleBorder(
