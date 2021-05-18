@@ -3,6 +3,7 @@ import 'package:app_croissant_rouge/views/screens/hemorragieExterne.dart';
 import 'package:app_croissant_rouge/views/screens/malaise.dart';
 import 'package:app_croissant_rouge/views/screens/plaies.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ListeCas extends StatelessWidget {
   @override
@@ -28,7 +29,7 @@ class ListeCas extends StatelessWidget {
             SizedBox(
               height: 20,
             ),
-            Text("Cas Possibles",
+            Text("casPoss".tr,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.black.withOpacity(0.8),
@@ -69,7 +70,7 @@ class ListeCas extends StatelessWidget {
                             BoxConstraints(maxWidth: 250.0, minHeight: 50.0),
                         alignment: Alignment.center,
                         child: Text(
-                          "Malaise",
+                          "malaise".tr,
                           textAlign: TextAlign.center,
                           style: TextStyle(color: Colors.white, fontSize: 25),
                         ),
@@ -108,7 +109,7 @@ class ListeCas extends StatelessWidget {
                             BoxConstraints(maxWidth: 250.0, minHeight: 50.0),
                         alignment: Alignment.center,
                         child: Text(
-                          "Hémorragie\n Externe",
+                          "hemoExt".tr,
                           textAlign: TextAlign.center,
                           style: TextStyle(color: Colors.white, fontSize: 25),
                         ),
@@ -151,7 +152,7 @@ class ListeCas extends StatelessWidget {
                             BoxConstraints(maxWidth: 250.0, minHeight: 50.0),
                         alignment: Alignment.center,
                         child: Text(
-                          "Plaies",
+                          "Plaies".tr,
                           textAlign: TextAlign.center,
                           style: TextStyle(color: Colors.white, fontSize: 25),
                         ),
@@ -189,7 +190,7 @@ class ListeCas extends StatelessWidget {
                             BoxConstraints(maxWidth: 250.0, minHeight: 50.0),
                         alignment: Alignment.center,
                         child: Text(
-                          "Brûlures",
+                          "brulure".tr,
                           textAlign: TextAlign.center,
                           style: TextStyle(color: Colors.white, fontSize: 25),
                         ),
@@ -229,7 +230,7 @@ class ListeCas extends StatelessWidget {
                         BoxConstraints(maxWidth: 250.0, minHeight: 50.0),
                     alignment: Alignment.center,
                     child: Text(
-                      "Fractures",
+                      "Fractures".tr,
                       textAlign: TextAlign.center,
                       style: TextStyle(color: Colors.white, fontSize: 25),
                     ),

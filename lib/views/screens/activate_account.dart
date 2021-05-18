@@ -1,5 +1,6 @@
 import 'package:app_croissant_rouge/views/screens/page_alerte.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ActivateAccount extends StatelessWidget {
   @override
@@ -8,7 +9,7 @@ class ActivateAccount extends StatelessWidget {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.redAccent[700],
-        title: Text("Activate Account"),
+        title: Text('activerCompte'.tr),
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
@@ -35,7 +36,7 @@ class ActivateAccount extends StatelessWidget {
               obscureText: true,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
-                labelText: 'Ecrire votre Code',
+                labelText: 'ecrireCode'.tr,
               ),
             ),
           ),
@@ -58,7 +59,7 @@ class ActivateAccount extends StatelessWidget {
                 constraints: BoxConstraints(maxWidth: 150.0, minHeight: 50.0),
                 alignment: Alignment.center,
                 child: Text(
-                  "Valider",
+                  "valider".tr,
                   textAlign: TextAlign.center,
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 ),

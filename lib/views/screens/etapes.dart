@@ -23,30 +23,30 @@ class _StepListState extends State<StepList> {
   void _addInstructions() {
     List<Instruction> _instructions = [
       Instruction(
-          title: '1ère étape',
+          title: 'etape1'.tr,
           img: 'e1.PNG',
           steps:
-              "Avant de mettre une personne en position latérale de sécurité(PLS), il faut vérifier qu'elle qoit inconsciente sur le dos mais qu'elle respire toujours normalement. Desserrez si vous le pouvez le col, la cravate ou la ceinture. Si elle porte des lunettes, commencez par les lui retirer "),
+              "etape1Inst".tr),
       Instruction(
-          title: '2ème étape',
+          title: 'etape2'.tr,
           img: 'e2.PNG',
           steps:
-              "Tout d'abord, il faut se positionner à côté(ici à droite) de la personne étendue et vérifier que vous êtes bien stable sur vos deux genoux. Une fois que vous êtes bien installé, prenez, avec votre main gauche, celle du patient. Et appliquez le dos de sa main gauche contre son oreille droite."),
+              "etape2Inst".tr),
       Instruction(
-          title: '3ème étape',
+          title: 'etape3'.tr,
           img: 'e3.PNG',
           steps:
-              "Ensuite, tout en maintenant la pression contre cette main gauche, relevez, avec votre main droite, la jambe gauche de la personne inconsciente. Puis en appuyant sur son genou gauche, le patient va automatiquement se tourner sur le côté droit grâce à un système de balancier. "),
+              "etape3Inst".tr),
       Instruction(
-          title: '4ème étape',
+          title: 'etape4'.tr,
           img: 'e4.PNG',
           steps:
-              "Après avoir délicatement retiré votre main gauche, de sous la tête de la victime, ajustez sa jambe gauche."),
+              "etape4Inst".tr),
       Instruction(
-          title: '5ème étape',
+          title: 'etape5'.tr,
           img: 'e5.PNG',
           steps:
-              "Pour éviter que le patient ne perde l'équilibre, le genou gauche doit former un qngle droit entre le tibia et la cuisse. Une fois que la personne est en PSL, entrouvrez délicatement sa bouche pour permettre l'écoulement d'éventuels liquides vers l'extérieur et vérifiez régulièrement sa respiration. Enfin, appelez les secours."),
+              "etape5Inst".tr),
     ];
 
     _instructions.forEach((Instruction instruction) {
@@ -89,7 +89,7 @@ class _StepListState extends State<StepList> {
       //appBar
       appBar: AppBar(
         title: Center(
-            child: Text('Position Latérale de sécurité',
+            child: Text('pos'.tr,
                 textAlign: TextAlign.center, style: TextStyle(fontSize: 20))),
         backgroundColor: Colors.redAccent[700],
         automaticallyImplyLeading: true,

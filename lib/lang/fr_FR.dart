@@ -77,4 +77,54 @@ const Map<String, String> frFR = {
   "vousAvez": "Vous avez déjà un compte?", //
   "seConnecter": " Se connecter", //
   "croissantRouge": "Croissant Rouge", //
+  "activerCompte": "Activer le compte",
+  "ecrireCode": "Ecrire votre code",
+  "valider": "Valider",
+  "brulureQuest": "Le degré de brûlure de la victime est ",
+  "brulureSimple": "Brûlure simple",
+  "brulureGrave": "Brûlure grave",
+  "conscienceQuest": "La victime est-elle consciente?",
+  "oui": "Oui",
+  "non": "Non",
+  "criseQuest": "La victime crie et/ou pleure et/ou signes d’agitation?",
+  "etape1": "1ère étape",
+  "etape1Inst":
+      "Avant de mettre une personne en position latérale de sécurité(PLS), il faut vérifier qu'elle soit inconsciente sur le dos mais qu'elle respire toujours normalement. Desserrez si vous le pouvez le col, la cravate ou la ceinture. Si elle porte des lunettes, commencez par les lui retirer.",
+  "etape2": "2ème étape",
+  "etape2Inst":
+      "Tout d'abord, il faut se positionner à côté(ici à droite) de la personne étendue et vérifier que vous êtes bien stable sur vos deux genoux. Une fois que vous êtes bien installé, prenez, avec votre main gauche, celle du patient. Et appliquez le dos de sa main gauche contre son oreille droite.",
+  "etape3": "3ème étape",
+  "etape3Inst":
+      "Ensuite, tout en maintenant la pression contre cette main gauche, relevez, avec votre main droite, la jambe gauche de la personne inconsciente. Puis en appuyant sur son genou gauche, le patient va automatiquement se tourner sur le côté droit grâce à un système de balancier. ",
+  "etape4": "4ème étape",
+  "etape4Inst":
+      "Après avoir délicatement retiré votre main gauche, de sous la tête de la victime, ajustez sa jambe gauche.",
+  "etape5": "5ème étape",
+  "etape5Inst":
+      "Pour éviter que le patient ne perde l'équilibre, le genou gauche doit former un qngle droit entre le tibia et la cuisse. Une fois que la personne est en PSL, entrouvrez délicatement sa bouche pour permettre l'écoulement d'éventuels liquides vers l'extérieur et vérifiez régulièrement sa respiration. Enfin, appelez les secours.",
+  "pos": "Position Latérale de sécurité",
+  "etouffQuest": "Est-ce que la victime tousse ou émet un son?",
+  "hemExt":
+      "S'agit t'il d'une victime qui présente un saignement abondant visible?",
+  "noteSec": "NOTE DE SECOURISTE",
+  "soumettre": "Soumettre",
+  "casPoss": "Cas Possibles",
+  "malaise": "Malaise",
+  "HemoExt": "Hémorragie\n Externe",
+  "Plaies": "Plaies",
+  "brulure": "Brûlures",
+  "Fractures": "Fractures",
+  "crise": "Crise de nerfs",
+  "malDiab": "Malaise Diabétique",
+  "malCard": "Malaise Cardiaque",
+  "malQuest": "La victime est-elle consciente et ne se sent pas bien?",
+  "malCardQuest":
+      "La victime souffre-t-elle de forte douleur qui serre la poitrine et/ou sueurs d'essoufflement ?",
+  "malDiabQuest":
+      "La victime présente-t-elle : Paleur et/ou Sueur froide et/ou Sensation de faim?",
+  "plaieQuest": "La gravité de la plaie est ",
+  "plaieSimple": "Plaie Simple",
+  "plaieGrave": "Plaie Grave",
+  "respQuest": "La victime respire-t-elle?",
+  "saignQuest": "Le saignement s'est-il arrêté?",
 };

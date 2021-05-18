@@ -61,7 +61,7 @@ class _InstructionListState extends State<InstructionList> {
                         height: 24,
                       ),
                       Text(
-                        'NOTE DE SECOURISTE',
+                        'noteSec'.tr,
                         style: TextStyle(fontSize: 18, color: Colors.black87),
                         textAlign: TextAlign.center,
                       ),
@@ -85,7 +85,7 @@ class _InstructionListState extends State<InstructionList> {
                           context,
                           MaterialPageRoute(builder: (context) => PageAlerte()),
                         ),
-                        child: Text('Soumettre'),
+                        child: Text('soumettre'.tr),
                         color: Colors.white,
                         textColor: Colors.redAccent[100],
                       ),
@@ -186,7 +186,7 @@ class _InstructionListState extends State<InstructionList> {
       appBar: AppBar(
         title: Center(
             child: Text(
-          'Instructions',
+          'instructions'.tr,
           textAlign: TextAlign.center,
         )),
         backgroundColor: Colors.redAccent[700],
