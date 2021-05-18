@@ -101,11 +101,11 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       ),
       //home: SignIn(),
       //home: MapPage()
-      // home: PageAlerte(),
+      home: PageAlerte(),
       //home: TestNotification(),
       //home: Profile(ss),
       //home: ListeMalaise()
-      home: HemorexOui(),
+      //home: HemorexOui(),
       //home: Fracture(),
       //home: PlaiesGraves(),
       //home: PlaiesSimples(),
