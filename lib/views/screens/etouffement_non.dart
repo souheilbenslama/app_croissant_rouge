@@ -105,7 +105,7 @@ class _EtoufNonState extends State<EtoufNon> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             SizedBox(
-              height: 200,
+              height: MediaQuery.of(context).size.height * 0.17,
             ),
             ListView.builder(
                 physics: NeverScrollableScrollPhysics(),

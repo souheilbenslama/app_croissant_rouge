@@ -72,13 +72,13 @@ class LoginServiceImp extends LoginService {
 
   @override
 // The method used when password is forget
-  Future<int> forget(
+  forget(
     String email,
   ) async {
     var res =
         await http.post('$SERVER_IP/users/forget', body: {"email": email});
-    print(res.body);
-    return res.statusCode;
+
+    return res;
   }
 
   verifycode(
@@ -90,16 +90,15 @@ class LoginServiceImp extends LoginService {
     return res;
   }
 
-  Future<int> resetPassword(
-      String password, String confirmPassword, String token) async {
+  resetPassword(String password, String confirmPassword, String token) async {
     var res = await http.post('$SERVER_IP/users/reset', headers: {
       'Authorization': '$token',
     }, body: {
       "password": password,
       "confirmPassword": confirmPassword
     });
-    print(res.body);
-    return res.statusCode;
+
+    return res;
   }
 
   attempttoupdate(String email, String name, String cin, String phone,

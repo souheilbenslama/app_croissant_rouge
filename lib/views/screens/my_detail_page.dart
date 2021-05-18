@@ -13,20 +13,21 @@ class Details extends StatelessWidget {
           elevation: 0,
         ),
         extendBodyBehindAppBar: true,
-        body: Container(
+        body: SingleChildScrollView(
+            child: Container(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               SizedBox(
-                height: 60,
+                height: MediaQuery.of(context).size.height * 0.09,
               ),
               ClipRRect(
                   child: Hero(
                 tag: 'case-img-${instruction.img}',
                 child: Image.asset(
                   'assets/images/${instruction.img}',
-                  height: 360,
-                  fit: BoxFit.cover,
+                  height: 250,
+                  width: 300,
                   alignment: Alignment.topCenter,
                 ),
               )),
@@ -42,9 +43,9 @@ class Details extends StatelessWidget {
                   padding: EdgeInsets.all(18),
                   child: Text('${instruction.steps}',
                       style: TextStyle(
-                          color: Colors.grey[600], height: 1.4, fontSize: 18))),
+                          color: Colors.black, height: 1.4, fontSize: 18))),
             ],
           ),
-        ));
+        )));
   }
 }

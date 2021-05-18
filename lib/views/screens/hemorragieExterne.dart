@@ -25,7 +25,7 @@ class HemorragieExterne extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 50,
+            height: 80,
           ),
           Text("hemExt".tr,
               textAlign: TextAlign.center,
@@ -34,6 +34,7 @@ class HemorragieExterne extends StatelessWidget {
                 fontSize: 30,
                 //fontWeight: FontWeight.bold,
                 fontStyle: FontStyle.italic,
+                letterSpacing: 2.2,
               )),
           SizedBox(
             height: 20,
@@ -41,7 +42,25 @@ class HemorragieExterne extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
+              RaisedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => HemorexOui()),
+                  );
+                },
+                color: Colors.redAccent[700],
+                padding: EdgeInsets.symmetric(horizontal: 50),
+                elevation: 2,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)),
+                child: Text(
+                  "Oui",
+                  style: TextStyle(
+                      fontSize: 14, letterSpacing: 2.2, color: Colors.white),
+                ),
+              ),
+              /*Container(
                 height: 60.0,
                 width: 130.0,
                 margin: EdgeInsets.only(),
@@ -78,11 +97,29 @@ class HemorragieExterne extends StatelessWidget {
                     ),
                   ),
                 ),
-              ),
+              ),*/
               SizedBox(
-                width: 5,
+                width: 30,
               ),
-              Container(
+              RaisedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ListeCas()),
+                  );
+                },
+                color: Colors.redAccent[700],
+                padding: EdgeInsets.symmetric(horizontal: 50),
+                elevation: 2,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)),
+                child: Text(
+                  "Non",
+                  style: TextStyle(
+                      fontSize: 14, letterSpacing: 2.2, color: Colors.white),
+                ),
+              ),
+              /*Container(
                 height: 60.0,
                 width: 130.0,
                 margin: EdgeInsets.only(),
@@ -119,7 +156,7 @@ class HemorragieExterne extends StatelessWidget {
                     ),
                   ),
                 ),
-              )
+              )*/
             ],
           )
         ],

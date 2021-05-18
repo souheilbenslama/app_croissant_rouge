@@ -226,7 +226,7 @@ class ListeCas extends StatelessWidget {
                 onPressed: () {
                   final doc =
                       Provider.of<AccidentProvider>(context, listen: false);
-                  doc.setCas("Fractures");
+                  doc.setCas("Fracture");
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => ListeCas()),

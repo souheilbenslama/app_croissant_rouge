@@ -4,10 +4,19 @@ import 'package:app_croissant_rouge/services/login_service.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 
-class ResetCode extends StatelessWidget {
+class ResetCode extends StatefulWidget {
+  @override
+  _ResetCodeState createState() => _ResetCodeState();
+}
+
+class _ResetCodeState extends State<ResetCode> {
+  String errormessage;
+  FocusNode myFocusNode = new FocusNode();
+
   @override
   Widget build(BuildContext context) {
     final TextEditingController _codeController = TextEditingController();
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -28,6 +37,18 @@ class ResetCode extends StatelessWidget {
       ),
       body: Column(
         children: [
+          (errormessage == null)
+              ? SizedBox(height: size.height / 10)
+              : Container(
+                  height: size.height / 10,
+                  child: Center(
+                    child: Text(errormessage,
+                        style: TextStyle(
+                            color: Colors.black38,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500)),
+                  ),
+                ),
           Padding(
             padding: const EdgeInsets.only(
               bottom: 20.0,
@@ -38,9 +59,16 @@ class ResetCode extends StatelessWidget {
             child: TextField(
               obscureText: true,
               controller: _codeController,
+              focusNode: myFocusNode,
               decoration: InputDecoration(
+                focusedBorder: const OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.red, width: 0.9),
+                ),
                 border: OutlineInputBorder(),
                 labelText: 'Ecrire votre code',
+                labelStyle: TextStyle(
+                    fontSize: 20.0,
+                    color: myFocusNode.hasFocus ? Colors.red : Colors.grey),
               ),
             ),
           ),
@@ -53,6 +81,10 @@ class ResetCode extends StatelessWidget {
 
                 Navigator.of(context).pushReplacement(new MaterialPageRoute(
                     builder: (BuildContext context) => ResetPassword(token)));
+              } else {
+                setState(() {
+                  errormessage = res.body;
+                });
               }
             },
             shape: RoundedRectangleBorder(
@@ -81,6 +113,7 @@ class ResetCode extends StatelessWidget {
           ),
         ],
       ),
+
       /* Row(
         children: <Widget>[
           TextField(

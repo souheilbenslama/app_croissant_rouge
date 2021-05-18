@@ -23,7 +23,6 @@ class Dets extends StatelessWidget {
                 child: Image.asset(
                   'assets/images/${instruction.img}',
                   height: 360,
-                  fit: BoxFit.cover,
                   alignment: Alignment.topCenter,
                 ),
               )),
