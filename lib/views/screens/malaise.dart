@@ -25,23 +25,39 @@ class Malaise extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 50,
+            height: 80,
           ),
-          Text("La victime est-elle consciente et ne se sent pas bien?",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.black.withOpacity(0.8),
-                fontSize: 20,
-                //fontWeight: FontWeight.bold,
-                fontStyle: FontStyle.italic,
-              )),
+          Text(
+            "La victime est-elle consciente et ne se sent pas bien?",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Colors.black.withOpacity(0.8),
+              fontSize: 30,
+              //fontWeight: FontWeight.bold,
+              fontStyle: FontStyle.italic,
+              letterSpacing: 2.2,
+            ),
+          ),
           SizedBox(
             height: 20,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
+              RaisedButton(
+                onPressed: () {},
+                color: Colors.redAccent[700],
+                padding: EdgeInsets.symmetric(horizontal: 50),
+                elevation: 2,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)),
+                child: Text(
+                  "Oui",
+                  style: TextStyle(
+                      fontSize: 14, letterSpacing: 2.2, color: Colors.white),
+                ),
+              ),
+              /* Container(
                 height: 60.0,
                 width: 130.5,
                 margin: EdgeInsets.only(),
@@ -70,11 +86,29 @@ class Malaise extends StatelessWidget {
                     ),
                   ),
                 ),
-              ),
+              ),*/
               SizedBox(
-                width: 5,
+                width: 30,
               ),
-              Container(
+              RaisedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ListeCas()),
+                  );
+                },
+                color: Colors.redAccent[700],
+                padding: EdgeInsets.symmetric(horizontal: 50),
+                elevation: 2,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)),
+                child: Text(
+                  "Non",
+                  style: TextStyle(
+                      fontSize: 14, letterSpacing: 2.2, color: Colors.white),
+                ),
+              ),
+              /*Container(
                 height: 60.0,
                 width: 130.0,
                 margin: EdgeInsets.only(),
@@ -108,7 +142,7 @@ class Malaise extends StatelessWidget {
                     ),
                   ),
                 ),
-              )
+              )*/
             ],
           )
         ],

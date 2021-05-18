@@ -23,20 +23,36 @@ class Brulure extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: 50,
+              height: 80,
             ),
-            Text("Le degré de brûlure de la victime est ",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.black.withOpacity(0.8),
-                  fontSize: 30,
-                  //fontWeight: FontWeight.bold,
-                  fontStyle: FontStyle.italic,
-                )),
+            Text(
+              "Le degré de brûlure de la victime est ",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.black.withOpacity(0.8),
+                fontSize: 30,
+                //fontWeight: FontWeight.bold,
+                fontStyle: FontStyle.italic,
+                letterSpacing: 2.2,
+              ),
+            ),
             SizedBox(
-              height: 50,
+              height: 20,
             ),
-            Container(
+            RaisedButton(
+              onPressed: () {},
+              color: Colors.redAccent[700],
+              padding: EdgeInsets.symmetric(horizontal: 50),
+              elevation: 2,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20)),
+              child: Text(
+                "Brûlure simple",
+                style: TextStyle(
+                    fontSize: 14, letterSpacing: 2.2, color: Colors.white),
+              ),
+            ),
+            /*Container(
               height: 60.0,
               width: 190,
               margin: EdgeInsets.only(),
@@ -65,11 +81,24 @@ class Brulure extends StatelessWidget {
                   ),
                 ),
               ),
-            ),
+            ),*/
             SizedBox(
               height: 15,
             ),
-            Container(
+            RaisedButton(
+              onPressed: () {},
+              color: Colors.redAccent[700],
+              padding: EdgeInsets.symmetric(horizontal: 50),
+              elevation: 2,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20)),
+              child: Text(
+                "Brûlure grave",
+                style: TextStyle(
+                    fontSize: 14, letterSpacing: 2.2, color: Colors.white),
+              ),
+            ),
+            /*Container(
               height: 60.0,
               width: 190,
               margin: EdgeInsets.only(),
@@ -98,7 +127,7 @@ class Brulure extends StatelessWidget {
                   ),
                 ),
               ),
-            ),
+            ),*/
           ],
         ),
       ),
