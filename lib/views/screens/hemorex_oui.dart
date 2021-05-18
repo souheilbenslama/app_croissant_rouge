@@ -5,6 +5,7 @@ import 'my_detail_page.dart';
 import 'package:app_croissant_rouge/models/Instruction.dart';
 import 'package:get/get.dart';
 import 'package:app_croissant_rouge/views/screens/page_alerte.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class HemorexOui extends StatefulWidget {
   @override
@@ -27,22 +28,22 @@ class _HemorexOuiState extends State<HemorexOui> {
           title: 'Hémorragie au travers d’un plaie',
           img: 'b1.png',
           steps:
-              "-Comprimer immédiatement et fortement l’endroit qui saigne avec votre main.\n-Allonger la victime.\n-Alerter les secours.\n-Surveiller la victime et parler avec elle régulièrement.  "),
+              "-Assurez vous que la victime est en sécurité (isoler la des risques).\n-Portez des gants ou glisser votre main dans un sac plastique imperméable (protégez vous).\n-Comprimer immédiatement et fortement l’endroit qui saigne avec votre main.\n-Allonger la victime.\n-Alerter les secours.\n-Surveiller la victime et parler avec elle régulièrement.  "),
       Instruction(
           title: 'La victime vomit ou crache du sang ',
           img: 'b2.png',
           steps:
-              "-Si la victime est CONSCIENTE :La mettre à la position ou elle se sent le mieux.\n-Si la victime est INCONSCIENTE: La mettre allongée sur le coté.\n-Alerter les secours.\n-Appliquer les consignes du service des secours.\n-Conserver les vomissements ou les crachés si possible.\n-Surveiller la victime et parler avec elle régulièrement."),
+              "-Assurez vous que la victime est en sécurité (isoler la des risques).\n-Portez des gants ou glisser votre main dans un sac plastique imperméable (protégez vous).\n-La mettre allongée sur le coté.\n-Alerter les secours.\n-Appliquer les consignes du service des secours.\n-Conserver les vomissements ou les crachés si possible.\n-Surveiller la victime et parler avec elle régulièrement."),
       Instruction(
           title: 'La victime saigne du nez',
           img: 'b3.png',
           steps:
-              "-Faire asseoir la victime tête penchée en avant.\n-Lui demander de se moucher vigoureusement.\n-Lui demander de se comprimer les narines pendant 10 minutes.\n"),
+              "-Assurez vous que la victime est en sécurité (isoler la des risques).\n-Portez des gants ou glisser votre main dans un sac plastique imperméable (protégez vous).\n-Faire asseoir la victime tête penchée en avant.\n-Lui demander de se moucher vigoureusement.\n-Lui demander de se comprimer les narines pendant 10 minutes.\n"),
       Instruction(
-          title: 'La victime perd du sang d’un orifice naturel'.tr,
+          title: 'Saignement d’un orifice naturel'.tr,
           img: 'b4.png',
           steps:
-              "-La victime perd du sang d’un orifice naturel.\n-Allonger la victime.\n-Alerter les secours.\n-Appliquer les consignes du service des secours.\n-Surveiller la victime et parler avec elle régulièrement."),
+              "-Assurez vous que la victime est en sécurité (isoler la des risques).\n-Portez des gants ou glisser votre main dans un sac plastique imperméable (protégez vous).\n-La victime perd du sang d’un orifice naturel.\n-Allonger la victime.\n-Alerter les secours.\n-Appliquer les consignes du service des secours.\n-Surveiller la victime et parler avec elle régulièrement."),
     ];
 
     _instructions.forEach((Instruction instruction) {
@@ -52,85 +53,90 @@ class _HemorexOuiState extends State<HemorexOui> {
 
   Widget _buildTile(Instruction instruction) {
     return ListTile(
-      onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => Details(instruction: instruction)));
-      },
-      contentPadding: EdgeInsets.all(25),
-      title: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(instruction.title,
-              style: TextStyle(fontSize: 20, color: Colors.grey[600])),
-        ],
-      ),
-      leading: ClipRRect(
-        borderRadius: BorderRadius.circular(8.0),
-        child: Hero(
-          tag: 'case-img-${instruction.img}',
-          child: Image.asset(
-            'assets/images/${instruction.img}',
-            height: 100.0,
-            width: 100.0,
-          ),
-        ),
-      ),
-    );
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => Details(instruction: instruction)));
+        },
+        contentPadding: EdgeInsets.all(25),
+        title:  Container(
+                height: 400,
+                width: 400,
+                child: Card(
+                    color: Colors.white,
+                    child: Column(
+                      children: <Widget>[
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(8.0),
+                          child: Hero(
+                            tag: 'case-img-${instruction.img}',
+                            child: Image.asset(
+                              'assets/images/${instruction.img}',
+                              height: 100,
+                              width: 100,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Text(
+                          instruction.title,
+                          style:
+                              TextStyle(fontSize: 13, color: Colors.grey[600]),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ))));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => {
-          showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return ChatScreen();
-              })
-        },
-        tooltip: 'Increment',
-        backgroundColor: Colors.red,
-        child: Icon(Icons.messenger),
-      ),
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {},
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => {
+            showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return ChatScreen();
+                })
+          },
+          tooltip: 'Increment',
+          backgroundColor: Colors.red,
+          child: Icon(Icons.messenger),
         ),
-        title: Center(child: Text('Saignement'.tr)),
-        backgroundColor: Colors.redAccent[700],
-      ),
-      body: SingleChildScrollView(
-        physics: ScrollPhysics(),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            SizedBox(
-              height: 25,
-            ),
-            Material(
-              child: Text(
-                '-Assurez vous que la victime est en sécurité (isoler la des risques).\n\n-Portez des gants ou glisser votre main dans un sac plastique imperméable (protégez vous).\n ',
-                style: TextStyle(fontSize: 20, color: Colors.grey[600]),
-                textAlign: TextAlign.center,
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {},
+          ),
+          title: Center(child: Text('Hemorragies Externes'.tr)),
+          backgroundColor: Colors.redAccent[700],
+        ),
+        body: SingleChildScrollView(
+            physics: ScrollPhysics(),
+            child: Column(children: <Widget>[
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.09,
               ),
-            ),
-            ListView.builder(
+              Card(
+                  color: Colors.white,
+                  child: Image.asset(
+                    "assets/profil.png",
+                    height: 100,
+                  )),
+              GridView.count(
                 physics: NeverScrollableScrollPhysics(),
                 key: _listKey,
                 shrinkWrap: true,
-                itemCount: _instructionTiles.length,
-                itemBuilder: (context, index) {
-                  return _instructionTiles[index];
-                }), //CONTACTER NOUS
-          ],
-        ),
-      ),
-    );
+                crossAxisSpacing: 12.0,
+                mainAxisSpacing: 12.0,
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                crossAxisCount: 2,
+                children: _instructionTiles,
+              )
+            ])));
   }
 }
