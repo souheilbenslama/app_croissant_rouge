@@ -4,6 +4,9 @@ import 'package:app_croissant_rouge/views/screens/malaise.dart';
 import 'package:app_croissant_rouge/views/screens/plaies.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
+
+import '../../accidentProvider.dart';
 
 class ListeCas extends StatelessWidget {
   @override
@@ -49,6 +52,9 @@ class ListeCas extends StatelessWidget {
                   margin: EdgeInsets.only(),
                   child: RaisedButton(
                     onPressed: () {
+                      final doc =
+                          Provider.of<AccidentProvider>(context, listen: false);
+                      doc.setCas("Malaise");
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => Malaise()),
@@ -87,6 +93,9 @@ class ListeCas extends StatelessWidget {
                   margin: EdgeInsets.only(),
                   child: RaisedButton(
                     onPressed: () {
+                      final doc =
+                          Provider.of<AccidentProvider>(context, listen: false);
+                      doc.setCas("Hemorragie Externe");
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -131,6 +140,9 @@ class ListeCas extends StatelessWidget {
                   margin: EdgeInsets.only(),
                   child: RaisedButton(
                     onPressed: () {
+                      final doc =
+                          Provider.of<AccidentProvider>(context, listen: false);
+                      doc.setCas("Plaies");
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => Plaies()),
@@ -169,6 +181,9 @@ class ListeCas extends StatelessWidget {
                   margin: EdgeInsets.only(),
                   child: RaisedButton(
                     onPressed: () {
+                      final doc =
+                          Provider.of<AccidentProvider>(context, listen: false);
+                      doc.setCas("Brulure");
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => Brulure()),
@@ -209,6 +224,9 @@ class ListeCas extends StatelessWidget {
               margin: EdgeInsets.only(),
               child: RaisedButton(
                 onPressed: () {
+                  final doc =
+                      Provider.of<AccidentProvider>(context, listen: false);
+                  doc.setCas("Fractures");
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => ListeCas()),

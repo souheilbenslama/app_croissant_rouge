@@ -12,14 +12,22 @@ class AccidentProvider with ChangeNotifier {
   String longitude;
   bool respire;
   bool conscient;
-  String description; //cas
-  List<ChoixConscience> choixConscience = [];
-  List<ChoixHemorragie> choixHemorragie = [];
-  List<ChoixRespiration> choixRespiration = [];
-  List<ChoixProtection> choixProtection = [];
+  String description = "";
+  String cas;
+  bool needSecouriste = false;
 
-  setDescription(String cas) {
-    this.description = cas;
+  setNeedSecouriste() {
+    this.needSecouriste = true;
+    notifyListeners();
+  }
+
+  setCas(String cas) {
+    this.cas = cas;
+    notifyListeners();
+  }
+
+  setDescription(String desc) {
+    this.description += desc;
     notifyListeners();
   }
 
@@ -43,37 +51,13 @@ class AccidentProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  addConscience(ChoixConscience choix) {
-    this.choixConscience.add(choix);
-    notifyListeners();
-  }
-
-  addRespiration(ChoixRespiration choix) {
-    this.choixRespiration.add(choix);
-    notifyListeners();
-  }
-
-  addHemorragie(ChoixHemorragie choix) {
-    this.choixHemorragie.add(choix);
-    notifyListeners();
-  }
-
-  addProtection(ChoixProtection choix) {
-    this.choixProtection.add(choix);
-    notifyListeners();
-  }
-
   Map getInfo() {
     return {
-      "hemorragie": this.choixHemorragie.last.title,
-      "respiration": this.choixRespiration.last.title,
-      "protection": this.choixProtection.last.title,
-      "conscience": this.choixConscience.last.title,
       "latitude": latitude.toString(),
       "longitude": longitude.toString(),
-      "respire": this.respire,
-      "conscient": this.conscient,
-      "description": this.description
+      "description": this.description,
+      "cas": this.cas,
+      "need_secouriste": this.needSecouriste
     };
   }
 

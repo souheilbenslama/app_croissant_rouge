@@ -4,42 +4,38 @@ class Accident {
   final String id;
   final String idtemoin;
   final String idsecouriste;
-  final String protectionDesc;
-  final String respirationDesc;
-  final String hemorragieDesc;
-  final String conscienceDesc;
   final String status;
   final LatLng localisation;
+  final bool needSecouriste;
+  final String cas;
+  final String description;
 
   Accident(
       {this.id,
       this.idsecouriste,
       this.idtemoin,
-      this.conscienceDesc,
-      this.hemorragieDesc,
       this.localisation,
-      this.protectionDesc,
-      this.respirationDesc,
-      this.status});
+      this.status,
+      this.cas,
+      this.description,
+      this.needSecouriste});
   Accident.fromJson(Map<dynamic, dynamic> json)
       : id = json["id"],
         idtemoin = json["id_temoin"],
         idsecouriste = json["id_secouriste"],
-        protectionDesc = json["protectionDesc"],
-        respirationDesc = json["respirationDesc"],
-        hemorragieDesc = json["hemorragieDesc"],
-        conscienceDesc = json["conscienceDesc"],
         status = json["status"],
-        localisation = LatLng(json["latitude"], json["longitude"]);
+        localisation = LatLng(json["latitude"], json["longitude"]),
+        cas = json["cas"],
+        description = json["description"],
+        needSecouriste = json["need_secouriste"];
   Map<dynamic, dynamic> toJson() => {
         "id": id,
         "id_secouriste": idsecouriste,
         "id_temoin": idtemoin,
-        "protectionDesc": protectionDesc,
-        "respirationDesc": respirationDesc,
-        "hemorragieDesc": hemorragieDesc,
-        "conscienceDesc": conscienceDesc,
         "status": status,
         "localisation": localisation,
+        "cas": cas,
+        "description": description,
+        "need_secouriste": needSecouriste
       };
 }

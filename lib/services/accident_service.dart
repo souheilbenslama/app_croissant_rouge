@@ -44,18 +44,16 @@ class AccidentService {
       String idtemoin,
       String longitude,
       String latitude,
-      String protectionDesc,
-      String hemorragieDesc,
-      String respirationDesc,
-      String conscienceDesc) async {
+      String cas,
+      String description,
+      bool needSecouriste) async {
     var res = await http.post("$SERVER_IP/accident", body: {
       "id_temoin": idtemoin,
       "longitude": longitude,
       "latitude": latitude,
-      "protectionDesc": protectionDesc,
-      "hemorragieDesc": hemorragieDesc,
-      "respirationDesc": respirationDesc,
-      "conscienceDesc": conscienceDesc
+      "cas": cas,
+      "description": description,
+      "need_secouriste": needSecouriste
     });
 
     return res.statusCode == 200 ? res.body : null;

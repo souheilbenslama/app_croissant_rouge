@@ -53,7 +53,7 @@ class Respire extends StatelessWidget {
                 margin: EdgeInsets.only(),
                 child: RaisedButton(
                   onPressed: () {
-                    dynamic doc =
+                    final doc =
                         Provider.of<AccidentProvider>(context, listen: false);
                     bool conscient = doc.conscient;
                     doc.setRespire(true);
@@ -63,6 +63,7 @@ class Respire extends StatelessWidget {
                         MaterialPageRoute(builder: (context) => ListeCas()),
                       );
                     } else {
+                      doc.setCas("Perte de connaissance");
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => StepList()),
@@ -107,11 +108,14 @@ class Respire extends StatelessWidget {
                     bool conscient = doc.conscient;
                     doc.setRespire(false);
                     if (conscient) {
+                      doc.setCas("Etouffement");
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => Etouffement()),
                       );
                     } else {
+                      doc.setCas("Arrêt cardiaque");
+                      doc.setNeedSecouriste();
                       const number = '198';
                       await FlutterPhoneDirectCaller.callNumber(number);
                       Navigator.pushReplacement(
