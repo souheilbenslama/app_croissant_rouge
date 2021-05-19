@@ -47,6 +47,9 @@ class Etouffement extends StatelessWidget {
                 margin: EdgeInsets.only(),
                 child: RaisedButton(
                   onPressed: () {
+                    final doc =
+                        Provider.of<AccidentProvider>(context, listen: false);
+                    doc.setDescription("La victime tousse ou émet un son.\n");
                     Navigator.of(context).push(
                         MaterialPageRoute(builder: (context) => EtoufOui()));
                   },
