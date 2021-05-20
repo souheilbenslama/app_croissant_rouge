@@ -1,6 +1,6 @@
 import 'package:app_croissant_rouge/services/accident_service.dart';
 
-import 'package:app_croissant_rouge/views/screens/etapes.dart';
+import 'package:app_croissant_rouge/views/screens/perte_connaissance_etapes.dart';
 import 'package:app_croissant_rouge/views/screens/page_alerte.dart';
 import 'package:geocoder/geocoder.dart';
 import 'package:geocoding/geocoding.dart';
@@ -10,6 +10,7 @@ import 'package:app_croissant_rouge/services/secouriste_service.dart';
 import 'package:app_croissant_rouge/views/screens/etouffement.dart';
 import 'package:app_croissant_rouge/views/screens/listeDesCas.dart';
 import 'package:flutter/material.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:location/location.dart';
 import 'package:provider/provider.dart';
 import '../../accidentProvider.dart';
@@ -164,48 +165,11 @@ class Respire extends StatelessWidget {
                   } else {
                     final doc =
                         Provider.of<AccidentProvider>(context, listen: false);
+
                     doc.setCas("Arrêt cardiaque");
-                    //doc.setNeedSecouriste();
 
-                    print(_locationData);
-                    print("tr");
-                    if (_locationData == null) {
-                      getPosition().then((value) async {
-                        _locationData = value;
-                        String latitude = _locationData.latitude.toString();
-                        String longitude = _locationData.longitude.toString();
-                        doc.setLatitude(latitude);
-                        doc.setLongitude(longitude);
-                        List<Placemark> placemarks =
-                            await placemarkFromCoordinates(
-                                _locationData.latitude, _locationData.latitude);
-
-                        final localite = placemarks[0].subAdministrativeArea;
-
-                        final address = placemarks[0].administrativeArea +
-                            "  " +
-                            placemarks[0].subAdministrativeArea +
-                            " " +
-                            placemarks[0].locality +
-                            " " +
-                            placemarks[0].street +
-                            " " +
-                            placemarks[0].postalCode;
-
-                        var jsondoc = doc.getInfo();
-                        //  var details = getDeviceDetails();
-                        var userId = "123"; // details[2];
-                        var res2 = AccidentService.createAccident(
-                            userId,
-                            jsondoc["longitude"],
-                            jsondoc["latitude"],
-                            jsondoc["cas"],
-                            jsondoc["description"],
-                            jsondoc["need_secouriste"],
-                            address,
-                            localite);
-                      });
-                    } else {
+                    if (doc.getCurrentLocation() != null) {
+                      _locationData = doc.currentLocation;
                       String latitude = _locationData.latitude.toString();
                       String longitude = _locationData.longitude.toString();
                       doc.setLatitude(latitude);
@@ -227,8 +191,15 @@ class Respire extends StatelessWidget {
                           placemarks[0].postalCode;
 
                       var jsondoc = doc.getInfo();
-                      //  var details = getDeviceDetails();
-                      var userId = "123"; // details[2];
+                      String userId;
+                      if (doc.gettoken() != null) {
+                        final decodedToken = JwtDecoder.decode(doc.gettoken());
+                        userId = decodedToken["id"];
+                      } else {
+                        var details = await getDeviceDetails();
+                        userId = details[2];
+                      }
+
                       var res2 = AccidentService.createAccident(
                           userId,
                           jsondoc["longitude"],
@@ -239,12 +210,14 @@ class Respire extends StatelessWidget {
                           address,
                           localite);
                     }
+
                     const number = '198';
+
                     FlutterPhoneDirectCaller.callNumber(number);
-                    /* Navigator.pushReplacement(
+                    Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(builder: (context) => PageAlerte()),
-                    );*/
+                    );
                   }
                 },
                 color: Colors.redAccent[700],

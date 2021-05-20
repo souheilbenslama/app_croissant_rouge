@@ -22,7 +22,7 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'locator.dart';
 import 'views/screens/page_alerte.dart';
-import 'package:app_croissant_rouge/views/screens/etapes.dart';
+import 'package:app_croissant_rouge/views/screens/perte_connaissance_etapes.dart';
 import 'package:app_croissant_rouge/views/screens/etouffement_oui.dart';
 import 'package:app_croissant_rouge/views/screens/hemorex_oui.dart';
 import 'package:app_croissant_rouge/views/screens/etouffement_non.dart';

@@ -3,7 +3,9 @@ import 'package:app_croissant_rouge/models/choix_hemorragie.dart';
 import 'package:app_croissant_rouge/models/choix_protection.dart';
 import 'package:app_croissant_rouge/models/choix_respiration.dart';
 import 'package:app_croissant_rouge/services/accident_service.dart';
+import 'package:app_croissant_rouge/services/secouriste_service.dart';
 import 'package:flutter/material.dart';
+import 'package:location/location.dart';
 
 import 'models/accident.dart';
 
@@ -15,6 +17,25 @@ class AccidentProvider with ChangeNotifier {
   String description = "";
   String cas;
   bool needSecouriste = false;
+  LocationData currentLocation;
+  String token;
+
+  getCurrentLocation() {
+    if (currentLocation == null) {
+      getPosition().then((value) {
+        this.currentLocation = value;
+      });
+    }
+    return this.currentLocation;
+  }
+
+  settoken(token) {
+    this.token = token;
+  }
+
+  gettoken() {
+    return this.token;
+  }
 
   setNeedSecouriste() {
     this.needSecouriste = true;

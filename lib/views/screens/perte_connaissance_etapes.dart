@@ -1,12 +1,15 @@
 import 'package:app_croissant_rouge/services/accident_service.dart';
+import 'package:app_croissant_rouge/views/screens/page_alerte.dart';
+
 import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
 import 'package:app_croissant_rouge/models/Instruction.dart';
 import 'package:app_croissant_rouge/views/screens/my_detail_page.dart';
-import 'package:app_croissant_rouge/views/screens/page_alerte.dart';
-import 'package:app_croissant_rouge/views/screens/chat_screen.dart';
-import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
+import 'package:app_croissant_rouge/views/widgets/rating_box.dart';
+
+import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:location/location.dart';
 import 'package:provider/provider.dart';
 
@@ -86,6 +89,7 @@ class _StepListState extends State<StepList> {
 
   @override
   Widget build(BuildContext context) {
+    LocationData _locationData;
     return Scaffold(
       //appBar
       appBar: AppBar(
@@ -94,13 +98,6 @@ class _StepListState extends State<StepList> {
                 textAlign: TextAlign.center, style: TextStyle(fontSize: 20))),
         backgroundColor: Colors.redAccent[700],
         automaticallyImplyLeading: true,
-        /*leading: IconButton(
-          icon: Icon(Icons.home_outlined, size: 30),
-          onPressed: () => Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => PageAlerte()),
-          ),
-        ),*/
       ),
       body: SingleChildScrollView(
         physics: ScrollPhysics(),
@@ -118,54 +115,50 @@ class _StepListState extends State<StepList> {
                   }),
               RaisedButton(
                 onPressed: () async {
-                  Location location = new Location();
-
-                  bool _serviceEnabled;
-                  PermissionStatus _permissionGranted;
-                  LocationData _locationData;
-
-                  _serviceEnabled = await location.serviceEnabled();
-                  if (!_serviceEnabled) {
-                    _serviceEnabled = await location.requestService();
-                    if (!_serviceEnabled) {
-                      return;
-                    }
-                  }
-
-                  _permissionGranted = await location.hasPermission();
-                  if (_permissionGranted == PermissionStatus.denied) {
-                    _permissionGranted = await location.requestPermission();
-                    if (_permissionGranted != PermissionStatus.granted) {
-                      return;
-                    }
-                  }
-
-                  _locationData = await location.getLocation();
-                  String latitude = _locationData.latitude.toString();
-                  String longitude = _locationData.longitude.toString();
-
                   final doc =
                       Provider.of<AccidentProvider>(context, listen: false);
 
-                  doc.setLatitude(latitude);
-                  doc.setLongitude(longitude);
+                  if (doc.getCurrentLocation() != null) {
+                    _locationData = doc.currentLocation;
+                    String latitude = _locationData.latitude.toString();
+                    String longitude = _locationData.longitude.toString();
+                    doc.setLatitude(latitude);
+                    doc.setLongitude(longitude);
+                    List<Placemark> placemarks = await placemarkFromCoordinates(
+                        _locationData.latitude, _locationData.latitude);
 
-                  var jsondoc = doc.getInfo();
-                  var details = await getDeviceDetails();
-                  var userId = details[2];
-                  var res2 = await AccidentService.createAccident(
-                      userId,
-                      jsondoc["longitude"],
-                      jsondoc["latitude"],
-                      jsondoc["cas"],
-                      jsondoc["description"],
-                      jsondoc["need_secouriste"],
-                      "",
-                      "");
-                  print(res2);
+                    final localite = placemarks[0].subAdministrativeArea;
 
-                  const number = '198';
-                  await FlutterPhoneDirectCaller.callNumber(number);
+                    final address = placemarks[0].administrativeArea +
+                        "  " +
+                        placemarks[0].subAdministrativeArea +
+                        " " +
+                        placemarks[0].locality +
+                        " " +
+                        placemarks[0].street +
+                        " " +
+                        placemarks[0].postalCode;
+
+                    var jsondoc = doc.getInfo();
+                    String userId;
+                    if (doc.gettoken() != null) {
+                      final decodedToken = JwtDecoder.decode(doc.gettoken());
+                      userId = decodedToken["id"];
+                    } else {
+                      var details = await getDeviceDetails();
+                      userId = details[2];
+                    }
+                    var res2 = AccidentService.createAccident(
+                        userId,
+                        jsondoc["longitude"],
+                        jsondoc["latitude"],
+                        jsondoc["cas"],
+                        jsondoc["description"],
+                        jsondoc["need_secouriste"],
+                        address,
+                        localite);
+                  }
+
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => PageAlerte()));
                 },

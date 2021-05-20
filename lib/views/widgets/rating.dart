@@ -1,4 +1,13 @@
+import 'package:app_croissant_rouge/views/screens/page_alerte.dart';
 import 'package:flutter/material.dart';
+
+createRatingDialog(BuildContext context) {
+  return showDialog(
+      context: context,
+      builder: (buildContext) {
+        return Container();
+      });
+}
 
 class Rating extends StatefulWidget {
   final int maximumRating;

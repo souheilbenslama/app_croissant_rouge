@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:app_croissant_rouge/models/accident.dart';
+import 'package:device_info/device_info.dart';
 import 'package:http/http.dart' as http;
 
 const SERVER_IP = 'http://192.168.43.68:3000';
@@ -62,4 +63,17 @@ class AccidentService {
 
     return res.statusCode == 200 ? res.body : null;
   }
+}
+
+Future<List<String>> getDeviceDetails() async {
+  String deviceName;
+  String deviceVersion;
+  String identifier;
+  final DeviceInfoPlugin deviceInfoPlugin = new DeviceInfoPlugin();
+  var build = await deviceInfoPlugin.androidInfo;
+  deviceName = build.model;
+  deviceVersion = build.version.toString();
+  identifier = build.androidId; //UUID for Android
+//if (!mounted) return;
+  return [deviceName, deviceVersion, identifier];
 }

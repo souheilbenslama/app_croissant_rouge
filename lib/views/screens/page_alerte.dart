@@ -106,6 +106,7 @@ class _PageAlerteState extends State<PageAlerte> {
   Widget build(BuildContext context) {
     final doc = Provider.of<AccidentProvider>(context, listen: true);
     Future<SharedPreferences> prefs = SharedPreferences.getInstance();
+    doc.getCurrentLocation();
 
     return new WillPopScope(
         onWillPop: () async => false,
@@ -113,6 +114,10 @@ class _PageAlerteState extends State<PageAlerte> {
             future: prefs,
             builder: (BuildContext context,
                 AsyncSnapshot<SharedPreferences> snapshot) {
+              if (snapshot.hasData) {
+                jwt = snapshot.data.getString("jwt");
+                if (jwt != null) doc.settoken(jsonDecode(jwt)["token"]);
+              }
               bool isAdmin() {
                 if (snapshot.hasData) {
                   jwt = snapshot.data.getString("jwt");

@@ -1,6 +1,6 @@
 import 'package:app_croissant_rouge/views/screens/etouffement2.dart';
 import 'package:app_croissant_rouge/views/screens/listeDesCas.dart';
-import 'package:app_croissant_rouge/views/screens/respiration2.dart';
+import 'package:app_croissant_rouge/views/screens/question_respiration.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../accidentProvider.dart';
