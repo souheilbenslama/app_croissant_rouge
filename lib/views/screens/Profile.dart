@@ -1,11 +1,9 @@
 import 'package:app_croissant_rouge/models/secouriste.dart';
-import 'package:app_croissant_rouge/services/secouriste_service.dart';
 import 'package:app_croissant_rouge/views/screens/profile_update.dart';
 import 'package:app_croissant_rouge/views/screens/sign_in.dart';
 import 'package:app_croissant_rouge/views/screens/page_alerte.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:lite_rolling_switch/lite_rolling_switch.dart';
+
 // The package used to get the location
 import 'package:get/get.dart';
 import 'package:location/location.dart';

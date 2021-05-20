@@ -1,9 +1,6 @@
-import 'package:app_croissant_rouge/views/screens/Conscience.dart';
-import 'package:app_croissant_rouge/views/screens/Conscience2.dart';
 import 'package:app_croissant_rouge/views/screens/etapes.dart';
 import 'package:app_croissant_rouge/views/screens/page_alerte.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
-import 'package:app_croissant_rouge/views/screens/Respiration.dart';
 import 'package:app_croissant_rouge/views/screens/etouffement.dart';
 import 'package:app_croissant_rouge/views/screens/listeDesCas.dart';
 import 'package:flutter/material.dart';

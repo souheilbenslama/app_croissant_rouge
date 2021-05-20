@@ -1,4 +1,3 @@
-import 'package:app_croissant_rouge/models/secouriste.dart';
 import 'package:app_croissant_rouge/services/socket_service.dart';
 import 'package:flutter/material.dart';
 

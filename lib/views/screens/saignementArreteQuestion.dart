@@ -1,8 +1,4 @@
-import 'package:app_croissant_rouge/views/screens/listeDesCas.dart';
-import 'package:app_croissant_rouge/views/screens/respiration2.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../../accidentProvider.dart';
 
 class SaignementArreteQuestion extends StatelessWidget {
   @override
