@@ -7,7 +7,7 @@ import 'package:geocoding/geocoding.dart';
 import 'package:device_info/device_info.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:app_croissant_rouge/services/secouriste_service.dart';
-import 'package:app_croissant_rouge/views/screens/etouffement.dart';
+import 'package:app_croissant_rouge/views/screens/question_etouffement.dart';
 import 'package:app_croissant_rouge/views/screens/listeDesCas.dart';
 import 'package:flutter/material.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';

@@ -1,5 +1,5 @@
 import 'package:app_croissant_rouge/services/accident_service.dart';
-import 'package:app_croissant_rouge/views/screens/page_alerte.dart';
+import 'package:app_croissant_rouge/views/widgets/app_rating_box.dart';
 import 'package:flutter/material.dart';
 import 'package:app_croissant_rouge/models/Instruction.dart';
 import 'package:geocoding/geocoding.dart';
@@ -17,6 +17,7 @@ class Details extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     LocationData _locationData;
+    String userId;
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.redAccent[700],
@@ -64,6 +65,8 @@ class Details extends StatelessWidget {
                   final doc =
                       Provider.of<AccidentProvider>(context, listen: false);
 
+                  doc.setDescription(" " + instruction.title);
+
                   if (doc.getCurrentLocation() != null) {
                     _locationData = doc.currentLocation;
                     String latitude = _locationData.latitude.toString();
@@ -87,7 +90,7 @@ class Details extends StatelessWidget {
 
                     var jsondoc = doc.getInfo();
                     print(jsondoc);
-                    String userId;
+
                     if (doc.gettoken() != null) {
                       final decodedToken = JwtDecoder.decode(doc.gettoken());
                       userId = decodedToken["id"];
@@ -104,10 +107,17 @@ class Details extends StatelessWidget {
                         jsondoc["need_secouriste"],
                         address,
                         localite);
+
+                    doc.description = "";
                   }
 
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => PageAlerte()));
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AppRatingBox(userId);
+                      });
+//                  Navigator.push(context,
+//                    MaterialPageRoute(builder: (context) => PageAlerte()));
                 },
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(100.0)),
