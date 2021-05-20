@@ -1,5 +1,6 @@
 import 'package:app_croissant_rouge/views/screens/hemorragieExterne.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Plaies extends StatelessWidget {
   @override
@@ -25,7 +26,7 @@ class Plaies extends StatelessWidget {
             SizedBox(
               height: 80,
             ),
-            Text("La gravité de la plaie est ",
+            Text("plaieQuest".tr,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.black.withOpacity(0.8),
@@ -75,7 +76,7 @@ class Plaies extends StatelessWidget {
                         BoxConstraints(maxWidth: 250.0, minHeight: 50.0),
                     alignment: Alignment.center,
                     child: Text(
-                      "Plaie simple",
+                      "plaieSimple".tr,
                       textAlign: TextAlign.center,
                       style: TextStyle(color: Colors.white, fontSize: 25),
                     ),
@@ -124,7 +125,7 @@ class Plaies extends StatelessWidget {
                         BoxConstraints(maxWidth: 250.0, minHeight: 50.0),
                     alignment: Alignment.center,
                     child: Text(
-                      "Plaie grave",
+                      "plaieGrave".tr,
                       textAlign: TextAlign.center,
                       style: TextStyle(color: Colors.white, fontSize: 25),
                     ),

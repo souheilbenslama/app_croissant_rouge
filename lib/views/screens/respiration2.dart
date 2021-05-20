@@ -6,6 +6,7 @@ import 'package:app_croissant_rouge/views/screens/listeDesCas.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../accidentProvider.dart';
+import 'package:get/get.dart';
 
 class Respire extends StatelessWidget {
   @override
@@ -29,7 +30,7 @@ class Respire extends StatelessWidget {
           SizedBox(
             height: 80,
           ),
-          Text("La victime respire-t-elle?",
+          Text("respQuest".tr,
               textAlign: TextAlign.center,
               style: TextStyle(
                   color: Colors.black.withOpacity(0.8),
@@ -110,7 +111,7 @@ class Respire extends StatelessWidget {
                           BoxConstraints(maxWidth: 250.0, minHeight: 50.0),
                       alignment: Alignment.center,
                       child: Text(
-                        "Oui",
+                        "oui".tr,
                         textAlign: TextAlign.center,
                         style: TextStyle(color: Colors.white, fontSize: 30),
                       ),
@@ -192,7 +193,7 @@ class Respire extends StatelessWidget {
                           BoxConstraints(maxWidth: 250.0, minHeight: 50.0),
                       alignment: Alignment.center,
                       child: Text(
-                        "Non",
+                        "non".tr,
                         textAlign: TextAlign.center,
                         style: TextStyle(color: Colors.white, fontSize: 30),
                       ),

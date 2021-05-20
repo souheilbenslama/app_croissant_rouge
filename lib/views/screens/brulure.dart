@@ -1,5 +1,6 @@
 import 'package:app_croissant_rouge/views/screens/hemorragieExterne.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Brulure extends StatelessWidget {
   @override
@@ -36,6 +37,14 @@ class Brulure extends StatelessWidget {
                 letterSpacing: 2.2,
               ),
             ),
+            Text('BrulureQuest'.tr,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.black.withOpacity(0.8),
+                  fontSize: 30,
+                  //fontWeight: FontWeight.bold,
+                  fontStyle: FontStyle.italic,
+                )),
             SizedBox(
               height: 20,
             ),
@@ -74,7 +83,7 @@ class Brulure extends StatelessWidget {
                         BoxConstraints(maxWidth: 250.0, minHeight: 50.0),
                     alignment: Alignment.center,
                     child: Text(
-                      "Brûlure simple",
+                      "brulureSimple".tr,
                       textAlign: TextAlign.center,
                       style: TextStyle(color: Colors.white, fontSize: 20),
                     ),
@@ -120,7 +129,7 @@ class Brulure extends StatelessWidget {
                         BoxConstraints(maxWidth: 250.0, minHeight: 50.0),
                     alignment: Alignment.center,
                     child: Text(
-                      "Brûlure grave",
+                      "brulureGrave".tr,
                       textAlign: TextAlign.center,
                       style: TextStyle(color: Colors.white, fontSize: 20),
                     ),

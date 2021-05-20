@@ -6,7 +6,7 @@ import 'package:app_croissant_rouge/views/screens/malaiseCardiaque.dart';
 import 'package:app_croissant_rouge/views/screens/malaiseDiabetique.dart';
 import 'package:app_croissant_rouge/views/screens/plaies.dart';
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
 import 'listeDesCas.dart';
 
 class ListeMalaise extends StatelessWidget {
@@ -33,7 +33,7 @@ class ListeMalaise extends StatelessWidget {
             SizedBox(
               height: 50,
             ),
-            Text("Cas Possibles",
+            Text("casPoss".tr,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.black.withOpacity(0.8),
@@ -71,7 +71,7 @@ class ListeMalaise extends StatelessWidget {
                         BoxConstraints(maxWidth: 250.0, minHeight: 50.0),
                     alignment: Alignment.center,
                     child: Text(
-                      "Crise de nerfs",
+                      "crise".tr,
                       textAlign: TextAlign.center,
                       style: TextStyle(color: Colors.white, fontSize: 30),
                     ),
@@ -110,7 +110,7 @@ class ListeMalaise extends StatelessWidget {
                         BoxConstraints(maxWidth: 250.0, minHeight: 50.0),
                     alignment: Alignment.center,
                     child: Text(
-                      "Malaise Diabétique",
+                      "malDiab".tr,
                       textAlign: TextAlign.center,
                       style: TextStyle(color: Colors.white, fontSize: 25),
                     ),
@@ -148,7 +148,7 @@ class ListeMalaise extends StatelessWidget {
                         BoxConstraints(maxWidth: 250.0, minHeight: 50.0),
                     alignment: Alignment.center,
                     child: Text(
-                      "Malaise Cardiaque",
+                      "malCard".tr,
                       textAlign: TextAlign.center,
                       style: TextStyle(color: Colors.white, fontSize: 28),
                     ),
