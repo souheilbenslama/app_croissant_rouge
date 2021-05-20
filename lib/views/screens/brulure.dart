@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 class Brulure extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(backgroundColor: Colors.redAccent[700]),
       body: Center(
@@ -12,18 +14,18 @@ class Brulure extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(
-              height: 40,
+              height: 0.055 * height,
             ),
             Padding(
               padding: const EdgeInsets.only(),
               child: Image.asset(
-                'assets/logo.jpg',
-                width: 150,
-                height: 150,
+                'assets/profil.png',
+                width: height * 0.205,
+                height: height * 0.205,
               ),
             ),
             SizedBox(
-              height: 80,
+              height: height * 0.055,
             ),
             Text(
               "Le degré de brûlure de la victime est ",
@@ -37,105 +39,64 @@ class Brulure extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: 40,
+              height: 0.055 * height,
             ),
             Container(
-              height: 50,
-              width: 280,
+              height: height * 0.068,
+              width: width * 0.681,
               child: RaisedButton(
                 onPressed: () {},
                 color: Colors.redAccent[700],
-                padding: EdgeInsets.symmetric(horizontal: 50),
+                padding: EdgeInsets.symmetric(
+                  horizontal: width * 0.121,
+                ),
                 elevation: 2,
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)),
+                  borderRadius: BorderRadius.circular(20),
+                ),
                 child: Text(
                   "Brûlure simple",
                   style: TextStyle(
-                      fontSize: 25, letterSpacing: 2.2, color: Colors.white),
-                ),
-              ),
-            ),
-            /*Container(
-              height: 60.0,
-              width: 190,
-              margin: EdgeInsets.only(),
-              child: RaisedButton(
-                onPressed: null,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(80.0)),
-                padding: EdgeInsets.all(0.0),
-                child: Ink(
-                  decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [Color(0xFFe84f4c), Color(0xFFe2231e)],
-                        begin: Alignment.centerRight,
-                        end: Alignment.centerLeft,
-                      ),
-                      borderRadius: BorderRadius.circular(30.0)),
-                  child: Container(
-                    constraints:
-                        BoxConstraints(maxWidth: 250.0, minHeight: 50.0),
-                    alignment: Alignment.center,
-                    child: Text(
-                      "Brûlure simple",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.white, fontSize: 20),
-                    ),
+                    fontSize: 25,
+                    letterSpacing: 2.2,
+                    color: Colors.white,
                   ),
                 ),
               ),
-            ),*/
+            ),
             SizedBox(
-              height: 15,
+              height: height * 0.021,
             ),
             Container(
-              height: 50,
-              width: 280,
+              height: height * 0.068,
+              width: width * 0.681,
               child: RaisedButton(
                 onPressed: () {},
                 color: Colors.redAccent[700],
-                padding: EdgeInsets.symmetric(horizontal: 50),
+                padding: EdgeInsets.symmetric(
+                  horizontal: width * 0.121,
+                ),
                 elevation: 2,
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)),
+                  borderRadius: BorderRadius.circular(20),
+                ),
                 child: Text(
                   "Brûlure grave",
                   style: TextStyle(
-                      fontSize: 25, letterSpacing: 2.2, color: Colors.white),
-                ),
-              ),
-            ),
-            /*Container(
-              height: 60.0,
-              width: 190,
-              margin: EdgeInsets.only(),
-              child: RaisedButton(
-                onPressed: null,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(80.0)),
-                padding: EdgeInsets.all(0.0),
-                child: Ink(
-                  decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [Color(0xFFe84f4c), Color(0xFFe2231e)],
-                        begin: Alignment.centerRight,
-                        end: Alignment.centerLeft,
-                      ),
-                      borderRadius: BorderRadius.circular(30.0)),
-                  child: Container(
-                    constraints:
-                        BoxConstraints(maxWidth: 250.0, minHeight: 50.0),
-                    alignment: Alignment.center,
-                    child: Text(
-                      "Brûlure grave",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.white, fontSize: 20),
-                    ),
+                    fontSize: 25,
+                    letterSpacing: 2.2,
+                    color: Colors.white,
                   ),
                 ),
               ),
-            ),*/
+            ),
+            Container(
+              height: height * 0.274,
+              width: height * 0.274,
+              child: Image.asset(
+                'assets/images/burn1g.png',
+              ),
+            ),
           ],
         ),
       ),

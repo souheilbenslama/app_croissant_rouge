@@ -48,14 +48,17 @@ class ListeCas extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Malaise()),
+                    MaterialPageRoute(
+                      builder: (context) => Malaise(),
+                    ),
                   );
                 },
                 color: Colors.redAccent[700],
                 padding: EdgeInsets.symmetric(horizontal: 50),
                 elevation: 2,
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)),
+                  borderRadius: BorderRadius.circular(20),
+                ),
                 child: Text(
                   "Malaise",
                   style: TextStyle(
@@ -63,41 +66,6 @@ class ListeCas extends StatelessWidget {
                 ),
               ),
             ),
-            /*Container(
-              height: 65.0,
-              width: 180.0,
-              margin: EdgeInsets.only(),
-              child: RaisedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Malaise()),
-                  );
-                },
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(80.0)),
-                padding: EdgeInsets.all(0.0),
-                child: Ink(
-                  decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [Color(0xFFe84f4c), Color(0xFFe2231e)],
-                        begin: Alignment.centerRight,
-                        end: Alignment.centerLeft,
-                      ),
-                      borderRadius: BorderRadius.circular(30.0)),
-                  child: Container(
-                    constraints:
-                        BoxConstraints(maxWidth: 250.0, minHeight: 50.0),
-                    alignment: Alignment.center,
-                    child: Text(
-                      "Malaise",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.white, fontSize: 25),
-                    ),
-                  ),
-                ),
-              ),
-            ),*/
             SizedBox(
               height: 10,
             ),
@@ -109,7 +77,8 @@ class ListeCas extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => HemorragieExterne()),
+                      builder: (context) => HemorragieExterne(),
+                    ),
                   );
                 },
                 color: Colors.redAccent[700],

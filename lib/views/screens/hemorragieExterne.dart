@@ -7,6 +7,8 @@ import '../../accidentProvider.dart';
 class HemorragieExterne extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.redAccent[700],
@@ -14,37 +16,40 @@ class HemorragieExterne extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          SizedBox(height: 40),
+          SizedBox(
+            height: 0.055 * height,
+          ),
           Padding(
             padding: const EdgeInsets.only(),
             child: Image.asset(
-              'assets/logo.jpg',
-              width: 150,
-              height: 150,
+              'assets/profil.png',
+              width: height * 0.205,
+              height: height * 0.205,
             ),
           ),
           SizedBox(
-            height: 80,
+            height: 0.041 * height,
           ),
           Text(
-              "S'agit t'il d'une victime qui présente un saignement abondant visible?",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.black.withOpacity(0.8),
-                fontSize: 30,
-                //fontWeight: FontWeight.bold,
-                fontStyle: FontStyle.italic,
-                letterSpacing: 2.2,
-              )),
+            "S'agit t'il d'une victime qui présente un saignement abondant visible?",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Colors.black.withOpacity(0.8),
+              fontSize: 30,
+              //fontWeight: FontWeight.bold,
+              fontStyle: FontStyle.italic,
+              letterSpacing: 2.2,
+            ),
+          ),
           SizedBox(
-            height: 40,
+            height: 0.055 * height,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                height: 50,
-                width: 150,
+                height: height * 0.068,
+                width: width * 0.364,
                 child: RaisedButton(
                   onPressed: () {
                     Navigator.push(
@@ -53,10 +58,13 @@ class HemorragieExterne extends StatelessWidget {
                     );
                   },
                   color: Colors.redAccent[700],
-                  padding: EdgeInsets.symmetric(horizontal: 50),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: width * 0.121,
+                  ),
                   elevation: 2,
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20)),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
                   child: Text(
                     "Oui",
                     style: TextStyle(
@@ -64,103 +72,46 @@ class HemorragieExterne extends StatelessWidget {
                   ),
                 ),
               ),
-              /*Container(
-                height: 60.0,
-                width: 130.0,
-                margin: EdgeInsets.only(),
-                child: RaisedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => HemorexOui()),
-                    );
-                  },
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(80.0)),
-                  padding: EdgeInsets.all(0.0),
-                  child: Ink(
-                    decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [Color(0xFFe84f4c), Color(0xFFe2231e)],
-                          begin: Alignment.centerRight,
-                          end: Alignment.centerLeft,
-                        ),
-                        borderRadius: BorderRadius.circular(30.0)),
-                    child: Container(
-                      constraints:
-                          BoxConstraints(maxWidth: 250.0, minHeight: 50.0),
-                      alignment: Alignment.center,
-                      child: Text(
-                        "Oui",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.white, fontSize: 30),
-                      ),
-                    ),
-                  ),
-                ),
-              ),*/
               SizedBox(
-                width: 30,
+                width: width * 0.073,
               ),
               Container(
-                height: 50,
-                width: 150,
+                height: height * 0.068,
+                width: width * 0.364,
                 child: RaisedButton(
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => ListeCas()),
+                      MaterialPageRoute(
+                        builder: (context) => ListeCas(),
+                      ),
                     );
                   },
                   color: Colors.redAccent[700],
-                  padding: EdgeInsets.symmetric(horizontal: 50),
+                  padding: EdgeInsets.symmetric(horizontal: width * 0.121),
                   elevation: 2,
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20)),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
                   child: Text(
                     "Non",
                     style: TextStyle(
-                        fontSize: 25, letterSpacing: 2.2, color: Colors.white),
-                  ),
-                ),
-              ),
-              /*Container(
-                height: 60.0,
-                width: 130.0,
-                margin: EdgeInsets.only(),
-                child: RaisedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => ListeCas()),
-                    );
-                  },
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(80.0)),
-                  padding: EdgeInsets.all(0.0),
-                  child: Ink(
-                    decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [Color(0xFFe84f4c), Color(0xFFe2231e)],
-                          begin: Alignment.centerRight,
-                          end: Alignment.centerLeft,
-                        ),
-                        borderRadius: BorderRadius.circular(30.0)),
-                    child: Container(
-                      constraints:
-                          BoxConstraints(maxWidth: 250.0, minHeight: 50.0),
-                      alignment: Alignment.center,
-                      child: Text(
-                        "Non",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.white, fontSize: 30),
-                      ),
+                      fontSize: 25,
+                      letterSpacing: 2.2,
+                      color: Colors.white,
                     ),
                   ),
                 ),
-              )*/
+              ),
             ],
-          )
+          ),
+          Container(
+            height: height * 0.274,
+            width: height * 0.274,
+            child: Image.asset(
+              'assets/images/wound2g.png',
+            ),
+          ),
         ],
       ),
     );
