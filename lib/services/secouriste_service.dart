@@ -17,25 +17,38 @@ Future<LocationData> getPosition() async {
   LocationData currentLocation;
   bool _serviceEnabled;
   PermissionStatus _permissionGranted;
+  print("A");
   // Test if location services are enabled.
   _serviceEnabled = await location.serviceEnabled();
+  _permissionGranted = await location.hasPermission();
+  print("AB");
+  print(_serviceEnabled);
 
-  _serviceEnabled = await location.serviceEnabled();
   if (!_serviceEnabled) {
     _serviceEnabled = await location.requestService();
     _permissionGranted = await location.hasPermission();
+    print("B");
   }
-
+  print("BA");
+  print(_permissionGranted);
   if (_permissionGranted == PermissionStatus.denied) {
     _permissionGranted = await location.requestPermission();
+    print("D");
   }
 
-  if (_permissionGranted != PermissionStatus.granted) {
-    currentLocation = await location.getLocation();
+  if (_permissionGranted == PermissionStatus.granted) {
+    print("eee");
+    var onValue = await location.getLocation();
 
+    print(onValue.latitude.toString() + "," + onValue.longitude.toString());
+    currentLocation = onValue;
+    print("C");
+    return currentLocation;
+  } else {
+    print("E");
     return currentLocation;
   }
-  return null;
+  print("F");
 }
 
 //updating rescuer's disponibility (disponible-indisponible)

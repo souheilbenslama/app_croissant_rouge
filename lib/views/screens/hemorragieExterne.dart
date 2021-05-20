@@ -66,6 +66,9 @@ class HemorragieExterne extends StatelessWidget {
                 margin: EdgeInsets.only(),
                 child: RaisedButton(
                   onPressed: () {
+                    final doc =
+                        Provider.of<AccidentProvider>(context, listen: false);
+                    doc.setDescription("Saignement abondant visible.\n");
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => HemorexOui()),
@@ -122,6 +125,9 @@ class HemorragieExterne extends StatelessWidget {
                 margin: EdgeInsets.only(),
                 child: RaisedButton(
                   onPressed: () {
+                    final doc =
+                        Provider.of<AccidentProvider>(context, listen: false);
+                    doc.setDescription("Pas de saignement abondant visible.\n");
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => ListeCas()),

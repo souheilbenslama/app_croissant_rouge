@@ -1,9 +1,16 @@
+import 'package:app_croissant_rouge/services/accident_service.dart';
+import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
 import 'package:app_croissant_rouge/models/Instruction.dart';
 import 'package:app_croissant_rouge/views/screens/my_detail_page.dart';
 import 'package:app_croissant_rouge/views/screens/page_alerte.dart';
 import 'package:app_croissant_rouge/views/screens/chat_screen.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:get/get.dart';
+import 'package:location/location.dart';
+import 'package:provider/provider.dart';
+
+import '../../accidentProvider.dart';
 
 class StepList extends StatefulWidget {
   @override
@@ -18,6 +25,19 @@ class _StepListState extends State<StepList> {
   void initState() {
     super.initState();
     _addInstructions();
+  }
+
+  static Future<List<String>> getDeviceDetails() async {
+    String deviceName;
+    String deviceVersion;
+    String identifier;
+    final DeviceInfoPlugin deviceInfoPlugin = new DeviceInfoPlugin();
+    var build = await deviceInfoPlugin.androidInfo;
+    deviceName = build.model;
+    deviceVersion = build.version.toString();
+    identifier = build.androidId; //UUID for Android
+//if (!mounted) return;
+    return [deviceName, deviceVersion, identifier];
   }
 
   void _addInstructions() {
@@ -97,8 +117,58 @@ class _StepListState extends State<StepList> {
                     return _instructionTiles[index];
                   }),
               RaisedButton(
-                onPressed: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => PageAlerte())),
+                onPressed: () async {
+                  Location location = new Location();
+
+                  bool _serviceEnabled;
+                  PermissionStatus _permissionGranted;
+                  LocationData _locationData;
+
+                  _serviceEnabled = await location.serviceEnabled();
+                  if (!_serviceEnabled) {
+                    _serviceEnabled = await location.requestService();
+                    if (!_serviceEnabled) {
+                      return;
+                    }
+                  }
+
+                  _permissionGranted = await location.hasPermission();
+                  if (_permissionGranted == PermissionStatus.denied) {
+                    _permissionGranted = await location.requestPermission();
+                    if (_permissionGranted != PermissionStatus.granted) {
+                      return;
+                    }
+                  }
+
+                  _locationData = await location.getLocation();
+                  String latitude = _locationData.latitude.toString();
+                  String longitude = _locationData.longitude.toString();
+
+                  final doc =
+                      Provider.of<AccidentProvider>(context, listen: false);
+
+                  doc.setLatitude(latitude);
+                  doc.setLongitude(longitude);
+
+                  var jsondoc = doc.getInfo();
+                  var details = await getDeviceDetails();
+                  var userId = details[2];
+                  var res2 = await AccidentService.createAccident(
+                      userId,
+                      jsondoc["longitude"],
+                      jsondoc["latitude"],
+                      jsondoc["cas"],
+                      jsondoc["description"],
+                      jsondoc["need_secouriste"],
+                      "",
+                      "");
+                  print(res2);
+
+                  const number = '198';
+                  await FlutterPhoneDirectCaller.callNumber(number);
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => PageAlerte()));
+                },
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(100.0)),
                 padding: EdgeInsets.all(0.0),

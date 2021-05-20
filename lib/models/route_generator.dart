@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../views/screens/page_alerte.dart';
 import '../views/screens/map_page.dart';
-import '../views/screens/conscience2.dart';
+import '../views/screens/question_conscience.dart';
 import '../views/screens/sign_in.dart';
 
 import '../views/screens/admin_dashboard.dart';

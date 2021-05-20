@@ -1,6 +1,9 @@
 // Khalil
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:provider/provider.dart';
+
+import '../../accidentProvider.dart';
 
 class HemorragieExterneListe extends StatefulWidget {
   @override
@@ -38,7 +41,11 @@ class _HemorragieExterneListeState extends State<HemorragieExterneListe> {
                   ],
                 ),
                 child: GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    final doc =
+                        Provider.of<AccidentProvider>(context, listen: false);
+                    doc.setDescription("Hémorragie au travers d'un plaie.\n");
+                  },
                   child: Card(
                       color: Colors.white,
                       child: Column(
@@ -71,7 +78,11 @@ class _HemorragieExterneListeState extends State<HemorragieExterneListe> {
                   ],
                 ),
                 child: GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    final doc =
+                        Provider.of<AccidentProvider>(context, listen: false);
+                    doc.setDescription("La victime vomit ou crache du sang.\n");
+                  },
                   child: Card(
                       color: Colors.white,
                       child: Column(
@@ -104,7 +115,11 @@ class _HemorragieExterneListeState extends State<HemorragieExterneListe> {
                   ],
                 ),
                 child: GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    final doc =
+                        Provider.of<AccidentProvider>(context, listen: false);
+                    doc.setDescription("La victime saigne du nez.\n");
+                  },
                   child: Card(
                       color: Colors.white,
                       child: Column(
@@ -137,7 +152,12 @@ class _HemorragieExterneListeState extends State<HemorragieExterneListe> {
                   ],
                 ),
                 child: GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    final doc =
+                        Provider.of<AccidentProvider>(context, listen: false);
+                    doc.setDescription(
+                        "La victime perd du sang d'un orifice naturel.\n");
+                  },
                   child: Card(
                       color: Colors.white,
                       child: Column(

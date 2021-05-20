@@ -137,23 +137,23 @@ class _RespirationState extends State<Respiration> {
 
                       choix.forEach((element) {
                         if (element.value) {
-                          doc.addRespiration(element);
+                          // doc.addRespiration(element);
                         }
                       });
 
-                      doc.setLatitude(latitude);
+                      /*doc.setLatitude(latitude);
                       print('LATITUDE : ' + doc.latitude.toString());
                       doc.setLongitude(longitude);
                       print('LONGITUDE : ' + doc.longitude.toString());
                       print('CHOIX : ');
                       doc.choixRespiration.forEach((element) {
                         print(element);
-                      });
+                      });*/
 
                       var jsondoc = doc.getInfo();
                       var details = await getDeviceDetails();
                       var userId = details[2];
-                      var res2 = await AccidentService.createAccident(
+                      /*var res2 = await AccidentService.createAccident(
                           userId,
                           jsondoc["longitude"],
                           jsondoc["latitude"],
@@ -170,7 +170,7 @@ class _RespirationState extends State<Respiration> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => InstructionList()));
+                              builder: (context) => InstructionList()));*/
                     },
                     child: Text("nextButton".tr),
                   ),

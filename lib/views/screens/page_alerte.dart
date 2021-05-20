@@ -106,8 +106,6 @@ class _PageAlerteState extends State<PageAlerte> {
   Widget build(BuildContext context) {
     final doc = Provider.of<AccidentProvider>(context, listen: true);
     Future<SharedPreferences> prefs = SharedPreferences.getInstance();
-    location = new Location();
-    currentlocation = getPosition();
 
     return new WillPopScope(
         onWillPop: () async => false,
@@ -117,13 +115,10 @@ class _PageAlerteState extends State<PageAlerte> {
                 AsyncSnapshot<SharedPreferences> snapshot) {
               bool isAdmin() {
                 if (snapshot.hasData) {
-                  //print(snapshot.data);
                   jwt = snapshot.data.getString("jwt");
-                  print("hell");
                   if ((jwt != null)) {
                     token = jsonDecode(jwt)["token"];
                     decodedToken = JwtDecoder.decode(token);
-                    //  print(decodedToken);
                     if (decodedToken["isAdmin"]) {
                       return true;
                     } else
@@ -136,13 +131,10 @@ class _PageAlerteState extends State<PageAlerte> {
 
               bool isActivated() {
                 if (snapshot.hasData) {
-                  //  print(snapshot.data);
                   jwt = snapshot.data.getString("jwt");
-
                   if ((jwt != null)) {
                     token = jsonDecode(jwt)["token"];
                     decodedToken = JwtDecoder.decode(token);
-                    // print(decodedToken);
                     if (decodedToken["isActivated"]) {
                       return true;
                     } else
@@ -155,13 +147,10 @@ class _PageAlerteState extends State<PageAlerte> {
 
               bool isSecouriste() {
                 if (snapshot.hasData) {
-                  //print(snapshot.data);
                   jwt = snapshot.data.getString("jwt");
-
                   if ((jwt != null)) {
                     token = jsonDecode(jwt)["token"];
                     decodedToken = JwtDecoder.decode(token);
-                    // print(decodedToken);
                     if (!decodedToken["isNormalUser"]) {
                       return true;
                     } else

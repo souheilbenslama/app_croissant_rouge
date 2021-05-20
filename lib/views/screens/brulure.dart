@@ -1,8 +1,28 @@
+import 'package:app_croissant_rouge/services/accident_service.dart';
 import 'package:app_croissant_rouge/views/screens/hemorragieExterne.dart';
+import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:get/get.dart';
+import 'package:location/location.dart';
+import 'package:provider/provider.dart';
+
+import '../../accidentProvider.dart';
 
 class Brulure extends StatelessWidget {
+  static Future<List<String>> getDeviceDetails() async {
+    String deviceName;
+    String deviceVersion;
+    String identifier;
+    final DeviceInfoPlugin deviceInfoPlugin = new DeviceInfoPlugin();
+    var build = await deviceInfoPlugin.androidInfo;
+    deviceName = build.model;
+    deviceVersion = build.version.toString();
+    identifier = build.androidId; //UUID for Android
+//if (!mounted) return;
+    return [deviceName, deviceVersion, identifier];
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +69,11 @@ class Brulure extends StatelessWidget {
               height: 20,
             ),
             RaisedButton(
-              onPressed: () {},
+              onPressed: () {
+                final doc =
+                    Provider.of<AccidentProvider>(context, listen: false);
+                doc.setDescription("Brûlure simple.\n");
+              },
               color: Colors.redAccent[700],
               padding: EdgeInsets.symmetric(horizontal: 50),
               elevation: 2,
@@ -95,7 +119,56 @@ class Brulure extends StatelessWidget {
               height: 15,
             ),
             RaisedButton(
-              onPressed: () {},
+              onPressed: () async {
+                final doc =
+                    Provider.of<AccidentProvider>(context, listen: false);
+                doc.setDescription("Brûlure grave");
+                doc.setNeedSecouriste();
+                Location location = new Location();
+
+                bool _serviceEnabled;
+                PermissionStatus _permissionGranted;
+                LocationData _locationData;
+
+                _serviceEnabled = await location.serviceEnabled();
+                if (!_serviceEnabled) {
+                  _serviceEnabled = await location.requestService();
+                  if (!_serviceEnabled) {
+                    return;
+                  }
+                }
+
+                _permissionGranted = await location.hasPermission();
+                if (_permissionGranted == PermissionStatus.denied) {
+                  _permissionGranted = await location.requestPermission();
+                  if (_permissionGranted != PermissionStatus.granted) {
+                    return;
+                  }
+                }
+
+                _locationData = await location.getLocation();
+                String latitude = _locationData.latitude.toString();
+                String longitude = _locationData.longitude.toString();
+
+                doc.setLatitude(latitude);
+                doc.setLongitude(longitude);
+
+                var jsondoc = doc.getInfo();
+                var details = await getDeviceDetails();
+                var userId = details[2];
+                var res2 = await AccidentService.createAccident(
+                    userId,
+                    jsondoc["longitude"],
+                    jsondoc["latitude"],
+                    jsondoc["cas"],
+                    jsondoc["description"],
+                    jsondoc["need_secouriste"],
+                    "",
+                    "");
+
+                const number = '198';
+                await FlutterPhoneDirectCaller.callNumber(number);
+              },
               color: Colors.redAccent[700],
               padding: EdgeInsets.symmetric(horizontal: 50),
               elevation: 2,
