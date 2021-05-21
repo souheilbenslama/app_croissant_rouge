@@ -2,6 +2,7 @@ import 'package:app_croissant_rouge/views/screens/brulure.dart';
 import 'package:app_croissant_rouge/views/screens/hemorragieExterne.dart';
 import 'package:app_croissant_rouge/views/screens/malaise.dart';
 import 'package:app_croissant_rouge/views/screens/plaies.dart';
+import 'package:app_croissant_rouge/views/screens/fracture.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -174,7 +175,7 @@ class ListeCas extends StatelessWidget {
                     doc.setCas("Fracture");
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => ListeCas()),
+                      MaterialPageRoute(builder: (context) => Fracture()),
                     );
                   },
                   color: Colors.redAccent[700],

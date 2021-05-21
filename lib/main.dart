@@ -102,7 +102,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       ),
       //home: SignIn(),
       //home: MapPage()
-      home: PageAlerte(),
+      //home: PageAlerte(),
       //home: TestNotification(),
       //home: Profile(ss),
       //home: ListeMalaise()
@@ -113,7 +113,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       //home: BrulureSimple(),
       //home: BrulureGrave(),
       // home: CriseNerfs(),
-      //home: MalCardio(),
+      // home: MalCardio(),
       //home: MalDiab(),
     );
   }

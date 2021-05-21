@@ -1,5 +1,5 @@
 import 'package:app_croissant_rouge/views/screens/listeDesCas.dart';
-import 'package:app_croissant_rouge/views/screens/question_respiration.dart';
+import 'package:app_croissant_rouge/views/screens/crise_nerfs.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../accidentProvider.dart';
@@ -48,7 +48,12 @@ class CriseDeNerfs extends StatelessWidget {
                 width: 130.0,
                 margin: EdgeInsets.only(),
                 child: RaisedButton(
-                  onPressed: null,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => CriseNerfs()),
+                    );
+                  },
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(80.0)),
                   padding: EdgeInsets.all(0.0),
