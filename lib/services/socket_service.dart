@@ -13,7 +13,7 @@ import 'package:socket_io_client/socket_io_client.dart';
 class SocketService {
   static bool status = true;
   static IO.Socket socket =
-      IO.io('http://192.168.43.68:3000', <String, dynamic>{
+      IO.io('http://192.168.1.118:3000', <String, dynamic>{
     'transports': ['websocket'],
     'autoConnect': true,
   });

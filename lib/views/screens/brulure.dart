@@ -25,6 +25,8 @@ class Brulure extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(backgroundColor: Colors.redAccent[700]),
       body: Center(
@@ -33,31 +35,20 @@ class Brulure extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(
-              height: 40,
+              height: 0.055 * height,
             ),
             Padding(
               padding: const EdgeInsets.only(),
               child: Image.asset(
-                'assets/logo.jpg',
-                width: 150,
-                height: 150,
+                'assets/profil.png',
+                width: height * 0.205,
+                height: height * 0.205,
               ),
             ),
             SizedBox(
-              height: 80,
+              height: height * 0.055,
             ),
-            Text(
-              "Le degré de brûlure de la victime est ",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.black.withOpacity(0.8),
-                fontSize: 30,
-                //fontWeight: FontWeight.bold,
-                fontStyle: FontStyle.italic,
-                letterSpacing: 2.2,
-              ),
-            ),
-            Text('BrulureQuest'.tr,
+            Text('brulureQuest'.tr,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.black.withOpacity(0.8),
@@ -66,150 +57,117 @@ class Brulure extends StatelessWidget {
                   fontStyle: FontStyle.italic,
                 )),
             SizedBox(
-              height: 20,
+              height: 0.055 * height,
             ),
-            RaisedButton(
-              onPressed: () {
-                final doc =
-                    Provider.of<AccidentProvider>(context, listen: false);
-                doc.setDescription("Brûlure simple.\n");
-              },
-              color: Colors.redAccent[700],
-              padding: EdgeInsets.symmetric(horizontal: 50),
-              elevation: 2,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20)),
-              child: Text(
-                "Brûlure simple",
-                style: TextStyle(
-                    fontSize: 14, letterSpacing: 2.2, color: Colors.white),
-              ),
-            ),
-            /*Container(
-              height: 60.0,
-              width: 190,
-              margin: EdgeInsets.only(),
+            Container(
+              height: height * 0.068,
+              width: width * 0.681,
               child: RaisedButton(
-                onPressed: null,
+                onPressed: () {
+                  final doc =
+                      Provider.of<AccidentProvider>(context, listen: false);
+                  doc.setDescription("Brûlure simple.\n");
+                },
+                color: Colors.redAccent[700],
+                padding: EdgeInsets.symmetric(
+                  horizontal: width * 0.121,
+                ),
+                elevation: 2,
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(80.0)),
-                padding: EdgeInsets.all(0.0),
-                child: Ink(
-                  decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [Color(0xFFe84f4c), Color(0xFFe2231e)],
-                        begin: Alignment.centerRight,
-                        end: Alignment.centerLeft,
-                      ),
-                      borderRadius: BorderRadius.circular(30.0)),
-                  child: Container(
-                    constraints:
-                        BoxConstraints(maxWidth: 250.0, minHeight: 50.0),
-                    alignment: Alignment.center,
-                    child: Text(
-                      "brulureSimple".tr,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.white, fontSize: 20),
-                    ),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Text(
+                  "brulureSimple".tr,
+                  style: TextStyle(
+                    fontSize: 25,
+                    letterSpacing: 2.2,
+                    color: Colors.white,
                   ),
                 ),
               ),
-            ),*/
+            ),
             SizedBox(
-              height: 15,
+              height: height * 0.021,
             ),
-            RaisedButton(
-              onPressed: () async {
-                final doc =
-                    Provider.of<AccidentProvider>(context, listen: false);
-                doc.setDescription("Brûlure grave");
-                doc.setNeedSecouriste();
-                Location location = new Location();
-
-                bool _serviceEnabled;
-                PermissionStatus _permissionGranted;
-                LocationData _locationData;
-
-                _serviceEnabled = await location.serviceEnabled();
-                if (!_serviceEnabled) {
-                  _serviceEnabled = await location.requestService();
-                  if (!_serviceEnabled) {
-                    return;
-                  }
-                }
-
-                _permissionGranted = await location.hasPermission();
-                if (_permissionGranted == PermissionStatus.denied) {
-                  _permissionGranted = await location.requestPermission();
-                  if (_permissionGranted != PermissionStatus.granted) {
-                    return;
-                  }
-                }
-
-                _locationData = await location.getLocation();
-                String latitude = _locationData.latitude.toString();
-                String longitude = _locationData.longitude.toString();
-
-                doc.setLatitude(latitude);
-                doc.setLongitude(longitude);
-
-                var jsondoc = doc.getInfo();
-                var details = await getDeviceDetails();
-                var userId = details[2];
-                var res2 = await AccidentService.createAccident(
-                    userId,
-                    jsondoc["longitude"],
-                    jsondoc["latitude"],
-                    jsondoc["cas"],
-                    jsondoc["description"],
-                    jsondoc["need_secouriste"],
-                    "",
-                    "");
-
-                const number = '198';
-                await FlutterPhoneDirectCaller.callNumber(number);
-              },
-              color: Colors.redAccent[700],
-              padding: EdgeInsets.symmetric(horizontal: 50),
-              elevation: 2,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20)),
-              child: Text(
-                "Brûlure grave",
-                style: TextStyle(
-                    fontSize: 14, letterSpacing: 2.2, color: Colors.white),
-              ),
-            ),
-            /*Container(
-              height: 60.0,
-              width: 190,
-              margin: EdgeInsets.only(),
+            Container(
+              height: height * 0.068,
+              width: width * 0.681,
               child: RaisedButton(
-                onPressed: null,
+                onPressed: () async {
+                  final doc =
+                      Provider.of<AccidentProvider>(context, listen: false);
+                  doc.setDescription("Brûlure grave");
+                  doc.setNeedSecouriste();
+                  Location location = new Location();
+
+                  bool _serviceEnabled;
+                  PermissionStatus _permissionGranted;
+                  LocationData _locationData;
+
+                  _serviceEnabled = await location.serviceEnabled();
+                  if (!_serviceEnabled) {
+                    _serviceEnabled = await location.requestService();
+                    if (!_serviceEnabled) {
+                      return;
+                    }
+                  }
+
+                  _permissionGranted = await location.hasPermission();
+                  if (_permissionGranted == PermissionStatus.denied) {
+                    _permissionGranted = await location.requestPermission();
+                    if (_permissionGranted != PermissionStatus.granted) {
+                      return;
+                    }
+                  }
+
+                  _locationData = await location.getLocation();
+                  String latitude = _locationData.latitude.toString();
+                  String longitude = _locationData.longitude.toString();
+
+                  doc.setLatitude(latitude);
+                  doc.setLongitude(longitude);
+
+                  var jsondoc = doc.getInfo();
+                  var details = await getDeviceDetails();
+                  var userId = details[2];
+                  var res2 = await AccidentService.createAccident(
+                      userId,
+                      jsondoc["longitude"],
+                      jsondoc["latitude"],
+                      jsondoc["cas"],
+                      jsondoc["description"],
+                      jsondoc["need_secouriste"],
+                      "",
+                      "");
+
+                  const number = '198';
+                  await FlutterPhoneDirectCaller.callNumber(number);
+                },
+                color: Colors.redAccent[700],
+                padding: EdgeInsets.symmetric(
+                  horizontal: width * 0.121,
+                ),
+                elevation: 2,
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(80.0)),
-                padding: EdgeInsets.all(0.0),
-                child: Ink(
-                  decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [Color(0xFFe84f4c), Color(0xFFe2231e)],
-                        begin: Alignment.centerRight,
-                        end: Alignment.centerLeft,
-                      ),
-                      borderRadius: BorderRadius.circular(30.0)),
-                  child: Container(
-                    constraints:
-                        BoxConstraints(maxWidth: 250.0, minHeight: 50.0),
-                    alignment: Alignment.center,
-                    child: Text(
-                      "brulureGrave".tr,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.white, fontSize: 20),
-                    ),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Text(
+                  "brulureGrave".tr,
+                  style: TextStyle(
+                    fontSize: 25,
+                    letterSpacing: 2.2,
+                    color: Colors.white,
                   ),
                 ),
               ),
-            ),*/
+            ),
+            Container(
+              height: height * 0.274,
+              width: height * 0.274,
+              child: Image.asset(
+                'assets/images/burn1g.png',
+              ),
+            ),
           ],
         ),
       ),

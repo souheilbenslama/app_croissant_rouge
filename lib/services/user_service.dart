@@ -2,7 +2,7 @@ import 'package:http/http.dart' as http;
 
 class UserService {
 // The Server to the backend
-  static const SERVER_IP = 'http://192.168.43.68:3000';
+  static const SERVER_IP = 'http://192.168.1.118:3000';
 // The method to register the user
   static Future<String> attemptLogInUser(String userId) async {
     var res = await http

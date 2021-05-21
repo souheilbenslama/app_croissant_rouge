@@ -25,6 +25,8 @@ class Plaies extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(backgroundColor: Colors.redAccent[700]),
       body: Center(
@@ -33,18 +35,18 @@ class Plaies extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(
-              height: 40,
+              height: 0.055 * height,
             ),
             Padding(
               padding: const EdgeInsets.only(),
               child: Image.asset(
-                'assets/logo.jpg',
-                width: 150,
-                height: 150,
+                'assets/profil.png',
+                width: height * 0.205,
+                height: height * 0.205,
               ),
             ),
             SizedBox(
-              height: 80,
+              height: height * 0.109,
             ),
             Text("plaieQuest".tr,
                 textAlign: TextAlign.center,
@@ -56,10 +58,11 @@ class Plaies extends StatelessWidget {
                   letterSpacing: 2.2,
                 )),
             SizedBox(
-              height: 20,
+              height: 0.055 * height,
             ),
             Container(
-              width: 200,
+              height: height * 0.068,
+              width: width * 0.608,
               child: RaisedButton(
                 onPressed: () {
                   final doc =
@@ -67,52 +70,26 @@ class Plaies extends StatelessWidget {
                   doc.setDescription("Plaie simple.\n");
                 },
                 color: Colors.redAccent[700],
-                padding: EdgeInsets.symmetric(horizontal: 50),
+                padding: EdgeInsets.symmetric(
+                  horizontal: width * 0.121,
+                ),
                 elevation: 2,
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)),
+                  borderRadius: BorderRadius.circular(20),
+                ),
                 child: Text(
-                  "Plaie simple",
+                  "plaieSimple".tr,
                   style: TextStyle(
-                      fontSize: 14, letterSpacing: 2.2, color: Colors.white),
+                      fontSize: 25, letterSpacing: 2.2, color: Colors.white),
                 ),
               ),
             ),
-            /*Container(
-              height: 60.0,
-              width: 190,
-              margin: EdgeInsets.only(),
-              child: RaisedButton(
-                onPressed: null,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(80.0)),
-                padding: EdgeInsets.all(0.0),
-                child: Ink(
-                  decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [Color(0xFFe84f4c), Color(0xFFe2231e)],
-                        begin: Alignment.centerRight,
-                        end: Alignment.centerLeft,
-                      ),
-                      borderRadius: BorderRadius.circular(30.0)),
-                  child: Container(
-                    constraints:
-                        BoxConstraints(maxWidth: 250.0, minHeight: 50.0),
-                    alignment: Alignment.center,
-                    child: Text(
-                      "plaieSimple".tr,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.white, fontSize: 25),
-                    ),
-                  ),
-                ),
-              ),
-            ),*/
             SizedBox(
-              height: 15,
+              height: height * 0.021,
             ),
             Container(
-              width: 200,
+              height: height * 0.068,
+              width: width * 0.608,
               child: RaisedButton(
                 onPressed: () async {
                   final doc =
@@ -165,47 +142,20 @@ class Plaies extends StatelessWidget {
                   await FlutterPhoneDirectCaller.callNumber(number);
                 },
                 color: Colors.redAccent[700],
-                padding: EdgeInsets.symmetric(horizontal: 50),
+                padding: EdgeInsets.symmetric(
+                  horizontal: width * 0.121,
+                ),
                 elevation: 2,
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)),
+                  borderRadius: BorderRadius.circular(20),
+                ),
                 child: Text(
-                  "Plaie grave",
+                  "plaieGrave".tr,
                   style: TextStyle(
-                      fontSize: 14, letterSpacing: 2.2, color: Colors.white),
+                      fontSize: 25, letterSpacing: 2.2, color: Colors.white),
                 ),
               ),
             ),
-            /*Container(
-              height: 60.0,
-              width: 190,
-              margin: EdgeInsets.only(),
-              child: RaisedButton(
-                onPressed: null,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(80.0)),
-                padding: EdgeInsets.all(0.0),
-                child: Ink(
-                  decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [Color(0xFFe84f4c), Color(0xFFe2231e)],
-                        begin: Alignment.centerRight,
-                        end: Alignment.centerLeft,
-                      ),
-                      borderRadius: BorderRadius.circular(30.0)),
-                  child: Container(
-                    constraints:
-                        BoxConstraints(maxWidth: 250.0, minHeight: 50.0),
-                    alignment: Alignment.center,
-                    child: Text(
-                      "plaieGrave".tr,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.white, fontSize: 25),
-                    ),
-                  ),
-                ),
-              ),
-            ),*/
           ],
         ),
       ),

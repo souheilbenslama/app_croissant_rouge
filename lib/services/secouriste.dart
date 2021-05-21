@@ -4,7 +4,7 @@ import 'package:app_croissant_rouge/models/secouriste.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-const SERVER_IP = 'http://192.168.43.68:3000';
+const SERVER_IP = 'http://192.168.1.118:3000';
 
 //updating rescuer's disponibility (disponible-indisponible)
 //

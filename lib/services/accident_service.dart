@@ -3,7 +3,7 @@ import 'package:app_croissant_rouge/models/accident.dart';
 import 'package:device_info/device_info.dart';
 import 'package:http/http.dart' as http;
 
-const SERVER_IP = 'http://192.168.43.68:3000';
+const SERVER_IP = 'http://192.168.1.118:3000';
 
 class AccidentService {
 //get the list of interventions in progress

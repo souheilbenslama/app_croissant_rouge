@@ -1,15 +1,13 @@
 import 'package:app_croissant_rouge/services/accident_service.dart';
-
-import 'package:app_croissant_rouge/views/screens/perte_connaissance_etapes.dart';
 import 'package:app_croissant_rouge/views/screens/page_alerte.dart';
-import 'package:geocoder/geocoder.dart';
-import 'package:geocoding/geocoding.dart';
-import 'package:device_info/device_info.dart';
-import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
-import 'package:app_croissant_rouge/services/secouriste_service.dart';
+import 'package:app_croissant_rouge/views/screens/perte_connaissance_etapes.dart';
 import 'package:app_croissant_rouge/views/screens/question_etouffement.dart';
+
+import 'package:device_info/device_info.dart';
 import 'package:app_croissant_rouge/views/screens/listeDesCas.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:location/location.dart';
 import 'package:provider/provider.dart';
@@ -34,6 +32,8 @@ class Respire extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     LocationData _locationData;
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.redAccent[700],
@@ -41,17 +41,19 @@ class Respire extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          SizedBox(height: 40),
+          SizedBox(
+            height: 0.055 * height,
+          ),
           Padding(
             padding: const EdgeInsets.only(),
             child: Image.asset(
-              'assets/logo.jpg',
-              width: 150,
-              height: 150,
+              'assets/profil.png',
+              width: height * 0.205,
+              height: height * 0.205,
             ),
           ),
           SizedBox(
-            height: 80,
+            height: height * 0.109,
           ),
           Text("respQuest".tr,
               textAlign: TextAlign.center,
@@ -62,47 +64,14 @@ class Respire extends StatelessWidget {
                   fontStyle: FontStyle.italic,
                   letterSpacing: 2.2)),
           SizedBox(
-            height: 20,
+            height: 0.055 * height,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              RaisedButton(
-                onPressed: () {
-                  final doc =
-                      Provider.of<AccidentProvider>(context, listen: false);
-                  bool conscient = doc.conscient;
-                  doc.setRespire(true);
-                  if (conscient) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => ListeCas()),
-                    );
-                  } else {
-                    final doc =
-                        Provider.of<AccidentProvider>(context, listen: false);
-                    doc.setCas("Perte de connaissance");
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => StepList()),
-                    );
-                  }
-                },
-                color: Colors.redAccent[700],
-                padding: EdgeInsets.symmetric(horizontal: 50),
-                elevation: 2,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)),
-                child: Text(
-                  "oui".tr,
-                  style: TextStyle(
-                      fontSize: 14, letterSpacing: 2.2, color: Colors.white),
-                ),
-              ),
-              /*Container(
-                height: 60.0,
-                width: 130.0,
-                margin: EdgeInsets.only(),
+              Container(
+                height: height * 0.068,
+                width: width * 0.364,
                 child: RaisedButton(
                   onPressed: () {
                     final doc =
@@ -122,124 +91,29 @@ class Respire extends StatelessWidget {
                       );
                     }
                   },
+                  color: Colors.redAccent[700],
+                  padding: EdgeInsets.symmetric(horizontal: width * 0.121),
+                  elevation: 2,
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(80.0)),
-                  padding: EdgeInsets.all(0.0),
-                  child: Ink(
-                    decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [Color(0xFFe84f4c), Color(0xFFe2231e)],
-                          begin: Alignment.centerRight,
-                          end: Alignment.centerLeft,
-                        ),
-                        borderRadius: BorderRadius.circular(30.0)),
-                    child: Container(
-                      constraints:
-                          BoxConstraints(maxWidth: 250.0, minHeight: 50.0),
-                      alignment: Alignment.center,
-                      child: Text(
-                        "oui".tr,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.white, fontSize: 30),
-                      ),
-                    ),
+                      borderRadius: BorderRadius.circular(20)),
+                  child: Text(
+                    "oui".tr,
+                    style: TextStyle(
+                        fontSize: 25, letterSpacing: 2.2, color: Colors.white),
                   ),
                 ),
-              ),*/
+              ),
               SizedBox(
-                width: 30,
+                width: width * 0.073,
               ),
-              RaisedButton(
-                onPressed: () async {
-                  final doc =
-                      Provider.of<AccidentProvider>(context, listen: false);
-
-                  bool conscient = doc.conscient;
-                  doc.setRespire(false);
-                  if (conscient) {
-                    doc.setCas("Etouffement");
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Etouffement()),
-                    );
-                  } else {
-                    final doc =
-                        Provider.of<AccidentProvider>(context, listen: false);
-
-                    doc.setCas("Arrêt cardiaque");
-
-                    if (doc.getCurrentLocation() != null) {
-                      _locationData = doc.currentLocation;
-                      String latitude = _locationData.latitude.toString();
-                      String longitude = _locationData.longitude.toString();
-                      doc.setLatitude(latitude);
-                      doc.setLongitude(longitude);
-                      List<Placemark> placemarks =
-                          await placemarkFromCoordinates(
-                              _locationData.latitude, _locationData.latitude);
-
-                      final localite = placemarks[0].subAdministrativeArea;
-
-                      final address = placemarks[0].administrativeArea +
-                          "  " +
-                          placemarks[0].subAdministrativeArea +
-                          " " +
-                          placemarks[0].locality +
-                          " " +
-                          placemarks[0].street +
-                          " " +
-                          placemarks[0].postalCode;
-
-                      var jsondoc = doc.getInfo();
-                      String userId;
-                      if (doc.gettoken() != null) {
-                        final decodedToken = JwtDecoder.decode(doc.gettoken());
-                        userId = decodedToken["id"];
-                      } else {
-                        var details = await getDeviceDetails();
-                        userId = details[2];
-                      }
-
-                      var res2 = AccidentService.createAccident(
-                          userId,
-                          jsondoc["longitude"],
-                          jsondoc["latitude"],
-                          jsondoc["cas"],
-                          jsondoc["description"],
-                          jsondoc["need_secouriste"],
-                          address,
-                          localite);
-                    }
-
-                    const number = '198';
-
-                    FlutterPhoneDirectCaller.callNumber(number);
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => PageAlerte()),
-                    );
-                  }
-                },
-                color: Colors.redAccent[700],
-                padding: EdgeInsets.symmetric(horizontal: 50),
-                elevation: 2,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)),
-                child: Text(
-                  "non".tr,
-                  style: TextStyle(
-                      fontSize: 14, letterSpacing: 2.2, color: Colors.white),
-                ),
-              ),
-
-              /*Container(
-                height: 60.0,
-                width: 130.0,
-                margin: EdgeInsets.only(),
+              Container(
+                height: height * 0.068,
+                width: width * 0.364,
                 child: RaisedButton(
                   onPressed: () async {
                     final doc =
                         Provider.of<AccidentProvider>(context, listen: false);
+
                     bool conscient = doc.conscient;
                     doc.setRespire(false);
                     if (conscient) {
@@ -249,40 +123,77 @@ class Respire extends StatelessWidget {
                         MaterialPageRoute(builder: (context) => Etouffement()),
                       );
                     } else {
+                      final doc =
+                          Provider.of<AccidentProvider>(context, listen: false);
+
                       doc.setCas("Arrêt cardiaque");
-                      doc.setNeedSecouriste();
+
+                      if (doc.getCurrentLocation() != null) {
+                        _locationData = doc.currentLocation;
+                        String latitude = _locationData.latitude.toString();
+                        String longitude = _locationData.longitude.toString();
+                        doc.setLatitude(latitude);
+                        doc.setLongitude(longitude);
+                        List<Placemark> placemarks =
+                            await placemarkFromCoordinates(
+                                _locationData.latitude, _locationData.latitude);
+
+                        final localite = placemarks[0].subAdministrativeArea;
+
+                        final address = placemarks[0].administrativeArea +
+                            "  " +
+                            placemarks[0].subAdministrativeArea +
+                            " " +
+                            placemarks[0].locality +
+                            " " +
+                            placemarks[0].street +
+                            " " +
+                            placemarks[0].postalCode;
+
+                        var jsondoc = doc.getInfo();
+                        String userId;
+                        if (doc.gettoken() != null) {
+                          final decodedToken =
+                              JwtDecoder.decode(doc.gettoken());
+                          userId = decodedToken["id"];
+                        } else {
+                          var details = await getDeviceDetails();
+                          userId = details[2];
+                        }
+
+                        var res2 = AccidentService.createAccident(
+                            userId,
+                            jsondoc["longitude"],
+                            jsondoc["latitude"],
+                            jsondoc["cas"],
+                            jsondoc["description"],
+                            jsondoc["need_secouriste"],
+                            address,
+                            localite);
+                      }
+
                       const number = '198';
-                      await FlutterPhoneDirectCaller.callNumber(number);
+
+                      FlutterPhoneDirectCaller.callNumber(number);
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(builder: (context) => PageAlerte()),
                       );
                     }
                   },
+                  color: Colors.redAccent[700],
+                  padding: EdgeInsets.symmetric(horizontal: width * 0.121),
+                  elevation: 2,
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(80.0)),
-                  padding: EdgeInsets.all(0.0),
-                  child: Ink(
-                    decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [Color(0xFFe84f4c), Color(0xFFe2231e)],
-                          begin: Alignment.centerRight,
-                          end: Alignment.centerLeft,
-                        ),
-                        borderRadius: BorderRadius.circular(30.0)),
-                    child: Container(
-                      constraints:
-                          BoxConstraints(maxWidth: 250.0, minHeight: 50.0),
-                      alignment: Alignment.center,
-                      child: Text(
-                        "non".tr,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.white, fontSize: 30),
-                      ),
-                    ),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Text(
+                    "non".tr,
+                    style: TextStyle(
+                        fontSize: 25, letterSpacing: 2.2, color: Colors.white),
                   ),
                 ),
-              )*/
+              ),
             ],
           )
         ],

@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 
 class AdminService {
 // The backend server
-  static const SERVER_IP = 'http://192.168.43.68:3000';
+  static const SERVER_IP = 'http://192.168.1.118:3000';
 // The method to get the list of secourists
   static Future<List<dynamic>> listSecourists() async {
     var res = await http.get("$SERVER_IP/users/list");
