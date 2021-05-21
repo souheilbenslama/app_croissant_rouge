@@ -34,6 +34,8 @@ import 'package:app_croissant_rouge/views/screens/plaies_simples.dart';
 import 'package:app_croissant_rouge/views/screens/brulure_simple.dart';
 import 'package:app_croissant_rouge/views/screens/brulure_grave.dart';
 import 'package:app_croissant_rouge/views/screens/crise_nerfs.dart';
+import 'package:app_croissant_rouge/views/screens/mal_cardio.dart';
+import 'package:app_croissant_rouge/views/screens/mal_diab.dart';
 
 void main() {
   runApp(ChangeNotifierProvider(
@@ -111,6 +113,8 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       //home: BrulureSimple(),
       //home: BrulureGrave(),
       // home: CriseNerfs(),
+      home: MalCardio(),
+      //home: MalDiab(),
     );
   }
 }
