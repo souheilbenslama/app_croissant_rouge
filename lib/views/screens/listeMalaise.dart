@@ -134,7 +134,7 @@ class ListeMalaise extends StatelessWidget {
                 onPressed: () {
                   final doc =
                       Provider.of<AccidentProvider>(context, listen: false);
-                  doc.setCas("MalaiseDiabetique");
+                  doc.setCas("Malaise Diabetique");
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -207,6 +207,9 @@ class ListeMalaise extends StatelessWidget {
               width: 270,
               child: RaisedButton(
                 onPressed: () {
+                  final doc =
+                      Provider.of<AccidentProvider>(context, listen: false);
+                  doc.setCas("Malaise Cardiaque");
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => MalaiseCardiaque()),

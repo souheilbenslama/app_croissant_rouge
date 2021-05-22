@@ -51,6 +51,11 @@ class MalaiseCardiaque extends StatelessWidget {
                 width: width * 0.364,
                 child: RaisedButton(
                   onPressed: () {
+                    final doc =
+                        Provider.of<AccidentProvider>(context, listen: false);
+                    doc.setDescription(
+                        " la victime souffre de forte douleur qui serre la poitrine et/ou sueurs d'essouflement");
+
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => MalCardio()),
