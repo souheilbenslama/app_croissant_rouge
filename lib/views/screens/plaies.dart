@@ -49,15 +49,17 @@ class Plaies extends StatelessWidget {
             SizedBox(
               height: height * 0.109,
             ),
-            Text("plaieQuest".tr,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.black.withOpacity(0.8),
-                  fontSize: 30,
-                  //fontWeight: FontWeight.bold,
-                  fontStyle: FontStyle.italic,
-                  letterSpacing: 2.2,
-                )),
+            Text(
+              "plaieQuest".tr,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.black.withOpacity(0.8),
+                fontSize: 30,
+                //fontWeight: FontWeight.bold,
+                fontStyle: FontStyle.italic,
+                letterSpacing: 2.2,
+              ),
+            ),
             SizedBox(
               height: 0.055 * height,
             ),

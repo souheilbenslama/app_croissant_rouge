@@ -15,7 +15,9 @@ class ListeCas extends StatelessWidget {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.redAccent[700]),
+      appBar: AppBar(
+        backgroundColor: Colors.redAccent[700],
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -200,7 +202,9 @@ class ListeCas extends StatelessWidget {
                   doc.setCas("Fracture");
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Fracture()),
+                    MaterialPageRoute(
+                      builder: (context) => Fracture(),
+                    ),
                   );
                 },
                 color: Colors.redAccent[700],

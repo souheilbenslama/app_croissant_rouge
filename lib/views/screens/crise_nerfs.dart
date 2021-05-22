@@ -16,21 +16,13 @@ class CriseNerfs extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         home: Scaffold(
           appBar: AppBar(
-            backgroundColor: Colors.redAccent[700],
-            leading: IconButton(
-              icon: Icon(
-                Icons.arrow_back,
-                color: Colors.white,
-              ),
-              onPressed: () {},
-            ),
-            title: Center(
-              child: Text(
-                'Crise de nerfs',
-              ),
-            ),
-            elevation: 0,
-          ),
+              backgroundColor: Colors.redAccent[700],
+              leading: IconButton(
+                icon: Icon(
+                  Icons.arrow_back,
+                  color: Colors.white,
+                ),
+              )),
           body: SingleChildScrollView(
               physics: ScrollPhysics(),
               child: Container(

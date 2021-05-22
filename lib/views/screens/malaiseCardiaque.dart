@@ -8,6 +8,8 @@ import 'package:get/get.dart';
 class MalaiseCardiaque extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.redAccent[700],
@@ -19,13 +21,13 @@ class MalaiseCardiaque extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(),
             child: Image.asset(
-              'assets/logo.jpg',
-              width: 150,
-              height: 150,
+              'assets/profil.png',
+              width: height * 0.205,
+              height: height * 0.205,
             ),
           ),
           SizedBox(
-            height: 50,
+            height: height * 0.109,
           ),
           Text(
             "malCardQuest".tr,
@@ -35,6 +37,7 @@ class MalaiseCardiaque extends StatelessWidget {
               fontSize: 30,
               //fontWeight: FontWeight.bold,
               fontStyle: FontStyle.italic,
+              letterSpacing: 2.2,
             ),
           ),
           SizedBox(
@@ -44,9 +47,8 @@ class MalaiseCardiaque extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                height: 60.0,
-                width: 130.0,
-                margin: EdgeInsets.only(),
+                height: height * 0.068,
+                width: width * 0.364,
                 child: RaisedButton(
                   onPressed: () {
                     Navigator.push(
@@ -54,37 +56,30 @@ class MalaiseCardiaque extends StatelessWidget {
                       MaterialPageRoute(builder: (context) => MalCardio()),
                     );
                   },
+                  color: Colors.redAccent[700],
+                  padding: EdgeInsets.symmetric(
+                    horizontal: width * 0.121,
+                  ),
+                  elevation: 2,
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(80.0)),
-                  padding: EdgeInsets.all(0.0),
-                  child: Ink(
-                    decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [Color(0xFFe84f4c), Color(0xFFe2231e)],
-                          begin: Alignment.centerRight,
-                          end: Alignment.centerLeft,
-                        ),
-                        borderRadius: BorderRadius.circular(30.0)),
-                    child: Container(
-                      constraints:
-                          BoxConstraints(maxWidth: 250.0, minHeight: 50.0),
-                      alignment: Alignment.center,
-                      child: Text(
-                        "oui".tr,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.white, fontSize: 30),
-                      ),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Text(
+                    "oui".tr,
+                    style: TextStyle(
+                      fontSize: 25,
+                      letterSpacing: 2.2,
+                      color: Colors.white,
                     ),
                   ),
                 ),
               ),
               SizedBox(
-                width: 30,
+                width: width * 0.073,
               ),
               Container(
-                height: 60.0,
-                width: 130.0,
-                margin: EdgeInsets.only(),
+                height: height * 0.068,
+                width: width * 0.364,
                 child: RaisedButton(
                   onPressed: () {
                     Navigator.push(
@@ -92,32 +87,23 @@ class MalaiseCardiaque extends StatelessWidget {
                       MaterialPageRoute(builder: (context) => ListeCas()),
                     );
                   },
+                  color: Colors.redAccent[700],
+                  padding: EdgeInsets.symmetric(
+                    horizontal: width * 0.121,
+                  ),
+                  elevation: 2,
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(80.0)),
-                  padding: EdgeInsets.all(0.0),
-                  child: Ink(
-                    decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [Color(0xFFe84f4c), Color(0xFFe2231e)],
-                          begin: Alignment.centerRight,
-                          end: Alignment.centerLeft,
-                        ),
-                        borderRadius: BorderRadius.circular(30.0)),
-                    child: Container(
-                      constraints:
-                          BoxConstraints(maxWidth: 250.0, minHeight: 50.0),
-                      alignment: Alignment.center,
-                      child: Text(
-                        "non".tr,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.white, fontSize: 30),
-                      ),
-                    ),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Text(
+                    "non".tr,
+                    style: TextStyle(
+                        fontSize: 25, letterSpacing: 2.2, color: Colors.white),
                   ),
                 ),
-              )
+              ),
             ],
-          )
+          ),
         ],
       ),
     );
