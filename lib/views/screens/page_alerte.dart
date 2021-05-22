@@ -174,124 +174,121 @@ class _PageAlerteState extends State<PageAlerte> {
                     actions: [
                       // Used the actions to have the icons of the "App Bar" aligned in the same line
                       Container(
-                          width: MediaQuery.of(context).size.width,
-                          child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                isSecouriste() && isActivated()
-                                    ? SizedBox()
-                                    : IconButton(
-                                        // When the icon pressed it'll take as to the map page
-                                        iconSize: 35,
-                                        icon: Icon(
-                                          Icons.location_on,
-                                          color: Colors.white70,
-                                        ),
-                                        onPressed: () async {
-                                          Navigator.of(context)
-                                              .pushNamed('/publicmap');
-                                        },
+                        width: MediaQuery.of(context).size.width,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            isSecouriste() && isActivated()
+                                ? SizedBox()
+                                : IconButton(
+                                    // When the icon pressed it'll take as to the map page
+                                    iconSize: 35,
+                                    icon: Icon(
+                                      Icons.location_on,
+                                      color: Colors.white70,
+                                    ),
+                                    onPressed: () async {
+                                      Navigator.of(context)
+                                          .pushNamed('/publicmap');
+                                    },
+                                  ),
+                            // Used the container because i want the other 2 icons in the end and since i used .start for previous row i'll be applied automatically to the others
+                            Container(
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  if (isAdmin() &&
+                                      isSecouriste() &&
+                                      isActivated())
+                                    IconButton(
+                                      // This icon button when pressed it'll take as to the signin or to the profile page if the secouriste is connected
+                                      onPressed: () {
+                                        Navigator.of(context)
+                                            .pushNamed('/dashboard');
+                                      },
+                                      iconSize: 35,
+                                      icon: Icon(
+                                        Icons.dashboard,
+                                        color: Colors.white70,
                                       ),
-                                // Used the container because i want the other 2 icons in the end and since i used .start for previous row i'll be applied automatically to the others
-                                Container(
-                                    child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: <Widget>[
-                                      if (isAdmin() &&
-                                          isSecouriste() &&
-                                          isActivated())
-                                        IconButton(
-                                          // This icon button when pressed it'll take as to the signin or to the profile page if the secouriste is connected
-                                          onPressed: () {
-                                            Navigator.of(context)
-                                                .pushNamed('/dashboard');
-                                          },
-                                          iconSize: 35,
-                                          icon: Icon(
-                                            Icons.dashboard,
-                                            color: Colors.white70,
-                                          ),
-                                        ),
-                                      IconButton(
-                                        // This icon button when pressed it'll take as to the signin or to the profile page if the secouriste is connected
-                                        onPressed: () async {
-                                          if (snapshot.hasData) {
-                                            jwt =
-                                                snapshot.data.getString("jwt");
+                                    ),
+                                  IconButton(
+                                    // This icon button when pressed it'll take as to the signin or to the profile page if the secouriste is connected
+                                    onPressed: () async {
+                                      if (snapshot.hasData) {
+                                        jwt = snapshot.data.getString("jwt");
+                                        if (jwt != null) {
+                                          final decodedjwt = jsonDecode(jwt);
+                                          //print(decodedjwt);
+                                          token = jsonDecode(jwt)["token"];
+                                          decodedToken =
+                                              JwtDecoder.decode(token);
+                                          // print(decodedToken);
+                                          if (!decodedToken["isNormalUser"]) {
+                                            var jwt = await LoginServiceImp()
+                                                .attempttogetProfile();
                                             if (jwt != null) {
-                                              final decodedjwt =
-                                                  jsonDecode(jwt);
-                                              //print(decodedjwt);
-                                              token = jsonDecode(jwt)["token"];
-                                              decodedToken =
-                                                  JwtDecoder.decode(token);
-                                              // print(decodedToken);
-                                              if (!decodedToken[
-                                                  "isNormalUser"]) {
-                                                var jwt =
-                                                    await LoginServiceImp()
-                                                        .attempttogetProfile();
-                                                if (jwt != null) {
-                                                  print(jwt);
-                                                  var ss = Secouriste.fromJson(
-                                                      jsonDecode(jwt));
-                                                  if (ss.isActivated) {
-                                                    final prefs =
-                                                        await SharedPreferences
-                                                            .getInstance();
-                                                    prefs.setString("jwt", jwt);
-                                                    Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                            builder:
-                                                                (context) =>
-                                                                    Profile(
-                                                                        ss)));
-                                                  } else {
-                                                    Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
+                                              print(jwt);
+                                              var ss = Secouriste.fromJson(
+                                                  jsonDecode(jwt));
+                                              if (ss.isActivated) {
+                                                final prefs =
+                                                    await SharedPreferences
+                                                        .getInstance();
+                                                prefs.setString("jwt", jwt);
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
                                                         builder: (context) =>
-                                                            ActivateAccount(),
-                                                      ),
-                                                    );
-                                                  }
-                                                }
-                                              } else if (decodedToken[
-                                                  "isNormalUser"]) {
+                                                            Profile(ss)));
+                                              } else {
                                                 Navigator.push(
                                                   context,
                                                   MaterialPageRoute(
                                                     builder: (context) =>
-                                                        Profile(
-                                                            Secouriste.fromJson(
-                                                                decodedjwt)),
+                                                        ActivateAccount(),
                                                   ),
                                                 );
                                               }
-                                            } else {
-                                              Navigator.of(context)
-                                                  .pushNamed('/signIn');
                                             }
+                                          } else if (decodedToken[
+                                              "isNormalUser"]) {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) => Profile(
+                                                    Secouriste.fromJson(
+                                                        decodedjwt)),
+                                              ),
+                                            );
                                           }
-                                        },
-                                        iconSize: 35,
-                                        icon: Icon(
-                                          Icons.account_circle,
-                                          color: Colors.white70,
-                                        ),
-                                      ),
-                                      Padding(
-                                        // The padding contains the the settings icon and its functions : PopUpMenuButton
-                                        padding: const EdgeInsets.only(
-                                          right: 8.0,
-                                          bottom: 4.0,
-                                        ),
-                                        child: popupMenuButton(),
-                                      ),
-                                    ])),
-                              ]))
+                                        } else {
+                                          Navigator.of(context)
+                                              .pushNamed('/signIn');
+                                        }
+                                      }
+                                    },
+                                    iconSize: 35,
+                                    icon: Icon(
+                                      Icons.account_circle,
+                                      color: Colors.white70,
+                                    ),
+                                  ),
+                                  Padding(
+                                    // The padding contains the the settings icon and its functions : PopUpMenuButton
+                                    padding: const EdgeInsets.only(
+                                      right: 8.0,
+                                      bottom: 4.0,
+                                    ),
+                                    child: popupMenuButton(),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                   backgroundColor: Colors.white,
