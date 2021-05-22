@@ -202,9 +202,13 @@ class ListeCas extends StatelessWidget {
                   doc.setCas("Fracture");
                   Navigator.push(
                     context,
+<<<<<<< HEAD
                     MaterialPageRoute(
                       builder: (context) => Fracture(),
                     ),
+=======
+                    MaterialPageRoute(builder: (context) => Fracture()),
+>>>>>>> ef0595356e32b4c3562168c92efb6d55046f4613
                   );
                 },
                 color: Colors.redAccent[700],
