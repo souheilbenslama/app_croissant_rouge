@@ -54,6 +54,10 @@ class Malaise extends StatelessWidget {
                 width: width * 0.364,
                 child: RaisedButton(
                   onPressed: () {
+                    final doc =
+                        Provider.of<AccidentProvider>(context, listen: false);
+                    doc.setDescription(
+                        "la victime n'est pas consciente et ne sent pas bien ");
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => ListeMalaise()),

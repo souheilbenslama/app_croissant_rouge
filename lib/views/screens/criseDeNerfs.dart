@@ -49,6 +49,10 @@ class CriseDeNerfs extends StatelessWidget {
                 margin: EdgeInsets.only(),
                 child: RaisedButton(
                   onPressed: () {
+                    final doc =
+                        Provider.of<AccidentProvider>(context, listen: false);
+                    doc.setDescription(
+                        "la victime crie et/ou pleure et/ou signes d'agitation");
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => CriseNerfs()),

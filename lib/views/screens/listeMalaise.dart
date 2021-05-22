@@ -4,6 +4,8 @@ import 'package:app_croissant_rouge/views/screens/hemorragieExterne.dart';
 import 'package:app_croissant_rouge/views/screens/malaise.dart';
 import 'package:app_croissant_rouge/views/screens/malaiseCardiaque.dart';
 import 'package:app_croissant_rouge/views/screens/malaiseDiabetique.dart';
+import 'package:provider/provider.dart';
+import '../../accidentProvider.dart';
 import 'package:app_croissant_rouge/views/screens/plaies.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -50,6 +52,10 @@ class ListeMalaise extends StatelessWidget {
               margin: EdgeInsets.only(),
               child: RaisedButton(
                 onPressed: () {
+                  final doc =
+                      Provider.of<AccidentProvider>(context, listen: false);
+                  doc.setCas("Crisede nerfs");
+
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => CriseDeNerfs()),
@@ -88,6 +94,9 @@ class ListeMalaise extends StatelessWidget {
               margin: EdgeInsets.only(),
               child: RaisedButton(
                 onPressed: () {
+                  final doc =
+                      Provider.of<AccidentProvider>(context, listen: false);
+                  doc.setCas("MalaiseDiabetique");
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -127,6 +136,9 @@ class ListeMalaise extends StatelessWidget {
               margin: EdgeInsets.only(),
               child: RaisedButton(
                 onPressed: () {
+                  final doc =
+                      Provider.of<AccidentProvider>(context, listen: false);
+                  doc.setCas("Malaise Cardiaque");
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => MalaiseCardiaque()),
