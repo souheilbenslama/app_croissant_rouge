@@ -45,11 +45,31 @@ class _StepListState extends State<StepList> {
 
   void _addInstructions() {
     List<Instruction> _instructions = [
-      Instruction(title: 'etape1'.tr, img: 'e1.PNG', steps: "etape1Inst".tr),
-      Instruction(title: 'etape2'.tr, img: 'e2.PNG', steps: "etape2Inst".tr),
-      Instruction(title: 'etape3'.tr, img: 'e3.PNG', steps: "etape3Inst".tr),
-      Instruction(title: 'etape4'.tr, img: 'e4.PNG', steps: "etape4Inst".tr),
-      Instruction(title: 'etape5'.tr, img: 'e5.PNG', steps: "etape5Inst".tr),
+      Instruction(
+          title: 'etape1'.tr,
+          img: 'e1.PNG',
+          steps: "etape1Inst".tr,
+          needButton: false),
+      Instruction(
+          title: 'etape2'.tr,
+          img: 'e2.PNG',
+          steps: "etape2Inst".tr,
+          needButton: false),
+      Instruction(
+          title: 'etape3'.tr,
+          img: 'e3.PNG',
+          steps: "etape3Inst".tr,
+          needButton: false),
+      Instruction(
+          title: 'etape4'.tr,
+          img: 'e4.PNG',
+          steps: "etape4Inst".tr,
+          needButton: false),
+      Instruction(
+          title: 'etape5'.tr,
+          img: 'e5.PNG',
+          steps: "etape5Inst".tr,
+          needButton: false),
     ];
 
     _instructions.forEach((Instruction instruction) {

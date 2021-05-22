@@ -1,5 +1,6 @@
 import 'package:app_croissant_rouge/services/accident_service.dart';
-import 'package:app_croissant_rouge/views/screens/hemorragieExterne.dart';
+import 'package:app_croissant_rouge/views/screens/brulure_simple.dart';
+import 'package:app_croissant_rouge/views/screens/brulure_grave.dart';
 import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
@@ -67,6 +68,10 @@ class Brulure extends StatelessWidget {
                   final doc =
                       Provider.of<AccidentProvider>(context, listen: false);
                   doc.setDescription("Brûlure simple.\n");
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => BrulureSimple()),
+                  );
                 },
                 color: Colors.redAccent[700],
                 padding: EdgeInsets.symmetric(
@@ -142,6 +147,10 @@ class Brulure extends StatelessWidget {
 
                   const number = '198';
                   await FlutterPhoneDirectCaller.callNumber(number);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => BrulureGrave()),
+                  );
                 },
                 color: Colors.redAccent[700],
                 padding: EdgeInsets.symmetric(

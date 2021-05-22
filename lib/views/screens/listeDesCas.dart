@@ -2,6 +2,7 @@ import 'package:app_croissant_rouge/views/screens/brulure.dart';
 import 'package:app_croissant_rouge/views/screens/hemorragieExterne.dart';
 import 'package:app_croissant_rouge/views/screens/malaise.dart';
 import 'package:app_croissant_rouge/views/screens/plaies.dart';
+import 'package:app_croissant_rouge/views/screens/fracture.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -14,7 +15,9 @@ class ListeCas extends StatelessWidget {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.redAccent[700]),
+      appBar: AppBar(
+        backgroundColor: Colors.redAccent[700],
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -200,7 +203,7 @@ class ListeCas extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => ListeCas(),
+                      builder: (context) => Fracture(),
                     ),
                   );
                 },

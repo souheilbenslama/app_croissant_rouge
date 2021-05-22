@@ -1,6 +1,6 @@
 import 'package:app_croissant_rouge/views/screens/etouffement2.dart';
 import 'package:app_croissant_rouge/views/screens/listeDesCas.dart';
-import 'package:app_croissant_rouge/views/screens/question_respiration.dart';
+import 'package:app_croissant_rouge/views/screens/listeMalaise.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../accidentProvider.dart';
@@ -53,7 +53,12 @@ class Malaise extends StatelessWidget {
                 height: height * 0.068,
                 width: width * 0.364,
                 child: RaisedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ListeMalaise()),
+                    );
+                  },
                   color: Colors.redAccent[700],
                   padding: EdgeInsets.symmetric(horizontal: width * 0.121),
                   elevation: 2,

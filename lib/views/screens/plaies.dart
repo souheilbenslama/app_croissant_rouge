@@ -1,5 +1,6 @@
 import 'package:app_croissant_rouge/services/accident_service.dart';
-import 'package:app_croissant_rouge/views/screens/hemorragieExterne.dart';
+import 'package:app_croissant_rouge/views/screens/plaies_grave.dart';
+import 'package:app_croissant_rouge/views/screens/plaies_simples.dart';
 import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
@@ -48,15 +49,17 @@ class Plaies extends StatelessWidget {
             SizedBox(
               height: height * 0.109,
             ),
-            Text("plaieQuest".tr,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.black.withOpacity(0.8),
-                  fontSize: 30,
-                  //fontWeight: FontWeight.bold,
-                  fontStyle: FontStyle.italic,
-                  letterSpacing: 2.2,
-                )),
+            Text(
+              "plaieQuest".tr,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.black.withOpacity(0.8),
+                fontSize: 30,
+                //fontWeight: FontWeight.bold,
+                fontStyle: FontStyle.italic,
+                letterSpacing: 2.2,
+              ),
+            ),
             SizedBox(
               height: 0.055 * height,
             ),
@@ -68,6 +71,10 @@ class Plaies extends StatelessWidget {
                   final doc =
                       Provider.of<AccidentProvider>(context, listen: false);
                   doc.setDescription("Plaie simple.\n");
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => PlaiesSimples()),
+                  );
                 },
                 color: Colors.redAccent[700],
                 padding: EdgeInsets.symmetric(
@@ -140,6 +147,10 @@ class Plaies extends StatelessWidget {
 
                   const number = '198';
                   await FlutterPhoneDirectCaller.callNumber(number);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => PlaiesGraves()),
+                  );
                 },
                 color: Colors.redAccent[700],
                 padding: EdgeInsets.symmetric(

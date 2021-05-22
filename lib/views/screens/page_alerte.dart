@@ -41,7 +41,7 @@ class _PageAlerteState extends State<PageAlerte> {
   Object token;
   String jwt;
   Location location;
-  Future<LocationData> currentlocation;
+  LocationData currentlocation;
   LocationData localisation;
   // To get Device Details
   static Future<List<String>> getDeviceDetails() async {
@@ -106,7 +106,8 @@ class _PageAlerteState extends State<PageAlerte> {
   Widget build(BuildContext context) {
     final doc = Provider.of<AccidentProvider>(context, listen: true);
     Future<SharedPreferences> prefs = SharedPreferences.getInstance();
-    doc.getCurrentLocation();
+    location = new Location();
+    currentlocation = doc.getCurrentLocation();
 
     return new WillPopScope(
         onWillPop: () async => false,
@@ -401,69 +402,53 @@ class _PageAlerteState extends State<PageAlerte> {
                                   ),
                                 )),
                           (isSecouriste() && isActivated())
-                              ? FutureBuilder(
-                                  future: currentlocation,
-                                  builder: (BuildContext context,
-                                      AsyncSnapshot<LocationData>
-                                          locationsnapshot) {
-                                    if (locationsnapshot.hasData) {
-                                      this.localisation = locationsnapshot.data;
+                              ? FutureBuilder(builder: (BuildContext context,
+                                  AsyncSnapshot<LocationData>
+                                      locationsnapshot) {
+                                  this.localisation = this.currentlocation;
 
-                                      var subscription = location
-                                          .onLocationChanged
-                                          .listen((LocationData cLoc) {
-                                        // cLoc contains the lat and long of the
-                                        // current user's position in real time,
-                                        // so we're holding on to it
-                                        this.localisation = cLoc;
-                                        print(this.localisation);
-                                        print(
-                                            "///////////////////////////////////////////////${cLoc.latitude}");
-                                        print(
-                                            "///////////////////////////////////////////////${cLoc.longitude}");
-                                        updateLocation(
-                                            this.localisation.longitude,
-                                            this.localisation.latitude);
-                                      });
+                                  var subscription = location.onLocationChanged
+                                      .listen((LocationData cLoc) {
+                                    // cLoc contains the lat and long of the
+                                    // current user's position in real time,
+                                    // so we're holding on to it
+                                    this.localisation = cLoc;
+                                    print(this.localisation);
+                                    print(
+                                        "///////////////////////////////////////////////${cLoc.latitude}");
+                                    print(
+                                        "///////////////////////////////////////////////${cLoc.longitude}");
+                                    updateLocation(this.localisation.longitude,
+                                        this.localisation.latitude);
+                                  });
 
-                                      return Padding(
-                                          padding: EdgeInsets.only(),
-                                          child: Container(
-                                            height: 55,
-                                            width: 155,
-                                            child: LiteRollingSwitch(
-                                              value: false,
-                                              textOn: 'Available',
-                                              textOff: 'Not Available',
-                                              colorOn: Colors.green,
-                                              colorOff: Colors.red[700],
-                                              iconOn: Icons.done,
-                                              iconOff: Icons.alarm_off,
-                                              textSize: 13.0,
-                                              onChanged: (bool state) {
-                                                if (state == true) {
-                                                  SocketService.connect();
-                                                  subscription.resume();
-                                                  updateDisponibility(true);
-                                                } else {
-                                                  subscription.pause();
-                                                  updateDisponibility(false);
-                                                }
-                                              },
-                                            ),
-                                          ));
-                                    } else {
-                                      return Container(
-                                          color: Colors.white,
-                                          child: Align(
-                                              alignment: Alignment.center,
-                                              child: Center(
-                                                  child: SpinKitFadingCircle(
-                                                color: Colors.grey[800],
-                                                size: 80,
-                                              ))));
-                                    }
-                                  })
+                                  return Padding(
+                                      padding: EdgeInsets.only(),
+                                      child: Container(
+                                        height: 55,
+                                        width: 155,
+                                        child: LiteRollingSwitch(
+                                          value: false,
+                                          textOn: 'Available',
+                                          textOff: 'Not Available',
+                                          colorOn: Colors.green,
+                                          colorOff: Colors.red[700],
+                                          iconOn: Icons.done,
+                                          iconOff: Icons.alarm_off,
+                                          textSize: 13.0,
+                                          onChanged: (bool state) {
+                                            if (state == true) {
+                                              SocketService.connect();
+                                              subscription.resume();
+                                              updateDisponibility(true);
+                                            } else {
+                                              subscription.pause();
+                                              updateDisponibility(false);
+                                            }
+                                          },
+                                        ),
+                                      ));
+                                })
                               :
                               //DOCUMENTATION
                               Container(

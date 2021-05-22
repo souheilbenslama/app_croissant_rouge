@@ -1,5 +1,5 @@
 import 'package:app_croissant_rouge/services/accident_service.dart';
-import 'package:app_croissant_rouge/views/screens/page_alerte.dart';
+import 'package:app_croissant_rouge/views/widgets/app_rating_box.dart';
 import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
 import 'package:app_croissant_rouge/views/screens/chat_screen.dart';
@@ -144,10 +144,12 @@ class EtoufOui extends StatelessWidget {
                           jsondoc["need_secouriste"],
                           address,
                           localite);
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AppRatingBox(userId);
+                          });
                     }
-
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => PageAlerte()));
                   },
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(100.0)),

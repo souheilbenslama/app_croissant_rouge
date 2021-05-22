@@ -52,91 +52,101 @@ class _HemorexOuiState extends State<HemorexOui> {
   }
 
   Widget _buildTile(Instruction instruction) {
-    return ListTile(
+    return Container(
+      height: 500,
+      width: 500,
+      child: ListTile(
         onTap: () {
           Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => Details(instruction: instruction)));
+            context,
+            MaterialPageRoute(
+              builder: (context) => Details(instruction: instruction),
+            ),
+          );
         },
         contentPadding: EdgeInsets.all(25),
-        title:  Container(
-                height: 400,
-                width: 400,
-                child: Card(
-                    color: Colors.white,
-                    child: Column(
-                      children: <Widget>[
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: Hero(
-                            tag: 'case-img-${instruction.img}',
-                            child: Image.asset(
-                              'assets/images/${instruction.img}',
-                              height: 100,
-                              width: 100,
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        Text(
-                          instruction.title,
-                          style:
-                              TextStyle(fontSize: 13, color: Colors.grey[600]),
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
-                    ))));
+        title: Card(
+          color: Colors.white,
+          child: Column(
+            children: <Widget>[
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8.0),
+                child: Hero(
+                  tag: 'case-img-${instruction.img}',
+                  child: Image.asset(
+                    'assets/images/${instruction.img}',
+                    height: 50,
+                    width: 50,
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Text(
+                instruction.title,
+                style: TextStyle(
+                  fontSize: 13,
+                  color: Colors.grey[600],
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        floatingActionButton: FloatingActionButton(
-          onPressed: () => {
-            showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return ChatScreen();
-                })
-          },
-          tooltip: 'Increment',
-          backgroundColor: Colors.red,
-          child: Icon(Icons.messenger),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => {
+          showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return ChatScreen();
+              })
+        },
+        tooltip: 'Increment',
+        backgroundColor: Colors.red,
+        child: Icon(Icons.messenger),
+      ),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: Center(
+          child: Text('Hemorragies Externes'.tr),
         ),
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back),
-            onPressed: () {},
-          ),
-          title: Center(child: Text('Hemorragies Externes'.tr)),
-          backgroundColor: Colors.redAccent[700],
-        ),
-        body: SingleChildScrollView(
-            physics: ScrollPhysics(),
-            child: Column(children: <Widget>[
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.09,
+        backgroundColor: Colors.redAccent[700],
+      ),
+      body: SingleChildScrollView(
+        physics: ScrollPhysics(),
+        child: Column(
+          children: <Widget>[
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.09,
+            ),
+            Image.asset(
+              "assets/profil.png",
+              height: 100,
+            ),
+            GridView.count(
+              physics: NeverScrollableScrollPhysics(),
+              key: _listKey,
+              shrinkWrap: true,
+              crossAxisSpacing: 12.0,
+              mainAxisSpacing: 12.0,
+              padding: EdgeInsets.symmetric(
+                horizontal: 16,
+                vertical: 8,
               ),
-              Card(
-                  color: Colors.white,
-                  child: Image.asset(
-                    "assets/profil.png",
-                    height: 100,
-                  )),
-              GridView.count(
-                physics: NeverScrollableScrollPhysics(),
-                key: _listKey,
-                shrinkWrap: true,
-                crossAxisSpacing: 12.0,
-                mainAxisSpacing: 12.0,
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                crossAxisCount: 2,
-                children: _instructionTiles,
-              )
-            ])));
+              crossAxisCount: 2,
+              children: _instructionTiles,
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

@@ -118,6 +118,7 @@ class Respire extends StatelessWidget {
                     doc.setRespire(false);
                     if (conscient) {
                       doc.setCas("Etouffement");
+
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => Etouffement()),
@@ -127,7 +128,7 @@ class Respire extends StatelessWidget {
                           Provider.of<AccidentProvider>(context, listen: false);
 
                       doc.setCas("Arrêt cardiaque");
-
+                      doc.setNotNeedSecouriste();
                       if (doc.getCurrentLocation() != null) {
                         _locationData = doc.currentLocation;
                         String latitude = _locationData.latitude.toString();

@@ -42,6 +42,11 @@ class AccidentProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  setNotNeedSecouriste() {
+    this.needSecouriste = false;
+    notifyListeners();
+  }
+
   setCas(String cas) {
     this.cas = cas;
     notifyListeners();

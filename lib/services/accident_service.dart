@@ -48,8 +48,8 @@ class AccidentService {
       String cas,
       String description,
       bool needSecouriste,
-      String localite,
-      String address) async {
+      String address,
+      String localite) async {
     var res = await http.post("$SERVER_IP/accident", body: {
       "id_temoin": idtemoin,
       "longitude": longitude.toString(),

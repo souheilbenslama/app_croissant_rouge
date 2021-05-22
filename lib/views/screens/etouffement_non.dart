@@ -23,16 +23,19 @@ class _EtoufNonState extends State<EtoufNon> {
       Instruction(
           title: 'Adule-Enfant'.tr,
           img: 'adultkid11.png',
+          needButton: true,
           steps:
               "-Donner 5 claques vigoureuse sur le dos.\n-Donner 5 compressions abdominale avec la pomme de la main.\n-Recommencer les 5 claques et les 5 compressions jusqu’à l’apparition de la toux."),
       Instruction(
           title: 'Enceinte'.tr,
           img: 'pregnant.png',
+          needButton: true,
           steps:
               "-Donner 5 claques vigoureuse sur le dos.\n-Donner 5 compressions du thorax avec la pomme de la main.  \n-Recommencer les 5 claques et les 5 compressions jusqu’à l’apparition de la toux."),
       Instruction(
           title: 'Nourrison'.tr,
           img: 'infant.png',
+          needButton: true,
           steps:
               "-Donner 5 claques vigoureuse sur le dos.\n-Donner 5 compressions du thorax avec 2 doigts. \n-Recommencer les 5 claques et les 5 compressions jusqu’à l’apparition de la toux."),
     ];
