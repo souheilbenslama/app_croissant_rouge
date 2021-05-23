@@ -42,6 +42,12 @@ class AccidentProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  clear() {
+    this.cas = null;
+    this.description = null;
+    this.needSecouriste = null;
+  }
+
   setNotNeedSecouriste() {
     this.needSecouriste = false;
     notifyListeners();

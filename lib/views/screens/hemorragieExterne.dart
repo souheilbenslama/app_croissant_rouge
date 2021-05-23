@@ -41,7 +41,7 @@ class HemorragieExterne extends StatelessWidget {
                 letterSpacing: 2.2,
               )),*/
           Text(
-            "S'agit t'il d'une victime qui présente un saignement abondant visible?",
+            "hemExt".tr,
             textAlign: TextAlign.center,
             style: TextStyle(
               color: Colors.black.withOpacity(0.8),

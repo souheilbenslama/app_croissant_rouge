@@ -26,21 +26,25 @@ class _HemorexOuiState extends State<HemorexOui> {
     List<Instruction> _instructions = [
       Instruction(
           title: 'Hémorragie au travers d’un plaie',
+          needButton: true,
           img: 'b1.png',
           steps:
               "-Assurez vous que la victime est en sécurité (isoler la des risques).\n-Portez des gants ou glisser votre main dans un sac plastique imperméable (protégez vous).\n-Comprimer immédiatement et fortement l’endroit qui saigne avec votre main.\n-Allonger la victime.\n-Alerter les secours.\n-Surveiller la victime et parler avec elle régulièrement.  "),
       Instruction(
           title: 'La victime vomit ou crache du sang ',
+          needButton: true,
           img: 'b2.png',
           steps:
               "-Assurez vous que la victime est en sécurité (isoler la des risques).\n-Portez des gants ou glisser votre main dans un sac plastique imperméable (protégez vous).\n-La mettre allongée sur le coté.\n-Alerter les secours.\n-Appliquer les consignes du service des secours.\n-Conserver les vomissements ou les crachés si possible.\n-Surveiller la victime et parler avec elle régulièrement."),
       Instruction(
           title: 'La victime saigne du nez',
+          needButton: true,
           img: 'b3.png',
           steps:
               "-Assurez vous que la victime est en sécurité (isoler la des risques).\n-Portez des gants ou glisser votre main dans un sac plastique imperméable (protégez vous).\n-Faire asseoir la victime tête penchée en avant.\n-Lui demander de se moucher vigoureusement.\n-Lui demander de se comprimer les narines pendant 10 minutes.\n"),
       Instruction(
           title: 'Saignement d’un orifice naturel'.tr,
+          needButton: true,
           img: 'b4.png',
           steps:
               "-Assurez vous que la victime est en sécurité (isoler la des risques).\n-Portez des gants ou glisser votre main dans un sac plastique imperméable (protégez vous).\n-La victime perd du sang d’un orifice naturel.\n-Allonger la victime.\n-Alerter les secours.\n-Appliquer les consignes du service des secours.\n-Surveiller la victime et parler avec elle régulièrement."),
@@ -101,18 +105,6 @@ class _HemorexOuiState extends State<HemorexOui> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => {
-          showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return ChatScreen();
-              })
-        },
-        tooltip: 'Increment',
-        backgroundColor: Colors.red,
-        child: Icon(Icons.messenger),
-      ),
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Center(
