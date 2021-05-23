@@ -1,4 +1,5 @@
 import 'package:app_croissant_rouge/services/accident_service.dart';
+import 'package:app_croissant_rouge/services/user_service.dart';
 import 'package:app_croissant_rouge/views/screens/page_alerte.dart';
 import 'package:app_croissant_rouge/views/screens/perte_connaissance_etapes.dart';
 import 'package:app_croissant_rouge/views/screens/question_etouffement.dart';
@@ -9,6 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
+import 'dart:convert';
+
 import 'package:location/location.dart';
 import 'package:provider/provider.dart';
 import '../../accidentProvider.dart';
@@ -159,7 +162,9 @@ class Respire extends StatelessWidget {
                           userId = decodedToken["id"];
                         } else {
                           var details = await getDeviceDetails();
-                          userId = details[2];
+                          String deviceId = details[2];
+                          userId = jsonDecode(await UserService.attemptgetUser(
+                              deviceId))["_id"];
                         }
 
                         var res2 = AccidentService.createAccident(

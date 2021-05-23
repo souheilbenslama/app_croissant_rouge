@@ -3,7 +3,7 @@
 import 'package:app_croissant_rouge/models/choix_respiration.dart';
 import 'package:app_croissant_rouge/accidentProvider.dart';
 import 'package:app_croissant_rouge/services/accident_service.dart';
-import 'package:app_croissant_rouge/views/screens/Instruction.dart';
+
 import 'package:app_croissant_rouge/views/screens/question_respiration.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';

@@ -51,7 +51,7 @@ class _MapPageState extends State<MapPage> {
           showDialog(
               context: context,
               builder: (BuildContext context) {
-                return ChatScreen();
+                return ChatScreen("test");
               });
         },
         backgroundColor: Colors.redAccent[700],

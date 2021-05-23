@@ -341,11 +341,13 @@ class _PageAlerteState extends State<PageAlerte> {
                                   margin: EdgeInsets.only(),
                                   child: RaisedButton(
                                     onPressed: () async {
-                                      var details =
-                                          await UserService.getDeviceDetails();
-                                      var userId = details[2];
-                                      var res =
-                                          UserService.attemptLogInUser(userId);
+                                      UserService.getDeviceDetails()
+                                          .then((value) {
+                                        var userId = value[2];
+                                        var res = UserService.attemptLogInUser(
+                                            userId);
+                                      });
+
                                       Navigator.of(context)
                                           .pushNamed('/options');
                                       //print(res);
@@ -394,10 +396,7 @@ class _PageAlerteState extends State<PageAlerte> {
                                     // so we're holding on to it
                                     this.localisation = cLoc;
                                     print(this.localisation);
-                                    print(
-                                        "///////////////////////////////////////////////${cLoc.latitude}");
-                                    print(
-                                        "///////////////////////////////////////////////${cLoc.longitude}");
+
                                     updateLocation(this.localisation.longitude,
                                         this.localisation.latitude);
                                   });

@@ -14,6 +14,12 @@ class UserService {
     return null;
   }
 
+  static Future<String> attemptgetUser(String userId) async {
+    var res = await http.post("$SERVER_IP/users/anonyme", body: {"id": userId});
+    if (res.statusCode == 200) return res.body;
+    return null;
+  }
+
 // To get Device Details
   static Future<List<String>> getDeviceDetails() async {
     String deviceName;

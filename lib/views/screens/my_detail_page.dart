@@ -3,6 +3,8 @@ import 'package:app_croissant_rouge/views/widgets/app_rating_box.dart';
 import 'package:flutter/material.dart';
 import 'package:app_croissant_rouge/models/Instruction.dart';
 import 'package:geocoding/geocoding.dart';
+import 'dart:convert';
+import 'package:app_croissant_rouge/services/user_service.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:location/location.dart';
 import 'package:provider/provider.dart';
@@ -100,7 +102,10 @@ class Details extends StatelessWidget {
                             userId = decodedToken["id"];
                           } else {
                             var details = await getDeviceDetails();
-                            userId = details[2];
+                            String deviceId = details[2];
+                            userId = jsonDecode(
+                                    await UserService.attemptgetUser(deviceId))[
+                                "_id"];
                           }
                           var res2 = AccidentService.createAccident(
                               userId,

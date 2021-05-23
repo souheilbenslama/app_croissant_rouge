@@ -160,7 +160,7 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                                 image: DecorationImage(
                                     fit: BoxFit.cover,
                                     image: NetworkImage(
-                                      "http://192.168.43.68:3000/${this.widget.secouriste.photo}",
+                                      "http://192.168.1.118:3000/${this.widget.secouriste.photo}",
                                     ))),
                           )
                         : Container(

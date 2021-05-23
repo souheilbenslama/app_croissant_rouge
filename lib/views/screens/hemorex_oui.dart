@@ -3,13 +3,12 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:app_croissant_rouge/services/accident_service.dart';
-import 'my_detail_page.dart';
+import 'package:app_croissant_rouge/services/user_service.dart';
 
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:app_croissant_rouge/models/hemorragie_Instruction.dart';
 import 'package:get/get.dart';
 import 'package:app_croissant_rouge/views/screens/my_hemorragie_detail_page.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:app_croissant_rouge/services/socket_service.dart';
 import 'package:app_croissant_rouge/models/hemorragie_Instruction.dart';
 import 'package:geocoding/geocoding.dart';
@@ -130,7 +129,9 @@ class _HemorexOuiState extends State<HemorexOui> {
                 userId = decodedToken["id"];
               } else {
                 var details = await getDeviceDetails();
-                userId = details[2];
+                String deviceId = details[2];
+                userId = jsonDecode(
+                    await UserService.attemptgetUser(deviceId))["_id"];
               }
               var res2 = await AccidentService.createAccident(
                   userId,

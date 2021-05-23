@@ -3,39 +3,16 @@ import 'package:app_croissant_rouge/models/user_model.dart';
 import 'package:app_croissant_rouge/models/message_model.dart';
 
 class ChatScreen extends StatefulWidget {
-  final User user;
-  ChatScreen({this.user});
+  final String userId;
+  ChatScreen(this.userId);
   @override
   _ChatScreenState createState() => _ChatScreenState();
 }
 
 class _ChatScreenState extends State<ChatScreen> {
   String sentMessage;
+  String userId;
   final _textController = TextEditingController();
-  //socket
-  /*void initState() {
-    //Creating the socket
-    socketIO = SocketIOManager().createSocketIO(
-      'http://192.168.43.68:3000',
-      '/',
-    );
-    //Call init before doing anything with socket
-    socketIO.init();
-    //Subscribe to an event to listen to
-    socketIO.subscribe('receive_message', (jsonData) {
-      //Convert the JSON data received into a Map
-      Map<String, dynamic> data = json.decode(jsonData);
-      this.setState(() => messages.add(data['message']));
-      _scrollController.animateTo(
-        _scrollController.position.maxScrollExtent,
-        duration: Duration(milliseconds: 600),
-        curve: Curves.ease,
-      );
-    });
-    //Connect to the socket
-    socketIO.connect();
-    super.initState();
-  }*/
 
   //Message
   _buildMessage(Message message, bool isMe) {
@@ -112,6 +89,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
+    List messages = [];
     return Scaffold(
       backgroundColor: Colors.red,
       appBar: AppBar(
@@ -145,7 +123,8 @@ class _ChatScreenState extends State<ChatScreen> {
                         itemBuilder: (BuildContext context, int index) {
                           final Message message = messages[index];
 
-                          final bool isMe = message.sender.id == currentUser.id;
+                          final bool isMe =
+                              false; //message.sender.id == currentUser.id;
                           return _buildMessage(message, isMe);
                         }),
                   )),
@@ -153,7 +132,7 @@ class _ChatScreenState extends State<ChatScreen> {
             _buildMessageComposer(() {
               setState(() {
                 messages = [
-                  Message(sender: yui, text: sentMessage),
+                  Message(sender: User(), text: sentMessage),
                   ...messages,
                 ];
                 _textController.clear();

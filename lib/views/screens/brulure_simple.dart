@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'dart:convert';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:location/location.dart';
 import 'package:provider/provider.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:app_croissant_rouge/services/accident_service.dart';
+import 'package:app_croissant_rouge/services/user_service.dart';
 import 'package:app_croissant_rouge/views/screens/page_alerte.dart';
 import '../../accidentProvider.dart';
 
@@ -124,7 +126,9 @@ class BrulureSimple extends StatelessWidget {
                           userId = decodedToken["id"];
                         } else {
                           var details = await getDeviceDetails();
-                          userId = details[2];
+                          String deviceId = details[2];
+                          userId = jsonDecode(await UserService.attemptgetUser(
+                              deviceId))["_id"];
                         }
                         var res2 = AccidentService.createAccident(
                             userId,

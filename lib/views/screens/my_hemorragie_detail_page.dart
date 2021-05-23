@@ -1,4 +1,6 @@
 import 'package:app_croissant_rouge/services/accident_service.dart';
+import 'package:app_croissant_rouge/services/user_service.dart';
+import 'dart:convert';
 import 'package:app_croissant_rouge/views/widgets/app_rating_box.dart';
 import 'package:app_croissant_rouge/views/screens/chat_screen.dart';
 import 'package:flutter/material.dart';
@@ -28,12 +30,22 @@ class HemorragieDetails extends StatelessWidget {
         ),
         floatingActionButton: (this.instruction.needSecouriste)
             ? FloatingActionButton(
-                onPressed: () => {
+                onPressed: () async {
+                  final doc =
+                      Provider.of<AccidentProvider>(context, listen: false);
+                  if (doc.gettoken() != null) {
+                    final decodedToken = JwtDecoder.decode(doc.gettoken());
+                    userId = decodedToken["id"];
+                  } else {
+                    var details = await getDeviceDetails();
+                    userId = details[2];
+                  }
+
                   showDialog(
                       context: context,
                       builder: (BuildContext context) {
-                        return ChatScreen();
-                      })
+                        return ChatScreen(userId);
+                      });
                 },
                 tooltip: 'Increment',
                 backgroundColor: Colors.red,
@@ -175,7 +187,10 @@ class HemorragieDetails extends StatelessWidget {
                               userId = decodedToken["id"];
                             } else {
                               var details = await getDeviceDetails();
-                              userId = details[2];
+                              String deviceId = details[2];
+                              userId = jsonDecode(
+                                  await UserService.attemptgetUser(
+                                      deviceId))["_id"];
                             }
                             var res2 = AccidentService.createAccident(
                                 userId,

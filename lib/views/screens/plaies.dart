@@ -11,19 +11,6 @@ import 'package:provider/provider.dart';
 import '../../accidentProvider.dart';
 
 class Plaies extends StatelessWidget {
-  static Future<List<String>> getDeviceDetails() async {
-    String deviceName;
-    String deviceVersion;
-    String identifier;
-    final DeviceInfoPlugin deviceInfoPlugin = new DeviceInfoPlugin();
-    var build = await deviceInfoPlugin.androidInfo;
-    deviceName = build.model;
-    deviceVersion = build.version.toString();
-    identifier = build.androidId; //UUID for Android
-//if (!mounted) return;
-    return [deviceName, deviceVersion, identifier];
-  }
-
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;

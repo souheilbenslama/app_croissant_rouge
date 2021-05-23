@@ -1,8 +1,8 @@
 import 'package:app_croissant_rouge/services/accident_service.dart';
 import 'package:app_croissant_rouge/views/widgets/app_rating_box.dart';
-import 'package:device_info/device_info.dart';
+import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:app_croissant_rouge/views/screens/chat_screen.dart';
+import 'package:app_croissant_rouge/services/user_service.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:get/get.dart';
@@ -133,7 +133,9 @@ class EtoufOui extends StatelessWidget {
                         userId = decodedToken["id"];
                       } else {
                         var details = await getDeviceDetails();
-                        userId = details[2];
+                        String deviceId = details[2];
+                        userId = jsonDecode(
+                            await UserService.attemptgetUser(deviceId))["_id"];
                       }
                       var res2 = AccidentService.createAccident(
                           userId,

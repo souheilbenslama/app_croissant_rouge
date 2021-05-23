@@ -1,7 +1,8 @@
 import 'package:app_croissant_rouge/services/accident_service.dart';
 import 'package:app_croissant_rouge/views/screens/page_alerte.dart';
 
-import 'package:device_info/device_info.dart';
+import 'dart:convert';
+import 'package:app_croissant_rouge/services/user_service.dart';
 import 'package:flutter/material.dart';
 import 'package:app_croissant_rouge/models/Instruction.dart';
 import 'package:app_croissant_rouge/views/screens/my_detail_page.dart';
@@ -152,7 +153,9 @@ class _StepListState extends State<StepList> {
                       userId = decodedToken["id"];
                     } else {
                       var details = await getDeviceDetails();
-                      userId = details[2];
+                      String deviceId = details[2];
+                      userId = jsonDecode(
+                          await UserService.attemptgetUser(deviceId))["_id"];
                     }
                     var res2 = AccidentService.createAccident(
                         userId,
