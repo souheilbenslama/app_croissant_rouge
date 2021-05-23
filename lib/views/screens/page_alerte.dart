@@ -341,6 +341,9 @@ class _PageAlerteState extends State<PageAlerte> {
                                   margin: EdgeInsets.only(),
                                   child: RaisedButton(
                                     onPressed: () async {
+                                      Navigator.of(context)
+                                          .pushNamed('/options');
+
                                       UserService.getDeviceDetails()
                                           .then((value) {
                                         var userId = value[2];
@@ -348,8 +351,6 @@ class _PageAlerteState extends State<PageAlerte> {
                                             userId);
                                       });
 
-                                      Navigator.of(context)
-                                          .pushNamed('/options');
                                       //print(res);
                                     },
                                     shape: RoundedRectangleBorder(

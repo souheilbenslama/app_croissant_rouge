@@ -51,7 +51,7 @@ class _HemorexOuiState extends State<HemorexOui> {
           needSecouriste: false,
           img: 'b2.png',
           steps:
-              "-Assurez vous que la victime est en sécurité (isoler la des risques).\n-Portez des gants ou glisser votre main dans un sac plastique imperméable (protégez vous).\n-La mettre allongée sur le coté.\n-Alerter les secours.\n-Appliquer les consignes du service des secours.\n-Conserver les vomissements ou les crachés si possible.\n-Surveiller la victime et parler avec elle régulièrement."),
+              "-Assurez vous que la victime est en sécurité (isoler la des risques).\n-Portez des gants ou glisser votre main dans un sac plastique imperméable (protégez vous).\n-Mettre la victime à la position ou elle se sent le mieux\n-Alerter les secours.\n-Conserver les vomissements ou les crachés si possible.\n-Surveiller la victime et parler avec elle régulièrement."),
       HemorragieInstruction(
           title: 'La victime saigne du nez',
           alerteSecoure: false,

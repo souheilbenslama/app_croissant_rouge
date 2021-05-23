@@ -2,7 +2,9 @@ import 'package:app_croissant_rouge/services/accident_service.dart';
 import 'package:app_croissant_rouge/services/user_service.dart';
 import 'dart:convert';
 import 'package:app_croissant_rouge/views/widgets/app_rating_box.dart';
+import 'package:app_croissant_rouge/views/widgets/rating_box.dart';
 import 'package:app_croissant_rouge/views/screens/chat_screen.dart';
+import 'package:app_croissant_rouge/views/screens/saignementArreteQuestion.dart';
 import 'package:flutter/material.dart';
 import 'package:app_croissant_rouge/models/hemorragie_Instruction.dart';
 import 'package:geocoding/geocoding.dart';
@@ -23,6 +25,84 @@ class HemorragieDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     LocationData _locationData;
     String userId;
+    int duration = 3000; //3600*1000;
+    Function finish_callback = (data) {
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              actions: [
+                Container(
+                    width: MediaQuery.of(context).size.width * 0.7,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  Colors.black12)),
+                          child: Text(
+                            "non".tr,
+                            style: TextStyle(color: Colors.white, fontSize: 18),
+                          ),
+                        ),
+                        Padding(
+                            padding: EdgeInsets.only(right: 50, left: 20),
+                            child: ElevatedButton(
+                              onPressed: () {
+                                final doc = Provider.of<AccidentProvider>(
+                                    context,
+                                    listen: false);
+                                print(doc.getCurrentAccident().id);
+
+                                AccidentService.updateToFinished(
+                                    doc.currentAccident.id);
+
+                                showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return AppRatingBox(userId);
+                                    });
+                              },
+                              style: ButtonStyle(
+                                  backgroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                          Colors.red)),
+                              child: Text(
+                                "oui".tr,
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 18),
+                              ),
+                            )),
+                      ],
+                    ))
+              ],
+              title: Text("est-ce que les secours sont arrivée ?"),
+            );
+          });
+      return;
+    };
+
+    Function finish_callback_nez = (data) {
+      Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => SaignementArreteQuestion()));
+
+      return;
+    };
+
+    if ((this.instruction.needSecouriste)) {
+      var future = new Future.delayed(const Duration(milliseconds: 3000));
+      var subscription = future.asStream().listen(finish_callback);
+    }
+
+    if ((this.instruction.img == "b3.png")) {
+      var future = new Future.delayed(const Duration(milliseconds: 3000));
+      var subscription = future.asStream().listen(finish_callback_nez);
+    }
+
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.redAccent[700],
@@ -38,7 +118,9 @@ class HemorragieDetails extends StatelessWidget {
                     userId = decodedToken["id"];
                   } else {
                     var details = await getDeviceDetails();
-                    userId = details[2];
+                    String deviceId = details[2];
+                    userId = jsonDecode(
+                        await UserService.attemptgetUser(deviceId))["_id"];
                   }
 
                   showDialog(
@@ -98,6 +180,13 @@ class HemorragieDetails extends StatelessWidget {
                               builder: (context) {
                                 return AppRatingBox(userId);
                               });
+
+                          final doc = Provider.of<AccidentProvider>(context,
+                              listen: false);
+                          print(doc.getCurrentAccident().id);
+
+                          AccidentService.updateToFinished(
+                              doc.currentAccident.id);
                         },
                         color: Colors.redAccent[700],
                         padding: EdgeInsets.symmetric(
@@ -123,7 +212,25 @@ class HemorragieDetails extends StatelessWidget {
                       // height: 0.068 * height,
                       //width: 0.560 * width,
                       child: RaisedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AppRatingBox(userId);
+                              });
+
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return RatingBox();
+                              });
+                          final doc = Provider.of<AccidentProvider>(context,
+                              listen: false);
+                          print(doc.getCurrentAccident().id);
+
+                          AccidentService.updateToFinished(
+                              doc.currentAccident.id);
+                        },
                         color: Colors.redAccent[700],
                         padding: EdgeInsets.symmetric(
                             horizontal:

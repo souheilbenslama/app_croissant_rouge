@@ -25,7 +25,7 @@ class AccidentProvider with ChangeNotifier {
     this.currentAccident = accident;
   }
 
-  getCurrentAccident() {
+  Accident getCurrentAccident() {
     return this.currentAccident;
   }
 

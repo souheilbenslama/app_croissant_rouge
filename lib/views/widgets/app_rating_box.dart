@@ -72,20 +72,40 @@ class _AppRatingBoxState extends State<AppRatingBox> {
                     width: 10,
                     height: 10,
                   ),
-                  RaisedButton(
-                    shape: new RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(30.0),
-                    ),
-                    onPressed: () {
-                      UserService.attemptRateApp(this.widget.userId, _rating);
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => PageAlerte()));
-                    },
-                    child: Text('Soumettre'),
-                    color: Colors.white,
-                    textColor: Colors.redAccent[100],
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      RaisedButton(
+                        shape: new RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(30.0),
+                        ),
+                        onPressed: () {
+                          UserService.attemptRateApp(
+                              this.widget.userId, _rating);
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => PageAlerte()));
+                        },
+                        child: Text('Soumettre'),
+                        color: Colors.white,
+                        textColor: Colors.redAccent[100],
+                      ),
+                      RaisedButton(
+                        shape: new RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(30.0),
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => PageAlerte()));
+                        },
+                        child: Text('Annuler'),
+                        color: Colors.white,
+                        textColor: Colors.redAccent[100],
+                      ),
+                    ],
                   ),
                   SizedBox(
                     width: 10,

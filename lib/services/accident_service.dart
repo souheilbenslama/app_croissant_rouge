@@ -27,14 +27,16 @@ class AccidentService {
   }
 
 //update the intervention's status to finished
-  static Future<bool> updateToFinished(int id) async {
+  static Future<bool> updateToFinished(String id) async {
+    print("here i am");
     var updated = false;
     var client = http.Client();
     try {
       var res =
-          await client.put('$SERVER_IP/accident/finished/' + id.toString());
+          await client.put('$SERVER_IP/accident/finished/', body: {"id": id});
       if (res.statusCode == 200) {
         updated = true;
+        print(res.body);
       } else if (res.statusCode == 403) {
         //go to login screen
       }

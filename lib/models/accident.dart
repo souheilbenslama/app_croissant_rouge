@@ -25,7 +25,7 @@ class Accident {
       this.needSecouriste});
 
   Accident.fromJson(Map<dynamic, dynamic> json)
-      : id = json["id"],
+      : id = json["_id"],
         idtemoin = json["id_temoin"],
         idsecouriste = json["id_secouriste"],
         status = json["status"],
