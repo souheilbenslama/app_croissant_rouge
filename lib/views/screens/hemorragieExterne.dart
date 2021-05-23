@@ -67,7 +67,9 @@ class HemorragieExterne extends StatelessWidget {
                     doc.setDescription("Saignement abondant visible.\n");
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => HemorexOui()),
+                      MaterialPageRoute(
+                        builder: (context) => HemorexOui(),
+                      ),
                     );
                   },
                   color: Colors.redAccent[700],
@@ -125,7 +127,7 @@ class HemorragieExterne extends StatelessWidget {
             height: height * 0.274,
             width: height * 0.274,
             child: Image.asset(
-              'assets/images/wound2g.png',
+              'assets/images/hemorragie.png',
             ),
           ),
         ],

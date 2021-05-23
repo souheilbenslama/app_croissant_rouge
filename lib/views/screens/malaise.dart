@@ -60,7 +60,9 @@ class Malaise extends StatelessWidget {
                         "la victime n'est pas consciente et ne sent pas bien ");
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => ListeMalaise()),
+                      MaterialPageRoute(
+                        builder: (context) => ListeMalaise(),
+                      ),
                     );
                   },
                   color: Colors.redAccent[700],

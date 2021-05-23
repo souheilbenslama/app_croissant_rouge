@@ -106,7 +106,6 @@ class _HemorexOuiState extends State<HemorexOui> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
         title: Center(
           child: Text('Hemorragies Externes'.tr),
         ),
