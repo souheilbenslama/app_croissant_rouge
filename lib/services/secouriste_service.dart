@@ -53,10 +53,7 @@ Future<LocationData> getPosition() async {
 
 //updating rescuer's disponibility (disponible-indisponible)
 updateDisponibility(bool isFree) async {
-  print("#################################################");
-
   SharedPreferences prefs = await SharedPreferences.getInstance();
-
   var jwt = prefs.getString("jwt");
   var jwtDecoded = jsonDecode(jwt);
   var token = jwtDecoded["token"];

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:app_croissant_rouge/models/secouriste.dart';
+import 'package:app_croissant_rouge/services/user_service.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -37,27 +38,50 @@ Future<bool> updateRescuerSocketId(String socketId) async {
   print("/////////////////////////::");
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String jwt = prefs.getString("jwt");
-  var jwtDecoded = jsonDecode(jwt);
-  print(jwtDecoded);
-  var token = jwtDecoded["token"];
   var updated = false;
-  try {
-    print(token);
-    var response = await client.put(
-      '$SERVER_IP/secouriste/socket',
-      headers: {'Authorization': '$token'},
-      body: {"socketId": socketId},
-    );
+  if (jwt != null) {
+    var jwtDecoded = jsonDecode(jwt);
+    print(jwtDecoded);
+    var token = jwtDecoded["token"];
 
-    print(response.body);
+    try {
+      print(token);
+      var response = await client.put(
+        '$SERVER_IP/secouriste/socket',
+        headers: {'Authorization': '$token'},
+        body: {"socketId": socketId},
+      );
 
-    if (response.statusCode == 200) {
-      updated = true;
-    } else if (response.statusCode == 403) {
-      //go to login screen
+      print(response.body);
+
+      if (response.statusCode == 200) {
+        updated = true;
+      } else if (response.statusCode == 403) {
+        //go to login screen
+      }
+    } catch (Exception) {
+      return updated;
     }
-  } catch (Exception) {
+    return updated;
+  } else {
+    var details = await UserService.getDeviceDetails();
+    var userId = details[2];
+    try {
+      var response = await client.put(
+        '$SERVER_IP/users/socket',
+        body: {"socketId": socketId, "deviceId": userId},
+      );
+
+      print(response.body);
+
+      if (response.statusCode == 200) {
+        updated = true;
+      } else if (response.statusCode == 403) {
+        //go to login screen
+      }
+    } catch (Exception) {
+      return updated;
+    }
     return updated;
   }
-  return updated;
 }

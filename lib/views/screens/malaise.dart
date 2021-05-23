@@ -57,7 +57,7 @@ class Malaise extends StatelessWidget {
                     final doc =
                         Provider.of<AccidentProvider>(context, listen: false);
                     doc.setDescription(
-                        "la victime n'est pas consciente et ne sent pas bien ");
+                        "la victime n'est pas consciente et ne sent pas bien .");
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => ListeMalaise()),

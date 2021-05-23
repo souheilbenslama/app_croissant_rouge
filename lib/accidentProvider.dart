@@ -1,7 +1,7 @@
 import 'package:app_croissant_rouge/models/choix_conscience.dart';
 import 'package:app_croissant_rouge/models/choix_hemorragie.dart';
 import 'package:app_croissant_rouge/models/choix_protection.dart';
-import 'package:app_croissant_rouge/models/choix_respiration.dart';
+import 'package:app_croissant_rouge/models/accident.dart';
 import 'package:app_croissant_rouge/services/accident_service.dart';
 import 'package:app_croissant_rouge/services/secouriste_service.dart';
 import 'package:flutter/material.dart';
@@ -14,11 +14,20 @@ class AccidentProvider with ChangeNotifier {
   String longitude;
   bool respire;
   bool conscient;
-  String description = "";
+  List<String> description = [];
   String cas;
   bool needSecouriste = false;
   LocationData currentLocation;
   String token;
+  Accident currentAccident;
+
+  setCurrentAccident(Accident accident) {
+    this.currentAccident = accident;
+  }
+
+  getCurrentAccident() {
+    return this.currentAccident;
+  }
 
   getCurrentLocation() {
     if (currentLocation == null) {
@@ -44,8 +53,8 @@ class AccidentProvider with ChangeNotifier {
 
   clear() {
     this.cas = null;
-    this.description = null;
-    this.needSecouriste = null;
+    this.description = [];
+    this.needSecouriste = false;
   }
 
   setNotNeedSecouriste() {
@@ -59,7 +68,13 @@ class AccidentProvider with ChangeNotifier {
   }
 
   setDescription(String desc) {
-    this.description += desc;
+    this.description.add(desc);
+    notifyListeners();
+  }
+
+  removeDescription() {
+    if (this.description.length > 0)
+      this.description.removeAt(this.description.length - 1);
     notifyListeners();
   }
 
@@ -84,10 +99,16 @@ class AccidentProvider with ChangeNotifier {
   }
 
   Map getInfo() {
+    String dsc = "";
+    if (description != null)
+      this.description.forEach((element) {
+        dsc = dsc + element + "\n";
+      });
+
     return {
       "latitude": latitude,
       "longitude": longitude,
-      "description": this.description,
+      "description": dsc,
       "cas": this.cas,
       "need_secouriste": this.needSecouriste
     };

@@ -5,7 +5,6 @@ import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
 import 'package:app_croissant_rouge/models/Instruction.dart';
 import 'package:app_croissant_rouge/views/screens/my_detail_page.dart';
-import 'package:app_croissant_rouge/views/widgets/rating_box.dart';
 
 import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
@@ -28,19 +27,6 @@ class _StepListState extends State<StepList> {
   void initState() {
     super.initState();
     _addInstructions();
-  }
-
-  static Future<List<String>> getDeviceDetails() async {
-    String deviceName;
-    String deviceVersion;
-    String identifier;
-    final DeviceInfoPlugin deviceInfoPlugin = new DeviceInfoPlugin();
-    var build = await deviceInfoPlugin.androidInfo;
-    deviceName = build.model;
-    deviceVersion = build.version.toString();
-    identifier = build.androidId; //UUID for Android
-//if (!mounted) return;
-    return [deviceName, deviceVersion, identifier];
   }
 
   void _addInstructions() {
@@ -181,6 +167,7 @@ class _StepListState extends State<StepList> {
 
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => PageAlerte()));
+                  doc.clear();
                 },
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(100.0)),

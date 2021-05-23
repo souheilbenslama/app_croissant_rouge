@@ -128,7 +128,7 @@ class MalCardio extends StatelessWidget {
                     address,
                     localite);
               }
-
+              doc.clear();
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => PageAlerte()));
             },

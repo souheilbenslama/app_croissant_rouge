@@ -146,6 +146,7 @@ class MalDiab extends StatelessWidget {
 
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => PageAlerte()));
+                doc.clear();
               },
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(100.0)),

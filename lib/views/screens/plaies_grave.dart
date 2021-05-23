@@ -160,6 +160,7 @@ class PlaiesGraves extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => PageAlerte()));
+                        doc.clear();
                       },
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(100.0)),

@@ -128,7 +128,7 @@ class Respire extends StatelessWidget {
                           Provider.of<AccidentProvider>(context, listen: false);
 
                       doc.setCas("Arrêt cardiaque");
-                      doc.setNotNeedSecouriste();
+
                       if (doc.getCurrentLocation() != null) {
                         _locationData = doc.currentLocation;
                         String latitude = _locationData.latitude.toString();
@@ -180,6 +180,7 @@ class Respire extends StatelessWidget {
                         context,
                         MaterialPageRoute(builder: (context) => PageAlerte()),
                       );
+                      doc.clear();
                     }
                   },
                   color: Colors.redAccent[700],

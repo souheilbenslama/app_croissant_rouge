@@ -64,7 +64,7 @@ class HemorragieExterne extends StatelessWidget {
                   onPressed: () {
                     final doc =
                         Provider.of<AccidentProvider>(context, listen: false);
-                    doc.setDescription("Saignement abondant visible.\n");
+                    doc.setDescription("Saignement abondant visible.");
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => HemorexOui()),

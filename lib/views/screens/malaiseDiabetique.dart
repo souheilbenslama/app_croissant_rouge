@@ -54,7 +54,7 @@ class MalaiseDiabetique extends StatelessWidget {
                     final doc =
                         Provider.of<AccidentProvider>(context, listen: false);
                     doc.setDescription(
-                        " la victime presente Paleur et/ou Sueur froide et/ou Sensation de faim ");
+                        " la victime presente Paleur et/ou Sueur froide et/ou Sensation de faim . ");
                     Navigator.push(
                       context,
                       MaterialPageRoute(

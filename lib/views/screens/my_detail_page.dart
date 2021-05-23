@@ -112,7 +112,7 @@ class Details extends StatelessWidget {
                               address,
                               localite);
 
-                          doc.description = "";
+                          doc.clear();
                         }
 
                         showDialog(

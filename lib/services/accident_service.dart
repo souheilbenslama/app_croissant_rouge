@@ -2,6 +2,10 @@ import 'dart:convert';
 import 'package:app_croissant_rouge/models/accident.dart';
 import 'package:device_info/device_info.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
+import 'package:get/get.dart';
+
+import '../accidentProvider.dart';
 
 const SERVER_IP = 'http://192.168.1.118:3000';
 

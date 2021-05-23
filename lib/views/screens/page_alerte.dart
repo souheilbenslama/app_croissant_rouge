@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:app_croissant_rouge/services/secouriste_service.dart';
+import 'package:app_croissant_rouge/services/user_service.dart';
 import 'package:app_croissant_rouge/accidentProvider.dart';
 import 'package:app_croissant_rouge/lang/localization_service.dart';
 import 'package:app_croissant_rouge/models/secouriste.dart';
@@ -11,7 +12,7 @@ import 'package:app_croissant_rouge/views/widgets/customized_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
-import 'package:device_info/device_info.dart';
+
 import 'package:http/http.dart' as http;
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:lite_rolling_switch/lite_rolling_switch.dart';
@@ -20,16 +21,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:get/get.dart';
 import 'package:location/location.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-
-// The Server to the backend
-const SERVER_IP = 'http://192.168.43.68:3000';
-// The method to register the user
-Future<String> attemptLogInUser(String userId) async {
-  var res =
-      await http.post("$SERVER_IP/users/normalUser", body: {"userid": userId});
-  if (res.statusCode == 200) return res.body;
-  return null;
-}
 
 class PageAlerte extends StatefulWidget {
   @override
@@ -43,19 +34,6 @@ class _PageAlerteState extends State<PageAlerte> {
   Location location;
   LocationData currentlocation;
   LocationData localisation;
-  // To get Device Details
-  static Future<List<String>> getDeviceDetails() async {
-    String deviceName;
-    String deviceVersion;
-    String identifier;
-    final DeviceInfoPlugin deviceInfoPlugin = new DeviceInfoPlugin();
-    var build = await deviceInfoPlugin.androidInfo;
-    deviceName = build.model;
-    deviceVersion = build.version.toString();
-    identifier = build.androidId; //UUID for Android
-//if (!mounted) return;
-    return [deviceName, deviceVersion, identifier];
-  }
 
   Widget popupMenuButton() {
     return PopupMenuButton<String>(
@@ -363,9 +341,11 @@ class _PageAlerteState extends State<PageAlerte> {
                                   margin: EdgeInsets.only(),
                                   child: RaisedButton(
                                     onPressed: () async {
-                                      //var details = await getDeviceDetails();
-                                      //var userId = details[2];
-                                      //var res = await attemptLogInUser(userId);
+                                      var details =
+                                          await UserService.getDeviceDetails();
+                                      var userId = details[2];
+                                      var res =
+                                          UserService.attemptLogInUser(userId);
                                       Navigator.of(context)
                                           .pushNamed('/options');
                                       //print(res);
