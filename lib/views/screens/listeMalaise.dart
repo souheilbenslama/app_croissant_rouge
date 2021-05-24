@@ -29,7 +29,7 @@ class ListeMalaise extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(),
               child: Image.asset(
-                'assets/logo.jpg',
+                'assets/profil.png',
                 width: 150,
                 height: 150,
               ),
@@ -42,7 +42,7 @@ class ListeMalaise extends StatelessWidget {
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.black.withOpacity(0.8),
-                fontSize: 50,
+                fontSize: 30,
                 //fontWeight: FontWeight.bold,
                 fontStyle: FontStyle.italic,
                 letterSpacing: 2.2,
@@ -85,45 +85,6 @@ class ListeMalaise extends StatelessWidget {
                 ),
               ),
             ),
-            /*Container(
-              height: 80.0,
-              width: 170,
-              margin: EdgeInsets.only(),
-              child: RaisedButton(
-                onPressed: () {
-                  final doc =
-                      Provider.of<AccidentProvider>(context, listen: false);
-                  doc.setCas("Crisede nerfs");
-
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => CriseDeNerfs()),
-                  );
-                },
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(80.0)),
-                padding: EdgeInsets.all(0.0),
-                child: Ink(
-                  decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [Color(0xFFe84f4c), Color(0xFFe2231e)],
-                        begin: Alignment.centerRight,
-                        end: Alignment.centerLeft,
-                      ),
-                      borderRadius: BorderRadius.circular(30.0)),
-                  child: Container(
-                    constraints:
-                        BoxConstraints(maxWidth: 250.0, minHeight: 50.0),
-                    alignment: Alignment.center,
-                    child: Text(
-                      "crise".tr,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.white, fontSize: 30),
-                    ),
-                  ),
-                ),
-              ),
-            ),*/
             SizedBox(
               height: 15,
             ),
@@ -160,45 +121,6 @@ class ListeMalaise extends StatelessWidget {
                 ),
               ),
             ),
-            /*Container(
-              height: 80.0,
-              width: 170,
-              margin: EdgeInsets.only(),
-              child: RaisedButton(
-                onPressed: () {
-                  final doc =
-                      Provider.of<AccidentProvider>(context, listen: false);
-                  doc.setCas("MalaiseDiabetique");
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => MalaiseDiabetique()),
-                  );
-                },
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(80.0)),
-                padding: EdgeInsets.all(0.0),
-                child: Ink(
-                  decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [Color(0xFFe84f4c), Color(0xFFe2231e)],
-                        begin: Alignment.centerRight,
-                        end: Alignment.centerLeft,
-                      ),
-                      borderRadius: BorderRadius.circular(30.0)),
-                  child: Container(
-                    constraints:
-                        BoxConstraints(maxWidth: 250.0, minHeight: 50.0),
-                    alignment: Alignment.center,
-                    child: Text(
-                      "malDiab".tr,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.white, fontSize: 25),
-                    ),
-                  ),
-                ),
-              ),
-            ),*/
             SizedBox(
               height: 15,
             ),
@@ -233,44 +155,6 @@ class ListeMalaise extends StatelessWidget {
                 ),
               ),
             ),
-            /*Container(
-              height: 80.0,
-              width: 170,
-              margin: EdgeInsets.only(),
-              child: RaisedButton(
-                onPressed: () {
-                  final doc =
-                      Provider.of<AccidentProvider>(context, listen: false);
-                  doc.setCas("Malaise Cardiaque");
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => MalaiseCardiaque()),
-                  );
-                },
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(80.0)),
-                padding: EdgeInsets.all(0.0),
-                child: Ink(
-                  decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [Color(0xFFe84f4c), Color(0xFFe2231e)],
-                        begin: Alignment.centerRight,
-                        end: Alignment.centerLeft,
-                      ),
-                      borderRadius: BorderRadius.circular(30.0)),
-                  child: Container(
-                    constraints:
-                        BoxConstraints(maxWidth: 250.0, minHeight: 50.0),
-                    alignment: Alignment.center,
-                    child: Text(
-                      "malCard".tr,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.white, fontSize: 28),
-                    ),
-                  ),
-                ),
-              ),
-            ),*/
           ],
         ),
       ),

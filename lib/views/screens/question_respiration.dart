@@ -202,7 +202,12 @@ class Respire extends StatelessWidget {
                 ),
               ),
             ],
-          )
+          ),
+          Container(
+            height: 200,
+            width: 150,
+            child: Image.asset('assets/images/respire1.png'),
+          ),
         ],
       ),
     );

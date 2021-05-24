@@ -110,7 +110,7 @@ class ListeCas extends StatelessWidget {
                 child: Text(
                   "hemoExt".tr,
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 25,
                     letterSpacing: 2.2,
                     color: Colors.white,
                   ),

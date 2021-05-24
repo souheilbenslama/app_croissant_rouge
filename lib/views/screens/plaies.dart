@@ -52,7 +52,7 @@ class Plaies extends StatelessWidget {
             ),
             Container(
               height: height * 0.068,
-              width: width * 0.608,
+              width: width * 0.657,
               child: RaisedButton(
                 onPressed: () {
                   final doc =
@@ -60,7 +60,9 @@ class Plaies extends StatelessWidget {
                   doc.setCas("Plaie simple.\n");
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => PlaiesSimples()),
+                    MaterialPageRoute(
+                      builder: (context) => PlaiesSimples(),
+                    ),
                   );
                 },
                 color: Colors.redAccent[700],
@@ -83,7 +85,7 @@ class Plaies extends StatelessWidget {
             ),
             Container(
               height: height * 0.068,
-              width: width * 0.608,
+              width: width * 0.657,
               child: RaisedButton(
                 onPressed: () async {
                   final doc =
@@ -95,7 +97,9 @@ class Plaies extends StatelessWidget {
                   FlutterPhoneDirectCaller.callNumber(number);
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => PlaiesGraves()),
+                    MaterialPageRoute(
+                      builder: (context) => PlaiesGraves(),
+                    ),
                   );
                 },
                 color: Colors.redAccent[700],
@@ -111,6 +115,13 @@ class Plaies extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 25, letterSpacing: 2.2, color: Colors.white),
                 ),
+              ),
+            ),
+            Container(
+              height: height * 0.246,
+              width: height * 0.246,
+              child: Image.asset(
+                'assets/images/plaie.png',
               ),
             ),
           ],

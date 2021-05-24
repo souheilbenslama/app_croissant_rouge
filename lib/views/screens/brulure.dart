@@ -133,8 +133,8 @@ class Brulure extends StatelessWidget {
               ),
             ),
             Container(
-              height: height * 0.274,
-              width: height * 0.274,
+              height: height * 0.246,
+              width: height * 0.246,
               child: Image.asset(
                 'assets/images/burn1g.png',
               ),
