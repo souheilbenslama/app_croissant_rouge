@@ -3,7 +3,7 @@ import 'package:app_croissant_rouge/services/admin_service.dart';
 import 'package:app_croissant_rouge/views/screens/liste_interventions.dart';
 import 'package:app_croissant_rouge/views/screens/liste_secouristes.dart';
 import 'package:flutter/material.dart';
-import './Profile.dart';
+import 'dart:convert';
 
 class AdminDashboard extends StatefulWidget {
   @override
@@ -42,37 +42,10 @@ class _AdminDashboardState extends State<AdminDashboard> {
                   children: <Widget>[
                     GestureDetector(
                       onTap: () async {
-                        /*final arraySecouristes =
-                            await AdminService.listSecourists();
-                        var secouristes = [];
-                        for (var i = 0; i < arraySecouristes.length; i++) {
-                          // print("it is " + arraySecouristes.length.toString());
-
-                          secouristes.add(arraySecouristes[i]["name"]);
-                        }*/
-                        var secouristes = [
-                          new Secouriste(
-                            name: "Amal",
-                            email: "amal@test.com",
-                            isFree: false,
-                          ),
-                          new Secouriste(
-                            name: "Amal",
-                            email: "amal@test.com",
-                            isFree: true,
-                          ),
-                          new Secouriste(
-                            name: "test",
-                            email: "test@test.com",
-                            isFree: true,
-                          ),
-                        ];
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (_) => ListeSecouristes(
-                              secouristes: secouristes,
-                            ),
+                            builder: (_) => ListeSecouristes(),
                           ),
                         );
                       },
@@ -118,8 +91,10 @@ class _AdminDashboardState extends State<AdminDashboard> {
                         for (var i = 0; i < arrayintervention.length; i++) {
                           // print("it is " + arrayintervention.length.toString());
 
-                          interventions.add(arrayintervention[i]["id_temoin"]);
+                          interventions.add(arrayintervention[i]);
                         }
+                        print("jjjjjjjjjjjjjjjjjjjjjjjjj");
+                        print(interventions);
                         Navigator.push(
                           context,
                           MaterialPageRoute(

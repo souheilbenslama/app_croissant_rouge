@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'dart:async';
 import '../../models/interventions.dart';
-import '../../services/interventions.dart';
+import 'package:app_croissant_rouge/services/admin_service.dart';
 import 'package:get/get.dart';
 
 class ListeInterventions extends StatefulWidget {
@@ -29,16 +29,17 @@ class Debouncer {
 
 class _ListeInterventionsState extends State<ListeInterventions> {
   final _debouncer = Debouncer(milliseconds: 500);
-  List<Interventions> interventions = List();
-  List<Interventions> filteredInterventions = List();
+  List interventions = List();
+  List filteredInterventions = List();
 
   @override
   void initState() {
     super.initState();
-    Services.getInterventions().then((interventionsFromServer) {
+    AdminService.listinterventions().then((interventionsFromServer) {
       setState(() {
         interventions = interventionsFromServer;
         filteredInterventions = interventions;
+        print(interventions);
       });
     });
   }
@@ -60,7 +61,7 @@ class _ListeInterventionsState extends State<ListeInterventions> {
               _debouncer.run(() {
                 setState(() {
                   filteredInterventions = interventions
-                      .where((u) => (u.name
+                      .where((u) => (u.localite
                               .toLowerCase()
                               .contains(string.toLowerCase()) ||
                           u.region
@@ -76,6 +77,9 @@ class _ListeInterventionsState extends State<ListeInterventions> {
               padding: EdgeInsets.all(10.0),
               itemCount: filteredInterventions.length,
               itemBuilder: (BuildContext context, int index) {
+                print("*******************************");
+                print(filteredInterventions[index].localite);
+                print("*******************************");
                 return Card(
                   color: Colors.white,
                   elevation: 3,
@@ -86,8 +90,7 @@ class _ListeInterventionsState extends State<ListeInterventions> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          "interDe".tr +
-                              filteredInterventions[index].name,
+                          "interDe".tr + filteredInterventions[index].cas,
                           style: TextStyle(
                             fontSize: 20,
                           ),
@@ -96,7 +99,9 @@ class _ListeInterventionsState extends State<ListeInterventions> {
                           height: 5.0,
                         ),
                         Text(
-                          filteredInterventions[index].region,
+                          (filteredInterventions[index].localite != null)
+                              ? filteredInterventions[index].localite
+                              : null,
                           style: TextStyle(
                             fontSize: 18.0,
                             color: Colors.grey[800],
@@ -106,7 +111,8 @@ class _ListeInterventionsState extends State<ListeInterventions> {
                           height: 5.0,
                         ),
                         Text(
-                          DateFormat.yMMMMEEEEd().format(DateTime.now()),
+                          DateFormat.yMMMMEEEEd()
+                              .format(filteredInterventions[index].date),
                           style: TextStyle(
                             fontSize: 16.0,
                             color: Colors.grey,

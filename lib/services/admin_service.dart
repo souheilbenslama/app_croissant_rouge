@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:app_croissant_rouge/models/secouriste.dart';
+import 'package:app_croissant_rouge/models/accident.dart';
 
 class AdminService {
 // The backend server
@@ -7,12 +9,46 @@ class AdminService {
 // The method to get the list of secourists
   static Future<List<dynamic>> listSecourists() async {
     var res = await http.get("$SERVER_IP/users/list");
-    return res.statusCode == 200 ? jsonDecode(res.body) : null;
+
+    final body = jsonDecode(res.body);
+
+    if (res.statusCode == 200) {
+      List<dynamic> result =
+          body.map((item) => Secouriste.fromJson(item)).toList();
+      return result;
+    } else {
+      return null;
+    }
+  }
+
+  static Future<List<dynamic>> secouristelistInter(id) async {
+    print("okok");
+    var res = await http
+        .post("$SERVER_IP/accident/Secouristeinter/", body: {'id': id});
+    final body = jsonDecode(res.body);
+    print(body);
+    if (res.statusCode == 200) {
+      //print();
+
+      var result = body.map((element) => Accident.fromJson(body[0])).toList();
+      print('oazeazeo');
+      print(result);
+      return result;
+    } else {
+      return null;
+    }
   }
 
 // The method to get the list of interventions
   static Future<List<dynamic>> listinterventions() async {
-    var res = await http.get("$SERVER_IP/accident/inprogress");
-    return res.statusCode == 200 ? jsonDecode(res.body) : null;
+    var res = await http.get("$SERVER_IP/accident/all");
+    if (res.statusCode == 200) {
+      var body = jsonDecode(res.body);
+      print(body);
+      var liste = body.map((element) => Accident.fromJson(element)).toList();
+      return liste;
+    } else {
+      return null;
+    }
   }
 }

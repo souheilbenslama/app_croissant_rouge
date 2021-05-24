@@ -10,6 +10,7 @@ class Secouriste {
   bool isAdmin;
   bool isNormalUser;
   bool isActivated;
+  String verificationCode;
   final String phone;
 
   Secouriste(
@@ -24,13 +25,14 @@ class Secouriste {
       this.isActivated,
       this.isNormalUser,
       this.phone,
-      this.gouvernorat});
+      this.gouvernorat,
+      this.verificationCode});
 
   factory Secouriste.fromJson(Map<dynamic, dynamic> json) {
-    var secourist = json["Secouriste"];
+    var secourist = json;
 
     return Secouriste(
-        id: secourist["id"],
+        id: secourist["_id"],
         photo: secourist["photo"],
         cin: secourist["cin"],
         name: secourist["name"],
@@ -41,6 +43,7 @@ class Secouriste {
         isNormalUser: secourist['isNormalUser'],
         phone: secourist['phone'],
         gouvernorat: secourist['gouvernorat'],
+        verificationCode: secourist['verificationCode'],
         age: secourist['age']);
   }
 

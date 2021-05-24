@@ -130,7 +130,7 @@ class Profile extends StatelessWidget {
                                         shape: BoxShape.circle,
                                         image: DecorationImage(
                                           image: NetworkImage(
-                                            "http://192.168.43.68:3000/${this.secouriste.photo}",
+                                            "http://192.168.1.118:3000/${this.secouriste.photo}",
                                           ),
                                           fit: BoxFit.cover,
                                         ),

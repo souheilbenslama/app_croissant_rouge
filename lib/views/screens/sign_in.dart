@@ -229,8 +229,8 @@ class SignIn extends StatelessWidget {
                                     prefs.setString("jwt", jwt);
                                     print("string set to " + jwt);
 
-                                    var ss =
-                                        Secouriste.fromJson(jsonDecode(jwt));
+                                    var ss = Secouriste.fromJson(
+                                        jsonDecode(jwt)["Secouriste"]);
                                     if (!ss.isActivated && !ss.isNormalUser) {
                                       Navigator.pushReplacement(
                                           context,

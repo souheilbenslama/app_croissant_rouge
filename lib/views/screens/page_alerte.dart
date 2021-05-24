@@ -209,7 +209,8 @@ class _PageAlerteState extends State<PageAlerte> {
                                             if (jwt != null) {
                                               print(jwt);
                                               var ss = Secouriste.fromJson(
-                                                  jsonDecode(jwt));
+                                                  jsonDecode(
+                                                      jwt)["Secouriste"]);
                                               if (ss.isActivated) {
                                                 final prefs =
                                                     await SharedPreferences

@@ -102,3 +102,41 @@ Future<String> updateLocation(double longitude, double latitude) async {
   if (res.statusCode == 200) return res.body;
   return null;
 }
+
+Future<String> changeUserActivation(String userId, bool activation) async {
+  var jwt = await getToken();
+  var jwtDecoded = jsonDecode(jwt);
+  var token = jwtDecoded["token"];
+  print("hello");
+  print(userId);
+  print(activation);
+  var res = await http.put("$SERVER_IP/users/activationUser", headers: {
+    'Authorization': '$token',
+  }, body: {
+    "id": userId,
+    "activated": activation.toString()
+  });
+  print("okok");
+  print(res.body);
+  if (res.statusCode == 200) return res.body;
+  return null;
+}
+
+Future<String> changeUsertype(String userId, bool admin) async {
+  var jwt = await getToken();
+  var jwtDecoded = jsonDecode(jwt);
+  var token = jwtDecoded["token"];
+  print("hello");
+  print(userId);
+  print(admin);
+  var res = await http.put("$SERVER_IP/users/adminuser", headers: {
+    'Authorization': '$token',
+  }, body: {
+    "id": userId,
+    "admin": admin.toString()
+  });
+  print("okok");
+  print(res.body);
+  if (res.statusCode == 200) return res.body;
+  return null;
+}

@@ -94,7 +94,7 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
             context,
             MaterialPageRoute(
                 builder: (context) =>
-                    Profile(Secouriste.fromJson(decodedjwt))));
+                    Profile(Secouriste.fromJson(decodedjwt["Secouriste"]))));
       } else {
         error = res.body;
       }

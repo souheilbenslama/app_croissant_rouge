@@ -1,57 +1,89 @@
 import 'package:app_croissant_rouge/models/secouriste.dart';
 import 'package:app_croissant_rouge/views/screens/intervention_par_secouriste.dart';
+import 'package:app_croissant_rouge/services/admin_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:lite_rolling_switch/lite_rolling_switch.dart';
+import 'package:app_croissant_rouge/views/screens/admin_dashboard.dart';
 
 class ListeSecouristes extends StatefulWidget {
-  final secouristes;
-  ListeSecouristes({Key key, @required this.secouristes}) : super(key: key);
+  ListeSecouristes({Key key}) : super(key: key);
   @override
   _ListeSecouristesState createState() => _ListeSecouristesState();
 }
 
 class _ListeSecouristesState extends State<ListeSecouristes> {
+  Future<List> listSecouristes = AdminService.listSecourists();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.redAccent[700],
-        title: Text("listeSec".tr),
-      ),
-      body: Container(
-        padding: EdgeInsets.all(10),
-        child: ListView.builder(
-          itemCount: widget.secouristes.length,
-          itemBuilder: (BuildContext context, int index) {
-            return Container(
-              height: 40,
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => InterventionParSecouriste(
-                        secouriste: widget.secouristes[index],
-                      ),
-                    ),
-                  );
-                },
-                child: Card(
-                  elevation: 3,
-                  child: Text(
-                    widget.secouristes[index].name.toString(),
-                    style: TextStyle(
-                        color: Colors.grey[700],
-                        fontSize: 20,
-                        letterSpacing: 0.3,
-                        height: 1.3),
-                  ),
-                ),
+        automaticallyImplyLeading: false,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (_) => AdminDashboard(),
               ),
             );
           },
         ),
+        backgroundColor: Colors.redAccent[700],
+        title: Text("listeSec".tr),
+      ),
+      body: FutureBuilder(
+        future: listSecouristes,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            var secouristes = snapshot.data;
+            return Container(
+                padding: EdgeInsets.all(10),
+                child: ListView.builder(
+                    itemCount: secouristes.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Container(
+                        height: 40,
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => InterventionParSecouriste(
+                                  secouriste: secouristes[index],
+                                ),
+                              ),
+                            );
+                          },
+                          child: Card(
+                            elevation: 3,
+                            child: Text(
+                              secouristes[index].name.toString(),
+                              style: TextStyle(
+                                  color: Colors.grey[700],
+                                  fontSize: 20,
+                                  letterSpacing: 0.3,
+                                  height: 1.3),
+                            ),
+                          ),
+                        ),
+                      );
+                    }));
+          } else {
+            return Container(
+                color: Colors.white,
+                child: Align(
+                    alignment: Alignment.center,
+                    child: Center(
+                        child: SpinKitFadingCircle(
+                      color: Colors.grey[800],
+                      size: 80,
+                    ))));
+          }
+        },
       ),
     );
   }

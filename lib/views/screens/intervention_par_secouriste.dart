@@ -1,10 +1,18 @@
+import 'package:app_croissant_rouge/services/secouriste_service.dart';
+import 'package:app_croissant_rouge/services/admin_service.dart';
+
 import '../../models/secouriste.dart';
 import 'package:flutter/material.dart';
+import 'package:app_croissant_rouge/views/screens/liste_secouristes.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:intl/intl.dart';
 import 'package:get/get.dart';
 
 class InterventionParSecouriste extends StatefulWidget {
   final Secouriste secouriste;
+  bool makeAdmin = false;
+  bool active = false;
+  Future<List> interventions;
   InterventionParSecouriste({Key key, @required this.secouriste})
       : super(key: key);
   @override
@@ -13,12 +21,32 @@ class InterventionParSecouriste extends StatefulWidget {
 }
 
 class _InterventionParSecouristeState extends State<InterventionParSecouriste> {
-  var makeAdmin = false;
-  var active = false;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    this.widget.makeAdmin = this.widget.secouriste.isAdmin;
+    this.widget.active = this.widget.secouriste.isActivated;
+  }
+
   @override
   Widget build(BuildContext context) {
+    this.widget.interventions =
+        AdminService.secouristelistInter(this.widget.secouriste.id);
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (_) => ListeSecouristes(),
+              ),
+            );
+          },
+        ),
         backgroundColor: Colors.redAccent[700],
         title: Text("listeInter".tr),
       ),
@@ -81,7 +109,7 @@ class _InterventionParSecouristeState extends State<InterventionParSecouriste> {
                     height: 10,
                   ),
                   Text(
-                    "Code de verification : 156325",
+                    "Code de verification : ${widget.secouriste.verificationCode.toString()}",
                     style: TextStyle(
                       fontSize: 18,
                     ),
@@ -96,19 +124,27 @@ class _InterventionParSecouristeState extends State<InterventionParSecouriste> {
                         children: <Widget>[
                           IconButton(
                             iconSize: 30,
-                            color: makeAdmin ? Colors.green : Colors.red,
+                            color: this.widget.makeAdmin
+                                ? Colors.green
+                                : Colors.red,
                             icon: Icon(Icons.person),
                             onPressed: () {
                               setState(() {
-                                makeAdmin = !makeAdmin;
+                                this.widget.makeAdmin = !this.widget.makeAdmin;
+                                this.widget.secouriste.isAdmin =
+                                    !this.widget.secouriste.isAdmin;
+                                changeUsertype(this.widget.secouriste.id,
+                                    this.widget.makeAdmin);
                               });
                             },
                           ),
                           Text(
-                            makeAdmin ? "Admin" : "Normal User",
+                            this.widget.makeAdmin ? "Admin" : "Normal User",
                             style: TextStyle(
                               fontSize: 16.0,
-                              color: makeAdmin ? Colors.green : Colors.red,
+                              color: this.widget.makeAdmin
+                                  ? Colors.green
+                                  : Colors.red,
                             ),
                           ),
                         ],
@@ -117,20 +153,29 @@ class _InterventionParSecouristeState extends State<InterventionParSecouriste> {
                         children: <Widget>[
                           IconButton(
                             iconSize: 30,
-                            color: active ? Colors.green : Colors.red,
-                            icon:
-                                Icon(active ? Icons.alarm_on : Icons.alarm_off),
+                            color:
+                                this.widget.active ? Colors.green : Colors.red,
+                            icon: Icon(this.widget.active
+                                ? Icons.alarm_on
+                                : Icons.alarm_off),
                             onPressed: () {
                               setState(() {
-                                active = !active;
+                                this.widget.active = !this.widget.active;
+                                this.widget.secouriste.isActivated =
+                                    this.widget.secouriste.isActivated;
+
+                                changeUserActivation(this.widget.secouriste.id,
+                                    this.widget.active);
                               });
                             },
                           ),
                           Text(
-                            active ? "Activé" : "Desactivé",
+                            this.widget.active ? "Activé" : "Desactivé",
                             style: TextStyle(
                               fontSize: 16.0,
-                              color: active ? Colors.green : Colors.red,
+                              color: this.widget.active
+                                  ? Colors.green
+                                  : Colors.red,
                             ),
                           ),
                         ],
@@ -141,39 +186,65 @@ class _InterventionParSecouristeState extends State<InterventionParSecouriste> {
               ),
             ),
           ),
-          Container(
-            height: 300,
-            child: ListView.builder(
-              itemCount: 3,
-              itemBuilder: (context, index) {
-                return Card(
-                  color: Colors.white,
-                  elevation: 3,
-                  child: ListTile(
-                    title: Column(
-                      children: [
-                        Text(
-                          "ariana".tr,
-                          style: TextStyle(
-                            fontSize: 18.0,
-                            color: Colors.grey[800],
-                            fontWeight: FontWeight.bold,
+          FutureBuilder(
+            future: this.widget.interventions,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                var data = snapshot.data;
+                return Container(
+                  height: MediaQuery.of(context).size.height * 0.4,
+                  child: ListView.builder(
+                    itemCount: data.length,
+                    itemBuilder: (context, index) {
+                      return Card(
+                        color: Colors.white,
+                        elevation: 3,
+                        child: ListTile(
+                          title: Column(
+                            children: [
+                              Text(
+                                data[index].address,
+                                style: TextStyle(
+                                  fontSize: 18.0,
+                                  color: Colors.grey[800],
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                data[index].cas,
+                                style: TextStyle(
+                                  fontSize: 18.0,
+                                  color: Colors.grey[800],
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                DateFormat.yMMMMEEEEd().format(DateTime.now()),
+                                style: TextStyle(
+                                  fontSize: 16.0,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                        Text(
-                          DateFormat.yMMMMEEEEd().format(DateTime.now()),
-                          style: TextStyle(
-                            fontSize: 16.0,
-                            color: Colors.grey,
-                          ),
-                        ),
-                      ],
-                    ),
+                      );
+                    },
                   ),
                 );
-              },
-            ),
-          ),
+              } else {
+                return Container(
+                    color: Colors.white,
+                    child: Align(
+                        alignment: Alignment.center,
+                        child: Center(
+                            child: SpinKitFadingCircle(
+                          color: Colors.grey[800],
+                          size: 80,
+                        ))));
+              }
+            },
+          )
         ],
       ),
     );
