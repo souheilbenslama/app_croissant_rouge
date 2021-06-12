@@ -1,6 +1,6 @@
 import 'package:app_croissant_rouge/models/choix_conscience.dart';
 import 'package:app_croissant_rouge/models/choix_hemorragie.dart';
-import 'package:app_croissant_rouge/models/choix_protection.dart';
+import 'package:app_croissant_rouge/models/message_model.dart';
 import 'package:app_croissant_rouge/models/accident.dart';
 import 'package:app_croissant_rouge/services/accident_service.dart';
 import 'package:app_croissant_rouge/services/secouriste_service.dart';
@@ -15,14 +15,23 @@ class AccidentProvider with ChangeNotifier {
   bool respire;
   bool conscient;
   List<String> description = [];
+  List<Message> messages = [];
   String cas;
   bool needSecouriste = false;
   LocationData currentLocation;
   String token;
   Accident currentAccident;
 
+  getMessages() {}
+
+  addMessage(Message m) {
+    this.messages.add(m);
+    notifyListeners();
+  }
+
   setCurrentAccident(Accident accident) {
     this.currentAccident = accident;
+    notifyListeners();
   }
 
   Accident getCurrentAccident() {
@@ -40,6 +49,7 @@ class AccidentProvider with ChangeNotifier {
 
   settoken(token) {
     this.token = token;
+    notifyListeners();
   }
 
   gettoken() {
@@ -55,6 +65,7 @@ class AccidentProvider with ChangeNotifier {
     this.cas = null;
     this.description = [];
     this.needSecouriste = false;
+    notifyListeners();
   }
 
   setNotNeedSecouriste() {

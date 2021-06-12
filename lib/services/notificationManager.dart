@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:app_croissant_rouge/models/accident.dart';
 import 'dart:io' show Platform;
 import 'package:rxdart/subjects.dart';
 
@@ -55,7 +56,7 @@ class NotificationManager {
     });
   }
 
-  Future<void> showNotification() async {
+  Future<void> showNotification(Accident accident) async {
     var androidChannel = AndroidNotificationDetails(
         'CHANNEL_ID', 'CHANNEL_NAME', 'CHANNEL_DESCRIPTION',
         importance: Importance.Max,
@@ -66,7 +67,7 @@ class NotificationManager {
     var iosChannel = IOSNotificationDetails();
     var platformChannel = NotificationDetails(androidChannel, iosChannel);
     await flutterLocalNotificationsPlugin.show(
-        0, 'App croissant rouge', 'notification test', platformChannel,
+        0, 'App croissant rouge', accident.cas, platformChannel,
         payload: 'New payload');
   }
 }

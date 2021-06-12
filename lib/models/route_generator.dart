@@ -12,6 +12,7 @@ import '../views/screens/intervention_par_secouriste.dart';
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     // Getting arguments passed in while calling Navigator.pushNamed
+    var arguments = settings.arguments;
 
     switch (settings.name) {
       case '/':
@@ -19,7 +20,7 @@ class RouteGenerator {
       case '/signIn':
         return MaterialPageRoute(builder: (_) => SignIn());
       case '/map':
-        return MaterialPageRoute(builder: (_) => MapPage());
+        return MaterialPageRoute(builder: (_) => MapPage(arguments));
       case '/publicmap':
         return MaterialPageRoute(builder: (_) => PublicMap());
       case '/options':

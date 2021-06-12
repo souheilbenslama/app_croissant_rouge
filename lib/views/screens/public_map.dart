@@ -26,22 +26,7 @@ class _PublicMapState extends State<PublicMap> {
   Set<Marker> markers = HashSet<Marker>();
 
   Set<Marker> _markers = Set<Marker>();
-
-  Marker marker = Marker(
-      markerId: MarkerId("testing"),
-      position: LatLng(37.4241, 10.9903381),
-      infoWindow: InfoWindow(title: "test", snippet: '*'),
-      onTap: () {},
-      onDragEnd: (LatLng position) {},
-      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueViolet));
-
-  Marker marker2 = Marker(
-      markerId: MarkerId("testing2"),
-      position: LatLng(37.4240, -122.0840),
-      infoWindow: InfoWindow(title: "test2", snippet: '*'),
-      onTap: () {},
-      onDragEnd: (LatLng position) {},
-      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueViolet));
+  CameraPosition initialCameraPosition ;
 
   MapType mapType = MapType.normal;
   // the user's initial location and current location
@@ -109,6 +94,13 @@ class _PublicMapState extends State<PublicMap> {
       // so we're holding on to it
       currentLocation = cLoc;
       updatePinOnMap();
+
+       /* CameraPosition(
+        zoom: CAMERA_ZOOM,
+        tilt: CAMERA_TILT,
+        bearing: CAMERA_BEARING,
+        target: SOURCE_LOCATION);*/
+
     });
 
     //setSourceAndDestinationIcons();
@@ -154,14 +146,7 @@ class _PublicMapState extends State<PublicMap> {
 
   @override
   Widget build(BuildContext context) {
-    markers.add(marker);
-    markers.add(marker2);
-
-    CameraPosition initialCameraPosition = CameraPosition(
-        zoom: CAMERA_ZOOM,
-        tilt: CAMERA_TILT,
-        bearing: CAMERA_BEARING,
-        target: SOURCE_LOCATION);
+    
 
     if (currentLocation != null) {
       initialCameraPosition = CameraPosition(
@@ -181,13 +166,12 @@ class _PublicMapState extends State<PublicMap> {
               if (snapshot.hasData) {
                 var list = snapshot.data;
                 list.forEach((element) {
-                  print(element.localisation);
+                  print("a");
                   markers.add(Marker(
-                      markerId: MarkerId(element.status),
-                      position: LatLng(element.localisation.latitude,
-                          element.localisation.longitude),
-                      infoWindow:
-                          InfoWindow(title: "hello", snippet: element.status)));
+                      markerId: MarkerId(element.id),
+                      position: element.localisation,
+                      infoWindow: InfoWindow(
+                          title: element.cas, snippet: element.description)));
                 });
               }
 

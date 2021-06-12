@@ -1,10 +1,11 @@
 import 'dart:convert';
 import 'package:app_croissant_rouge/locator.dart';
 import 'package:app_croissant_rouge/services/navigation_service.dart';
+import 'package:app_croissant_rouge/services/secouriste_service.dart';
 import 'package:app_croissant_rouge/services/notificationManager.dart';
 import 'package:app_croissant_rouge/views/widgets/notification_dialog.dart';
 import 'package:bot_toast/bot_toast.dart';
-import 'package:app_croissant_rouge/models/secouriste.dart';
+import 'package:app_croissant_rouge/models/accident.dart';
 import 'package:app_croissant_rouge/services/secouriste.dart';
 import 'package:flutter/material.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
@@ -25,16 +26,22 @@ class SocketService {
       updateRescuerSocketId(socket.id);
 
       socket.on('chat', (data) {
+        print("*********************************");
+
+        print("*********************************");
         String message = jsonDecode(jsonEncode(data))["message"];
         print(message);
       });
 
       socket.on('alerte', (data) async {
         print("good job souheil ***********************************");
+        Accident ac = Accident.fromJson(jsonDecode(jsonEncode(data)));
+
+        await notificationManager.showNotification(ac);
 
         BotToast.showCustomNotification(
             enableSlideOff: true,
-            duration: Duration(seconds: 30),
+            duration: Duration(seconds: 300),
             toastBuilder: (_) {
               return Dialog(
                   shape: RoundedRectangleBorder(
@@ -43,7 +50,7 @@ class SocketService {
                   elevation: 0,
                   backgroundColor: Colors.transparent,
                   child: Container(
-                    height: 450,
+                    height: 600,
                     decoration: BoxDecoration(
                       color: Colors.grey,
                       shape: BoxShape.rectangle,
@@ -51,7 +58,9 @@ class SocketService {
                         Radius.circular(12),
                       ),
                     ),
-                    child: Column(
+                    child: SingleChildScrollView(
+                        child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         Container(
                           child: Padding(
@@ -78,9 +87,44 @@ class SocketService {
                         Text(
                           'Emergency Alert',
                           style: TextStyle(
-                            fontSize: 20,
+                            fontSize: 30,
                             color: Colors.redAccent[700],
                             fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  'cas : ',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  ac.cas,
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 30),
+                                ),
+                              )
+                            ]),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            ac.description,
+                            style: TextStyle(color: Colors.white, fontSize: 25),
                           ),
                         ),
                         SizedBox(
@@ -89,51 +133,16 @@ class SocketService {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
-                            'Localisation : Cite Olympique MG',
+                            'Localisation :' + ac.address,
                             style: TextStyle(
+                              fontSize: 22,
                               color: Colors.white,
                             ),
                             textAlign: TextAlign.center,
                           ),
                         ),
                         SizedBox(
-                          height: 5,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            'Hemorragie: ........',
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            'Conscience: ........',
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            'Respiration: ........',
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 5,
+                          height: 25,
                         ),
                         Row(
                           mainAxisSize: MainAxisSize.min,
@@ -150,11 +159,23 @@ class SocketService {
                               width: 10,
                             ),
                             RaisedButton(
-                              onPressed: () {
-                                BotToast.cleanAll();
-                                final NavigationService _navigationService =
-                                    locator<NavigationService>();
-                                _navigationService.navigateTo("/map");
+                              onPressed: () async {
+                                var response = await acceptIntervention(ac.id);
+                                if (response.statusCode == 401) {
+                                  BotToast.cleanAll();
+                                  BotToast.showText(
+                                    text: jsonDecode(response.body)["message"],
+                                  );
+                                } else {
+                                  if (response.statusCode == 200) {
+                                    BotToast.cleanAll();
+                                    final NavigationService _navigationService =
+                                        locator<NavigationService>();
+                                    _navigationService.navigateTo("/map", ac);
+                                  } else {
+                                    BotToast.cleanAll();
+                                  }
+                                }
                               },
                               child: Text('Accept'),
                               color: Colors.green,
@@ -163,12 +184,10 @@ class SocketService {
                           ],
                         )
                       ],
-                    ),
+                    )),
                   ));
             });
-        if (!status) {
-          await notificationManager.showNotification();
-        }
+
         /*BotToast.showAttachedWidget(
             attachedBuilder: (_) => Card(
                   child: Padding(
@@ -203,16 +222,8 @@ class SocketService {
     });
   }
 
-  static void acceptIntervention(secouristeId, accidentId) {
-    socket.emit(
-        "accept", {"secouristeId": secouristeId, "accidentId": accidentId});
-  }
-
   static void sendMessage(accidentId, message, userId) {
-    socket.emit("chat", {
-      "messsage": message,
-      "senderId": "608c65ad52b1a01bf0ddb9fb",
-      "chatId": "6048839aa564a24a5c72df5c"
-    });
+    socket.emit("chat",
+        {"messsage": message, "senderId": userId, "accidentId": accidentId});
   }
 }

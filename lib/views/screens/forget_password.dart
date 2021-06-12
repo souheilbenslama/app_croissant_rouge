@@ -33,7 +33,8 @@ class _ForgetPasswordState extends State<ForgetPassword> {
           },
         ),
       ),
-      body: Column(
+      body: SingleChildScrollView(
+          child: Column(
         children: [
           (errormessage == null)
               ? SizedBox(height: size.height / 10)
@@ -108,7 +109,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
             ),
           ),
         ],
-      ),
+      )),
       /* Row(
         children: <Widget>[
           TextField(

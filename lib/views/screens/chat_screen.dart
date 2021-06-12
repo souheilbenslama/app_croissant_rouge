@@ -4,7 +4,8 @@ import 'package:app_croissant_rouge/models/message_model.dart';
 
 class ChatScreen extends StatefulWidget {
   final String userId;
-  ChatScreen(this.userId);
+  final String accidentId;
+  ChatScreen(this.userId, this.accidentId);
   @override
   _ChatScreenState createState() => _ChatScreenState();
 }
@@ -132,7 +133,7 @@ class _ChatScreenState extends State<ChatScreen> {
             _buildMessageComposer(() {
               setState(() {
                 messages = [
-                  Message(sender: User(), text: sentMessage),
+                  Message(),
                   ...messages,
                 ];
                 _textController.clear();

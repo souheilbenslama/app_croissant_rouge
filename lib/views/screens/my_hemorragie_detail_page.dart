@@ -126,7 +126,7 @@ class HemorragieDetails extends StatelessWidget {
                   showDialog(
                       context: context,
                       builder: (BuildContext context) {
-                        return ChatScreen(userId);
+                        return ChatScreen(doc.getCurrentAccident().id, userId);
                       });
                 },
                 tooltip: 'Increment',

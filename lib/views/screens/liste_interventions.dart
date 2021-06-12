@@ -39,7 +39,6 @@ class _ListeInterventionsState extends State<ListeInterventions> {
       setState(() {
         interventions = interventionsFromServer;
         filteredInterventions = interventions;
-        print(interventions);
       });
     });
   }
@@ -60,14 +59,17 @@ class _ListeInterventionsState extends State<ListeInterventions> {
             onChanged: (string) {
               _debouncer.run(() {
                 setState(() {
-                  filteredInterventions = interventions
-                      .where((u) => (u.localite
-                              .toLowerCase()
-                              .contains(string.toLowerCase()) ||
-                          u.region
-                              .toLowerCase()
-                              .contains(string.toLowerCase())))
-                      .toList();
+                  filteredInterventions = interventions.where((u) {
+                    print(u.localite);
+                    print(string);
+
+                    return (u.localite
+                            .toLowerCase()
+                            .contains(string.toLowerCase()) ||
+                        u.localite
+                            .toLowerCase()
+                            .contains(string.toLowerCase()));
+                  }).toList();
                 });
               });
             },
@@ -77,9 +79,7 @@ class _ListeInterventionsState extends State<ListeInterventions> {
               padding: EdgeInsets.all(10.0),
               itemCount: filteredInterventions.length,
               itemBuilder: (BuildContext context, int index) {
-                print("*******************************");
-                print(filteredInterventions[index].localite);
-                print("*******************************");
+                //   print(filteredInterventions[index].localite);
                 return Card(
                   color: Colors.white,
                   elevation: 3,
@@ -101,7 +101,7 @@ class _ListeInterventionsState extends State<ListeInterventions> {
                         Text(
                           (filteredInterventions[index].localite != null)
                               ? filteredInterventions[index].localite
-                              : null,
+                              : "",
                           style: TextStyle(
                             fontSize: 18.0,
                             color: Colors.grey[800],
@@ -111,8 +111,10 @@ class _ListeInterventionsState extends State<ListeInterventions> {
                           height: 5.0,
                         ),
                         Text(
-                          DateFormat.yMMMMEEEEd()
-                              .format(filteredInterventions[index].date),
+                          (filteredInterventions[index].date != null)
+                              ? DateFormat.yMMMMEEEEd()
+                                  .format(filteredInterventions[index].date)
+                              : "",
                           style: TextStyle(
                             fontSize: 16.0,
                             color: Colors.grey,

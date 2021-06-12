@@ -402,7 +402,7 @@ class _PageAlerteState extends State<PageAlerte> {
                                     updateLocation(this.localisation.longitude,
                                         this.localisation.latitude);
                                   });
-
+                                  subscription.cancel();
                                   return Padding(
                                       padding: EdgeInsets.only(),
                                       child: Container(
@@ -420,10 +420,22 @@ class _PageAlerteState extends State<PageAlerte> {
                                           onChanged: (bool state) {
                                             if (state == true) {
                                               SocketService.connect();
-                                              subscription.resume();
+                                              subscription = location
+                                                  .onLocationChanged
+                                                  .listen((LocationData cLoc) {
+                                                // cLoc contains the lat and long of the
+                                                // current user's position in real time,
+                                                // so we're holding on to it
+                                                this.localisation = cLoc;
+                                                print(this.localisation);
+
+                                                updateLocation(
+                                                    this.localisation.longitude,
+                                                    this.localisation.latitude);
+                                              });
                                               updateDisponibility(true);
                                             } else {
-                                              subscription.pause();
+                                              subscription.cancel();
                                               updateDisponibility(false);
                                             }
                                           },

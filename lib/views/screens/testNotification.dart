@@ -31,7 +31,7 @@ class _TestNotificationState extends State<TestNotification> {
         child: FlatButton(
           child: Text('Send Notification'),
           onPressed: () async {
-            await notificationManager.showNotification();
+            //await notificationManager.showNotification();
           },
         ),
       ),

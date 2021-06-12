@@ -75,6 +75,24 @@ updateDisponibility(bool isFree) async {
   return null;
 }
 
+//updating rescuer's disponibility (disponible-indisponible)
+acceptIntervention(accidentId) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  var jwt = prefs.getString("jwt");
+  var jwtDecoded = jsonDecode(jwt);
+  var token = jwtDecoded["token"];
+
+  var res = await http.put("$SERVER_IP/accident/acceptintervention",
+      //headers: {HttpHeaders.authorizationHeader: token},
+      headers: {
+        'Authorization': '$token',
+      }, body: {
+    "accidentId": accidentId
+  });
+
+  return res;
+}
+
 // The function to get the token from shared preferences
 Future<String> getToken() async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
