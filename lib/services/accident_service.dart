@@ -2,18 +2,18 @@ import 'dart:convert';
 import 'package:app_croissant_rouge/models/accident.dart';
 import 'package:device_info/device_info.dart';
 import 'package:http/http.dart' as http;
+import 'package:app_croissant_rouge/globals.dart' as globals;
+
 import 'package:provider/provider.dart';
 import 'package:get/get.dart';
 
 import '../accidentProvider.dart';
 
-const SERVER_IP = 'http://192.168.1.118:3000';
-
 class AccidentService {
 //get the list of interventions in progress
   static Future<List<Accident>> getInProgressInterventions() async {
     var client = http.Client();
-    var res = await client.get('$SERVER_IP/accident/inprogress');
+    var res = await client.get('http://${globals.Server}/accident/inprogress');
 
     if (res.statusCode == 200) {
       List<dynamic> body = jsonDecode(res.body);
@@ -32,8 +32,8 @@ class AccidentService {
     var updated = false;
     var client = http.Client();
     try {
-      var res =
-          await client.put('$SERVER_IP/accident/finished/', body: {"id": id});
+      var res = await client
+          .put('http://${globals.Server}/accident/finished/', body: {"id": id});
       if (res.statusCode == 200) {
         updated = true;
         print(res.body);
@@ -56,7 +56,7 @@ class AccidentService {
       bool needSecouriste,
       String address,
       String localite) async {
-    var res = await http.post("$SERVER_IP/accident", body: {
+    var res = await http.post("http://${globals.Server}/accident", body: {
       "id_temoin": idtemoin,
       "longitude": longitude.toString(),
       "latitude": latitude.toString(),

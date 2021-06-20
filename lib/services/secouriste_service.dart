@@ -3,8 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:location/location.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-const SERVER_IP = 'http://192.168.1.118:3000';
+import 'package:app_croissant_rouge/globals.dart' as globals;
 
 /// this function  Determine the current position of the device.
 ///
@@ -58,7 +57,7 @@ updateDisponibility(bool isFree) async {
   var jwtDecoded = jsonDecode(jwt);
   var token = jwtDecoded["token"];
 
-  var res = await http.put("$SERVER_IP/secouriste/disponibility",
+  var res = await http.put("http://${globals.Server}/secouriste/disponibility",
       //headers: {HttpHeaders.authorizationHeader: token},
       headers: {
         'Authorization': '$token',
@@ -82,9 +81,10 @@ acceptIntervention(accidentId) async {
   var jwtDecoded = jsonDecode(jwt);
   var token = jwtDecoded["token"];
 
-  var res = await http.put("$SERVER_IP/accident/acceptintervention",
-      //headers: {HttpHeaders.authorizationHeader: token},
-      headers: {
+  var res =
+      await http.put("http://${globals.Server}/accident/acceptintervention",
+          //headers: {HttpHeaders.authorizationHeader: token},
+          headers: {
         'Authorization': '$token',
       }, body: {
     "accidentId": accidentId
@@ -106,7 +106,7 @@ Future<String> updateLocation(double longitude, double latitude) async {
   var jwt = await getToken();
   var jwtDecoded = jsonDecode(jwt);
   var token = jwtDecoded["token"];
-  var res = await http.put("$SERVER_IP/secouriste/location",
+  var res = await http.put("http://${globals.Server}/secouriste/location",
       //headers: {HttpHeaders.authorizationHeader: token},
       headers: {
         'Authorization': '$token',
@@ -128,7 +128,8 @@ Future<String> changeUserActivation(String userId, bool activation) async {
   print("hello");
   print(userId);
   print(activation);
-  var res = await http.put("$SERVER_IP/users/activationUser", headers: {
+  var res =
+      await http.put("http://${globals.Server}/users/activationUser", headers: {
     'Authorization': '$token',
   }, body: {
     "id": userId,
@@ -147,7 +148,8 @@ Future<String> changeUsertype(String userId, bool admin) async {
   print("hello");
   print(userId);
   print(admin);
-  var res = await http.put("$SERVER_IP/users/adminuser", headers: {
+  var res =
+      await http.put("http://${globals.Server}/users/adminuser", headers: {
     'Authorization': '$token',
   }, body: {
     "id": userId,

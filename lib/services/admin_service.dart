@@ -2,13 +2,14 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:app_croissant_rouge/models/secouriste.dart';
 import 'package:app_croissant_rouge/models/accident.dart';
+import 'package:app_croissant_rouge/globals.dart' as globals;
 
 class AdminService {
 // The backend server
-  static const SERVER_IP = 'http://192.168.1.118:3000';
+
 // The method to get the list of secourists
   static Future<List<dynamic>> listSecourists() async {
-    var res = await http.get("$SERVER_IP/users/list");
+    var res = await http.get("http://${globals.Server}/users/list");
 
     final body = jsonDecode(res.body);
 
@@ -23,8 +24,9 @@ class AdminService {
 
   static Future<List<dynamic>> secouristelistInter(id) async {
     print("okok");
-    var res = await http
-        .post("$SERVER_IP/accident/Secouristeinter/", body: {'id': id});
+    var res = await http.post(
+        "http://${globals.Server}/accident/Secouristeinter/",
+        body: {'id': id});
     final body = jsonDecode(res.body);
     print(body);
     if (res.statusCode == 200) {
@@ -41,7 +43,7 @@ class AdminService {
 
 // The method to get the list of interventions
   static Future<List<dynamic>> listinterventions() async {
-    var res = await http.get("$SERVER_IP/accident/all");
+    var res = await http.get("http://${globals.Server}/accident/all");
     if (res.statusCode == 200) {
       var body = jsonDecode(res.body);
       print(body);

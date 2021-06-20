@@ -4,8 +4,7 @@ import 'package:app_croissant_rouge/models/secouriste.dart';
 import 'package:app_croissant_rouge/services/user_service.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-
-const SERVER_IP = 'http://192.168.1.118:3000';
+import 'package:app_croissant_rouge/globals.dart' as globals;
 
 //updating rescuer's disponibility (disponible-indisponible)
 //
@@ -18,7 +17,7 @@ Future<bool> updateDisponibility(bool isFree) async {
   var updated = false;
   try {
     var response = await client.put(
-      '$SERVER_IP/secouriste/disponibility',
+      'http://${globals.Server}/secouriste/disponibility',
       headers: {'Authorization': '$token'},
       body: {isFree: isFree},
     );
@@ -47,7 +46,7 @@ Future<bool> updateRescuerSocketId(String socketId) async {
     try {
       print(token);
       var response = await client.put(
-        '$SERVER_IP/secouriste/socket',
+        'http://${globals.Server}/secouriste/socket',
         headers: {'Authorization': '$token'},
         body: {"socketId": socketId},
       );
@@ -68,7 +67,7 @@ Future<bool> updateRescuerSocketId(String socketId) async {
     var userId = details[2];
     try {
       var response = await client.put(
-        '$SERVER_IP/users/socket',
+        'http://${globals.Server}/users/socket',
         body: {"socketId": socketId, "deviceId": userId},
       );
 

@@ -1,21 +1,22 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:app_croissant_rouge/globals.dart' as globals;
 import 'package:device_info/device_info.dart';
 
 class UserService {
 // The Server to the backend
-  static const SERVER_IP = 'http://192.168.1.118:3000';
 // The method to register the user
   static Future<String> attemptLogInUser(String userId) async {
-    var res = await http
-        .post("$SERVER_IP/users/normalUser", body: {"userid": userId});
+    var res = await http.post("http://${globals.Server}/users/normalUser",
+        body: {"userid": userId});
     if (res.statusCode == 200) return res.body;
     return null;
   }
 
   static Future<String> attemptgetUser(String userId) async {
-    var res = await http.post("$SERVER_IP/users/anonyme", body: {"id": userId});
+    var res = await http
+        .post("http://${globals.Server}/users/anonyme", body: {"id": userId});
     if (res.statusCode == 200) return res.body;
     return null;
   }
@@ -44,7 +45,7 @@ class UserService {
     try {
       print(token);
       var response = await client.put(
-        '$SERVER_IP/users/socket',
+        'http://${globals.Server}/users/socket',
         headers: {'Authorization': '$token'},
         body: {"socketId": socketId, "deviceId": userDeviceId},
       );
@@ -63,7 +64,7 @@ class UserService {
   }
 
   static Future<String> attemptRateApp(String userId, int value) async {
-    var res = await http.post("$SERVER_IP/users/Rate",
+    var res = await http.post("http://${globals.Server}/users/Rate",
         body: {"id": userId, "value": value.toString()});
     if (res.statusCode == 200) {
       print(res.body);

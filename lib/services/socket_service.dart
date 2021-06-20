@@ -8,13 +8,13 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:app_croissant_rouge/models/accident.dart';
 import 'package:app_croissant_rouge/services/secouriste.dart';
 import 'package:flutter/material.dart';
+import 'package:app_croissant_rouge/globals.dart' as globals;
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:socket_io_client/socket_io_client.dart';
 
 class SocketService {
   static bool status = true;
-  static IO.Socket socket =
-      IO.io('http://192.168.1.118:3000', <String, dynamic>{
+  static IO.Socket socket = IO.io('http://${globals.Server}', <String, dynamic>{
     'transports': ['websocket'],
     'autoConnect': true,
   });
