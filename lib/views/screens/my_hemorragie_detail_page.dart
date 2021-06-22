@@ -25,7 +25,7 @@ class HemorragieDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     LocationData _locationData;
     String userId;
-    int duration = 3000; //3600*1000;
+    int duration = 3600 * 1000;
     Function finish_callback = (data) {
       showDialog(
           context: context,
@@ -94,7 +94,8 @@ class HemorragieDetails extends StatelessWidget {
     };
 
     if ((this.instruction.needSecouriste)) {
-      var future = new Future.delayed(const Duration(milliseconds: 3000));
+      var future =
+          new Future.delayed(const Duration(milliseconds: 3600 * 1000));
       var subscription = future.asStream().listen(finish_callback);
     }
 
@@ -106,6 +107,17 @@ class HemorragieDetails extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.redAccent[700],
+          leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              Provider.of<AccidentProvider>(context, listen: false)
+                  .removeDescription();
+              Navigator.of(context).pop();
+            },
+          ),
           elevation: 0,
         ),
         floatingActionButton: (this.instruction.needSecouriste)

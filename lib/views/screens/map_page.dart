@@ -169,66 +169,71 @@ class _MapPageState extends State<MapPage> {
           bearing: CAMERA_BEARING);
     }
 
-    return WillPopScope(
-        onWillPop: () {
-          return Navigator.of(context).pushNamed('/');
-        },
-        child: Scaffold(
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerDocked,
-          floatingActionButton: FloatingActionButton.extended(
-            icon: Icon(
-              Icons.message,
-            ),
-            label: Text("message"),
-            onPressed: () {
-              showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return ChatScreen(this.widget.accident.id,
-                        JwtDecoder.decode(doc.gettoken())["id"]);
-                  });
-            },
-            backgroundColor: Colors.redAccent[700],
-          ),
-          appBar: AppBarComponent(),
-          body: Stack(
-            children: [
-              GoogleMap(
-                myLocationEnabled: true,
-                compassEnabled: true,
-                mapType: mapType,
-                onMapCreated: (GoogleMapController controller) {
-                  print("//////////////////////////////////////////////");
-                  _controller.complete(controller);
-                  // my map has completed being created;
-                  // i'm ready to show the pins on the map
-                  showPinsOnMap();
-                },
-                initialCameraPosition: initialCameraPosition,
-                markers: markers,
-                //circles: _markers,
+    return ChangeNotifierProvider(
+      create: (context) => AccidentProvider(),
+      child: WillPopScope(
+          onWillPop: () {
+            return Navigator.of(context).pushNamed('/');
+          },
+          child: Scaffold(
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerDocked,
+            floatingActionButton: FloatingActionButton.extended(
+              icon: Icon(
+                Icons.message,
               ),
-              Align(
-                alignment: Alignment.bottomLeft,
-                child: Container(
-                  margin: EdgeInsets.all(5.0),
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle, color: Colors.white),
-                  child: IconButton(
-                    color: Colors.black,
-                    onPressed: switchMapType,
-                    icon: Icon(
-                      mapType == MapType.normal
-                          ? Icons.blur_circular
-                          : Icons.map,
+              label: Text("message"),
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return ChatScreen(
+                        JwtDecoder.decode(doc.gettoken())["id"],
+                        this.widget.accident.id,
+                      );
+                    });
+              },
+              backgroundColor: Colors.redAccent[700],
+            ),
+            appBar: AppBarComponent(),
+            body: Stack(
+              children: [
+                GoogleMap(
+                  myLocationEnabled: true,
+                  compassEnabled: true,
+                  mapType: mapType,
+                  onMapCreated: (GoogleMapController controller) {
+                    print("//////////////////////////////////////////////");
+                    _controller.complete(controller);
+                    // my map has completed being created;
+                    // i'm ready to show the pins on the map
+                    showPinsOnMap();
+                  },
+                  initialCameraPosition: initialCameraPosition,
+                  markers: markers,
+                  //circles: _markers,
+                ),
+                Align(
+                  alignment: Alignment.bottomLeft,
+                  child: Container(
+                    margin: EdgeInsets.all(5.0),
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle, color: Colors.white),
+                    child: IconButton(
+                      color: Colors.black,
+                      onPressed: switchMapType,
+                      icon: Icon(
+                        mapType == MapType.normal
+                            ? Icons.blur_circular
+                            : Icons.map,
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
-          ),
-        ));
+              ],
+            ),
+          )),
+    );
   }
 }
 

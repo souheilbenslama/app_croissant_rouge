@@ -15,18 +15,28 @@ class AccidentProvider with ChangeNotifier {
   bool respire;
   bool conscient;
   List<String> description = [];
-  List<Message> messages = [];
+  List<Message> messages = [Message(text: "hello", senderId: "123")];
   String cas;
   bool needSecouriste = false;
   LocationData currentLocation;
   String token;
   Accident currentAccident;
 
-  getMessages() {}
+  getMessages() {
+    return this.messages.reversed;
+  }
 
   addMessage(Message m) {
-    this.messages.add(m);
-    notifyListeners();
+    if (this.messages.length > 0) {
+      if (this.messages[this.messages.length - 1].time != m.time) {
+        this.messages.insert(0, m);
+
+        notifyListeners();
+      }
+    } else {
+      this.messages.add(m);
+      notifyListeners();
+    }
   }
 
   setCurrentAccident(Accident accident) {
@@ -79,9 +89,14 @@ class AccidentProvider with ChangeNotifier {
   }
 
   setDescription(String desc) {
-    if (this.description[this.description.length - 1] != desc)
+    if (this.description.length > 0) {
+      if (this.description[this.description.length - 1] != desc)
+        this.description.add(desc);
+      notifyListeners();
+    } else {
       this.description.add(desc);
-    notifyListeners();
+      notifyListeners();
+    }
   }
 
   removeDescription() {

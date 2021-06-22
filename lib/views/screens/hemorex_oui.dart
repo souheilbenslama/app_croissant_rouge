@@ -150,7 +150,7 @@ class _HemorexOuiState extends State<HemorexOui> {
                   localite);
 
               doc.setCurrentAccident(Accident.fromJson(jsonDecode(res2)));
-              SocketService.connect();
+              SocketService.connect(context);
             }
           }
         },

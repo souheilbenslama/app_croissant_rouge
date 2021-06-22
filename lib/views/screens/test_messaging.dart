@@ -20,7 +20,7 @@ class _MessageTestState extends State<MessageTest> {
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(16.0))),
           onPressed: () {
-            SocketService.connect();
+            SocketService.connect(context);
           },
           child: Text("connect"),
         ),
@@ -29,7 +29,7 @@ class _MessageTestState extends State<MessageTest> {
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(16.0))),
           onPressed: () {
-            SocketService.sendMessage("AZE", message.text, "");
+            //SocketService.sendMessage("AZE", message.text, "");
           },
           child: Text("send"),
         ),

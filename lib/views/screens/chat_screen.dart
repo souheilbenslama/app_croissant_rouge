@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:app_croissant_rouge/models/user_model.dart';
+import 'package:app_croissant_rouge/services/socket_service.dart';
 import 'package:app_croissant_rouge/models/message_model.dart';
+import 'package:app_croissant_rouge/accidentProvider.dart';
+import 'package:provider/provider.dart';
 
 class ChatScreen extends StatefulWidget {
   final String userId;
@@ -12,7 +14,7 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreenState extends State<ChatScreen> {
   String sentMessage;
-  String userId;
+
   final _textController = TextEditingController();
 
   //Message
@@ -22,7 +24,7 @@ class _ChatScreenState extends State<ChatScreen> {
       height: MediaQuery.of(context).size.height * 0.09,
       margin: isMe
           ? EdgeInsets.only(top: 7.0, bottom: 8.0, left: 80.0)
-          : EdgeInsets.only(top: 8.0, bottom: 8.0),
+          : EdgeInsets.only(top: 8.0, bottom: 8.0, right: 80.0),
       padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
       decoration: isMe
           ? //the UI if you are the sender
@@ -90,7 +92,6 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
-    List messages = [];
     return Scaffold(
       backgroundColor: Colors.red,
       appBar: AppBar(
@@ -105,37 +106,46 @@ class _ChatScreenState extends State<ChatScreen> {
             SizedBox(
               height: 10.0,
             ),
-            Expanded(
-              child: Container(
-                  padding: EdgeInsets.only(left: 10.0, right: 10.0),
-                  decoration: BoxDecoration(
-                      color: Colors.white,
+            Consumer<AccidentProvider>(builder: (context, value, child) {
+              return Expanded(
+                child: Container(
+                    padding: EdgeInsets.only(left: 10.0, right: 10.0),
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(30.0),
+                            topRight: Radius.circular(30.0))),
+                    child: ClipRRect(
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(30.0),
-                          topRight: Radius.circular(30.0))),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30.0),
-                        topRight: Radius.circular(30.0)),
-                    child: ListView.builder(
-                        reverse: true,
-                        padding: EdgeInsets.only(top: 14.0),
-                        itemCount: messages.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          final Message message = messages[index];
+                          topRight: Radius.circular(30.0)),
+                      child: ListView.builder(
+                          reverse: true,
+                          padding: EdgeInsets.only(top: 14.0),
+                          itemCount: value.messages.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            final Message message = value.messages[index];
 
-                          final bool isMe =
-                              false; //message.sender.id == currentUser.id;
-                          return _buildMessage(message, isMe);
-                        }),
-                  )),
-            ),
+                            final bool isMe = value.messages[index].senderId ==
+                                this.widget.userId;
+                            return _buildMessage(message, isMe);
+                          }),
+                    )),
+              );
+            }),
             _buildMessageComposer(() {
+              if (sentMessage != null) {
+                Message mess = Message(
+                    senderId: this.widget.userId,
+                    text: sentMessage,
+                    time: DateTime.now().toString());
+                var prov =
+                    Provider.of<AccidentProvider>(context, listen: false);
+                prov.addMessage(mess);
+                SocketService.sendMessage(prov.currentAccident.id, mess);
+                sentMessage = null;
+              }
               setState(() {
-                messages = [
-                  Message(),
-                  ...messages,
-                ];
                 _textController.clear();
               });
             })

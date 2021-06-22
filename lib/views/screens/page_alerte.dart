@@ -419,7 +419,7 @@ class _PageAlerteState extends State<PageAlerte> {
                                           textSize: 13.0,
                                           onChanged: (bool state) {
                                             if (state == true) {
-                                              SocketService.connect();
+                                              SocketService.connect(context);
                                               subscription = location
                                                   .onLocationChanged
                                                   .listen((LocationData cLoc) {
@@ -435,6 +435,7 @@ class _PageAlerteState extends State<PageAlerte> {
                                               });
                                               updateDisponibility(true);
                                             } else {
+                                              SocketService.disconnect();
                                               subscription.cancel();
                                               updateDisponibility(false);
                                             }
