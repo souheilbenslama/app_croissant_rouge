@@ -35,9 +35,14 @@ class SocketService {
 
       socket.on('alerte', (data) async {
         print("good job souheil ***********************************");
-        Accident ac = Accident.fromJson(jsonDecode(jsonEncode(data)));
-
-        await notificationManager.showNotification(ac);
+        var accident = jsonDecode(jsonEncode(data))["accident"];
+        print(accident);
+        Accident ac = Accident.fromJson(accident);
+        print("ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd");
+        print("ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd");
+        print(ac);
+        print("ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd");
+        // await notificationManager.showNotification(ac);
 
         BotToast.showCustomNotification(
             enableSlideOff: true,
@@ -95,28 +100,14 @@ class SocketService {
                         SizedBox(
                           height: 10,
                         ),
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  'cas : ',
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  ac.cas,
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 30),
-                                ),
-                              )
-                            ]),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            ac.cas,
+                            style: TextStyle(
+                                color: Colors.redAccent[700], fontSize: 25),
+                          ),
+                        ),
                         SizedBox(
                           height: 5,
                         ),
@@ -128,7 +119,7 @@ class SocketService {
                           ),
                         ),
                         SizedBox(
-                          height: 24,
+                          height: 10,
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),

@@ -127,7 +127,7 @@ class HemorragieExterne extends StatelessWidget {
             height: height * 0.274,
             width: height * 0.274,
             child: Image.asset(
-              'assets/images/hemorragie.png',
+              'assets/images/wash.png',
             ),
           ),
         ],

@@ -127,6 +127,11 @@ class Respire extends StatelessWidget {
                         MaterialPageRoute(builder: (context) => Etouffement()),
                       );
                     } else {
+                      const number = '198';
+
+                      FlutterPhoneDirectCaller.callNumber(number);
+                      print("here here");
+
                       final doc =
                           Provider.of<AccidentProvider>(context, listen: false);
 
@@ -138,21 +143,26 @@ class Respire extends StatelessWidget {
                         String longitude = _locationData.longitude.toString();
                         doc.setLatitude(latitude);
                         doc.setLongitude(longitude);
-                        List<Placemark> placemarks =
-                            await placemarkFromCoordinates(
-                                _locationData.latitude, _locationData.latitude);
+                        var localite;
+                        var address;
+                        try {
+                          List<Placemark> placemarks =
+                              await placemarkFromCoordinates(
+                                  _locationData.latitude,
+                                  _locationData.latitude);
 
-                        final localite = placemarks[0].subAdministrativeArea;
+                          localite = placemarks[0].subAdministrativeArea;
 
-                        final address = placemarks[0].administrativeArea +
-                            "  " +
-                            placemarks[0].subAdministrativeArea +
-                            " " +
-                            placemarks[0].locality +
-                            " " +
-                            placemarks[0].street +
-                            " " +
-                            placemarks[0].postalCode;
+                          address = placemarks[0].administrativeArea +
+                              "  " +
+                              placemarks[0].subAdministrativeArea +
+                              " " +
+                              placemarks[0].locality +
+                              " " +
+                              placemarks[0].street +
+                              " " +
+                              placemarks[0].postalCode;
+                        } catch (e) {}
 
                         var jsondoc = doc.getInfo();
                         String userId;
@@ -178,9 +188,6 @@ class Respire extends StatelessWidget {
                             localite);
                       }
 
-                      const number = '198';
-
-                      FlutterPhoneDirectCaller.callNumber(number);
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(builder: (context) => PageAlerte()),
@@ -206,7 +213,7 @@ class Respire extends StatelessWidget {
           Container(
             height: 200,
             width: 150,
-            child: Image.asset('assets/images/respire1.png'),
+            child: Image.asset('assets/images/uncons1g.png'), //respire1.png'),
           ),
         ],
       ),

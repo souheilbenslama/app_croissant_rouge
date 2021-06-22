@@ -27,7 +27,6 @@ class Accident {
       this.needSecouriste});
 
   factory Accident.fromJson(Map<dynamic, dynamic> json) {
-    print(json);
     var ac = Accident(
         id: json["_id"],
         idtemoin: json["id_temoin"],

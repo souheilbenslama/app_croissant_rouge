@@ -56,6 +56,8 @@ class AccidentService {
       bool needSecouriste,
       String address,
       String localite) async {
+    print(localite);
+    print(globals.Server);
     var res = await http.post("http://${globals.Server}/accident", body: {
       "id_temoin": idtemoin,
       "longitude": longitude.toString(),
@@ -63,10 +65,11 @@ class AccidentService {
       "cas": cas,
       "description": description,
       "needSecouriste": needSecouriste.toString(),
-      "localite": localite,
-      "address": address
+      "localite": localite.toString(),
+      "address": address.toString()
     });
 
+    print(res.body);
     return res.statusCode == 200 ? res.body : null;
   }
 }

@@ -55,7 +55,9 @@ class Conscient extends StatelessWidget {
                   onPressed: () {
                     final doc =
                         Provider.of<AccidentProvider>(context, listen: false);
+                    doc.clear();
                     doc.setConscient(true);
+
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => Respire(),
@@ -90,6 +92,7 @@ class Conscient extends StatelessWidget {
                   onPressed: () {
                     final doc =
                         Provider.of<AccidentProvider>(context, listen: false);
+                    doc.clear();
                     doc.setConscient(false);
                     Navigator.push(
                       context,

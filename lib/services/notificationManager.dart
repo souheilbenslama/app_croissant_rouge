@@ -67,7 +67,7 @@ class NotificationManager {
     var iosChannel = IOSNotificationDetails();
     var platformChannel = NotificationDetails(androidChannel, iosChannel);
     await flutterLocalNotificationsPlugin.show(
-        0, 'App croissant rouge', accident.cas, platformChannel,
+        0, 'App croissant rouge', "trtr", platformChannel,
         payload: 'New payload');
   }
 }

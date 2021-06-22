@@ -131,32 +131,49 @@ class _StepListState extends State<StepList> {
                     String longitude = _locationData.longitude.toString();
                     doc.setLatitude(latitude);
                     doc.setLongitude(longitude);
-                    List<Placemark> placemarks = await placemarkFromCoordinates(
-                        _locationData.latitude, _locationData.latitude);
+                    doc.setDescription("no description");
 
-                    final localite = placemarks[0].subAdministrativeArea;
+                    var localite;
+                    var address;
+                    try {
+                      List<Placemark> placemarks =
+                          await placemarkFromCoordinates(
+                              _locationData.latitude, _locationData.latitude);
 
-                    final address = placemarks[0].administrativeArea +
-                        "  " +
-                        placemarks[0].subAdministrativeArea +
-                        " " +
-                        placemarks[0].locality +
-                        " " +
-                        placemarks[0].street +
-                        " " +
-                        placemarks[0].postalCode;
+                      localite = placemarks[0].subAdministrativeArea;
+
+                      address = placemarks[0].administrativeArea +
+                          "  " +
+                          placemarks[0].subAdministrativeArea +
+                          " " +
+                          placemarks[0].locality +
+                          " " +
+                          placemarks[0].street +
+                          " " +
+                          placemarks[0].postalCode;
+                    } catch (e) {
+                      //  print(e);
+                    }
 
                     var jsondoc = doc.getInfo();
                     String userId;
                     if (doc.gettoken() != null) {
+                      print("yesyesyes");
                       final decodedToken = JwtDecoder.decode(doc.gettoken());
                       userId = decodedToken["id"];
                     } else {
                       var details = await getDeviceDetails();
+                      print("yesyesyes2");
                       String deviceId = details[2];
                       userId = jsonDecode(
                           await UserService.attemptgetUser(deviceId))["_id"];
                     }
+
+                    print(jsondoc["longitude"]);
+                    print(jsondoc["latitude"]);
+                    print(jsondoc["cas"]);
+                    print(jsondoc["description"]);
+                    print(jsondoc["need_secouriste"]);
                     var res2 = AccidentService.createAccident(
                         userId,
                         jsondoc["longitude"],

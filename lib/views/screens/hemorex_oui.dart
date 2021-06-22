@@ -106,20 +106,26 @@ class _HemorexOuiState extends State<HemorexOui> {
               String longitude = _locationData.longitude.toString();
               doc.setLatitude(latitude);
               doc.setLongitude(longitude);
-              List<Placemark> placemarks = await placemarkFromCoordinates(
-                  _locationData.latitude, _locationData.latitude);
+              var localite;
+              var address;
+              try {
+                List<Placemark> placemarks = await placemarkFromCoordinates(
+                    _locationData.latitude, _locationData.latitude);
 
-              final localite = placemarks[0].subAdministrativeArea;
+                localite = placemarks[0].subAdministrativeArea;
 
-              final address = placemarks[0].administrativeArea +
-                  "  " +
-                  placemarks[0].subAdministrativeArea +
-                  " " +
-                  placemarks[0].locality +
-                  " " +
-                  placemarks[0].street +
-                  " " +
-                  placemarks[0].postalCode;
+                address = placemarks[0].administrativeArea +
+                    "  " +
+                    placemarks[0].subAdministrativeArea +
+                    " " +
+                    placemarks[0].locality +
+                    " " +
+                    placemarks[0].street +
+                    " " +
+                    placemarks[0].postalCode;
+              } catch (e) {
+                print(e);
+              }
 
               var jsondoc = doc.getInfo();
               print(jsondoc);
@@ -142,6 +148,7 @@ class _HemorexOuiState extends State<HemorexOui> {
                   jsondoc["need_secouriste"],
                   address,
                   localite);
+
               doc.setCurrentAccident(Accident.fromJson(jsonDecode(res2)));
               SocketService.connect();
             }

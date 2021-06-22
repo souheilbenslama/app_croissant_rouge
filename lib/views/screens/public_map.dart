@@ -26,7 +26,7 @@ class _PublicMapState extends State<PublicMap> {
   Set<Marker> markers = HashSet<Marker>();
 
   Set<Marker> _markers = Set<Marker>();
-  CameraPosition initialCameraPosition ;
+  CameraPosition initialCameraPosition;
 
   MapType mapType = MapType.normal;
   // the user's initial location and current location
@@ -61,9 +61,9 @@ class _PublicMapState extends State<PublicMap> {
       //bearing: CAMERA_BEARING,
       target: LatLng(currentLocation.latitude, currentLocation.longitude),
     );
-
+    initialCameraPosition = cPosition;
     final GoogleMapController controller = await _controller.future;
-    controller.animateCamera(CameraUpdate.newCameraPosition(cPosition));
+    //controller.animateCamera(CameraUpdate.newCameraPosition(cPosition));
     // do this inside the setState() so Flutter gets notified
     // that a widget update is due
     setState(() {
@@ -84,6 +84,11 @@ class _PublicMapState extends State<PublicMap> {
   void initState() {
     super.initState();
 
+    initialCameraPosition = CameraPosition(
+        zoom: CAMERA_ZOOM,
+        tilt: CAMERA_TILT,
+        bearing: CAMERA_BEARING,
+        target: SOURCE_LOCATION);
     location = new Location();
     getLocation();
     // subscribe to changes in the user's location
@@ -94,13 +99,6 @@ class _PublicMapState extends State<PublicMap> {
       // so we're holding on to it
       currentLocation = cLoc;
       updatePinOnMap();
-
-       /* CameraPosition(
-        zoom: CAMERA_ZOOM,
-        tilt: CAMERA_TILT,
-        bearing: CAMERA_BEARING,
-        target: SOURCE_LOCATION);*/
-
     });
 
     //setSourceAndDestinationIcons();
@@ -146,15 +144,13 @@ class _PublicMapState extends State<PublicMap> {
 
   @override
   Widget build(BuildContext context) {
-    
-
-    if (currentLocation != null) {
+    /*  if (currentLocation != null) {
       initialCameraPosition = CameraPosition(
           target: LatLng(currentLocation.latitude, currentLocation.longitude),
           // zoom: CAMERA_ZOOM,
           tilt: CAMERA_TILT,
           bearing: CAMERA_BEARING);
-    }
+    }*/
 
     return WillPopScope(
         onWillPop: () {

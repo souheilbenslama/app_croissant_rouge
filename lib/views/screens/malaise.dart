@@ -30,7 +30,7 @@ class Malaise extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: height * 0.109,
+            height: height * 0.059,
           ),
           Text(
             "malQuest".tr,

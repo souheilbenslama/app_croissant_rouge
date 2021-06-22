@@ -79,7 +79,8 @@ class AccidentProvider with ChangeNotifier {
   }
 
   setDescription(String desc) {
-    this.description.add(desc);
+    if (this.description[this.description.length - 1] != desc)
+      this.description.add(desc);
     notifyListeners();
   }
 
