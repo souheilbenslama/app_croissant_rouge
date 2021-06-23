@@ -15,7 +15,7 @@ class AccidentProvider with ChangeNotifier {
   bool respire;
   bool conscient;
   List<String> description = [];
-  List<Message> messages = [Message(text: "hello", senderId: "123")];
+  List<Message> messages = [];
   String cas;
   bool needSecouriste = false;
   LocationData currentLocation;
@@ -37,6 +37,11 @@ class AccidentProvider with ChangeNotifier {
       this.messages.add(m);
       notifyListeners();
     }
+  }
+
+  clearMessages() {
+    this.messages = [];
+    notifyListeners();
   }
 
   setCurrentAccident(Accident accident) {

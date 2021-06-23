@@ -238,7 +238,6 @@ class HemorragieDetails extends StatelessWidget {
                               });
                           final doc = Provider.of<AccidentProvider>(context,
                               listen: false);
-                          print(doc.getCurrentAccident().id);
 
                           AccidentService.updateToFinished(
                               doc.currentAccident.id);

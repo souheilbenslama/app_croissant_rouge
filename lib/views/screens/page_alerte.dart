@@ -426,16 +426,32 @@ class _PageAlerteState extends State<PageAlerte> {
                                                 // cLoc contains the lat and long of the
                                                 // current user's position in real time,
                                                 // so we're holding on to it
-                                                this.localisation = cLoc;
-                                                print(this.localisation);
+                                                if ((this.localisation ==
+                                                        null) ||
+                                                    (this
+                                                            .localisation
+                                                            .latitude !=
+                                                        cLoc.latitude) ||
+                                                    (this
+                                                            .localisation
+                                                            .longitude !=
+                                                        cLoc.longitude)) {
+                                                  this.localisation = cLoc;
 
-                                                updateLocation(
-                                                    this.localisation.longitude,
-                                                    this.localisation.latitude);
+                                                  if (state == true)
+                                                    updateLocation(
+                                                        this
+                                                            .localisation
+                                                            .longitude,
+                                                        this
+                                                            .localisation
+                                                            .latitude);
+                                                } else {}
                                               });
                                               updateDisponibility(true);
                                             } else {
                                               SocketService.disconnect();
+                                              this.localisation = null;
                                               subscription.cancel();
                                               updateDisponibility(false);
                                             }

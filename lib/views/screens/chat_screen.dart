@@ -20,42 +20,47 @@ class _ChatScreenState extends State<ChatScreen> {
   //Message
   _buildMessage(Message message, bool isMe) {
     final Container msg = Container(
-      width: MediaQuery.of(context).size.width * 0.3,
-      height: MediaQuery.of(context).size.height * 0.09,
-      margin: isMe
-          ? EdgeInsets.only(top: 7.0, bottom: 8.0, left: 80.0)
-          : EdgeInsets.only(top: 8.0, bottom: 8.0, right: 80.0),
-      padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
-      decoration: isMe
-          ? //the UI if you are the sender
-          BoxDecoration(
-              color: Colors.red.shade400,
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(15.0),
-                  bottomLeft: Radius.circular(15.0),
-                  topRight: Radius.circular(15.0)),
+        width: MediaQuery.of(context).size.width * 0.3,
+        // height: MediaQuery.of(context).size.height * 0.09,
+        margin: isMe
+            ? EdgeInsets.only(top: 7.0, bottom: 8.0, left: 80.0)
+            : EdgeInsets.only(top: 8.0, bottom: 8.0, right: 80.0),
+        padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
+        decoration: isMe
+            ? //the UI if you are the sender
+            BoxDecoration(
+                color: Colors.red.shade400,
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(15.0),
+                    bottomLeft: Radius.circular(15.0),
+                    topRight: Radius.circular(15.0)),
+              )
+            : //the UI if you are the receiver
+            BoxDecoration(
+                color: Color(0xFFe4f1fe),
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(15.0),
+                    topRight: Radius.circular(15.0),
+                    bottomRight: Radius.circular(15.0))),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            SizedBox(
+              height: 8.0,
+            ),
+            Row(
+              children: <Widget>[
+                Flexible(
+                  child: Text(message.text,
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 15.0,
+                          fontWeight: FontWeight.w600)),
+                )
+              ],
             )
-          : //the UI if you are the receiver
-          BoxDecoration(
-              color: Color(0xFFe4f1fe),
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(15.0),
-                  topRight: Radius.circular(15.0),
-                  bottomRight: Radius.circular(15.0))),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          SizedBox(
-            height: 8.0,
-          ),
-          Text(message.text,
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 15.0,
-                  fontWeight: FontWeight.w600)),
-        ],
-      ),
-    );
+          ],
+        ));
     if (isMe) {
       return msg;
     }
