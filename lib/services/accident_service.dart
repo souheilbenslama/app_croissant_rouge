@@ -4,11 +4,6 @@ import 'package:device_info/device_info.dart';
 import 'package:http/http.dart' as http;
 import 'package:app_croissant_rouge/globals.dart' as globals;
 
-import 'package:provider/provider.dart';
-import 'package:get/get.dart';
-
-import '../accidentProvider.dart';
-
 class AccidentService {
 //get the list of interventions in progress
   static Future<List<Accident>> getInProgressInterventions() async {

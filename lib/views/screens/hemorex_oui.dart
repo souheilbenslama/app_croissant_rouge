@@ -4,18 +4,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:app_croissant_rouge/services/accident_service.dart';
 import 'package:app_croissant_rouge/services/user_service.dart';
-
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:app_croissant_rouge/models/hemorragie_Instruction.dart';
 import 'package:get/get.dart';
 import 'package:app_croissant_rouge/views/screens/my_hemorragie_detail_page.dart';
 import 'package:app_croissant_rouge/services/socket_service.dart';
-import 'package:app_croissant_rouge/models/hemorragie_Instruction.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:location/location.dart';
 import 'package:provider/provider.dart';
-import 'package:get/get.dart';
 
 import '../../accidentProvider.dart';
 

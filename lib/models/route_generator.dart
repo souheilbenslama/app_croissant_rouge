@@ -7,7 +7,6 @@ import '../views/screens/question_conscience.dart';
 import '../views/screens/sign_in.dart';
 
 import '../views/screens/admin_dashboard.dart';
-import '../views/screens/intervention_par_secouriste.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -27,8 +26,7 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => Conscient());
       case '/dashboard':
         return MaterialPageRoute(builder: (_) => AdminDashboard());
-      case '/interventionParSecouriste':
-        return MaterialPageRoute(builder: (_) => InterventionParSecouriste());
+
       default:
         // if there is no such named route in the switch statement
         return _errorRoute();

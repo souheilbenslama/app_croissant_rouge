@@ -142,7 +142,7 @@ class SignIn extends StatelessWidget {
     return WillPopScope(
         onWillPop: () {
           Navigator.of(context).pushNamed('/');
-          return Navigator.of(context).pushNamed('/');
+          return Future<bool>.value(true);
         },
         child: Scaffold(
           //appBar:

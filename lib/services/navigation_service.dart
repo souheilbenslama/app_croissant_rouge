@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:app_croissant_rouge/models/accident.dart';
 
 class NavigationService {
   final GlobalKey<NavigatorState> navigatorKey =

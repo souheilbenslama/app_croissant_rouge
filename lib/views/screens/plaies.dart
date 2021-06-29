@@ -1,11 +1,8 @@
-import 'package:app_croissant_rouge/services/accident_service.dart';
 import 'package:app_croissant_rouge/views/screens/plaies_grave.dart';
 import 'package:app_croissant_rouge/views/screens/plaies_simples.dart';
-import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:get/get.dart';
-import 'package:location/location.dart';
 import 'package:provider/provider.dart';
 
 import '../../accidentProvider.dart';

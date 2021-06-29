@@ -1,13 +1,9 @@
-import 'package:app_croissant_rouge/services/accident_service.dart';
 import 'package:app_croissant_rouge/views/screens/brulure_simple.dart';
 import 'package:app_croissant_rouge/views/screens/brulure_grave.dart';
 import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:get/get.dart';
-import 'package:jwt_decoder/jwt_decoder.dart';
-import 'package:geocoding/geocoding.dart';
-import 'package:location/location.dart';
 import 'package:provider/provider.dart';
 
 import '../../accidentProvider.dart';
@@ -28,7 +24,6 @@ class Brulure extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    LocationData _locationData;
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     return Scaffold(

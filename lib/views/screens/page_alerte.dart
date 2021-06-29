@@ -12,15 +12,12 @@ import 'package:app_croissant_rouge/views/widgets/customized_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
-
-import 'package:http/http.dart' as http;
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:lite_rolling_switch/lite_rolling_switch.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:get/get.dart';
 import 'package:location/location.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class PageAlerte extends StatefulWidget {
   @override
@@ -348,11 +345,8 @@ class _PageAlerteState extends State<PageAlerte> {
                                       UserService.getDeviceDetails()
                                           .then((value) {
                                         var userId = value[2];
-                                        var res = UserService.attemptLogInUser(
-                                            userId);
+                                        UserService.attemptLogInUser(userId);
                                       });
-
-                                      //print(res);
                                     },
                                     shape: RoundedRectangleBorder(
                                         borderRadius:

@@ -9,10 +9,6 @@ import 'package:provider/provider.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
 import '../../accidentProvider.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../../accidentProvider.dart';
-import 'package:get/get.dart';
 import 'package:location/location.dart';
 
 class SaignementArreteQuestion extends StatelessWidget {
@@ -97,7 +93,7 @@ class SaignementArreteQuestion extends StatelessWidget {
                         userId = jsonDecode(
                             await UserService.attemptgetUser(deviceId))["_id"];
                       }
-                      var res2 = AccidentService.createAccident(
+                      AccidentService.createAccident(
                           userId,
                           jsondoc["longitude"],
                           jsondoc["latitude"],
@@ -188,7 +184,7 @@ class SaignementArreteQuestion extends StatelessWidget {
                         userId = jsonDecode(
                             await UserService.attemptgetUser(deviceId))["_id"];
                       }
-                      var res2 = AccidentService.createAccident(
+                      AccidentService.createAccident(
                           userId,
                           jsondoc["longitude"],
                           jsondoc["latitude"],

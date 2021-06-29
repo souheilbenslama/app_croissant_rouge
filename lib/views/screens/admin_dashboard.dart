@@ -1,9 +1,7 @@
-import 'package:app_croissant_rouge/models/secouriste.dart';
 import 'package:app_croissant_rouge/services/admin_service.dart';
 import 'package:app_croissant_rouge/views/screens/liste_interventions.dart';
 import 'package:app_croissant_rouge/views/screens/liste_secouristes.dart';
 import 'package:flutter/material.dart';
-import 'dart:convert';
 
 class AdminDashboard extends StatefulWidget {
   @override

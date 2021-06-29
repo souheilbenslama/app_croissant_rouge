@@ -130,7 +130,7 @@ class BrulureSimple extends StatelessWidget {
                           userId = jsonDecode(await UserService.attemptgetUser(
                               deviceId))["_id"];
                         }
-                        var res2 = AccidentService.createAccident(
+                        AccidentService.createAccident(
                             userId,
                             jsondoc["longitude"],
                             jsondoc["latitude"],

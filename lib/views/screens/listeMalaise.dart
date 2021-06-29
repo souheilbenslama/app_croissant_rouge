@@ -1,20 +1,14 @@
-import 'package:app_croissant_rouge/views/screens/brulure.dart';
 import 'package:app_croissant_rouge/views/screens/criseDeNerfs.dart';
-import 'package:app_croissant_rouge/views/screens/hemorragieExterne.dart';
-import 'package:app_croissant_rouge/views/screens/malaise.dart';
 import 'package:app_croissant_rouge/views/screens/malaiseCardiaque.dart';
 import 'package:app_croissant_rouge/views/screens/malaiseDiabetique.dart';
 import 'package:provider/provider.dart';
 import '../../accidentProvider.dart';
-import 'package:app_croissant_rouge/views/screens/plaies.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'listeDesCas.dart';
 
 class ListeMalaise extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(backgroundColor: Colors.redAccent[700]),

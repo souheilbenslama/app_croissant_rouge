@@ -24,8 +24,10 @@ class LoginServiceImp extends LoginService {
   Future<String> attemptLogIn(String username, String password) async {
     var res = await http.post("http://${globals.Server}/users/login",
         body: {"email": username, "password": password});
+    print(jsonDecode(res.body)["Secouriste"]);
+    print("MMMMMMMMMMMMM");
     if (res.statusCode == 200) return res.body;
-    print(res.body);
+
     return null;
   }
 
@@ -40,8 +42,7 @@ class LoginServiceImp extends LoginService {
         'Authorization': '$token',
       },
     );
-    if (res.statusCode == 200) print(res.body);
-    return res.body;
+    if (res.statusCode == 200) return res.body;
     return null;
   }
 
@@ -70,8 +71,6 @@ class LoginServiceImp extends LoginService {
     return res.statusCode;
   }
 
-  @override
-// The method used when password is forget
   forget(
     String email,
   ) async {
@@ -137,6 +136,7 @@ class LoginServiceImp extends LoginService {
     var image2;
     if (image != null) {
       image2 = File(image.path);
+      // ignore: deprecated_member_use
       stream = new http.ByteStream(DelegatingStream.typed(image2.openRead()));
       length = await image2.length();
     }

@@ -62,22 +62,24 @@ class _PublicMapState extends State<PublicMap> {
       target: LatLng(currentLocation.latitude, currentLocation.longitude),
     );
     initialCameraPosition = cPosition;
-    final GoogleMapController controller = await _controller.future;
+    await _controller.future;
     //controller.animateCamera(CameraUpdate.newCameraPosition(cPosition));
     // do this inside the setState() so Flutter gets notified
     // that a widget update is due
-    setState(() {
-      // updated position
 
-      var pinPosition =
-          LatLng(currentLocation.latitude, currentLocation.longitude);
+    if (this.mounted)
+      setState(() {
+        // updated position
 
-      // the trick is to remove the marker (by id)
-      // and add it again at the updated location
-      _markers.removeWhere((m) => m.markerId.value == 'sourcePin');
-      _markers
-          .add(Marker(markerId: MarkerId('sourcePin'), position: pinPosition));
-    });
+        var pinPosition =
+            LatLng(currentLocation.latitude, currentLocation.longitude);
+
+        // the trick is to remove the marker (by id)
+        // and add it again at the updated location
+        _markers.removeWhere((m) => m.markerId.value == 'sourcePin');
+        _markers.add(
+            Marker(markerId: MarkerId('sourcePin'), position: pinPosition));
+      });
   }
 
   @override

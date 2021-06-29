@@ -3,9 +3,6 @@ import 'package:app_croissant_rouge/services/accident_service.dart';
 import 'package:app_croissant_rouge/views/screens/page_alerte.dart';
 import 'package:app_croissant_rouge/services/user_service.dart';
 import 'dart:convert';
-
-import 'package:flutter/material.dart';
-
 import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
@@ -157,7 +154,7 @@ class PlaiesSimples extends StatelessWidget {
                       userId = jsonDecode(
                           await UserService.attemptgetUser(deviceId))["_id"];
                     }
-                    var res2 = AccidentService.createAccident(
+                    AccidentService.createAccident(
                         userId,
                         jsondoc["longitude"],
                         jsondoc["latitude"],

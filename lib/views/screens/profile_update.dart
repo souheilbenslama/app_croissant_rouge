@@ -103,7 +103,6 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     namecontroller = TextEditingController(text: this.widget.secouriste.name);
     emailcontroller = TextEditingController(text: this.widget.secouriste.email);
@@ -116,7 +115,8 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
 
   @override
   Widget build(BuildContext context) {
-    print(this.widget.secouriste.photo);
+    var img = this.widget.secouriste.photo["img"]["data"]["data"];
+    List<int> intList2 = img.cast<int>();
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -159,9 +159,8 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                                 shape: BoxShape.circle,
                                 image: DecorationImage(
                                     fit: BoxFit.cover,
-                                    image: NetworkImage(
-                                      "http://192.168.1.118:3000/${this.widget.secouriste.photo}",
-                                    ))),
+                                    image: MemoryImage(
+                                        base64Decode(base64Encode(intList2))))),
                           )
                         : Container(
                             width: 130,
@@ -225,43 +224,45 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                 height: 35,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  OutlineButton(
-                    padding: EdgeInsets.symmetric(horizontal: 50),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20)),
-                    onPressed: () => Navigator.of(context).pop(),
-                    child: Text("Annuler",
-                        style: TextStyle(
-                            fontSize: 14,
-                            letterSpacing: 2.2,
-                            color: Colors.black)),
-                  ),
-                  RaisedButton(
-                    onPressed: () {
-                      updateProfile(
-                          emailcontroller.text,
-                          namecontroller.text,
-                          this.widget.secouriste.cin,
-                          phonecontroller.text,
-                          gouvernoratcontroller.text,
-                          agecontroller.text,
-                          _image);
-                    },
-                    color: Colors.redAccent[700],
-                    padding: EdgeInsets.symmetric(horizontal: 50),
-                    elevation: 2,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20)),
-                    child: Text(
-                      "Enregistrer",
-                      style: TextStyle(
-                          fontSize: 14,
-                          letterSpacing: 2.2,
-                          color: Colors.white),
-                    ),
-                  )
+                  Container(
+                      width: MediaQuery.of(context).size.width * 0.4,
+                      child: OutlineButton(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20)),
+                        onPressed: () => Navigator.of(context).pop(),
+                        child: Text("Annuler",
+                            style: TextStyle(
+                                fontSize: 15,
+                                letterSpacing: 2.2,
+                                color: Colors.black)),
+                      )),
+                  Container(
+                      width: MediaQuery.of(context).size.width * 0.4,
+                      child: RaisedButton(
+                        onPressed: () {
+                          updateProfile(
+                              emailcontroller.text,
+                              namecontroller.text,
+                              this.widget.secouriste.cin,
+                              phonecontroller.text,
+                              gouvernoratcontroller.text,
+                              agecontroller.text,
+                              _image);
+                        },
+                        color: Colors.redAccent[700],
+                        elevation: 2,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20)),
+                        child: Text(
+                          "Enregistrer",
+                          style: TextStyle(
+                              fontSize: 15,
+                              color: Colors.white,
+                              letterSpacing: 1.4),
+                        ),
+                      ))
                 ],
               ),
               SizedBox(

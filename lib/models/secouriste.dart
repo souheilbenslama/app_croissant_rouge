@@ -1,6 +1,6 @@
 class Secouriste {
   final String id;
-  final String photo;
+  final dynamic photo;
   final String name;
   final String cin;
   final String email;

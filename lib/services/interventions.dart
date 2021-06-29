@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../models/interventions.dart';
-import 'package:app_croissant_rouge/globals.dart' as globals;
 
 class Services {
   // this one should modified

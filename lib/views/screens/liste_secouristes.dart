@@ -1,11 +1,8 @@
-import 'package:app_croissant_rouge/models/secouriste.dart';
 import 'package:app_croissant_rouge/views/screens/intervention_par_secouriste.dart';
 import 'package:app_croissant_rouge/services/admin_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:lite_rolling_switch/lite_rolling_switch.dart';
-import 'package:app_croissant_rouge/views/screens/admin_dashboard.dart';
 
 class ListeSecouristes extends StatefulWidget {
   ListeSecouristes({Key key}) : super(key: key);
@@ -24,12 +21,7 @@ class _ListeSecouristesState extends State<ListeSecouristes> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (_) => AdminDashboard(),
-              ),
-            );
+            Navigator.of(context).pop();
           },
         ),
         backgroundColor: Colors.redAccent[700],

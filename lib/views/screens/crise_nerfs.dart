@@ -121,21 +121,21 @@ class CriseNerfs extends StatelessWidget {
                       String deviceId = details[2];
                       userId = jsonDecode(
                           await UserService.attemptgetUser(deviceId))["_id"];
+                      AccidentService.createAccident(
+                          userId,
+                          jsondoc["longitude"],
+                          jsondoc["latitude"],
+                          jsondoc["cas"],
+                          jsondoc["description"],
+                          jsondoc["need_secouriste"],
+                          address,
+                          localite);
                     }
-                    var res2 = AccidentService.createAccident(
-                        userId,
-                        jsondoc["longitude"],
-                        jsondoc["latitude"],
-                        jsondoc["cas"],
-                        jsondoc["description"],
-                        jsondoc["need_secouriste"],
-                        address,
-                        localite);
-                  }
 
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => PageAlerte()));
-                  doc.clear();
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => PageAlerte()));
+                    doc.clear();
+                  }
                 },
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(100.0)),

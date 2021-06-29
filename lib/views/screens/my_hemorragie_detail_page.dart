@@ -96,12 +96,12 @@ class HemorragieDetails extends StatelessWidget {
     if ((this.instruction.needSecouriste)) {
       var future =
           new Future.delayed(const Duration(milliseconds: 3600 * 1000));
-      var subscription = future.asStream().listen(finish_callback);
+      future.asStream().listen(finish_callback);
     }
 
     if ((this.instruction.img == "b3.png")) {
       var future = new Future.delayed(const Duration(milliseconds: 3000));
-      var subscription = future.asStream().listen(finish_callback_nez);
+      future.asStream().listen(finish_callback_nez);
     }
 
     return Scaffold(
@@ -310,7 +310,7 @@ class HemorragieDetails extends StatelessWidget {
                                   await UserService.attemptgetUser(
                                       deviceId))["_id"];
                             }
-                            var res2 = AccidentService.createAccident(
+                            AccidentService.createAccident(
                                 userId,
                                 jsondoc["longitude"],
                                 jsondoc["latitude"],

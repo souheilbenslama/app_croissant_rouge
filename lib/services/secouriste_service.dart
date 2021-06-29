@@ -47,7 +47,6 @@ Future<LocationData> getPosition() async {
     print("E");
     return currentLocation;
   }
-  print("F");
 }
 
 //updating rescuer's disponibility (disponible-indisponible)

@@ -1,4 +1,3 @@
-import 'package:app_croissant_rouge/views/screens/hemorragieExterne.dart';
 import 'package:flutter/material.dart';
 
 class Etouffement2 extends StatelessWidget {

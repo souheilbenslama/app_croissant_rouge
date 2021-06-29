@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:app_croissant_rouge/models/secouriste.dart';
 import 'package:app_croissant_rouge/views/screens/profile_update.dart';
 import 'package:app_croissant_rouge/views/screens/sign_in.dart';
@@ -6,7 +8,6 @@ import 'package:flutter/material.dart';
 
 // The package used to get the location
 import 'package:get/get.dart';
-import 'package:location/location.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // ignore: must_be_immutable
@@ -17,12 +18,17 @@ class Profile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(this.secouriste.photo);
+    var img = this.secouriste.photo["img"]["data"]["data"];
+    List<int> intList2 = img.cast<int>();
+
     return WillPopScope(
         onWillPop: () async {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => PageAlerte()),
           );
+          return Future<bool>.value(true);
         },
         child: MaterialApp(
             home: Scaffold(
@@ -113,12 +119,12 @@ class Profile extends StatelessWidget {
                                   ),
                                 ),
                                 Positioned(
-                                    left: -10,
-                                    child: Container(
-                                      width: 100,
-                                      height: 100,
-                                      margin: EdgeInsets.only(left: 15),
-                                      decoration: BoxDecoration(
+                                  left: -10,
+                                  child: Container(
+                                    width: 100,
+                                    height: 100,
+                                    margin: EdgeInsets.only(left: 15),
+                                    decoration: BoxDecoration(
                                         boxShadow: [
                                           BoxShadow(
                                             offset: Offset(0, 0),
@@ -129,13 +135,11 @@ class Profile extends StatelessWidget {
                                         ],
                                         shape: BoxShape.circle,
                                         image: DecorationImage(
-                                          image: NetworkImage(
-                                            "http://192.168.1.118:3000/${this.secouriste.photo}",
-                                          ),
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                    )),
+                                            image: MemoryImage(base64Decode(
+                                                base64Encode(intList2))),
+                                            fit: BoxFit.cover)),
+                                  ),
+                                ),
                               ],
                             ),
                             SizedBox(

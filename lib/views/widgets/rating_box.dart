@@ -1,14 +1,13 @@
-import 'package:app_croissant_rouge/views/screens/page_alerte.dart';
 import 'package:app_croissant_rouge/views/widgets/rating.dart';
 import 'package:flutter/material.dart';
 
 class RatingBox extends StatefulWidget {
+  int _rating;
   @override
   _RatingBoxState createState() => _RatingBoxState();
 }
 
 class _RatingBoxState extends State<RatingBox> {
-  int _rating;
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -64,7 +63,7 @@ class _RatingBoxState extends State<RatingBox> {
                       ),
                       Rating((rating) {
                         setState(() {
-                          _rating = rating;
+                          this.widget._rating = rating;
                         });
                       }, 5),
                       SizedBox(

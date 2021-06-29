@@ -1,5 +1,3 @@
-import 'package:app_croissant_rouge/models/user_model.dart';
-
 class Message {
   final String senderId;
   final String time;

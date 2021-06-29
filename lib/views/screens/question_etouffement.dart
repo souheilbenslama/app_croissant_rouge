@@ -1,4 +1,3 @@
-import 'package:app_croissant_rouge/views/screens/etouffement2.dart';
 import 'package:app_croissant_rouge/views/screens/etouffement_oui.dart';
 import 'package:app_croissant_rouge/views/screens/etouffement_non.dart';
 import 'package:flutter/material.dart';

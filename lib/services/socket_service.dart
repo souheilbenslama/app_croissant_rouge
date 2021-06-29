@@ -2,9 +2,7 @@ import 'dart:convert';
 import 'package:app_croissant_rouge/locator.dart';
 import 'package:app_croissant_rouge/services/navigation_service.dart';
 import 'package:app_croissant_rouge/services/secouriste_service.dart';
-import 'package:app_croissant_rouge/services/notificationManager.dart';
 import 'package:app_croissant_rouge/models/message_model.dart';
-import 'package:app_croissant_rouge/views/widgets/notification_dialog.dart';
 import 'package:app_croissant_rouge/accidentProvider.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:app_croissant_rouge/models/accident.dart';
@@ -217,7 +215,7 @@ class SocketService {
     });
 
     socket.onDisconnect((socket) async {
-      print("disconnected" + socket.id);
+      print("disconnected" + (socket.toString()));
       await updateRescuerSocketId("");
     });
 

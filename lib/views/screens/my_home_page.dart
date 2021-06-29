@@ -1,6 +1,4 @@
-import 'package:app_croissant_rouge/services/socket_service.dart';
 import 'package:flutter/material.dart';
-import 'chat_screen.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
