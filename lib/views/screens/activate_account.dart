@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 class ActivateAccount extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    print("herehere123");
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
