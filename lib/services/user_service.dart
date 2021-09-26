@@ -8,15 +8,17 @@ class UserService {
 // The Server to the backend
 // The method to register the user
   static Future<String> attemptLogInUser(String userId) async {
-    var res = await http.post("http://${globals.Server}/users/normalUser",
+    var res = await http.post(
+        Uri.parse("http://${globals.Server}/users/normalUser"),
         body: {"userid": userId});
     if (res.statusCode == 200) return res.body;
     return null;
   }
 
   static Future<String> attemptgetUser(String userId) async {
-    var res = await http
-        .post("http://${globals.Server}/users/anonyme", body: {"id": userId});
+    var res = await http.post(
+        Uri.parse("http://${globals.Server}/users/anonyme"),
+        body: {"id": userId});
     if (res.statusCode == 200) return res.body;
     return null;
   }
@@ -45,7 +47,7 @@ class UserService {
     try {
       print(token);
       var response = await client.put(
-        'http://${globals.Server}/users/socket',
+        Uri.parse('http://${globals.Server}/users/socket'),
         headers: {'Authorization': '$token'},
         body: {"socketId": socketId, "deviceId": userDeviceId},
       );
@@ -64,7 +66,7 @@ class UserService {
   }
 
   static Future<String> attemptRateApp(String userId, int value) async {
-    var res = await http.post("http://${globals.Server}/users/Rate",
+    var res = await http.post(Uri.parse("http://${globals.Server}/users/Rate"),
         body: {"id": userId, "value": value.toString()});
     if (res.statusCode == 200) {
       print(res.body);

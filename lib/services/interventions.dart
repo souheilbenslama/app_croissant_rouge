@@ -8,7 +8,7 @@ class Services {
 
   static Future<List<Interventions>> getInterventions() async {
     try {
-      final response = await http.get(url);
+      final response = await http.get(Uri.parse(url));
       if (response.statusCode == 200) {
         List<Interventions> list = parseInterventions(response.body);
         return list;

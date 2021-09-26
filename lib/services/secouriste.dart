@@ -15,7 +15,7 @@ Future<bool> updateDisponibility(bool isFree) async {
   var updated = false;
   try {
     var response = await client.put(
-      'http://${globals.Server}/secouriste/disponibility',
+      Uri.parse('http://${globals.Server}/secouriste/disponibility'),
       headers: {'Authorization': '$token'},
       body: {isFree: isFree},
     );
@@ -44,7 +44,7 @@ Future<bool> updateRescuerSocketId(String socketId) async {
     try {
       print(token);
       var response = await client.put(
-        'http://${globals.Server}/secouriste/socket',
+        Uri.parse('http://${globals.Server}/secouriste/socket'),
         headers: {'Authorization': '$token'},
         body: {"socketId": socketId},
       );
@@ -65,7 +65,7 @@ Future<bool> updateRescuerSocketId(String socketId) async {
     var userId = details[2];
     try {
       var response = await client.put(
-        'http://${globals.Server}/users/socket',
+        Uri.parse('http://${globals.Server}/users/socket'),
         body: {"socketId": socketId, "deviceId": userId},
       );
 

@@ -19,8 +19,8 @@ class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print(this.secouriste.photo);
-    var img = this.secouriste.photo["img"]["data"]["data"];
-    List<int> intList2 = img.cast<int>();
+    //var img = this.secouriste.photo["img"]["data"]["data"];
+    //List<int> intList2 = img.cast<int>();
 
     return WillPopScope(
         onWillPop: () async {
@@ -107,7 +107,7 @@ class Profile extends StatelessWidget {
                                     children: <Widget>[
                                       Container(
                                         margin: EdgeInsets.only(left: 95),
-                                        child: Text(this.secouriste.name,
+                                        child: Text("", //this.secouriste.name,
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .headline4),
@@ -135,8 +135,11 @@ class Profile extends StatelessWidget {
                                         ],
                                         shape: BoxShape.circle,
                                         image: DecorationImage(
-                                            image: MemoryImage(base64Decode(
+                                            image: NetworkImage(
+                                                "https://www.larousse.fr/encyclopedie/data/images/1009655-Drapeau_du_Croissant-Rouge.jpg"),
+                                            /*  image: MemoryImage(base64Decode(
                                                 base64Encode(intList2))),
+                                            */
                                             fit: BoxFit.cover)),
                                   ),
                                 ),

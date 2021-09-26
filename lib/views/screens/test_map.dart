@@ -99,16 +99,14 @@ class MapePageState extends State<MapePage> {
         icon: destinationIcon));
     // set the route lines on the map from source to destination
     // for more info follow this tutorial
-    setPolylines();
+    //setPolylines();
   }
 
-  void setPolylines() async {
-    List<PointLatLng> result = await polylinePoints.getRouteBetweenCoordinates(
+/*   void setPolylines() async {
+     PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
         googleAPIKey,
-        currentLocation.latitude,
-        currentLocation.longitude,
-        destinationLocation.latitude,
-        destinationLocation.longitude);
+        currentLocation,
+        destinationLocation); 
     if (result.isNotEmpty) {
       result.forEach((PointLatLng point) {
         polylineCoordinates.add(LatLng(point.latitude, point.longitude));
@@ -122,7 +120,7 @@ class MapePageState extends State<MapePage> {
       });
     }
   }
-
+ */
   void updatePinOnMap() async {
     // create a new CameraPosition instance
     // every time the location changes, so the camera

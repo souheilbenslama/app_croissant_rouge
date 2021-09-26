@@ -9,7 +9,7 @@ class AdminService {
 
 // The method to get the list of secourists
   static Future<List<dynamic>> listSecourists() async {
-    var res = await http.get("http://${globals.Server}/users/list");
+    var res = await http.get(Uri.parse("http://${globals.Server}/users/list"));
 
     final body = jsonDecode(res.body);
 
@@ -25,7 +25,7 @@ class AdminService {
   static Future<List<dynamic>> secouristelistInter(id) async {
     print("okok");
     var res = await http.post(
-        "http://${globals.Server}/accident/Secouristeinter/",
+        Uri.parse("http://${globals.Server}/accident/Secouristeinter/"),
         body: {'id': id});
     final body = jsonDecode(res.body);
     print(body);
@@ -43,7 +43,8 @@ class AdminService {
 
 // The method to get the list of interventions
   static Future<List<dynamic>> listinterventions() async {
-    var res = await http.get("http://${globals.Server}/accident/all");
+    var res =
+        await http.get(Uri.parse("http://${globals.Server}/accident/all"));
     if (res.statusCode == 200) {
       var body = jsonDecode(res.body);
       print(body);

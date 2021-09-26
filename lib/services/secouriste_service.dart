@@ -56,9 +56,10 @@ updateDisponibility(bool isFree) async {
   var jwtDecoded = jsonDecode(jwt);
   var token = jwtDecoded["token"];
 
-  var res = await http.put("http://${globals.Server}/secouriste/disponibility",
-      //headers: {HttpHeaders.authorizationHeader: token},
-      headers: {
+  var res = await http
+      .put(Uri.parse("http://${globals.Server}/secouriste/disponibility"),
+          //headers: {HttpHeaders.authorizationHeader: token},
+          headers: {
         'Authorization': '$token',
       }, body: {
     "isFree": isFree.toString()
@@ -80,8 +81,8 @@ acceptIntervention(accidentId) async {
   var jwtDecoded = jsonDecode(jwt);
   var token = jwtDecoded["token"];
 
-  var res =
-      await http.put("http://${globals.Server}/accident/acceptintervention",
+  var res = await http
+      .put(Uri.parse("http://${globals.Server}/accident/acceptintervention"),
           //headers: {HttpHeaders.authorizationHeader: token},
           headers: {
         'Authorization': '$token',
@@ -105,9 +106,10 @@ Future<String> updateLocation(double longitude, double latitude) async {
   var jwt = await getToken();
   var jwtDecoded = jsonDecode(jwt);
   var token = jwtDecoded["token"];
-  var res = await http.put("http://${globals.Server}/secouriste/location",
-      //headers: {HttpHeaders.authorizationHeader: token},
-      headers: {
+  var res =
+      await http.put(Uri.parse("http://${globals.Server}/secouriste/location"),
+          //headers: {HttpHeaders.authorizationHeader: token},
+          headers: {
         'Authorization': '$token',
       }, body: {
     "longitude": longitude.toString(),
@@ -127,13 +129,15 @@ Future<String> changeUserActivation(String userId, bool activation) async {
   print("hello");
   print(userId);
   print(activation);
-  var res =
-      await http.put("http://${globals.Server}/users/activationUser", headers: {
-    'Authorization': '$token',
-  }, body: {
-    "id": userId,
-    "activated": activation.toString()
-  });
+  var res = await http.put(
+      Uri.parse("http://${globals.Server}/users/activationUser"),
+      headers: {
+        'Authorization': '$token',
+      },
+      body: {
+        "id": userId,
+        "activated": activation.toString()
+      });
   print("okok");
   print(res.body);
   if (res.statusCode == 200) return res.body;
@@ -147,8 +151,8 @@ Future<String> changeUsertype(String userId, bool admin) async {
   print("hello");
   print(userId);
   print(admin);
-  var res =
-      await http.put("http://${globals.Server}/users/adminuser", headers: {
+  var res = await http
+      .put(Uri.parse("http://${globals.Server}/users/adminuser"), headers: {
     'Authorization': '$token',
   }, body: {
     "id": userId,

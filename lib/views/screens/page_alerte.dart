@@ -213,11 +213,11 @@ class _PageAlerteState extends State<PageAlerte> {
                                                     await SharedPreferences
                                                         .getInstance();
                                                 prefs.setString("jwt", jwt);
-                                                Navigator.push(
+                                                /* Navigator.push(
                                                     context,
                                                     MaterialPageRoute(
                                                         builder: (context) =>
-                                                            Profile(ss)));
+                                                            Profile(ss))); */
                                               } else {
                                                 Navigator.push(
                                                   context,
@@ -234,8 +234,9 @@ class _PageAlerteState extends State<PageAlerte> {
                                               context,
                                               MaterialPageRoute(
                                                 builder: (context) => Profile(
-                                                    Secouriste.fromJson(
-                                                        decodedjwt)),
+                                                  Secouriste.fromJson(
+                                                      decodedToken),
+                                                ),
                                               ),
                                             );
                                           }

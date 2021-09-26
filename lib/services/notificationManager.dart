@@ -40,7 +40,8 @@ class NotificationManager {
       },
     );
 
-    initSetting = InitializationSettings(initSettingAndroid, initSettingIOS);
+    initSetting = InitializationSettings(
+        android: initSettingAndroid, iOS: initSettingIOS);
   }
 
   setOnNotificationReceive(Function onNotificationReceive) {
@@ -59,13 +60,14 @@ class NotificationManager {
   Future<void> showNotification(Accident accident) async {
     var androidChannel = AndroidNotificationDetails(
         'CHANNEL_ID', 'CHANNEL_NAME', 'CHANNEL_DESCRIPTION',
-        importance: Importance.Max,
-        priority: Priority.High,
+        importance: Importance.max,
+        priority: Priority.high,
         playSound: true,
         sound: RawResourceAndroidNotificationSound('test3'));
 
     var iosChannel = IOSNotificationDetails();
-    var platformChannel = NotificationDetails(androidChannel, iosChannel);
+    var platformChannel =
+        NotificationDetails(android: androidChannel, iOS: iosChannel);
     await flutterLocalNotificationsPlugin.show(
         0, 'App croissant rouge', "trtr", platformChannel,
         payload: 'New payload');

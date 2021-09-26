@@ -8,7 +8,8 @@ class AccidentService {
 //get the list of interventions in progress
   static Future<List<Accident>> getInProgressInterventions() async {
     var client = http.Client();
-    var res = await client.get('http://${globals.Server}/accident/inprogress');
+    var res = await client
+        .get(Uri.parse('http://${globals.Server}/accident/inprogress'));
 
     if (res.statusCode == 200) {
       List<dynamic> body = jsonDecode(res.body);
@@ -27,8 +28,9 @@ class AccidentService {
     var updated = false;
     var client = http.Client();
     try {
-      var res = await client
-          .put('http://${globals.Server}/accident/finished/', body: {"id": id});
+      var res = await client.put(
+          Uri.parse('http://${globals.Server}/accident/finished/'),
+          body: {"id": id});
       if (res.statusCode == 200) {
         updated = true;
         print(res.body);
@@ -53,7 +55,8 @@ class AccidentService {
       String localite) async {
     print(localite);
     print(globals.Server);
-    var res = await http.post("http://${globals.Server}/accident", body: {
+    var res =
+        await http.post(Uri.parse("http://${globals.Server}/accident"), body: {
       "id_temoin": idtemoin,
       "longitude": longitude.toString(),
       "latitude": latitude.toString(),

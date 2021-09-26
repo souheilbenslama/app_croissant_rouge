@@ -22,7 +22,7 @@ class LoginServiceImp extends LoginService {
 // The method used to log in
   @override
   Future<String> attemptLogIn(String username, String password) async {
-    var res = await http.post("http://${globals.Server}/users/login",
+    var res = await http.post(Uri.parse("http://${globals.Server}/users/login"),
         body: {"email": username, "password": password});
     print(jsonDecode(res.body)["Secouriste"]);
     print("MMMMMMMMMMMMM");
@@ -32,12 +32,13 @@ class LoginServiceImp extends LoginService {
   }
 
   Future<String> attempttogetProfile() async {
+    print("okokokokokok");
     var jwt = await getToken();
     var jwtDecoded = jsonDecode(jwt);
     var token = jwtDecoded["token"];
 
     var res = await http.get(
-      "http://${globals.Server}/users/profile",
+      Uri.parse("http://${globals.Server}/users/profile"),
       headers: {
         'Authorization': '$token',
       },
@@ -57,7 +58,8 @@ class LoginServiceImp extends LoginService {
       String address,
       String age,
       bool secouriste) async {
-    var res = await http.post('http://${globals.Server}/users/signup', body: {
+    var res = await http
+        .post(Uri.parse('http://${globals.Server}/users/signup'), body: {
       "email": email,
       "password": password,
       "name": name,
@@ -74,8 +76,9 @@ class LoginServiceImp extends LoginService {
   forget(
     String email,
   ) async {
-    var res = await http
-        .post('http://${globals.Server}/users/forget', body: {"email": email});
+    var res = await http.post(
+        Uri.parse('http://${globals.Server}/users/forget'),
+        body: {"email": email});
 
     return res;
   }
@@ -83,14 +86,16 @@ class LoginServiceImp extends LoginService {
   verifycode(
     String code,
   ) async {
-    var res = await http.post('http://${globals.Server}/users/verification',
+    var res = await http.post(
+        Uri.parse('http://${globals.Server}/users/verification'),
         body: {"code": code});
     print(res.body);
     return res;
   }
 
   resetPassword(String password, String confirmPassword, String token) async {
-    var res = await http.post('http://${globals.Server}/users/reset', headers: {
+    var res = await http
+        .post(Uri.parse('http://${globals.Server}/users/reset'), headers: {
       'Authorization': '$token',
     }, body: {
       "password": password,
@@ -107,8 +112,8 @@ class LoginServiceImp extends LoginService {
     var jwtDecoded = jsonDecode(jwt);
     var token = jwtDecoded["token"];
 
-    var res =
-        await http.post('http://${globals.Server}/users/update', headers: {
+    var res = await http
+        .post(Uri.parse('http://${globals.Server}/users/update'), headers: {
       'Authorization': '$token'
     }, body: {
       "email": email,
