@@ -15,6 +15,8 @@ class EtoufOui extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     LocationData _locationData;
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -25,7 +27,9 @@ class EtoufOui extends StatelessWidget {
                 Icons.arrow_back,
                 color: Colors.white,
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
             ),
             title: Center(
               child: Text(
@@ -39,7 +43,7 @@ class EtoufOui extends StatelessWidget {
               children: [
                 Container(
                   child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Column(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -76,26 +80,19 @@ class EtoufOui extends StatelessWidget {
                                   style: TextStyle(fontSize: 20)),
                             ]),
                         Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
                               Image.asset('assets/images/chokingga2.png',
-                                  height: 170, width: 200),
+                                  height: height * 0.15, width: width * 0.3),
                               SizedBox(
-                                height: 15,
+                                height: 55,
                               ),
-                              Image.asset(
-                                'assets/images/chokingga11.png',
-                                height: 170,
-                                width: 200,
-                              ),
-                              SizedBox(
-                                height: 15,
-                              ),
-                              Image.asset(
-                                'assets/images/chokingga3.png',
-                                height: 170,
-                                width: 200,
-                              ),
+                              Image.asset('assets/images/chokingga11.png',
+                                  height: height * 0.15, width: width * 0.3),
+                              SizedBox(height: 55),
+                              Image.asset('assets/images/chokingga3.png',
+                                  height: height * 0.15, width: width * 0.3),
+                              SizedBox(height: 55),
                             ])
                       ]),
                 ),

@@ -8,6 +8,8 @@ import 'package:get/get.dart';
 class Etouffement extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.redAccent[700],
@@ -15,17 +17,17 @@ class Etouffement extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          SizedBox(height: 40),
+          SizedBox(height: height * 0.05),
           Padding(
             padding: const EdgeInsets.only(),
             child: Image.asset(
               'assets/profil.png',
-              width: 150,
-              height: 150,
+              width: height * 0.205,
+              height: height * 0.205,
             ),
           ),
           SizedBox(
-            height: 50,
+            height: height * 0.05,
           ),
           Text(
             "etouffQuest".tr,
@@ -80,7 +82,6 @@ class Etouffement extends StatelessWidget {
                     );
                   },
                   color: Colors.redAccent[700],
-                  padding: EdgeInsets.symmetric(horizontal: 50),
                   elevation: 2,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20)),
@@ -94,8 +95,8 @@ class Etouffement extends StatelessWidget {
             ],
           ),
           Container(
-            height: 200,
-            width: 200,
+            height: height * 0.274,
+            width: height * 0.274,
             child: Image.asset('assets/images/sneez1g.png'),
           ),
         ],

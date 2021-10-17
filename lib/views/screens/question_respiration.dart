@@ -45,7 +45,7 @@ class Respire extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           SizedBox(
-            height: 0.055 * height,
+            height: 0.05 * height,
           ),
           Padding(
             padding: const EdgeInsets.only(),
@@ -56,7 +56,7 @@ class Respire extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: height * 0.109,
+            height: height * 0.1,
           ),
           Text("respQuest".tr,
               textAlign: TextAlign.center,
@@ -67,13 +67,13 @@ class Respire extends StatelessWidget {
                   fontStyle: FontStyle.italic,
                   letterSpacing: 2.2)),
           SizedBox(
-            height: 0.055 * height,
+            height: 0.05 * height,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                height: height * 0.068,
+                height: height * 0.07,
                 width: width * 0.364,
                 child: RaisedButton(
                   onPressed: () {
@@ -95,7 +95,6 @@ class Respire extends StatelessWidget {
                     }
                   },
                   color: Colors.redAccent[700],
-                  padding: EdgeInsets.symmetric(horizontal: width * 0.121),
                   elevation: 2,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20)),
@@ -196,7 +195,6 @@ class Respire extends StatelessWidget {
                     }
                   },
                   color: Colors.redAccent[700],
-                  padding: EdgeInsets.symmetric(horizontal: width * 0.121),
                   elevation: 2,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
@@ -211,8 +209,8 @@ class Respire extends StatelessWidget {
             ],
           ),
           Container(
-            height: 200,
-            width: 150,
+            height: height * 0.274,
+            width: height * 0.274,
             child: Image.asset('assets/images/uncons1g.png'), //respire1.png'),
           ),
         ],

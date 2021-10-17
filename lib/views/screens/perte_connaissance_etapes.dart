@@ -157,6 +157,8 @@ class _StepListState extends State<StepList> {
 
                     var jsondoc = doc.getInfo();
                     String userId;
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => PageAlerte()));
                     if (doc.gettoken() != null) {
                       print("yesyesyes");
                       final decodedToken = JwtDecoder.decode(doc.gettoken());
@@ -179,8 +181,6 @@ class _StepListState extends State<StepList> {
                         localite);
                   }
 
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => PageAlerte()));
                   doc.clear();
                 },
                 shape: RoundedRectangleBorder(

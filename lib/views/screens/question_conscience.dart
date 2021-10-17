@@ -29,7 +29,7 @@ class Conscient extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: height * 0.109,
+            height: height * 0.1,
           ),
           Text(
             "conscienceQuest".tr,
@@ -43,13 +43,13 @@ class Conscient extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 0.055 * height,
+            height: 0.05 * height,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                height: height * 0.068,
+                height: height * 0.07,
                 width: width * 0.364,
                 child: RaisedButton(
                   onPressed: () {
@@ -65,9 +65,6 @@ class Conscient extends StatelessWidget {
                     );
                   },
                   color: Colors.redAccent[700],
-                  padding: EdgeInsets.symmetric(
-                    horizontal: width * 0.121,
-                  ),
                   elevation: 2,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
@@ -102,9 +99,6 @@ class Conscient extends StatelessWidget {
                     );
                   },
                   color: Colors.redAccent[700],
-                  padding: EdgeInsets.symmetric(
-                    horizontal: width * 0.121,
-                  ),
                   elevation: 2,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
