@@ -7,7 +7,7 @@
 
 ![img3](186445122_1214462332318060_1660755239042307706_n.jpg)     ![img4](187301838_1203046150139649_8298504360104938631_n.png)
 <p align="center">
-  <img width="600" height="200" src="https://www.python.org/python-.png">
+  <img width="600" height="200" src="186445122_1214462332318060_1660755239042307706_n.jpg">
 </p>
 
 # how to contribute to this project:
